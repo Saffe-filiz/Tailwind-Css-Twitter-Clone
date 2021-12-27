@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.listContent {
+	@apply w-full h-[3.75rem] pl-2.5 flex items-center cursor-pointer delay-200 hover:text-[#1DA1F2];
+}

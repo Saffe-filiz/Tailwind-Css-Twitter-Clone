@@ -7,7 +7,7 @@
 </script>
 
 <template>
-	<div>
+	<div class="h-max w-[76.563rem] m-auto">
 	   <sideMenu/>	   
 	</div>
 </template>
