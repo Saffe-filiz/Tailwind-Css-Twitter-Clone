@@ -4,9 +4,17 @@
 
 
 .listContent {
-	@apply w-full h-[3.75rem] pl-2.5 cursor-pointer duration-200 hover:text-[#1DA1F2] hover:rounded-full hover:border hover:bg-[#d9d9d91a] hover:border-[#d9d9d91a]
+	@apply w-max  h-[3.125rem] p-4 itemCenter cursor-pointer duration-200 border-none dark:text-[#D9D9D9]  hover:rounded-full hover:border hover:bg-[#0f14191a] hover:border-[#d9d9d91a]
+}
+
+.navigationTextStyle {
+	@apply text-[1.188rem] font-bold pl-5
 }
 
 .itemCenter {
 	@apply flex items-center
+}
+
+.navigationIconStyle {
+	@apply itemCenter
 }
