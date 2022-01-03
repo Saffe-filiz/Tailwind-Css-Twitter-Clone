@@ -8,7 +8,7 @@
 }
 
 .navigationTextStyle {
-	@apply text-[1.188rem] font-bold pl-5
+	@apply text-[1.188rem] pl-5
 }
 
 .itemCenter {

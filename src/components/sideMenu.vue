@@ -1,6 +1,8 @@
 <template>
-	<div class="w-[15.688rem] h-full flex fixed flex-col">
-			<div class="w-full h-[3.313rem] bg-yellow-100"></div>
+	<div class="w-[15.688rem] h-screen flex fixed flex-col box-content px-3 relative">
+			<div class="w-full h-[3.313rem] itemCenter pl-[1.100rem]">
+				<Logo :width="28.38" :height="23.07"/>
+			</div>
 		    <div class="w-full h-[25rem]">
 		    	<ul>
 		    		<li class="listContent">
@@ -25,7 +27,7 @@
 		    		</li>
 		    		<li class="listContent">
 		    		    <List class="navigationIconStyle" :width="24" :height="24" />
-		    			<p class="navigationTextStyle">List</p>
+		    			<p class="navigationTextStyle">Lists</p>
 		    		</li>
 		    		<li class="listContent">
 		    		    <Profile class="navigationIconStyle" :width="24" :height="24" />
@@ -38,21 +40,23 @@
 		    	</ul>
 		    </div>
 		<div class="w-full h-[4.938rem] itemCenter">
-			<button class="w-[14.125rem] h-[3.25rem] bg-[#1DA1F2] text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
+			<button class="w-[14.063rem] h-[3.25rem] bg-[#1DA1F2] text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
 		</div>
-		
+		<ProfileSetting/>
 	</div>
 </template>
 
 <script setup>
-		import Home from '../assets/icons/Home.vue';
-		import Explore from '../assets/icons/Explore.vue';
-		import Notifications from '../assets/icons/Notifications.vue';
-		import Massages from '../assets/icons/Massages.vue';
-		import Bookmarks from '../assets/icons/Bookmarks.vue';
-		import List from '../assets/icons/List.vue';
-		import Profile from '../assets/icons/Profile.vue';
-		import More from '../assets/icons/More.vue';
+	    import Logo from './icons/Logo.vue';
+		import Home from './icons/Home.vue';
+		import Explore from './icons/Explore.vue';
+		import Notifications from './icons/Notifications.vue';
+		import Massages from './icons/Massages.vue';
+		import Bookmarks from './icons/Bookmarks.vue';
+		import List from './icons/List.vue';
+		import Profile from './icons/Profile.vue';
+		import More from './icons/More.vue';
+		import ProfileSetting from './ProfileSetting.vue'
 		import { ref } from 'vue';
 
 		const navigation = ref(['Home', 'Explore', 'Notifications', 'Massages', 'Bookmarks', 'List', 'Profile', 'More'])
