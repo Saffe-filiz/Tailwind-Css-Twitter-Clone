@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[15.688rem] h-screen flex fixed flex-col box-content px-3 relative">
+	    <div class="w-[15.688rem] h-full flex flex-col box-content px-3">
 			<div class="w-full h-[3.313rem] itemCenter pl-[1.100rem]">
 				<Logo :width="28.38" :height="23.07"/>
 			</div>
@@ -43,7 +43,7 @@
 			<button class="w-[14.063rem] h-[3.25rem] bg-[#1DA1F2] text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
 		</div>
 		<ProfileSetting/>
-	</div>
+    </div>
 </template>
 
 <script setup>

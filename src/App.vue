@@ -6,9 +6,9 @@
 </script>
 
 <template>
-	<div class="h-max w-[79.063rem] m-auto flex">
+	<div class="h-auto w-[79.063rem] m-auto flex relative">
 	   <LeftSideNavigation/>
 	   <TimeLine/>	  
-	   <Trends/>
+	   <Trends class="w-[24.375rem] h-auto min-h-screen max-h-auto  relative bg-black pl-[1.875rem] pt-[4.063rem]"/>
 	</div>
 </template>
