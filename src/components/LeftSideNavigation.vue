@@ -57,10 +57,4 @@
 		import Profile from './icons/Profile.vue';
 		import More from './icons/More.vue';
 		import ProfileSetting from './ProfileSetting.vue'
-		import { ref } from 'vue';
-
-		const navigation = ref(['Home', 'Explore', 'Notifications', 'Massages', 'Bookmarks', 'List', 'Profile', 'More'])
-
-		
-
 </script>
