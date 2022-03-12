@@ -42,7 +42,16 @@
 		<div class="w-full h-[4.938rem] itemCenter">
 			<button class="w-[14.063rem] h-[3.25rem] bg-[#1DA1F2] text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
 		</div>
-		<ProfileSetting/>
+		<div class="w-[15.688rem] h-16 absolute bottom-[0.75rem]">
+            <div class="w-[15.688rem] h-16 rounded-[4rem] inline-flex items-center justify-around  px-3 hover:bg-red-100 duration-200 hover:bg-[#0f14191a] cursor-pointer">
+            <div class="w-10 h-10 bg-black rounded-full"></div>
+            <div class="w-32 h-[2.313rem] leading-5">
+              <p class="truncate userCartTextStype">Bradley Ortiz BradleyOrtiz Bradley Ortiz Bradley Ortiz Bradley Ortiz</p>
+              <p class="truncate userCartTextStype">@bradley_</p>
+            </div>
+            <button>test</button>
+            </div>
+	    </div>
     </div>
 </template>
 
@@ -56,5 +65,4 @@
 		import List from './icons/List.vue';
 		import Profile from './icons/Profile.vue';
 		import More from './icons/More.vue';
-		import ProfileSetting from './ProfileSetting.vue'
 </script>

@@ -18,3 +18,16 @@
 .navigationIconStyle {
 	@apply itemCenter
 }
+
+
+.userCartTextStype {
+	@apply text-[#0f1419] text-sm
+}
+
+.rightSideMainStyle {
+	@apply  w-[21.875rem] rounded-[0.938rem] bg-[#f7f9f9]
+}
+
+.rightSiteCartHeadarStyle {
+	@apply w-full h-12 px-4 pt-3 text-xl
+}

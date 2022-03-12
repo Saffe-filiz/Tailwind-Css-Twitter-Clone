@@ -1,11 +1,11 @@
 <template>
-	<div>
+	<div class="bg-none">
 		<TrendList/>
-		<FollowList/>
+		<WhoToFollow/>
 	</div>
 </template>
 
 <script setup>
 	import TrendList from './TrendList.vue'
-	import FollowList from './FollowList.vue'
+	import WhoToFollow from './WhoToFollow.vue'
 </script>
