@@ -6,8 +6,8 @@
 		<UserCarts/>
 		<UserCarts/>
 		<UserCarts/>
-		<div class="w-100 h-[3.125rem] p-4">
-			<h4>Show more</h4>
+		<div class="seeMoreTextStyle">
+			<a href="">Show more</a>
 		</div>
 	</div>
 </template>

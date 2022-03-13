@@ -4,30 +4,39 @@
 
 
 .listContent {
-	@apply w-max  h-[3.125rem] p-4 itemCenter cursor-pointer duration-200 border-none dark:text-[#D9D9D9]  hover:rounded-full hover:border hover:bg-[#0f14191a] hover:border-[#d9d9d91a]
+	@apply w-max  h-[3.125rem] p-4 flex items-center cursor-pointer duration-200 border-none hover:rounded-full hover:border hover:bg-[#0f14191a] hover:border-[#d9d9d91a]
 }
 
 .navigationTextStyle {
 	@apply text-[1.188rem] pl-5
 }
 
-.itemCenter {
-	@apply flex items-center
+
+.userCartTextStyle {
+	@apply text-[#0f1419] text-sm truncate font-bold
 }
 
-.navigationIconStyle {
-	@apply itemCenter
-}
-
-
-.userCartTextStype {
-	@apply text-[#0f1419] text-sm
+.userCartSubTextStyle {
+	@apply text-[0.938rem] text-[#6E767D] truncate
 }
 
 .rightSideMainStyle {
-	@apply  w-[21.875rem] rounded-[0.938rem] bg-[#f7f9f9]
+	@apply w-[21.875rem] rounded-[0.938rem] bg-[#f7f9f9]
 }
 
 .rightSiteCartHeadarStyle {
 	@apply w-full h-12 px-4 pt-3 text-xl
+}
+
+.trandCartTextStyle {
+	@apply text-[#6E767D] text-[0.813rem]
+}
+
+.seeMoreTextStyle {
+	@apply w-full h-[3.125rem] p-4 text-[#1D9BF0]
+}
+
+
+.hoverEfect {
+	@apply duration-200 hover:bg-[#0f14191a] cursor-pointer
 }

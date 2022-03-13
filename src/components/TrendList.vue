@@ -3,8 +3,18 @@
 		<div class="rightSiteCartHeadarStyle">
 			<h3>Who to follow</h3>
 		</div>
-		<div class="w-100 h-[3.125rem] p-4">
-			<h4>Show more</h4>
+		<TrendListCart/>
+		<TrendListCart/>
+		<TrendListCart/>
+		<TrendListCart/>
+		<div class="seeMoreTextStyle">
+			<a href="">Show more</a>
 		</div>
 	</div>
 </template>
+
+
+<script setup>
+	import TrendListCart from './TrendListCart.vue'
+
+</script>

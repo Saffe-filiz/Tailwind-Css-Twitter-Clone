@@ -6,57 +6,58 @@
 		    <div class="w-full h-[25rem]">
 		    	<ul>
 		    		<li class="listContent">
-		    			<Home class="navigationIconStyle" :width="24" :height="24" />
+		    			<Home class="items-center"/>
 		    			<p class="navigationTextStyle">Home</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Explore class="navigationIconStyle" :width="24" :height="24" />
+		    		    <Explore class="items-center"/>
 		    			<p class="navigationTextStyle">Explore</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Notifications class="navigationIconStyle" :width="24" :height="24" />
+		    		    <Notifications class="items-center"/>
 		    			<p class="navigationTextStyle">Notifications</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Massages class="navigationIconStyle" :width="24" :height="24" />
+		    		    <Massages class="items-center"/>
 		    			<p class="navigationTextStyle">Massages</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Bookmarks class="navigationIconStyle" :width="24" :height="24" />
+		    		    <Bookmarks class="items-center"/>
 		    			<p class="navigationTextStyle">Bookmarks</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <List class="navigationIconStyle" :width="24" :height="24" />
+		    		    <List class="items-center"/>
 		    			<p class="navigationTextStyle">Lists</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Profile class="navigationIconStyle" :width="24" :height="24" />
+		    		    <Profile class="items-center"/>
 		    			<p class="navigationTextStyle">Profile</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <More class="navigationIconStyle" :width="24" :height="24" />
+		    		    <More class="items-center"/>
 		    			<p class="navigationTextStyle">More</p>
 		    		</li>
 		    	</ul>
 		    </div>
-		<div class="w-full h-[4.938rem] itemCenter">
+		<div class="w-full h-[4.938rem] items-center">
 			<button class="w-[14.063rem] h-[3.25rem] bg-[#1DA1F2] text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
 		</div>
 		<div class="w-[15.688rem] h-16 absolute bottom-[0.75rem]">
-            <div class="w-[15.688rem] h-16 rounded-[4rem] inline-flex items-center justify-around  px-3 hover:bg-red-100 duration-200 hover:bg-[#0f14191a] cursor-pointer">
+        <div class="w-[15.688rem] h-16 rounded-[4rem] inline-flex items-center justify-around px-3 hoverEfect">
             <div class="w-10 h-10 bg-black rounded-full"></div>
             <div class="w-32 h-[2.313rem] leading-5">
-              <p class="truncate userCartTextStype">Bradley Ortiz BradleyOrtiz Bradley Ortiz Bradley Ortiz Bradley Ortiz</p>
-              <p class="truncate userCartTextStype">@bradley_</p>
+              <p class="userCartTextStyle">Bradley Ortiz</p>
+              <p class="userCartSubTextStyle">@bradley_</p>
             </div>
             <button>test</button>
-            </div>
+        </div>
 	    </div>
     </div>
 </template>
 
 <script setup>
-	    import Logo from './icons/Logo.vue';
+	import { ref } from 'vue'
+ 	  import Logo from './icons/Logo.vue';
 		import Home from './icons/Home.vue';
 		import Explore from './icons/Explore.vue';
 		import Notifications from './icons/Notifications.vue';
@@ -65,4 +66,12 @@
 		import List from './icons/List.vue';
 		import Profile from './icons/Profile.vue';
 		import More from './icons/More.vue';
+
+		let newSet = ref(false)
+
+		let chanceValue = () => {
+			newSet.value = !newSet.value
+			console.log(newSet.value )
+		}
+
 </script>
