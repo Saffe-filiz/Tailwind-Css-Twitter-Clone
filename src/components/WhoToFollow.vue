@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[21.875rem] h-[19.625rem] mt-4 rightSideMainStyle">
+	<div class="w-[21.875rem] h-[19.625rem] rightSideMainStyle">
 		<div class="rightSiteCartHeadarStyle">
 			<h3>Who to follow</h3>
 		</div>

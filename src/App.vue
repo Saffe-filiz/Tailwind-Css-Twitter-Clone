@@ -1,8 +1,8 @@
 <template>
-	<div class="h-auto w-[79.063rem] m-auto flex relative">
-	   <TheNavigation/>
+	<div class="w-[79.063rem] inline-flex flex-row ">
+	   <TheNavigation class="sticky"/>
 	   <TimeLine/>	  
-	   <Trends class="w-[24.375rem] h-auto min-h-screen max-h-auto  relative pl-[1.875rem] pt-[4.063rem]"/>
+	   <Trends class="w-auto flex flex-col gap-y-4 pr-2.5 pl-[1.875rem]"/>
 	</div>
 </template>
 

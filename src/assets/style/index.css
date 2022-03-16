@@ -4,11 +4,11 @@
 
 
 .listContent {
-	@apply w-max  h-[3.125rem] p-4 flex items-center cursor-pointer duration-200 border-none hover:rounded-full hover:border hover:bg-[#0f14191a] hover:border-[#d9d9d91a]
+	@apply w-fit h-[3.125rem] inline-flex gap-5 p-3.5 items-center cursor-pointer duration-200 border-none hover:rounded-full hover:border hover:bg-[#0f14191a] hover:border-[#d9d9d91a]
 }
 
 .navigationTextStyle {
-	@apply text-[1.188rem] pl-5
+	@apply text-[1.188rem] 
 }
 
 
