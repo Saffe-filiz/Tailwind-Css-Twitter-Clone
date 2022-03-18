@@ -1,8 +1,10 @@
 <template>
-	<div class="h-[26.625rem] rightSideMainStyle">
+	<div class=" rightSideMainStyle">
 		<div class="rightSiteCartHeadarStyle">
-			<h3>Who to follow</h3>
+			<h3>Trends for you</h3>
 		</div>
+		<TrendListCart/>
+		<TrendListCart/>
 		<TrendListCart/>
 		<TrendListCart/>
 		<TrendListCart/>

@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<slot/>
 		<TrendList/>
 		<WhoToFollow/>
 		<div class="w-[21.875rem] text-[0.813rem] flex flex-wrap px-4 gap-y-1 gap-x-3">

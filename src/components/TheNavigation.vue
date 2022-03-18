@@ -1,5 +1,5 @@
 <template>
-	  <div class="h-screen inline-flex justify-between flex-col">
+	  <div class="h-screen inline-flex justify-between flex-col pb-2.5 pr-6">
 	    <div class="inline-flex flex-col px-3">
 		    <div class="">
 		    	<ul class="inline-flex w-full flex-col">
@@ -31,7 +31,7 @@
 		    			<p class="navigationTextStyle">Lists</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Profile class="items-center"/>
+		    		    <Profile class=""/>
 		    			<p class="navigationTextStyle">Profile</p>
 		    		</li>
 		    		<li class="listContent">
