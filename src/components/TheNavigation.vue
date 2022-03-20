@@ -41,7 +41,7 @@
 		    	</ul>
 		    </div>
 		<div class="w-full h-[4.938rem] mt-4">
-			<button class="w-[14.063rem] h-[3.25rem] bg-[#1DA1F2] text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
+			<button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
 		</div>
     </div>
     	<div class="w-[15.688rem] h-16">

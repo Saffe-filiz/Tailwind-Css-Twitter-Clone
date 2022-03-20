@@ -1,0 +1,6 @@
+<template>
+	<div class="w-[37.5rem] border-x-[1px] border-min-border-color">
+		<slot/>
+	</div>
+</template>
+
