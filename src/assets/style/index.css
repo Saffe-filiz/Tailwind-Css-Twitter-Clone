@@ -42,3 +42,16 @@
 .hoverEfect {
 	@apply duration-200 hover:bg-[#0f14191a] cursor-pointer
 }
+
+
+.sectionStyle {
+	@apply w-full h-[38px] cursor-pointer p-2 bg-transparent mt-[-8px] outline-none appearance-none
+}
+
+.sectionMainStyle {
+	@apply h-[55px] border border-[#cfd9de] rounded
+}
+
+.hoverDuration {
+	@apply  transition duration-200
+}

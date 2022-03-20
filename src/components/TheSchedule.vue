@@ -1,33 +1,33 @@
 <template>
-	<div class="w-[583px] h-auto rounded-t-2xl rounded-r-2xl overflow-auto">
-	<div class="w-full h-[50px] inline-flex flex-row justify-between px-[15px]">
-		<div class="flex items-center justify-between">
-		    <span class="w-[32px] h-[32px] rounded-full text-white hover:bg-[#0f14191a] transform cursor-pointer duration-200  flex items-center justify-center text-[#2d3136]">&#10005</span>
-			<span class="ml-[20px]">Schedule</span>
+	<div class="w-[37.5rem] h-auto rounded-t-2xl rounded-r-2xl overflow-auto">
+	<div class="w-full h-[3.125rem] inline-flex flex-row items-center justify-between px-3.75">
+		<div class="flex items-center justify-between ">
+		    <span class="w-[2rem] h-[2rem] rounded-full hover:bg-[#0f14191a] cursor-pointer flex items-center justify-center text-[#2d3136] hoverDuration">&#10005</span>
+			<span class="ml-[1.25rem]">Schedule</span>
 		</div>
-		<button>Confirm</button>
+		<button class="w-[5.2rem] h-[1.938rem] bg-[#0f1419] text-white rounded-[2rem]">Confirm</button>
 	</div>
-			<div class="w-full h-auto bg-yellow py-[11px]">
-		<div class="flex flex-col gap-[23px] px-[15px]">
+			<div class="w-full h-auto bg-yellow py-3.125">
+		<div class="flex flex-col gap-[1.438rem] px-3.75">
 				<div><span>Will send on Sun, Mar 5, 2023 at 4:16 PM</span></div>
 			<div>
 		<span>Date</span>
 		<div class="flex flex-row justify-between">
-			<div class="w-[264px] h-[53px] border border-[#cfd9de] rounded">
+			<div class="w-[16.5rem] sectionMainStyle">
 				<label class="ml-2">Mouth</label>
-				<select class="w-full h-[38px] p-2 cursor-pointer mt-[-8px] bg-transparent outline-none appearance-none">
+				<select class="sectionStyle">
 				<option>0</option>
 			</select>
 			</div>
-			<div class="w-[125px] h-[55px] border border-[#cfd9de] rounded">
+			<div class="w-[7.813rem] sectionMainStyle">
 				<label class="ml-2">Day</label>
-				<select class="w-full h-[38px] p-2 cursor-pointer mt-[-8px] bg-transparent outline-none appearance-none">
+				<select class="sectionStyle">
 				<option>0</option>
 			</select>
 			</div>
-			<div class="w-[145px] h-[55px] border border-[#cfd9de] rounded">
+			<div class="w-[9.063rem] sectionMainStyle">
 				<label class="ml-2">Year</label>
-				<select class="w-full h-[38px] p-2 cursor-pointer mt-[-8px] bg-transparent outline-none appearance-none">
+				<select class="sectionStyle">
 				<option>0</option>
 			</select>
 			</div>
@@ -36,15 +36,15 @@
 		<div>
 			<span>Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
-			<div class="w-[182px] h-[53px] border border-[#cfd9de] rounded">
-				<label class="ml-2">Mouth</label>
-				<select class="w-full h-[38px] p-2 cursor-pointer mt-[-8px] bg-transparent outline-none appearance-none">
+			<div class="w-[11.375rem] sectionMainStyle">
+				<label class="ml-2">Hour</label>
+				<select class="sectionStyle">
 				<option>0</option>
 			</select>
 			</div>
-			<div class="w-[182px] h-[55px] border border-[#f2f5f6] rounded">
-				<label class="ml-2">Day</label>
-				<select class="w-full h-[38px] p-2 cursor-pointer mt-[-8px] bg-transparent outline-none appearance-none">
+			<div class="w-[11.375rem] sectionMainStyle">
+				<label class="ml-2">Minute</label>
+				<select class="sectionStyle">
 				<option>0</option>
 			</select>
 			</div>
@@ -57,7 +57,7 @@
 		</div>
 		</div>
 	</div>
-<div class="w-full h-[45px] px-[15px] border-t-[1px]">	
+<div class="w-full h-[2.813rem] px-3.75 border-t border-[#cfd9de]">	
 </div>
 </div>
 </template>

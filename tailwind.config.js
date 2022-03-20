@@ -3,8 +3,13 @@ module.exports = {
   darkMode: 'class',
   content: [],
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  theme: {
+  theme: { 
     extend: {
+       padding: {
+        '2.75': '11px',
+        '3.75': '15px',
+      },
+      boderWidth: {}, 
       colors: {
         'btn-bg-color': '#1DA1F2',
         'min-border-color': '#eff3f40',
