@@ -49,9 +49,13 @@
 }
 
 .sectionMainStyle {
-	@apply h-[55px] border border-[#cfd9de] rounded
+	@apply h-[55px] border border-[#cfd9de] rounded focusInput
 }
 
 .hoverDuration {
 	@apply  transition duration-200
+}
+
+.focusInput {
+	@apply focus-within:border-[#1d9bf0] focus-within:fill-[#1d9bf0] focus-within:shadow-[0_0_0_1px_rgba(29,155,240,1)] 
 }

@@ -5,8 +5,8 @@
 	        <TheHeader/>
 	        <TheNewPost/>
 	   </TheFeed>
-	   <Trends class="w-auto flex flex-col gap-y-4 pr-2.5 pl-[1.875rem]">
-	   	   <TheSearch/>
+	   <Trends class="w-auto flex flex-col gap-y-4 pr-2.5 pl-[1.875rem] sticky top-0 mb-20">
+	   	   <TheSearch class="sticky top-0"/>
 	   </Trends>
 	</div>
 </template>
