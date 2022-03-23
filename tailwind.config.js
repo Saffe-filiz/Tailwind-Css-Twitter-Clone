@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         'btn-bg-color': '#1DA1F2',
         'min-border-color': '#eff3f40',
+        'input-main-border-color': '#cfd9de'
       }
     },
   },

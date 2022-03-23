@@ -8,11 +8,17 @@
 		    <textarea class="w-full outline-none overflow-hidden resize-none bg-none"></textarea>
 	    </div>
 	    <div class="w-full h-[50px] bg-gray-100 inline-flex justify-between pt-[11px] px-0.5">
-	    	<div class="w-[196px] h-full bg-black"></div>
-	    	<div class="w-[147px] h-full">
+	    	<div class="w-[196px] h-full">
+	    	</div>
+	    	<div class="w-[147px] h-full inline-flex items-center justify-between">
+	    		<TheCircle/>
 	    		<button class="w-[4.563rem] h-[1.938rem] bg-btn-bg-color text-white rounded-[2rem]">Tweet</button>
 	    	</div>
 	    </div>
 	</div>
     </div>
 </template>
+
+<script setup>
+	import TheCircle from './TheCircle.vue';
+</script>

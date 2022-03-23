@@ -1,15 +1,24 @@
 <template>
-	<div class="w-[31.563rem] pt-3 border border-[#cfd9de] rounded-2xl">
+	<div class="w-[31.563rem] pt-3 inputMainStyle rounded-2xl">
 	<div class="w-full h-auto inline-flex flex-row">
-		<div class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" :class="{'pr-2.75': !showIncressBtn}">
-			<span class="w-full h-[53px] border border-[#cfd9de] rounded" 
-			v-for="index in numberOfOptions" :key="index">
-				<input type="text" name="poll" v-model="questList[index -1]">
+		<div class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" :class="{'pr-2.75': !showBtn}">
+			<span class="w-full h-[53px] inputMainStyle rounded focusInput relative" 
+			v-for="num in numberOfChoice" :key="num">
+			<label>
+			    <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2" 
+			    type="text" v-model="quests[num -1]">  
+			    <span class="absolute focus top-3 text-lg left-2 duration-200" 
+			    :class="{'input-text': focusInput(num)}">
+			    {{choiceContent(num)}}</span>
+			    <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">
+			    {{quests[num -1].length}} / 25</span>
+			 </label>
 			</span>
 		</div>
-		<div class="w-[3.063rem] relative" v-if="showIncressBtn">
-			<span class="block w-[2rem] h-[2rem] ml-1 flexCenter rounded-full absolute bg-black bottom-6" 
-			@click="numberOfOptions++">+</span>
+		<div class="w-[3.063rem] relative pl-1" v-if="showBtn">
+			<span class="w-8 h-8 flexCenter rounded-full absolute hover:bg-[#1d9bf01a] bottom-6 cursor-pointer " @click="numberOfChoice++">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="#1d9bf0"><g><path d="M19.75 11H13V4.25c0-.553-.447-1-1-1s-1 .447-1 1V11H4.25c-.553 0-1 .447-1 1s.447 1 1 1H11v6.75c0 .553.447 1 1 1s1-.447 1-1V13h6.75c.553 0 1-.447 1-1s-.447-1-1-1z"/></g></svg>
+			</span>
 		</div>
 	</div>
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
@@ -45,7 +54,11 @@
 <script setup>
 	import { ref, computed } from 'vue';
 
-	let numberOfOptions = ref(2);
-    const questList = ref([]);
-    const showIncressBtn = computed(() => numberOfOptions.value < 4 )
+	let numberOfChoice = ref(2);
+    const quests = ref(['', '', '', '']);
+    const showBtn = computed(() => numberOfChoice.value < 4 )
+    const choiceContent = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`)
+    const focusInput = computed(() => (n) => quests.value[n -1].length > 0)
+
+
 </script>
