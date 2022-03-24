@@ -74,5 +74,5 @@ input[type="text"]:focus ~ .focus {
 }
 
 .input-text {
- @apply top-1 text-sm text-[#287acb]
+ @apply top-1 text-sm 
 }

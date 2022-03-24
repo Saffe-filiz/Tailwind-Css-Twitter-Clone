@@ -11,7 +11,7 @@
 			    :class="{'input-text': focusInput(num)}">
 			    {{choiceContent(num)}}</span>
 			    <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">
-			    {{quests[num -1].length}} / 25</span>
+			    {{quests[num -1].length ?? 0}} / 25</span>
 			 </label>
 			</span>
 		</div>
@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	<div class="w-full h-[3.125rem] rounded-b-2xl border-t border-[#cfd9de] hover:bg-[#f4212e1a] hoverDuration">
-		<button class="w-full h-full bg-red text-[#f4212e]">Remove Poll</button>
+		<button class="w-full h-full bg-red text-[#f4212e]" @click="$emit('hiddePoll', false)">Remove Poll</button>
 	</div>
 </div>
 </template>

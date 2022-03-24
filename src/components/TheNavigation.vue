@@ -58,22 +58,13 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
- 	  import Logo from './icons/Logo.vue';
-		import Home from './icons/Home.vue';
-		import Explore from './icons/Explore.vue';
-		import Notifications from './icons/Notifications.vue';
-		import Massages from './icons/Massages.vue';
-		import Bookmarks from './icons/Bookmarks.vue';
-		import List from './icons/List.vue';
-		import Profile from './icons/Profile.vue';
-		import More from './icons/More.vue';
-
-		let newSet = ref(false)
-
-		let chanceValue = () => {
-			newSet.value = !newSet.value
-			console.log(newSet.value )
-		}
-
+ 	import Logo from './icons/Logo.vue';
+	import Home from './icons/Home.vue';
+	import Explore from './icons/Explore.vue';
+	import Notifications from './icons/Notifications.vue';
+	import Massages from './icons/Massages.vue';
+	import Bookmarks from './icons/Bookmarks.vue';
+	import List from './icons/List.vue';
+	import Profile from './icons/Profile.vue';
+	import More from './icons/More.vue';
 </script>

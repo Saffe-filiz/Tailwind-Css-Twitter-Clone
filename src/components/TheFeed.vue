@@ -4,9 +4,3 @@
 	</div>
 </template>
 
-
-<script setup>
-	import ThePoll from './ThePoll.vue'
-	//import TheSchedule from './TheSchedule.vue'
-
-</script>
