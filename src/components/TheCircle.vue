@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[30px] h-[30px] relative flexCenter">
+	<div class="w-[30px] h-[30px] relative">
 		<svg class="w-full h-full transform -rotate-90"  fill="transparent" v-if="!(post.length >= 290)">
 			<circle cx="50%" cy="50%" :r="circleRadius" stroke-width="2" stroke="#eff3f4"></circle>
 		    <circle cx="50%" cy="50%" :r="circleRadius" stroke-width="2"  stroke-linecap="round" 

@@ -6,7 +6,7 @@
 			v-for="num in numberOfChoice" :key="num">
 			<label>
 			    <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2" 
-			    type="text" v-model="quests[num -1]">  
+			    type="text" v-model="quests[num -1]" maxlength="25">  
 			    <span class="absolute focus top-3 text-lg left-2 duration-200" 
 			    :class="{'input-text': focusInput(num)}">
 			    {{choiceContent(num)}}</span>
