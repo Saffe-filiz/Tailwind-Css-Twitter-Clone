@@ -1,6 +1,6 @@
 <template>
-	  <div class="h-screen inline-flex justify-between flex-col pb-2.5 pr-6 sticky top-0">
-	    <div class="inline-flex flex-col px-3">
+	  <aside class="h-screen inline-flex justify-between flex-col pb-2.5 pr-6 sticky top-0">
+	    <nav class="inline-flex flex-col px-3">
 		    <div class="">
 		    	<ul class="inline-flex w-full flex-col">
 		    		<li class="listContent">
@@ -43,7 +43,7 @@
 		<div class="w-full h-[4.938rem] mt-4">
 			<button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
 		</div>
-    </div>
+    </nav>
     	<div class="w-[15.688rem] h-16">
         <div class="w-[15.688rem] rounded-[4rem] inline-flex items-center justify-around px-3 py-3.5 hoverEfect">
             <div class="w-10 h-10 bg-black rounded-full"></div>
@@ -54,7 +54,7 @@
             <button>test</button>
         </div>
 	    </div>
-	  </div>
+	  </aside>
 </template>
 
 <script setup>

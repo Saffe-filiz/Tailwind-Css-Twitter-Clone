@@ -1,5 +1,5 @@
 <template>
-	<div class=" rightSideMainStyle">
+	<article class=" rightSideMainStyle">
 		<div class="rightSiteCartHeadarStyle">
 			<h3>Trends for you</h3>
 		</div>
@@ -12,7 +12,7 @@
 		<div class="seeMoreTextStyle">
 			<a href="">Show more</a>
 		</div>
-	</div>
+	</article>
 </template>
 
 

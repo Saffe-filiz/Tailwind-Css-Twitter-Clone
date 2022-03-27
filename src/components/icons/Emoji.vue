@@ -1,5 +1,5 @@
 <template>
-<span class="w-8 h-8  flexCenter rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
+<span class="w-8.5 h-8.5 flexCenter rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
 
 <svg class="w-[1.188rem] h-[1.188rem]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12 22.75C6.072 22.75 1.25 17.928 1.25 12C1.25 6.072 6.072 1.25 12 1.25C17.928 1.25 22.75 6.072 22.75 12C22.75 17.928 17.928 22.75 12 22.75ZM12 2.75C6.9 2.75 2.75 6.9 2.75 12C2.75 17.1 6.9 21.25 12 21.25C17.1 21.25 21.25 17.1 21.25 12C21.25 6.9 17.1 2.75 12 2.75Z" fill="#1DA1F2"/>

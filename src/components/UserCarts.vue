@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[21.875rem] h-[4.5rem] px-4 py-3 inline-flex flex-row justify-between hoverEfect">
+	<article class="w-[21.875rem] h-[4.5rem] px-4 py-3 inline-flex flex-row justify-between hoverEfect">
        <div class="w-12 h-12 rounded-full bg-black"></div>
        <div class="w-[16.125rem] h-12 inline-flex flex-row justify-between items-center">
          <div class="w-[10.5rem] h-12 inline-flex flex-col justify-center">
@@ -8,5 +8,5 @@
          </div>
          <button class="w-[4.563rem] h-[1.938rem] bg-[#0f1419] text-white rounded-[2rem]">Follow</button>
        </div>
-    </div>
+    </article>
 </template>

@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[31.563rem] pt-3 inputMainStyle rounded-2xl">
+	<article class="w-[31.563rem] pt-3 inputMainStyle rounded-2xl">
 	<div class="w-full h-auto inline-flex flex-row">
 		<div class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" :class="{'pr-2.75': !showBtn}">
 			<span class="w-full h-[53px] inputMainStyle rounded focusInput relative" 
@@ -47,7 +47,7 @@
 	<div class="w-full h-[3.125rem] rounded-b-2xl border-t border-[#cfd9de] hover:bg-[#f4212e1a] hoverDuration">
 		<button class="w-full h-full bg-red text-[#f4212e]" @click="$emit('hiddePoll', false)">Remove Poll</button>
 	</div>
-</div>
+</article>
 </template>
 
 
@@ -58,7 +58,7 @@
     const quests = ref(['', '', '', '']);
     const showBtn = computed(() => numberOfChoice.value < 4 )
     const choiceContent = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`)
-    const focusInput = computed(() => (n) => quests.value[n -1].length > 0)
+    const focusInput = computed(() => (n) => quests.value[n -1].length > 0);
 
 
 </script>
