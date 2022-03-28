@@ -6,9 +6,10 @@
 	<div class="w-full flex flex-col">
 		<div class="w-full">
 		    <div class="w-full min-h-[49px] h-auto py-2" @click="whoCanAnswer = true">
-		     <div class="relative">
-		     <div class="w-[507px] pl-2.75 outline-none relative z-[5] " contenteditable @input="takePost"></div>
-		     <div class="w-[507px] pl-2.75 outline-none z-[-1] absolute top-0 left-0" contenteditable id="read"></div>
+		     <div class="w-[507px] relative">
+		     <div class="w-full pl-2.75 outline-none bg-transparent text-transparent z-10 relative"
+		      contenteditable  @input="takePost"></div>
+		     <div class="w-full pl-2.75 whitespace-normal text-black outline-none bg-transparent absolute top-0 left-0 z-1" contenteditable v-html="post"></div>
 		     </div>
 		    </div>
 		    <div class="w-full h-auto">
@@ -33,7 +34,7 @@
 	    	</div>
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="showContent">
-	    		   <TheCircle :post="post.length"/>
+	    		   <TheCircle :post="postResult.length"/>
 	    		   <div class="w-px h-[29px] ml-[9px] mr-2.75 bg-[#c0d0d8]"></div>
 	    		   <Plus/>
 	    		</div>
@@ -58,26 +59,24 @@
 	import Mark from './icons/Mark.vue';
 
 
-    let post = ref('');
+
+
+    let postResult = ref('');
     let showThePoll = ref(false);
     let whoCanAnswer = ref(false);
 	let showCircle = ref(false);
-	let showContent = computed(() => post.value.length > 0)
+	let showContent = computed(() => postResult.value.length > 0)
 
-	const takePost = (e) => {
-		let realOnly = document.getElementById('read');
-		let el = e.target.innerText;
-		post.value = el;
-		let num = 280 - el.length
-		if(el.length > 280) {
-			let owerText = el.slice(num);
-			owerText = `<span class="bg-red-100">${owerText}</span>`
-			realOnly.style.zIndex = '1'
-			realOnly.innerHTML = el.slice(0, 280) + owerText
-		}else {
-			realOnly.innerHTML = ''
-		}
-	}
+	const takePost = (e) =>  postResult.value = e.target.innerText;
+
+	const post = computed(() => {
+		let text = postResult.value
+        let owerWrite = new RegExp(`(.\{${text.length - 280}\})\n*\$`, 'gi');
+        let hashTag = new RegExp(/\#\w+|\@\w+/, 'gi');
+        return text.replace(owerWrite, e => {
+           return `<span class="owerWriteBg">${e.replace(hashTag, x => `<span class="hastag">${x}</span>`)}</span>`
+        }).replace(hashTag, x => `<span class="hastag">${x}</span>`)
+	})
 
 
 

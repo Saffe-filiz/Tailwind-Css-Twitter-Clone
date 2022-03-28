@@ -64,6 +64,14 @@
 	@apply border border-input-main-border-color 
 }
 
+.hastag {
+	@apply text-[#1d9bf0];
+}
+
+.owerWriteBg {
+	@apply bg-[#fb9fa8]
+}
+
 input[type="text"]:focus ~ .counter {
 	@apply opacity-100 text-[#287acb] 
 }
