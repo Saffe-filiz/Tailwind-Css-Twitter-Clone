@@ -7,9 +7,9 @@
 		<div class="w-full">
 		    <div class="w-full min-h-[49px] h-auto py-2" @click="whoCanAnswer = true">
 		     <div class="w-[507px] relative">
-		     <div class="w-full pl-2.75 outline-none bg-transparent text-transparent z-10 relative"
-		      contenteditable  @input="takePost"></div>
-		     <div class="w-full pl-2.75 whitespace-normal text-black outline-none bg-transparent absolute top-0 left-0 z-1" contenteditable v-html="post"></div>
+		         <div class="w-full pl-2.75 outline-none bg-transparent text-transparent relative z-10" contenteditable
+		         @input="takePost" id="s"></div>
+		         <div class="w-full pl-2.75 outline-none absolute z-[-1] top-0 left-0" contenteditable v-html="post"></div>
 		     </div>
 		    </div>
 		    <div class="w-full h-auto">
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-	import { ref, computed } from 'vue';
+	import { ref, computed, onMounted } from 'vue';
  	import ThePoll from './ThePoll.vue'
 	//import TheSchedule from './TheSchedule.vue'
 	import TheCircle from './TheCircle.vue';
@@ -61,24 +61,22 @@
 
 
 
-    let postResult = ref('');
-    let showThePoll = ref(false);
-    let whoCanAnswer = ref(false);
+   let postResult = ref('');
+   let showThePoll = ref(false);
+   let whoCanAnswer = ref(false);
 	let showCircle = ref(false);
+	let position = ref(0);
 	let showContent = computed(() => postResult.value.length > 0)
 
-	const takePost = (e) =>  postResult.value = e.target.innerText;
-
+	const takePost = (e) => postResult.value = e.target.innerText
+	
 	const post = computed(() => {
-		let text = postResult.value
-        let owerWrite = new RegExp(`(.\{${text.length - 280}\})\n*\$`, 'gi');
-        let hashTag = new RegExp(/\#\w+|\@\w+/, 'gi');
-        return text.replace(owerWrite, e => {
-           return `<span class="owerWriteBg">${e.replace(hashTag, x => `<span class="hastag">${x}</span>`)}</span>`
-        }).replace(hashTag, x => `<span class="hastag">${x}</span>`)
-	})
-
-
+      let text = postResult.value
+      let owerWrite = new RegExp(`(.\{${text.length - 280}\})\n*\$`, 'gi');
+      let hashTag = new RegExp(/\#\w+|\@\w+/, 'gi');
+      return text.replace(owerWrite, e => {
+      	return `<span class="owerWriteBg">${e.replace(hashTag, x => `<a class="hastag">${x}</a>`)}</span>`
+            }).replace(hashTag, x => `<a class="hastag">${x}</a>`)
+   })
 
 </script>
-

@@ -4,38 +4,38 @@
 		    <div class="">
 		    	<ul class="inline-flex w-full flex-col">
 		    		<li class="listContent">
-		    			<Logo class=""/>
+		    			<Logo/>
 		    		</li>
 		    		<li class="listContent">
-		    			<Home class=""/>
+		    			<Home :active="true"/>
 		    			<p class="navigationTextStyle">Home</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Explore class=""/>
+		    		    <Explore :active="false"/>
 		    			<p class="navigationTextStyle">Explore</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Notifications class=""/>
+		    		    <Notifications :active="false"/>
 		    			<p class="navigationTextStyle">Notifications</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Massages class=""/>
+		    		    <Massages :active="false"/>
 		    			<p class="navigationTextStyle">Massages</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Bookmarks class=""/>
+		    		    <Bookmarks :active="false"/>
 		    			<p class="navigationTextStyle">Bookmarks</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <List class=""/>
+		    		    <List :active="false"/>
 		    			<p class="navigationTextStyle">Lists</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <Profile class=""/>
+		    		    <Profile :active="false"/>
 		    			<p class="navigationTextStyle">Profile</p>
 		    		</li>
 		    		<li class="listContent">
-		    		    <More class=""/>
+		    		    <More :active="false"/>
 		    			<p class="navigationTextStyle">More</p>
 		    		</li>
 		    	</ul>

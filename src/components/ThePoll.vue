@@ -11,7 +11,7 @@
 			    :class="{'input-text': focusInput(num)}">
 			    {{choiceContent(num)}}</span>
 			    <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">
-			    {{quests[num -1].length ?? 0}} / 25</span>
+			    {{quests[num -1].length}} / 25</span>
 			 </label>
 			</span>
 		</div>
@@ -24,24 +24,9 @@
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
 		<div class="w-full h-auto inline-flex justify-between">
-			<div class="w-[8.875rem] sectionMainStyle">
-				<label class="ml-2">Days</label>
-				<select class="sectionStyle">
-				<option>1</option>
-			</select>
-			</div>
-		    <div class="w-[8.875rem] sectionMainStyle">
-				<label class="ml-2">Hours</label>
-				<select class="sectionStyle">
-				<option>0</option>
-			</select>
-			</div>
-			<div class="w-[8.875rem] sectionMainStyle">
-				<label class="ml-2">Minutes</label>
-				<select class="sectionStyle">
-				<option>0</option>
-			</select>
-			</div>
+			<Selected class="w-[8.875rem]" title="Days"/>
+		    <Selected class="w-[8.875rem]" title="Hours"/>
+		    <Selected class="w-[8.875rem]" title="Minutes"/>
 		</div>
 	</div>
 	<div class="w-full h-[3.125rem] rounded-b-2xl border-t border-[#cfd9de] hover:bg-[#f4212e1a] hoverDuration">
@@ -53,6 +38,8 @@
 
 <script setup>
 	import { ref, computed } from 'vue';
+
+	import Selected from './Selected.vue';
 
 	let numberOfChoice = ref(2);
     const quests = ref(['', '', '', '']);

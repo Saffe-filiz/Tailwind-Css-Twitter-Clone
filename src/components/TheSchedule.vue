@@ -9,46 +9,21 @@
 	</div>
 		<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">
-				<div><span>Will send on Sun, Mar 5, 2023 at 4:16 PM</span></div>
-			<div>
+			<div><span>Will send on Sun, Mar 5, 2023 at 4:16 PM</span></div>
+		<div>
 		<span>Date</span>
-		<div class="flex flex-row justify-between">
-			<div class="w-[16.5rem] sectionMainStyle">
-				<label class="ml-2">Mouth</label>
-				<select class="sectionStyle">
-				<option>0</option>
-			</select>
-			</div>
-			<div class="w-[7.813rem] sectionMainStyle">
-				<label class="ml-2">Day</label>
-				<select class="sectionStyle">
-				<option>0</option>
-			</select>
-			</div>
-			<div class="w-[9.063rem] sectionMainStyle">
-				<label class="ml-2">Year</label>
-				<select class="sectionStyle">
-				<option>0</option>
-			</select>
-			</div>
-		</div>
+		    <div class="flex flex-row justify-between">
+			    <Selected class="w-[16.5rem]" title="Mouth"/>
+			    <Selected class="w-[7.813rem]" title="Day"/>
+			    <Selected class="w-[9.063rem]" title="Year"/>
+		    </div>
 		</div>
 		<div>
-			<span>Time</span>
+		<span>Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
-			<div class="w-[11.375rem] sectionMainStyle">
-				<label class="ml-2">Hour</label>
-				<select class="sectionStyle">
-				<option>0</option>
-			</select>
-			</div>
-			<div class="w-[11.375rem] sectionMainStyle">
-				<label class="ml-2">Minute</label>
-				<select class="sectionStyle">
-				<option>0</option>
-			</select>
-			</div>
-		 </div>
+				<Selected class="w-[11.375rem]" title="Hour"/>
+			    <Selected class="w-[11.375rem]" title="Minute"/>
+		    </div>
 		</div>
 		<div class="w-full" >
 			<p>Time zone</p>
@@ -59,3 +34,7 @@
     <div class="w-full h-[2.813rem] px-3.75 border-t border-[#cfd9de]"></div>
 </article>
 </template>
+
+<script setup>
+	import Selected from './Selected.vue';
+</script>
