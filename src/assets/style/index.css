@@ -68,8 +68,8 @@
 	@apply text-[#1d9bf0];
 }
 
-.owerWriteBg {
-	@apply bg-[#fb9fa8]
+.dragArea {
+	@apply border-2 border-dashed border-[#1d9bf0] rounded
 }
 
 input[type="text"]:focus ~ .counter {

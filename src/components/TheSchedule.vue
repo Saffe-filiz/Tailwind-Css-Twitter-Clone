@@ -1,13 +1,14 @@
 <template>
-	<article class="w-[37.5rem] h-auto rounded-t-2xl rounded-r-2xl overflow-auto">
+	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto mt-7">
 	<div class="w-full h-[3.125rem] inline-flex flex-row items-center justify-between px-3.75">
 		<div class="flex items-center justify-between ">
-		    <span class="w-[2rem] h-[2rem] rounded-full hover:bg-[#0f14191a] cursor-pointer flex items-center justify-center text-[#2d3136] hoverDuration">&#10005</span>
+		    <span class="w-[2rem] h-[2rem] rounded-full hover:bg-[#0f14191a] cursor-pointer flex items-center justify-center text-[#2d3136] hoverDuration" 
+		    @click="$emit('showTheSchedule', false)">&#10005</span>
 			<span class="ml-[1.25rem]">Schedule</span>
 		</div>
 		<button class="w-[5.2rem] h-[1.938rem] bg-[#0f1419] text-white rounded-[2rem]">Confirm</button>
 	</div>
-		<div class="w-full h-auto bg-yellow py-3.125">
+	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">
 			<div><span>Will send on Sun, Mar 5, 2023 at 4:16 PM</span></div>
 		<div>
