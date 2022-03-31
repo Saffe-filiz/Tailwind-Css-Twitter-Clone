@@ -4,11 +4,3 @@
 	</div>
 </template>
 
-<script setup>
-	import { onMounted } from 'vue';
-
-	onMounted(() => {
-		let body = document.querySelector('body');
-		body.style.overflow = 'hidden'
-	})
-</script>

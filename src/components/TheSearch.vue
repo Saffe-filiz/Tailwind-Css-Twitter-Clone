@@ -1,5 +1,5 @@
 <template>
-	<article class="w-full h-[55px] pt-[5px] bg-white">
+	<article class="w-full h-[55px] pt-[5px] bg-white sticky top-0">
 		<div class="w-[21.875rem] h-[3.125rem] rounded-[2.625rem] bg-[#f7f9f9] flexCenter focusInput">
 		<div class="w-[3.125rem] flexCenter">
 		<svg width="24" height="24" viewBox="0 0 19 19" fill="#6E767D" xmlns="http://www.w3.org/2000/svg">

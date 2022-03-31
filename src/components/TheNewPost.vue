@@ -16,8 +16,7 @@
 		                 contenteditable="true" 
 		                  @input="takePost"></div>
 		                 <div class="w-full pl-2.75 outline-none absolute z-[-1] top-0 left-0 break-words
-		                 text-transparent"
-		                 id="read">
+		                 text-transparent">
 		                 </div>
 		                 <span class="top-0 left-2.5 absolute text-[#71767b] pointer-events-none" 
 		                 v-if="placeHolder">What's happening</span>
@@ -42,7 +41,8 @@
 	    		<Gift/>
 	    		<Emoji/>
 			<Poll @click="showThePoll = true"/>
-	    		<Schedule @click="showTheSchedule = true"/>
+	    		<Schedule 
+	    		@click="owerFlowHidden(), showTheSchedule = true"/>
 	    		<Mark/>
 	    	</div>
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
@@ -61,17 +61,18 @@
 	      </div>
 	</div>
       </article>
-      <PopUp v-if="showTheSchedule">
-      	<TheSchedule @showTheSchedule="(hidde) => ShowTheSchedule = hidde"/>
+      <PopUp v-if="showTheSchedule" @click="showTheSchedule = false">
+      	    <TheSchedule v-on:click.stop 
+      	    @showTheSchedule="( hidden ) => showTheSchedule = hidden"/>
       </PopUp>
 </template>
 
 <script setup>
-	import { ref, computed, onUpdated } from 'vue';
+	import { ref, computed } from 'vue';
  	import ThePoll from './ThePoll.vue'
-	import TheSchedule from './TheSchedule.vue'
 	import PopUp from './PopUp.vue'
 	import TheCircle from './TheCircle.vue';
+	import TheSchedule from './TheSchedule.vue'
 	import Madia from './icons/Madia.vue';
 	import Gift from './icons/Gift.vue';
 	import Emoji from './icons/Emoji.vue';
@@ -84,31 +85,21 @@
 
 
 
-      let post = ref('');
-      let placeHolder = ref(true);
-      let showThePoll = ref(false);
-      let showTheSchedule = ref(false)
-      let whoCanAnswer = ref(false);
-      let showCircle = ref(false);
-      let dragArea = ref(false)
-	let showContent = computed(() => post.value.length > 0)
+    let post = ref('');
+    let placeHolder = ref(true);
+    let showThePoll = ref(false);
+    let showTheSchedule = ref(false);
+    let whoCanAnswer = ref(false);
+    let showCircle = ref(false);
+    let dragArea = ref(false);
 
-	const takePost = (e) =>  {
-		let text = e.target.innerText;
-		post.value = text
-		let read = document.getElementById('read');
-		if(text.length > 280){
-		      let owerText = text.substr(280);
-	            owerText = `<span class="bg-[#fb9fa8]">${owerText}</span>`
-	            text = text.substr(0, 280) + owerText
-	            return read.innerHTML = text	
-		}else {
-			read.innerHTML = ''
+	let showContent = computed(() => post.value.length > 0);
 
-		}
-	    
+	const takePost = (e) =>  post.value = e.target.innerText;
+
+	const owerFlowHidden = () => {
+		let body = document.querySelector('body');
+		body.style.overflow = 'hidden';	
 	}
-
-
 
 </script>

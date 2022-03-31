@@ -41,7 +41,7 @@
 		    	</ul>
 		    </div>
 		<div class="w-full h-[4.938rem] mt-4">
-			<button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full">Tweet</button>
+			<button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full" @click="showTheSchedule = true">Tweet</button>
 		</div>
     </nav>
     	<div class="w-[15.688rem] h-16">
@@ -55,9 +55,15 @@
         </div>
 	    </div>
 	  </aside>
+	       <PopUp v-if="showTheSchedule" @click="showTheSchedule = false">
+      	    <TheSchedule v-on:click.stop 
+      	    @showTheSchedule="( hidden ) => showTheSchedule = hidden"/>
+      </PopUp>
 </template>
 
 <script setup>
+	import { ref, computed } from 'vue';
+
  	import Logo from './icons/Logo.vue';
 	import Home from './icons/Home.vue';
 	import Explore from './icons/Explore.vue';
@@ -67,4 +73,13 @@
 	import List from './icons/List.vue';
 	import Profile from './icons/Profile.vue';
 	import More from './icons/More.vue';
+	import PopUp from './PopUp.vue';
+	import TheSchedule from './TheSchedule.vue';
+
+	let showTheSchedule = ref(false)
+
+	const owerFlowHidden = () => {
+		let body = document.querySelector('body');
+		body.style.overflow = 'hidden';	
+	}
 </script>

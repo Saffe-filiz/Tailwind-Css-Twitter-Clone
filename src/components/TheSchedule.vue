@@ -3,7 +3,7 @@
 	<div class="w-full h-[3.125rem] inline-flex flex-row items-center justify-between px-3.75">
 		<div class="flex items-center justify-between ">
 		    <span class="w-[2rem] h-[2rem] rounded-full hover:bg-[#0f14191a] cursor-pointer flex items-center justify-center text-[#2d3136] hoverDuration" 
-		    @click="$emit('showTheSchedule', false)">&#10005</span>
+		    @click="$emit('showTheSchedule', false), owerFlowAuto()">&#10005</span>
 			<span class="ml-[1.25rem]">Schedule</span>
 		</div>
 		<button class="w-[5.2rem] h-[1.938rem] bg-[#0f1419] text-white rounded-[2rem]">Confirm</button>
@@ -38,4 +38,13 @@
 
 <script setup>
 	import Selected from './Selected.vue';
+
+	//let showContent = defineProps({hidden: Boolean})
+
+	const owerFlowAuto = () => {
+		let body = document.querySelector('body')
+		body.style.overflow = 'auto'
+	}
+
+
 </script>
