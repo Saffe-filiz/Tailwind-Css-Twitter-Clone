@@ -64,15 +64,15 @@
 <script setup>
 	import { ref, computed } from 'vue';
 
- 	import Logo from './icons/Logo.vue';
-	import Home from './icons/Home.vue';
-	import Explore from './icons/Explore.vue';
-	import Notifications from './icons/Notifications.vue';
-	import Massages from './icons/Massages.vue';
-	import Bookmarks from './icons/Bookmarks.vue';
-	import List from './icons/List.vue';
-	import Profile from './icons/Profile.vue';
-	import More from './icons/More.vue';
+ 	import Logo from './icons/NavIcons/Logo.vue';
+	import Home from './icons/NavIcons/Home.vue';
+	import Explore from './icons/NavIcons/Explore.vue';
+	import Notifications from './icons/NavIcons/Notifications.vue';
+	import Massages from './icons/NavIcons/Massages.vue';
+	import Bookmarks from './icons/NavIcons/Bookmarks.vue';
+	import List from './icons/NavIcons/List.vue';
+	import Profile from './icons/NavIcons/Profile.vue';
+	import More from './icons/NavIcons/More.vue';
 	import PopUp from './PopUp.vue';
 	import TheSchedule from './TheSchedule.vue';
 

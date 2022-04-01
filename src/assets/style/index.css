@@ -57,7 +57,7 @@
 }
 
 .focusInput {
-	@apply focus-within:border-[#1d9bf0] focus-within:fill-[#1d9bf0] focus-within:shadow-[0_0_0_1px_rgba(29,155,240,1)] hoverDuration 
+	@apply focus-within:border-[#1d9bf0] focus-within:fill-[#1d9bf0] focus-within:shadow-[0_0_0_1px_rgba(29,155,240,1)] hoverDuration
 }
 
 .inputMainStyle {

@@ -30,9 +30,9 @@
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
 		<div class="w-full h-auto inline-flex justify-between">
-			<Selected class="w-[8.875rem]" title="Days"/>
-		    <Selected class="w-[8.875rem]" title="Hours"/>
-		    <Selected class="w-[8.875rem]" title="Minutes"/>
+			<Selected class="w-[8.875rem]" :durations="8" title="Days"/>
+		    <Selected class="w-[8.875rem]" :durations="24" title="Hours"/>
+		    <Selected class="w-[8.875rem]" :durations="60" title="Minutes"/>
 		</div>
 	</div>
 	<div class="w-full h-[3.125rem] rounded-b-2xl border-t border-[#cfd9de] hover:bg-[#f4212e1a] hoverDuration">

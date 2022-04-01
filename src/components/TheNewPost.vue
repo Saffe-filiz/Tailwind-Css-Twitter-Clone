@@ -10,23 +10,18 @@
 		      :class="{dragArea}" 
 		      @dragover="dragArea = true"
 		      @dragleave="dragArea = false" 
-		      @click="whoCanAnswer = true, placeHolder = false">
+		      @click="whoCanAnswer = true, showPlaceHolder = false">
 		            <div class="w-[507px] relative">
 		                 <div class="w-full pl-2.75 outline-none relative z-10 " 
 		                 contenteditable="true" 
-		                  @input="takePost"></div>
-		                 <div class="w-full pl-2.75 outline-none absolute z-[-1] top-0 left-0 break-words
-		                 text-transparent">
-		                 </div>
+		                 @input="takePost"></div>
 		                 <span class="top-0 left-2.5 absolute text-[#71767b] pointer-events-none" 
-		                 v-if="placeHolder">What's happening</span>
+		                 v-if="showPlaceHolder">What's happening</span>
 		            </div>
 		      <!-- TextArea Start -->
 		      </div>
 		      <div class="w-full h-auto">
-		    	      <ThePoll 
-		    	      v-if="showThePoll" 
-		    	      @hiddePoll="(hidde) => showThePoll = hidde"/>
+		    	      <ThePoll v-if="showThePoll" @hiddePoll="(hidde) => showThePoll = hidde"/>
 		      </div>
 		      <div class="w-full h-[35px] border-b border-min-border-color pl-2" v-if="whoCanAnswer">
 		    	<span class="w-auto h-auto inline-flex items-center flex-row">
@@ -37,7 +32,10 @@
 	      </div>
 	      <div class="w-auto h-[45px] inline-flex justify-between items-center px-0.5">
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    		<Madia/>
+	    		<label for="image">
+	    			<Madia/>
+	    			<input type="file" class="hidden" id="image">
+	    		</label>
 	    		<Gift/>
 	    		<Emoji/>
 			<Poll @click="showThePoll = true"/>
@@ -61,32 +59,32 @@
 	      </div>
 	</div>
       </article>
-      <PopUp v-if="showTheSchedule" @click="showTheSchedule = false">
+      <PopUp v-if="showTheSchedule" @click="showTheSchedule = false, owerFlowAuto()" >
       	    <TheSchedule v-on:click.stop 
       	    @showTheSchedule="( hidden ) => showTheSchedule = hidden"/>
       </PopUp>
 </template>
 
 <script setup>
-	import { ref, computed } from 'vue';
+	import { ref, computed, provide } from 'vue';
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
 	import TheCircle from './TheCircle.vue';
 	import TheSchedule from './TheSchedule.vue'
-	import Madia from './icons/Madia.vue';
-	import Gift from './icons/Gift.vue';
-	import Emoji from './icons/Emoji.vue';
-	import Poll from './icons/Poll.vue';
-	import Schedule from './icons/Schedule.vue';
-	import World from './icons/World.vue';
-	import Mark from './icons/Mark.vue';
+	import Madia from './icons/NewPostIcons/Madia.vue';
+	import Gift from './icons/NewPostIcons/Gift.vue';
+	import Emoji from './icons/NewPostIcons/Emoji.vue';
+	import Poll from './icons/NewPostIcons/Poll.vue';
+	import Schedule from './icons/NewPostIcons/Schedule.vue';
+	import World from './icons/NewPostIcons/World.vue';
+	import Mark from './icons/NewPostIcons/Mark.vue';
 	import Plus from './icons/Plus.vue';
 
 
 
 
     let post = ref('');
-    let placeHolder = ref(true);
+    let showPlaceHolder = ref(true);
     let showThePoll = ref(false);
     let showTheSchedule = ref(false);
     let whoCanAnswer = ref(false);
@@ -101,5 +99,13 @@
 		let body = document.querySelector('body');
 		body.style.overflow = 'hidden';	
 	}
+
+	const owerFlowAuto = () => {
+		let body = document.querySelector('body')
+		body.style.overflow = 'auto'
+		showTheSchedule.value = false
+	}
+
+	provide('owerFlowAuto', owerFlowAuto)
 
 </script>
