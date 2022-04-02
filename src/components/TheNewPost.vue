@@ -38,7 +38,7 @@
 	    		</label>
 	    		<Gift/>
 	    		<Emoji/>
-			<Poll @click="showThePoll = true"/>
+			    <Poll @click="showThePoll = true"/>
 	    		<Schedule 
 	    		@click="owerFlowHidden(), showTheSchedule = true"/>
 	    		<Mark/>
@@ -67,10 +67,12 @@
 
 <script setup>
 	import { ref, computed, provide } from 'vue';
+	// Component
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
 	import TheCircle from './TheCircle.vue';
 	import TheSchedule from './TheSchedule.vue'
+    // Icons 	
 	import Madia from './icons/NewPostIcons/Madia.vue';
 	import Gift from './icons/NewPostIcons/Gift.vue';
 	import Emoji from './icons/NewPostIcons/Emoji.vue';

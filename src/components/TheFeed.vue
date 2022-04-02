@@ -11,6 +11,15 @@
 		<Post/>
 		<Post/>
 		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
 	</div>
 </template>
 
