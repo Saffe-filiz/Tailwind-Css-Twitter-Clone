@@ -16,7 +16,7 @@
 
 <script setup>
 
-	import { reactive, onMounted, computed } from 'vue'
+	import { reactive, onMounted } from 'vue'
 
 	import TheNavigation from './components/TheNavigation.vue';
 	import TheFeed from './components/TheFeed.vue';
