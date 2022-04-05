@@ -1,5 +1,5 @@
 <template>
-	<article class=" rightSideMainStyle">
+	<article class="rightSideMainStyle">
 		<div class="rightSiteCartHeadarStyle">
 			<h3>Trends for you</h3>
 		</div>

@@ -1,5 +1,5 @@
 <template>
-	  <aside class="h-screen inline-flex justify-between flex-col pb-2.5 pr-6 sticky top-0">
+	<aside class="h-screen inline-flex justify-between flex-col pb-2.5 pr-6 sticky top-0">
 	    <nav class="inline-flex flex-col px-3">
 		    <div class="">
 		    	<ul class="inline-flex w-full flex-col">
@@ -54,11 +54,10 @@
             <button>test</button>
         </div>
 	    </div>
-	  </aside>
-	       <PopUp v-if="showTheSchedule" @click="showTheSchedule = false">
-      	    <TheSchedule v-on:click.stop 
-      	    @showTheSchedule="( hidden ) => showTheSchedule = hidden"/>
-      </PopUp>
+	</aside>
+	<PopUp v-if="showTheSchedule" @click="showTheSchedule = false">
+      	<TheSchedule v-on:click.stop/>
+    </PopUp>
 </template>
 
 <script setup>

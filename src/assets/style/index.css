@@ -11,7 +11,7 @@
 }
 
 .navigationTextStyle {
-	@apply text-[1.188rem] 
+	@apply text-[1.188rem] hidden xl:block
 }
 
 .userCartTextStyle {
@@ -23,7 +23,7 @@
 }
 
 .rightSideMainStyle {
-	@apply w-[21.875rem] rounded-[0.938rem] bg-[#f7f9f9]
+	@apply  xl:w-[21.875rem] lg:w-[18.125rem] rounded-[0.938rem] bg-[#f7f9f9]
 }
 
 .rightSiteCartHeadarStyle {
@@ -68,8 +68,12 @@
 	@apply text-[#1d9bf0];
 }
 
-.dragArea {
-	@apply border-2 border-dashed border-[#1d9bf0] rounded
+.draggableArea {
+	@apply border-2 border-dashed border-[#1d9bf0] border-transparent rounded
+}
+
+.draggableAreaActive {
+	@apply border-[#1d9bf0] 
 }
 
 input[type="text"]:focus ~ .counter {
