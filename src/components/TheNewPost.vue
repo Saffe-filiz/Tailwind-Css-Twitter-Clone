@@ -6,9 +6,9 @@
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
 			<!-- TextArea Start -->
-			<ImageDrag @dragover="draggableAreaActive = true">
+			<TheImageDragArea @dragover="draggableAreaActive = true">
 		        <TextArea @post="(text) => post = text" @click="whoCanAnswer = true"/>
-		    </ImageDrag>
+		    </TheImageDragArea>
 		    <!-- Poll Form Start --> 
 		     <div>
 		    	<ThePoll v-if="showThePollForm" @hiddePoll="(hidde) => showThePollForm = hidde"/>
@@ -65,7 +65,7 @@
 	import TheCircle from './TheCircle.vue';
 	import TheSchedule from './TheSchedule.vue';
 	import TextArea from './TextArea.vue';
-	import ImageDrag from './ImageDrag.vue';
+	import TheImageDragArea from './TheImageDragArea.vue';
     // Icons 	
 	import Madia from './icons/NewPostIcons/Madia.vue';
 	import Gift from './icons/NewPostIcons/Gift.vue';
@@ -84,8 +84,20 @@
     let showThePollForm = ref(false); // Show Poll Form
 	
 
-	const imagePrevew = inject('imagePrevew');
-	const draggableAreaActive = inject('draggableAreaActive');
+	const draggableAreaActive = ref(false);
+	const images = ref([]); // Take image.
+
+    const imagePrevew = (e) => {
+		let image = e.target.files || e.dataTransfer.files
+		for(let index = 0; index < image.length; index++){
+			images.value.push(URL.createObjectURL(image[index]))
+		}
+		draggableAreaActive.value = false
+	}
+
+	provide('imagePrevew', imagePrevew);
+	provide('images', images);
+	provide('draggableAreaActive', draggableAreaActive);
 
 	const scrollHidden = inject('scrollHidden');
 	const scrollVisibil = inject('scrollVisibil');

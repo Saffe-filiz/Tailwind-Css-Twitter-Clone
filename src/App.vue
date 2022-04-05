@@ -45,23 +45,7 @@
 			setPositions.searchPosition = 'sticky', setPositions.searchTopValue = '607']
 		}
 	}
-
-	const draggableAreaActive = ref(false);
-	const images = ref([]); // Take image.
-
-    const imagePrevew = (e) => {
-		let image = e.target.files || e.dataTransfer.files
-		for(let index = 0; index < image.length; index++){
-			images.value.push(URL.createObjectURL(image[index]))
-		}
-		draggableAreaActive.value = false
-	}
-
-	provide('imagePrevew', imagePrevew);
-	provide('images', images);
-	provide('draggableAreaActive', draggableAreaActive);
-
-
+	
     const showTheScheduleForm = ref(false);
 
 	const scrollHidden = () => {
