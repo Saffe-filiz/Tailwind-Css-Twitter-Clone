@@ -40,7 +40,7 @@
 	import { inject } from 'vue';
 	import Selected from './Selected.vue';
 
-	const scrollVisibil = inject('scrollVisibil')
+	const scrollVisibil = inject('scrollVisibil');
 
 
 </script>

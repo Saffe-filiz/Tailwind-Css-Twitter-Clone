@@ -9,29 +9,34 @@
 			<ImageDrag @dragover="draggableAreaActive = true">
 		        <TextArea @post="(text) => post = text" @click="whoCanAnswer = true"/>
 		    </ImageDrag>
+		    <!-- Poll Form Start --> 
+		     <div>
+		    	<ThePoll v-if="showThePollForm" @hiddePoll="(hidde) => showThePollForm = hidde"/>
+		    </div>
+		    <!-- Poll Form End --> 
 		    <div class="w-full h-[35px] border-b border-min-border-color pl-2" v-if="whoCanAnswer">
 		        <span class="w-auto h-auto inline-flex items-center flex-row">
 		            <World class="w-[15px] h-[15px] mr-1"/>
 		            <p class="text-[#1d9bf0]">Everyone can replay</p>
 		        </span>
             </div>
-            <div>
-		    	<ThePoll v-if="showThePoll" @hiddePoll="(hidde) => showThePoll = hidde"/>
-		    </div>
 		 </div>
 		    <!-- TestArea End -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center px-0.5">
+	        <!-- Icons Area Start -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 	    		<label for="image">
 	    			<Madia/>
-	    			<!--<input type="file" class="hidden" id="image" @change=""  multiple="multiple">-->
+	    			<input type="file" class="hidden" id="image" @change="imagePrevew"  multiple="multiple" 
+	    			accept="image/png, image/gif, image/jpeg">
 	    		</label>
 	    		<Gift/>
 	    		<Emoji/>
-			    <Poll @click="showThePoll = true"/>
-	    		<Schedule @click="scrollHidden(), showTheSchedule = true"/>
+			    <Poll @click="showThePollForm = true"/>
+	    		<Schedule @click="scrollHidden(), showTheScheduleForm = true"/>
 	    		<Mark/>
 	    	</div>
+	    	<!-- Icons Area End -->
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post">
 	    		    <TheCircle :post="post.length"/>
@@ -47,13 +52,13 @@
 	    </div>
 	</div>
     </article>
-    <PopUp v-if="showTheSchedule" @click="showTheSchedule = false, scrollVisibil()" >
+    <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
       	<TheSchedule v-on:click.stop/>
     </PopUp>
 </template>
 
 <script setup>
-	import { ref, computed, provide } from 'vue';
+	import { ref, computed, inject, provide } from 'vue';
 	// Component
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
@@ -71,32 +76,19 @@
 	import Mark from './icons/NewPostIcons/Mark.vue';
 	import Plus from './icons/Plus.vue';
 
-	const emit = defineEmits(['hiddePoll', 'takeImage'])
-
 	let whoCanAnswer = ref(false);
-    let showThePoll = ref(false);
 
-    let draggableAreaActive = ref(false); // Toggle drag area css class
-   
     
-    let post = ref('');
+    let post = ref(''); // Take Post Text
 
-
-
-	let showTheSchedule = ref(false);
+    let showThePollForm = ref(false); // Show Poll Form
 	
-	const scrollHidden = () => {
-		let body = document.querySelector('body');
-		body.style.overflow = 'hidden';	
-	}
 
-	const scrollVisibil = () => {
-		let body = document.querySelector('body');
-		body.style.overflow = 'auto';
-		showTheSchedule.value = false;
-	}
+	const imagePrevew = inject('imagePrevew');
+	const draggableAreaActive = inject('draggableAreaActive');
 
-	provide('scrollVisibil', scrollVisibil) 
-	// 
-	provide('draggableAreaActive', draggableAreaActive)
+	const scrollHidden = inject('scrollHidden');
+	const scrollVisibil = inject('scrollVisibil');
+	const showTheScheduleForm = inject('showTheScheduleForm');
+
 </script>

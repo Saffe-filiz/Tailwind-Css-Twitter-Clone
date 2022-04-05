@@ -1,6 +1,6 @@
 <template>
 	<article>
-	<div class="w-full min-h-[46px] py-2">
+	<div class="w-full min-h-[42px] py-2">
 		<div class="w-[507px] relative">
 		    <div class="w-full pl-2.75 outline-none relative z-10" contenteditable  @input="$emit('post', $event.target.innerText)"></div>
 	    </div>

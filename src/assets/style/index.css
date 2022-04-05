@@ -64,10 +64,6 @@
 	@apply border border-input-main-border-color 
 }
 
-.hastag {
-	@apply text-[#1d9bf0];
-}
-
 .draggableArea {
 	@apply border-2 border-dashed border-[#1d9bf0] border-transparent rounded
 }
