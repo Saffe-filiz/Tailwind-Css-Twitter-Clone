@@ -72,6 +72,15 @@
 	@apply border-[#1d9bf0] 
 }
 
+.imgLeyout {
+	@apply  rounded-2xl overflow-hidden bg-cover p-[5px] relative
+}
+
+.i2 {
+	@apply h-[285px]
+}
+
+
 input[type="text"]:focus ~ .counter {
 	@apply opacity-100 text-[#287acb] 
 }

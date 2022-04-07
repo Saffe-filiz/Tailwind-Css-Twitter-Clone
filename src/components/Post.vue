@@ -16,19 +16,25 @@
 				<div class="w-full h-auto my-3 empty:hidden"></div>
 				<div class="w-full h-8.5 flex items-end">
 					<div class="w-[425px] h-auto inline-flex justify-between ml-[-8px]">
-						<Comment/>
-					    <ReTweet/>
-					    <Like/>
-					    <Share/>
+							<Comment>
+								<p>0</p>
+							</Comment>
+							<ReTweet>
+								<p>0</p>
+							</ReTweet>
+							<Like>
+								<p>0</p>
+							</Like>
+					    	<Share/>
+					    </div>
 					</div>
 				</div>
-			</div>
 		</div>
 </template>
 
 <script setup>
-	import Comment from './icons/PostIcons/Comment.vue';
 	import ReTweet from './icons/PostIcons/ReTweet.vue';
 	import Like from './icons/PostIcons/Like.vue';
 	import Share from './icons/PostIcons/Share.vue';
+	import Comment from './icons/PostIcons/Comment.vue';
 </script>

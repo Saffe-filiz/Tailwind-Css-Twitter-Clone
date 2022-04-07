@@ -2,7 +2,9 @@
 	<article>
 	<div class="w-full min-h-[42px] py-2">
 		<div class="w-[507px] relative">
-		    <div class="w-full pl-2.75 outline-none relative z-10" contenteditable  @input="$emit('post', $event.target.innerText)"></div>
+		    <div id="textArea" class="w-full pl-2.75 outline-none" contenteditable 
+		    @input="$emit('post', $event.target.innerText), showPlaceholderMassage = false"></div>
+		    <div class="absolute top-0 left-0 pointer-events-none pl-2.75" v-if="showPlaceholderMassage">{{placeholderMassage}}</div>
 	    </div>
 	</div>
    </article>
@@ -10,7 +12,9 @@
 
 <script setup>
 
-	import { ref, inject } from 'vue';
+	import { ref } from 'vue';
 	import World from './icons/NewPostIcons/World.vue';
-	let whoCanAnswer = ref(false);
+
+	let placeholderMassage = ref('What\'s happening ?')
+	let showPlaceholderMassage = ref(true)
 </script>
