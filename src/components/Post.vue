@@ -16,25 +16,75 @@
 				<div class="w-full h-auto my-3 empty:hidden"></div>
 				<div class="w-full h-8.5 flex items-end">
 					<div class="w-[425px] h-auto inline-flex justify-between ml-[-8px]">
-							<Comment>
-								<p>0</p>
+						<span @click="increase('comment')">
+							<Comment :isActive="item.comment.isActive">
+								<span class="w-auto h-auto overflow-hidden">
+									<p :class="item.comment.currentClass" 
+									v-if="item.comment.counter">{{item.comment.counter}}</p>
+								</span>
 							</Comment>
-							<ReTweet>
-								<p>0</p>
+						</span>
+						<span @click="increase('retweet')">
+							<ReTweet :isActive="item.retweet.isActive">
+								<span class="w-auto h-auto overflow-hidden">
+									<p :class="item.retweet.currentClass" 
+									v-if="item.retweet.counter">{{item.retweet.counter}}</p>
+								</span>
 							</ReTweet>
-							<Like>
-								<p>0</p>
+						</span>
+						<span @click="increase('like')" class="overflow-hidden">
+							<Like :isActive="item.like.isActive">
+								<span class="w-auto h-auto overflow-hidden">
+									<p :class="item.like.currentClass" 
+									v-if="item.like.counter">{{item.like.counter}}</p>
+								</span>
 							</Like>
-					    	<Share/>
-					    </div>
+						</span>
+					    <Share/>
 					</div>
 				</div>
+			</div>
 		</div>
 </template>
 
 <script setup>
+	import { ref, reactive } from 'vue';
+
 	import ReTweet from './icons/PostIcons/ReTweet.vue';
 	import Like from './icons/PostIcons/Like.vue';
 	import Share from './icons/PostIcons/Share.vue';
 	import Comment from './icons/PostIcons/Comment.vue';
+
+
+    let item = reactive({
+    	'comment': {
+    		'isActive': false,
+    		'counter':  0,
+    		'currentClass': '',
+    	},
+    	'retweet': {
+    		'isActive': false,
+    		'counter':  0,
+    		'currentClass': '',
+    	},
+    	'like': {
+    		'isActive': false,
+    		'counter':  0,
+    		'currentClass': '',
+    	},
+    	'share': false,
+    })
+
+    const increase = ( str ) =>  {
+        if(!item[str].isActive){
+            item[str].isActive = true;
+            item[str].isActive = true;
+            item[str].currentClass = 'animate-increaseAnimation';
+            item[str].counter++;
+        }else {
+            item[str].isActive = false
+            item[str].currentClass = 'animate-decreaseAnimation';
+            item[str].counter--;
+         }
+    };
 </script>

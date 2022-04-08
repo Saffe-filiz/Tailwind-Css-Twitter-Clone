@@ -5,6 +5,20 @@ module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: { 
     extend: {
+       animation: {
+        increaseAnimation: 'increase 400ms 1',
+        decreaseAnimation: 'decrease 400ms 1',
+       },
+       keyframes: {
+          increase: {
+            'from': {transform: 'translateY(20px)'},
+            'to': {transform: 'translatY(0px)'},
+          },
+          decrease: {
+            'from': {transform: 'translateY(-20px)'},
+            'to': {transform: 'translatY(0px)'},
+          },
+       },
        padding: {
         '2.75': '11px',
         '3.75': '15px',
