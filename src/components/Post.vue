@@ -87,4 +87,27 @@
             item[str].counter--;
          }
     };
+
+    let date = new Date()
+
+    const dateCalculator = () => {
+        let currentDate = new Date();
+        let [_, month, day, year] = date.toString().split(' ')
+        let second = Math.floor((currentDate - date) / 1000);
+        let minute = Math.floor(second / 60);
+        let hourse = Math.floor(minute / 60);
+        let result;
+        if(second >= 60){
+            result = minute;
+        }else if(minute >= 60 ){
+            result = hourse;
+        }else if(hourse >= 24) {
+            result = `${month} ${day}`
+        }else if (currentDate.getFullYear() > year){
+            result = `${month} ${day} ${year}`
+        }else {
+            result = second
+        }
+        return result
+      } 
 </script>
