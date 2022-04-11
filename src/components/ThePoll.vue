@@ -11,7 +11,7 @@
 			    v-model="quests[num -1]" 
 			    maxlength="25">  
 			        <span class="absolute focus top-3 text-lg left-2 duration-200" 
-			        :class="{'input-text': focusInput(num)}">
+			        :class="{'input-text': activeInput(num)}">
 			        {{choiceContent(num)}}
 			        </span>
 			        <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">
@@ -52,7 +52,7 @@
     const quests = ref(['', '', '', '']);
     const showBtn = computed(() => numberOfChoice.value < 4 )
     const choiceContent = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`)
-    const focusInput = computed(() => (n) => quests.value[n -1].length > 0);
+    const activeInput = computed(() => (n) => quests.value[n -1].length > 0);
 
 
 </script>

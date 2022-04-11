@@ -75,6 +75,10 @@
     	'share': false,
     })
 
+    let postDate = reactive({
+    	date: new Date(),
+    })
+
     const increase = ( str ) =>  {
         if(!item[str].isActive){
             item[str].isActive = true;
@@ -88,26 +92,25 @@
          }
     };
 
-    let date = new Date()
-
-    const dateCalculator = () => {
+    const dataCalculete = (postDate) => {
         let currentDate = new Date();
-        let [_, month, day, year] = date.toString().split(' ')
-        let second = Math.floor((currentDate - date) / 1000);
-        let minute = Math.floor(second / 60);
-        let hourse = Math.floor(minute / 60);
+        let date = postDate.date
+        let [_, month, day, year] = date.toString().split(' ');
+        let second = Math.ceil((currentDate - date) / 1000);
+        let minute = Math.ceil(second / 60);
+        let hourse = Math.ceil(minute / 60);
         let result;
-        if(second >= 60){
-            result = minute;
-        }else if(minute >= 60 ){
-            result = hourse;
+        if (currentDate.getFullYear() > year){
+           result = `${month} ${day} ${year}`;
         }else if(hourse >= 24) {
-            result = `${month} ${day}`
-        }else if (currentDate.getFullYear() > year){
-            result = `${month} ${day} ${year}`
+           result = `${month} ${day}`
+        }else if(minute >= 60){
+           result = `${hourse}h`;
+        }else if(second >= 60){
+           result = `${minute}m`;
         }else {
-            result = second
+           result = `${second}s`
         }
         return result
-      } 
+    } 
 </script>
