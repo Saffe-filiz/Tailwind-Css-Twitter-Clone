@@ -73,6 +73,13 @@
 }
 
 
+.showPollChoces {
+	@apply w-full h-[30px] border border-sky-500 text-center rounded-t-[15px] rounded-b-[15px] cursor-pointer hover:bg-yellow-400 transition duration-200
+}
+
+.showPollResults {
+	@apply w-full h-[30px] relative bg-transparent inline-flex justify-between
+}
 
 
 input[type="text"]:focus ~ .counter {

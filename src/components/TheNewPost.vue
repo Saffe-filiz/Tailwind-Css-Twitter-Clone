@@ -5,15 +5,15 @@
 	</div>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
-			<!-- TextArea Start -->
+			<!-- TEXTAREA START -->
 			<TheImageDragArea @dragover="draggableAreaActive = true">
 		        <TextArea @post="(text) => post = text" @click="whoCanAnswer = true"/>
 		    </TheImageDragArea>
-		    <!-- Poll Form Start --> 
+		    <!-- POLL FORM START --> 
 		     <div>
 		    	<ThePoll v-if="showThePollForm" @hiddePoll="(hidde) => showThePollForm = hidde"/>
 		    </div>
-		    <!-- Poll Form End --> 
+		    <!-- POLL FORM EMD --> 
 		    <div class="w-full h-[35px] border-b border-min-border-color pl-2" v-if="whoCanAnswer">
 		        <span class="w-auto h-auto inline-flex items-center flex-row">
 		            <World class="w-[15px] h-[15px] mr-1"/>
@@ -21,9 +21,9 @@
 		        </span>
             </div>
 		 </div>
-		    <!-- TestArea End -->
+		 <!-- TEXTAREA END -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center px-0.5">
-	        <!-- Icons Area Start -->	
+	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 	    		<label for="image">
 	    			<Madia/>
@@ -36,7 +36,7 @@
 	    		<Schedule @click="scrollHidden(), showTheScheduleForm = true"/>
 	    		<Mark/>
 	    	</div>
-	    	<!-- Icons Area End -->
+	    	<!-- ICONS AREA END -->
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post">
 	    		    <TheCircle :post="post.length"/>

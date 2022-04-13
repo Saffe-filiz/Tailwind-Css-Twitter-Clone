@@ -2,7 +2,7 @@
 	<aside>
 		<slot/>
 		<TrendList/>
-		<WhoToFollow/>
+		<TheWhoToFollow/>
 		<nav class="w-[21.875rem]  text-[0.813rem] flex flex-wrap px-4 gap-y-1 gap-x-3">
 			<a href="#">Terms of Service</a>
 			<a href="#">Privacy Policy</a>
@@ -19,7 +19,7 @@
 
 	
 	import TrendList from './TrendList.vue'
-	import WhoToFollow from './WhoToFollow.vue'
+	import TheWhoToFollow from './TheWhoToFollow.vue'
 
 
 </script>
