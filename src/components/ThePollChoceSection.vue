@@ -1,14 +1,16 @@
 <template>
     <div class="w-[507px] flex flex-col gap-y-[4px]">
-	    <div :class="pollActiveClass" v-for="(c, i) in 2" @click="sendVote(c)">
+	    <div :class="pollActiveClass" v-for="(c, i) in 2" @click="sendVote(i)">
 			<span class="h-full absolute z-20" >{{c}}</span>
-			<span class="absolute right-0 z-20" v-if="showPollResult">{{progreserRateCalculate(voteRateCalculate[c])}}</span>
-			<div class="absolute top-0 left-0 bg-red-100 w-10 h-full z-5" :class="{'hidden': !showPollResult}" 
-			:style="{'width': progreserRateCalculate(voteRateCalculate[c])}"></div>
+			<span class="absolute right-0 z-20" v-if="showPollResult">{{progreserRateCalculate(voteRateCalculate[i])}}</span>
+			<!-- POLL RESULT PROGRESS BAR START -->
+			<div class="absolute top-0 left-0 bg-[#cfd9de] w-10 h-full z-5" :class="{'hidden': !showPollResult}" 
+			:style="{'width': progreserRateCalculate(voteRateCalculate[i])}"></div>
+			<!-- POLL RESULT PROGRESS BAR START -->
 		</div>
 		<!-- VOTE COUNTER START -->
 		<div class="w-auto h-auto mt-[8px]">
-			<span>{{totalVote}} votes . 3 minutes left</span>
+			<span>{{totalVote}} votes  minutes left</span>
 		</div>
 		<!-- VOTE COUNTER END -->
 	</div>
@@ -17,15 +19,16 @@
 
 <script setup> 
 
-	import {ref, computed} from 'vue';
+	import { ref, computed } from 'vue';
 
-	let votes = ref([]);
-    let totalVote = ref(2);
-    let showPollResult = ref(false);
+	const votes = ref([]); // Votes
+    const totalVote = ref(0); //Vote Counter
+    const showPollResult = ref(false); // Show result 
 
-    let pollActiveClass = ref('showPollChoces')
+    const pollActiveClass = ref('showPollChoces') // Active class
 
-    let sendVote = (vote) => {
+    // Send vote
+    const sendVote = (vote) => {
         if(showPollResult.value) return;
             pollActiveClass.value = 'showPollResults';
             votes.value.push(vote);
@@ -33,9 +36,11 @@
             showPollResult.value = true;
     };
 
-    let voteRateCalculate = computed(() => {
+    // Vote grouping
+    const voteRateCalculate = computed(() => {
         return votes.value.reduce((item, index) => {item[index] = (item[index] +1) || 1; return item} ,{});
     });
 
-    let progreserRateCalculate = computed(() => ( rate ) =>  ((rate * 100 ) / votes.value.length).toFixed(0) + '%');
+    // Progress bar percentage calculate
+    const progreserRateCalculate = computed(() => ( rate = 0 ) =>  ((rate * 100 ) / votes.value.length).toFixed(0) + '%');
 </script>

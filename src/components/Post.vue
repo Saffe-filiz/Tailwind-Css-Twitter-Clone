@@ -10,10 +10,9 @@
 					<div class="w-auto h-5 mb-0.5 inline inline-flex gap-x-[4px]">
 						<span>Name</span>
 						<a href="#" class="mr-[7px]">@UserName</a>
-						<span 
-						class="relative before:absolute before:content-['.'] before:top-[-4px] before:left-[-7px] before:w-1 before:h-auto" 
-						id="timer"
-						>Now</span>
+						<!-- TIME CALCULATER START -->
+						<TimeCalculteter :date="post.date"/>
+						<!-- TIME CALCULATER END -->
 					</div>
 						<!-- NAME AND USER NAME END -->	
 						<!-- POST START -->	
@@ -24,7 +23,7 @@
 				</div>
 			   <!-- POST IMAGE AND ANHOTER CONTENT START -->	 
 				<div class="w-full h-auto my-3 empty:hidden">
-			  <!--<ThePollChoceSection/>	-->
+			      <ThePollChoceSection/>
 				</div>
 				 <!-- POST IMAGE AND ANHOTER CONTENT AND -->	
 				 <!-- LIKA, COMMENT, SHARE, RETWEET START -->	
@@ -70,13 +69,14 @@
 </template>
 
 <script setup>
-	import { ref, reactive, onMounted} from 'vue';
+	import { reactive } from 'vue';
 
 	import ReTweet from './icons/PostIcons/ReTweet.vue';
 	import Like from './icons/PostIcons/Like.vue';
 	import Share from './icons/PostIcons/Share.vue';
 	import Comment from './icons/PostIcons/Comment.vue';
 	import ThePollChoceSection from './ThePollChoceSection.vue'
+	import TimeCalculteter from './TimeCalculteter.vue';
 
 
     let item = reactive({
@@ -114,33 +114,4 @@
     let post = reactive({
     	date: 'Wed Apr 13 2022 04:04:43 GMT+0300 (GMT+03:00)',
     })
-
-
-    document.addEventListener('visibilitychange', (e) => {
-		if(document.visibilityState == 'hidden') return;
-			dataCalculete(post.date);
-	})
-
-   const dataCalculete = (postDate) => {
-        let timer = document.querySelector('#timer');
-        let date = new Date(postDate);
-        let currentDate = new Date();
-        let [_, month, day, year] = date.toString().split(' ');
-        let second = Math.ceil((currentDate - date) / 1000);
-        let minute = Math.ceil(second / 60);
-        let hourse = Math.ceil(minute / 60);
-        let result;
-        if (currentDate.getFullYear() > year){
-           result = `${month} ${day} ${year}`;
-        }else if(hourse >= 24) {
-           result = `${month} ${day}`
-        }else if(minute >= 60){
-           result = `${hourse}h`;
-        }else if(second >= 60){
-           result = `${minute}m`;
-        }else {
-           result = `${second}s`
-        }
-        timer.innerText = result
-    }
 </script>

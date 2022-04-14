@@ -48,11 +48,13 @@
 	
     const showTheScheduleForm = ref(false);
 
+    // Hide page scroll
 	const scrollHidden = () => {
 		let body = document.querySelector('body');
 		body.style.overflow = 'hidden';	
 	}
 
+	// Visibile page scroll
 	const scrollVisibil = () => {
 		let body = document.querySelector('body');
 		body.style.overflow = 'auto';
