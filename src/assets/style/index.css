@@ -64,6 +64,8 @@
 	@apply border border-input-main-border-color 
 }
 
+/* DRAGABLE AREA ACTIVE CLASS START */
+
 .draggableArea {
 	@apply border-2 border-dashed border-[#1d9bf0] border-transparent rounded
 }
@@ -72,6 +74,9 @@
 	@apply border-[#1d9bf0] 
 }
 
+/* DRAGABLE AREA ACTIVE CLASS START */
+
+/* POLL ACTIVE CLASS START */
 
 .showPollChoces {
 	@apply w-full h-[30px] border border-sky-500 text-center rounded-t-[15px] rounded-b-[15px] cursor-pointer hover:bg-[#1d9bf01a] transition duration-200
@@ -81,6 +86,40 @@
 	@apply w-full h-[30px] relative bg-transparent inline-flex justify-between
 }
 
+/* POLL ACTIVE CLASS END */
+
+
+/* IMAGE LEYOUT START */
+
+
+.backgrounImage {
+	@apply relative bg-no-repeat bg-cover bg-center rounded-[15px]
+}
+
+.imageStyleTwo{
+	@apply w-[248px] h-[286px] rounded-[15px] backgrounImage
+}
+
+.imageStyleThree {
+	@apply first:row-span-2 first:h-[286px] h-[137px] backgrounImage
+}
+
+.imageStyleFour {
+	@apply h-[137px] backgrounImage
+}
+
+.imageLeyoutTwo {
+	@apply h-[286px] grid grid-cols-2 gap-x-[11px] 
+}
+
+.imageLeyoutThree {
+	@apply grid grid-cols-2 grid-rows-2 gap-x-[11px] gap-y-[11px]
+}
+
+/* IMAGE LEYOUT END */
+
+
+/* POLL INPUT ANIMATION START */
 
 input[type="text"]:focus ~ .counter {
 	@apply opacity-100 text-[#287acb] 
@@ -98,3 +137,5 @@ input[type="text"]:focus ~ .focus {
 select:focus label {
 	@apply text-red-100
 }
+
+/* POLL INPUT ANIMATION END */

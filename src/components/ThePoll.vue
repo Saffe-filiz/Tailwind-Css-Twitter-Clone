@@ -45,7 +45,6 @@
 <script setup>
 	import { ref, computed } from 'vue';
 
-	import Selected from './Selected.vue';
 	import Plus from './icons/Plus.vue';
 
 	let numberOfChoice = ref(2);

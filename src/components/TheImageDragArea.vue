@@ -1,10 +1,20 @@
 <template>
-	<article class="w-full draggableArea" :class="{draggableAreaActive}" @dragleave="draggableAreaActive = false" 
-	@drop.prevent="imagePrevew" 
-	@dragover.prevent>
+	<!-- DRAGABEL AREA START -->
+	<article class="w-full draggableArea" :class="{draggableAreaActive}" @dragleave="draggableAreaActive = false" @drop.prevent="imagePrevew" @dragover.prevent>
+		<!-- DRAGABEL AREA END -->
+		<!-- TEST AREA SLOT -->
 	    <slot/>
-	    <div class="empty:hidden w-full inline-flex flex-row flex-wrap" :class="{i2}">
+	    <!-- TEST AREA SLOT -->
+	    <!-- IMAGE GALLERY START -->
+	    <div :class="imageLeyout">
+	        <div v-for="(image, index) in images" :class="imageStyle" :style="{'background-image': `url(${image})`}">
+	            <img :src="image" class="w-full h-full opacity-0">
+	            <!-- IMAGE REMOVE BUTTON START -->
+	            <button class="w-7 h-7 rounded-full bg-[#24282c] absolute top-1 left-1 text-white" @click="removeImage(index)">&#10005</button>
+	            <!-- IMAGE REMOVE BUTTON END -->
+	        </div>	
 	    </div>
+	    <!-- IMAGE GALLERY START --> 
 	</article>
 </template>
 
@@ -12,12 +22,36 @@
 <script setup>
 	import { ref, inject, computed} from 'vue';
 
-	const imageLeyout = ref('')
-
-	const removeImage = ( index ) => images.value.splice(index, 1)
-	const draggableAreaActive = inject('draggableAreaActive')
-    const images = inject('images');
-    const imagePrevew = inject('imagePrevew');
-
-    const i2 = computed(() =>  images.value.length > 1 )
+	const removeImage = ( index ) => images.value.splice(index, 1) // Remove image
+	const draggableAreaActive = inject('draggableAreaActive') // Draggable area active
+    const images = inject('images'); // Images
+    const imagePrevew = inject('imagePrevew'); // Image prevew function 
+   // Image style
+    const imageStyle = computed(() =>  {
+   	    let numberOfPhotos = images.value.length;
+   	    switch(numberOfPhotos){
+   	    	case 4:
+   	    	    return 'imageStyleFour';
+   	    	    break;
+   	    	case 3:
+   	    	    return 'imageStyleThree';
+   	    	    break;
+   	    	case 2:
+   	    	    return 'imageStyleTwo';
+   	    	    break;
+   	    	default:
+   	    	return 'backgrounImage'
+   	    }
+    });
+    // Image leyout
+    const imageLeyout = computed(() => {
+   		let numberOfPhotos = images.value.length;
+   	    if(numberOfPhotos > 2) {
+   		    return  'imageLeyoutThree'
+   	    } else if(numberOfPhotos > 1){
+   		    return 'imageLeyoutTwo'
+   	    } else {
+   		    return 'empty:hidden w-auto'
+   	    }
+    });
 </script>

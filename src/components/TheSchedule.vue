@@ -1,19 +1,19 @@
 <template>
 	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto mt-7">
-	<div class="w-full h-[3.125rem] inline-flex flex-row items-center justify-between px-3.75">
+	<div class="w-full h-[3.125rem] inline-flex flex-row items-center justify-between px-3">
 		<div class="flex items-center justify-between ">
 			<!-- EXIT BUTTON START -->
 		    <span class="w-[2rem] h-[2rem] rounded-full hover:bg-[#0f14191a] cursor-pointer flex items-center justify-center text-[#2d3136] hoverDuration" 
 		    @click="scrollVisibil()">&#10005</span>
 		    <!-- EXIT BUTTON END -->
-			<span class="ml-[1.25rem]">Schedule</span>
+			<span class="ml-[1.7rem]">Schedule</span>
 		</div>
 		<button class="w-[5.2rem] h-[1.938rem] bg-[#0f1419] text-white rounded-[2rem]">Confirm</button>
 	</div>
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">
 			<!-- SELECTED TIME START -->
-			<div><span>Will send on Sun, {{showSelectedTime}} PM</span></div>
+			<div><span>Will send on {{showSelectedTime}}PM</span></div>
 			<!-- SELECTED TIME END -->
 		<div>
 		<span>Date</span>
@@ -22,8 +22,8 @@
 			    <div class="w-[16.5rem] sectionMainStyle focusInput relative">
 		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Mouth</label>
 		            <DownArrow/>
-		            <select class="sectionStyle" name="date" @change="selectedDate" id="month">
-			            <option v-for="(month, index) in getMouth" :key="index">{{month}}</option>
+		            <select class="sectionStyle" name="date" @change="selectedDate" id="monthParentItem">
+			            <option v-for="(month, index) in getMonths" :key="index" id="month" :selected="index == getMonthIndex">{{month}}</option>
 		            </select> 
 	            </div>	
 	            <!-- SELECT MONTH END -->
@@ -32,7 +32,7 @@
 		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Day</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="day">
-			            <option v-for="(day, index) in 30" :key="index">{{day}}</option>
+			            <option v-for="(day, index) in 30" :key="index" :selected="index == selectedDay">{{day -1}}</option>
 		            </select>
 	            </div>
 	            <!-- SELECT DAY END -->
@@ -56,7 +56,7 @@
 		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Hours</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="hours">
-			            <option v-for="(hours, index) in 24" :key="index">{{hours}}</option>
+			            <option v-for="(hours, index) in 24" :key="index" :selected="index == selectedHourse">{{hours -1}}</option>
 		            </select> 
 	            </div>
 	            <!-- SELECT HOURS END -->
@@ -65,7 +65,7 @@
 		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Minute</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="minute">
-			            <option v-for="(minute, index) in 60" :key="index">{{minute}}</option>
+			            <option v-for="(minute, index) in 60" :key="index" :selected="index == selectedMinute">{{minute -1}}</option>
 		            </select> 
 	            </div>
 	            <!-- SELECT MINUTE END -->
@@ -88,53 +88,71 @@
 
 	const scrollVisibil = inject('scrollVisibil');
 
-	// SET POST RESLIST DATE START
+	// POST SEND DATE START
 
-	let selectedMinute = ref('')    // Select relist minute
-	let selectedHourse = ref('')   // Select relist hourse
-	let selectedDay = ref('')     // Select relist day
-	let selectedYear = ref('')   // Select relist year
-	let selectedMonth = ref('') // Select relist month
+	let selectedMinute = ref('');     // Select relist minute
+	let selectedHourse = ref('');    // Select relist hourse
+	let selectedDay = ref('');      // Select relist day
+	let selectedMonth = ref('');   // Select relist month
+	let selectedYear = ref(2022); // Select relist year
+	let getMonthIndex = ref(0);  // Get month index
+	let monthDays = ref();
 
-	onMounted(() => selectedDate())
+	onMounted(() => currentTime());
 
-	// Relist date preview
+
+	// Set release date
 	const selectedDate = () => {
-		let month = document.querySelector('#month');
 		let day = document.querySelector('#day');
 		let year = document.querySelector('#year');
 		let hours = document.querySelector('#hours');
+		let month = document.querySelectorAll('#month');
 		let minute = document.querySelector('#minute');
-		selectedMonth.value = month.value;
+		let monthParentItem = document.querySelectorAll('#monthParentItem');
 		selectedDay.value = day.value;
 		selectedYear.value = year.value;
 		selectedHourse.value = hours.value;
-		selectedMinute.value = minute.value
+		selectedMinute.value =  minute.value;
+		month.forEach( (item, index) => {
+			if(item.value == monthParentItem[0].value) {
+				getMonthIndex.value = index
+			}
+		})
+	};
+
+	// Defult schedule value
+	const currentTime = () => {
+		let date = new Date();
+		getMonthIndex.value = date.getMonth() +1;
+		selectedDay.value = date.getDate();
+		selectedMinute.value = date.getMinutes();
+		selectedHourse.value = date.getHours();
 	}
 
+	// Date preview
 	const showSelectedTime = computed(() => {
-		return `${selectedMonth.value} ${selectedDay.value}, at ${selectedYear.value} ${selectedHourse.value}:${selectedMinute.value}`
+		let date = releaseDate.value
+		let [dayName, munth, munthDay, year] = date.toString().split(' ');
+		return `${dayName}, ${munth} ${selectedDay.value}, at ${year} ${selectedHourse.value}:${selectedMinute.value}`;
+	});
+	// Release date
+	const releaseDate = computed(() => {
+		 return new Date(selectedYear.value, getMonthIndex.value -1, selectedDay.value);
 	})
 
-
-	const getMouth = computed(() => {
-		let month = []
+	// Month arr 
+	const getMonths = computed(() => {
+		let month = [];
 		for(let index = 0; index < 12; index++) {
-			month.push(new Date(2022, index, 0).toLocaleString('en', { month: 'long' }));
+			month.push(new Date(selectedYear.value, index, 0).toLocaleString('en', { month: 'long' }));
 		}
-		return month
+		return month;
 		
-	})
+	});
 
-	// SET POST RESLIST DATE END
+	// POST SEND DATE END
 
-	const getMouthDay = (index) => {
-		let days = [];
-		/*for(let index = 0; index < 12; index++ ){
-			days.push(new Date(2022, index, 0).getDate())
-		}
-		let mouth = document.querySelectorAll('option');*/
-	}
+
 
 
 </script>
