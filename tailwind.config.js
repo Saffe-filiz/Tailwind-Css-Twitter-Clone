@@ -8,6 +8,7 @@ module.exports = {
        animation: {
         increaseAnimation: 'increase 400ms 1',
         decreaseAnimation: 'decrease 400ms 1',
+        transitionDeley: 'delay 100ms 1',
        },
        keyframes: {
           increase: {
@@ -18,6 +19,10 @@ module.exports = {
             'from': {transform: 'translateY(-20px)'},
             'to': {transform: 'translatY(0px)'},
           },
+          delay: {
+            'from': {visibility: 'hidden'},
+            'to': {visibility: 'visible'},
+          }
        },
        padding: {
         '2.75': '11px',
@@ -32,10 +37,13 @@ module.exports = {
         'input-main-border-color': '#cfd9de'
       },
        width: {
+        '11.5': '45px',
+        '8.3': '33.50px',
         '8.5': '34px',
         '3.75': '15px',
       },
       height: {
+        '8.3': '33.50px',
         '8.5': '34px',
         '3.75': '15px',
       },

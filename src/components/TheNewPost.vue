@@ -26,15 +26,32 @@
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 	    		<label for="image">
-	    			<Madia/>
-	    			<input type="file" class="hidden" id="image" @change="imagePrevew"  multiple="multiple" 
-	    			accept="image/png, image/gif, image/jpeg">
+	    			<span  class="group tooltipContainer">
+	    			    <Madia/>
+	    			    <input type="file" class="hidden" id="image" @change="imagePrevew"  multiple="multiple" accept="image/png, image/gif, image/jpeg">
+	    			    <span class="tooltip">Image</span>
+	    		   </span>
 	    		</label>
-	    		<Gift/>
-	    		<Emoji/>
-			    <Poll @click="showThePollForm = true"/>
-	    		<Schedule @click="scrollHidden(), showTheScheduleForm = true"/>
-	    		<Mark/>
+	    		<span  class="group tooltipContainer">
+	    			<Gift/>
+	    			<span class="tooltip">Gift</span>
+	    		</span>
+	    		<span class="group tooltipContainer">
+	    			<Emoji/>
+	    			<span class="tooltip">Emoji</span>
+	    		</span>
+			   <span  class="group tooltipContainer">
+			   	    <Poll @click="showThePollForm = true"/>
+			   	    <span class="tooltip">Poll</span>
+			   </span>
+	    		<span class="group tooltipContainer ">
+	    			<Schedule @click="scrollHidden(), showTheScheduleForm = true"/>
+	    			<span class="tooltip">Schedule</span>
+	    		</span>
+	    		<span class="group tooltipContainer">
+	    			<Mark/>
+	    			<span class="tooltip">Schedule</span>
+	    		</span>
 	    	</div>
 	    	<!-- ICONS AREA END -->
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">

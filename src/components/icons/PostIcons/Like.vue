@@ -1,12 +1,13 @@
 <template>
 <span class="hoverDuration hover:text-[#f9189e] cursor-pointer group" :class="{'text-[#f9189e]': item.isActive}">
-	    <div class="w-[45px] inline-flex items-center justify-between">
-	     <span class="w-8.5 h-8.5 flexCenter rounded-full bg-white hoverDuration group-hover:bg-[#f9189e40]">
-              <svg v-if="item.isActive" class="fill-[#f9189e]" viewBox="0 0 24 24" width="20" height="20"><g><path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12z"></path></g>
+	    <div class="w-11.5 inline-flex items-center justify-between">
+	     <span class="w-8.3 h-8.3 flexCenter rounded-full hoverDuration group-hover:bg-[#f9189e40] relative">
+              <svg v-if="item.isActive" class="fill-[#f9189e]" viewBox="0 0 24 24" width="17.5" height="17.5"><g><path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12z"></path></g>
         </svg>
-	    <svg v-else width="20" height="20" viewBox="0 0 20 20" class=" fill-[#5B7083] group-hover:fill-[#f9189e]">
+	    <svg v-else width="17.5" height="17.5" viewBox="0 0 20 20" class=" fill-[#5B7083] group-hover:fill-[#f9189e]">
          <path d="M10 18.0317H9.98833C7.83583 17.9917 1.625 12.38 1.625 7.065C1.625 4.51167 3.72917 2.27 6.1275 2.27C8.03583 2.27 9.31917 3.58667 9.99917 4.545C10.6775 3.58833 11.9608 2.27 13.87 2.27C16.27 2.27 18.3733 4.51167 18.3733 7.06583C18.3733 12.3792 12.1617 17.9908 10.0092 18.03H10V18.0317ZM6.12833 3.52083C4.395 3.52083 2.87583 5.1775 2.87583 7.06667C2.87583 11.85 8.7375 16.73 10.0008 16.7817C11.2658 16.73 17.1258 11.8508 17.1258 7.06667C17.1258 5.1775 15.6067 3.52083 13.8733 3.52083C11.7667 3.52083 10.59 5.9675 10.58 5.99167C10.3883 6.46 9.61667 6.46 9.42417 5.99167C9.4125 5.96667 8.23667 3.52083 6.12917 3.52083H6.12833Z"/>
         </svg>
+        <span class="tooltip">Like</span>
         </span>
     <slot/>
     </div>
@@ -15,6 +16,6 @@
 
 <script setup>
 
-    let item = defineProps({isActive: Boolean})
+    let item = defineProps({isActive: Boolean});
 
  </script>

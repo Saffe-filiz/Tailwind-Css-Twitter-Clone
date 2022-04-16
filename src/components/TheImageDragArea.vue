@@ -2,9 +2,9 @@
 	<!-- DRAGABEL AREA START -->
 	<article class="w-full draggableArea" :class="{draggableAreaActive}" @dragleave="draggableAreaActive = false" @drop.prevent="imagePrevew" @dragover.prevent>
 		<!-- DRAGABEL AREA END -->
-		<!-- TEST AREA SLOT -->
+		<!-- TEXT AREA SLOT -->
 	    <slot/>
-	    <!-- TEST AREA SLOT -->
+	    <!-- TEXT AREA SLOT -->
 	    <!-- IMAGE GALLERY START -->
 	    <div :class="imageLeyout">
 	        <div v-for="(image, index) in images" :class="imageStyle" :style="{'background-image': `url(${image})`}">

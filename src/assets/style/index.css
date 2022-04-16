@@ -119,6 +119,15 @@
 /* IMAGE LEYOUT END */
 
 
+.tooltipContainer {
+	@apply relative inline-flex justify-center
+}
+
+.tooltip {
+	@apply w-auto h-auto absolute bottom-[-20px] bg-[#5B7083] rounded-[2px]  px-1 text-white text-[11px] invisible group-hover:visible group-hover:delay-700
+}
+
+
 /* POLL INPUT ANIMATION START */
 
 input[type="text"]:focus ~ .counter {

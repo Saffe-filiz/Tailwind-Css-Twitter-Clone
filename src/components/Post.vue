@@ -1,6 +1,6 @@
 <template>
 	<div 
-	class="w-full min-h-[113px] py-3 px-4 inline-flex flex-row border-b border-min-border-color bg-white hover:bg-[#f7f9f999] cursor-pointer hoverDuration">
+	class="w-full min-h-[88px] pb-[11px] px-4 inline-flex flex-row border-b border-min-border-color bg-white hover:bg-[#f7f9f999] cursor-pointer hoverDuration">
 			<div class="w-[3.75rem] h-full">
 				<div class="w-12 h-12 rounded-full bg-black"></div>
 			</div>
@@ -23,12 +23,12 @@
 				</div>
 			   <!-- POST IMAGE AND ANHOTER CONTENT START -->	 
 				<div class="w-full h-auto my-3 empty:hidden">
-			      <ThePollChoceSection/>
+			     <!-- <ThePollChoceSection/>-->
 				</div>
 				 <!-- POST IMAGE AND ANHOTER CONTENT AND -->	
 				 <!-- LIKA, COMMENT, SHARE, RETWEET START -->	
 				<div class="w-full h-8.5 flex items-end">
-					<div class="w-[425px] h-auto inline-flex justify-between ml-[-8px]">
+					<div class="w-[425px] h-[29px] inline-flex justify-between ml-[-8px]">
 						<!-- LIKA COMMENT END -->
 						<span>
 							<Comment>
@@ -46,10 +46,11 @@
 									v-if="item.retweet.counter">{{item.retweet.counter}}</p>
 								</span>
 							</ReTweet>
+						
 						</span>
 						<!-- LIKA RETWEET END -->	
 						<!-- LIKA CHOCE START -->	
-						<span @click="increase('like')" class="overflow-hidden">
+						<span @click="increase('like')">
 							<Like :isActive="item.like.isActive">
 								<span class="w-auto h-auto overflow-hidden">
 									<p :class="item.like.currentClass" 
