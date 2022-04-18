@@ -1,16 +1,15 @@
 <template>
 	<div class="w-[79.063rem] inline-flex flex-row">
-	   <TheNavigation/>
-	   <TheFeed>
+	    <TheNavigation/>
+	    <TheFeed>
 	        <TheHeader/>
 	        <TheNewPost/>
-	   </TheFeed>
-	  	<div class="w-auto h-[1110px] relative hidden lg:block">
-	  		<TheTrends class="w-auto flex flex-col gap-y-4 pr-2.5 pl-[1.875rem] mb-20" 
-	  	        :style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
-	  	    <TheSearch :style="{position: setPositions.searchPosition, top: setPositions.searchTopValue}"/>
-	    </TheTrends>
-	  	</div>
+	    </TheFeed>
+	   	<div class="w-auto h-[1280px] relative hidden lg:block">
+	  		<TheTrends class="w-auto flex flex-col gap-y-4 pr-2.5 pl-[1.875rem]" :style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
+	  	        <TheSearch :style="{position: setPositions.searchPosition, top: setPositions.searchTopValue}"/>
+	        </TheTrends>
+	   </div>
 	</div>
 </template>
 
@@ -37,12 +36,12 @@
 	});
 
 	const setSideBarPosition = () => {
-		if(window.pageYOffset >= 455){
-			return [setPositions.sideBarPosition = 'fixed', setPositions.topValue = '-402px', 
+		if(window.pageYOffset >= 510){
+			return [setPositions.sideBarPosition = 'fixed', setPositions.topValue = '-495px', 
 			setPositions.searchPosition = 'fixed', setPositions.searchTopValue = '0px']
 		}else {
 			return [setPositions.sideBarPosition = 'static', setPositions.topValue = '0px',
-			setPositions.searchPosition = 'sticky', setPositions.searchTopValue = '607']
+			setPositions.searchPosition = 'sticky', setPositions.searchTopValue = '600']
 		}
 	}
 	

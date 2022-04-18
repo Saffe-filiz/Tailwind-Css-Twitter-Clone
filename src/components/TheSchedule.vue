@@ -8,19 +8,30 @@
 		    <!-- EXIT BUTTON END -->
 			<span class="ml-[1.7rem]">Schedule</span>
 		</div>
-		<button class="w-[5.2rem] h-[1.938rem] bg-[#0f1419] text-white rounded-[2rem]">Confirm</button>
+		<div class="w-[150px] inline-flex justify-between items-center mr-1">
+			<span @click="clearDate(), scrollVisibil()"  class="px-[15px] h-[30px] rounded-[15px] cursor-pointer flex items-center hover:bg-[#0c14191a] rounded-full">
+				<span class="h-[22px] border-b-2 border-black text-[16px] font-medium ">Clear</span>
+			</span>
+			<button class="h-[30px] px-[15px] bg-[#0f1419] text-[13px] font-bold text-white rounded-[2rem]" @click="$emit('date', scheduling), scrollVisibil(), scheduling.sending = true">
+			    <span v-if="!scheduling.sending">Confirm</span>
+			    <span v-else>Update</span>
+		    </button>
+		</div>
 	</div>
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">
-			<!-- SELECTED TIME START -->
-			<div><span>Will send on {{showSelectedTime}}PM</span></div>
-			<!-- SELECTED TIME END -->
+			<!-- DATE INFO START -->
+			<span class="inline-flex items-center">
+				<Calendar/>
+				<span class="text-[12px] text-[#536471]">{{sendingDateNotification}}</span>
+			</span>
+			<!-- DATE INFO END -->
 		<div>
-		<span>Date</span>
+		<span class="text-[15px] text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
 		    	<!-- SELECT MONTH START -->
-			    <div class="w-[16.5rem] sectionMainStyle focusInput relative">
-		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Mouth</label>
+			    <div class="w-[17rem] sectionMainStyle focusInput relative">
+		            <label class="text-[12px] text-[#536471] ml-2" for="date">Mouth</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="monthParentItem">
 			            <option v-for="(month, index) in getMonths" :key="index" id="month" :selected="index == getMonthIndex">{{month}}</option>
@@ -29,19 +40,19 @@
 	            <!-- SELECT MONTH END -->
 	            <!-- SELECT DAY START -->
 			    <div class="w-[7.813rem] sectionMainStyle focusInput relative">
-		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Day</label>
+		            <label class="text-[12px] text-[#536471] ml-2" for="date">Day</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="day">
-			            <option v-for="(day, index) in 30" :key="index" :selected="index == selectedDay">{{day -1}}</option>
+			            <option v-for="(day, index) in 30" :key="index" :selected="index == selectedDay">{{formatNumber(day -1)}}</option>
 		            </select>
 	            </div>
 	            <!-- SELECT DAY END -->
 	            <!-- SELECT YEAR START -->
-			    <div class="w-[7.813rem] sectionMainStyle focusInput relative">
-		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Year</label>
+			    <div class="w-[8.938rem] sectionMainStyle focusInput relative">
+		            <label class="text-[12px] text-[#536471] ml-2" for="date">Year</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="year">
-			            <option v-for="(year, index) in 3" :key="index">202{{year +1}}</option>
+			            <option v-for="(year, index) in [2022, 2023, 2024]"  :key="index" :selected="year == selectedYear">{{year}}</option>
 		            </select>
 	            </div>
 	            <!-- SELECT YEAR END -->
@@ -49,23 +60,23 @@
 		</div>
 		<!-- TIME SECTION START -->
 		<div>
-		<span>Time</span>
+		<span class="text-[15px] text-[#536471]">Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
 				<!-- SELECT HOURS START -->
 				 <div class="w-[11.375rem] sectionMainStyle focusInput relative">
-		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Hours</label>
+		            <label class="text-[12px] text-[#536471] ml-2" for="date">Hours</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="hours">
-			            <option v-for="(hours, index) in 24" :key="index" :selected="index == selectedHourse">{{hours -1}}</option>
+			            <option v-for="(hours, index) in 24" :key="index" :selected="index == selectedHours">{{formatNumber(hours -1)}}</option>
 		            </select> 
 	            </div>
 	            <!-- SELECT HOURS END -->
 	            <!-- SELECT MINUTE START --> 
 	            <div class="w-[11.375rem] sectionMainStyle focusInput relative">
-		            <label class="grup-focus-within:text-red-600 ml-2" for="date">Minute</label>
+		            <label class="text-[12px] text-[#536471] ml-2" for="date">Minute</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="minute">
-			            <option v-for="(minute, index) in 60" :key="index" :selected="index == selectedMinute">{{minute -1}}</option>
+			            <option v-for="(minute, index) in 60" :key="index" :selected="index == selectedMinutes">{{formatNumber(minute -1)}}</option>
 		            </select> 
 	            </div>
 	            <!-- SELECT MINUTE END -->
@@ -73,7 +84,7 @@
 		</div>
 		<!-- TIME SECTION END -->
 		<div class="w-full" >
-			<p>Time zone</p>
+			<span class="text-[16px] text-[#536471]">Time zone</span>
 			<h4>GMT+03:00</h4>
 		</div>
 		</div>
@@ -83,23 +94,36 @@
 </template>
 
 <script setup>
-	import { inject, ref, computed, onMounted } from 'vue';
+	import { inject, ref, computed, onMounted, reactive } from 'vue';
 	import DownArrow from './icons/DownArrow.vue';
+	import Calendar from './icons/NewPostIcons/Calendar.vue';
 
 	const scrollVisibil = inject('scrollVisibil');
+	const updateDate = inject('updateDate')
 
 	// POST SEND DATE START
 
-	let selectedMinute = ref('');     // Select relist minute
-	let selectedHourse = ref('');    // Select relist hourse
-	let selectedDay = ref('');      // Select relist day
-	let selectedMonth = ref('');   // Select relist month
-	let selectedYear = ref(2022); // Select relist year
-	let getMonthIndex = ref(0);  // Get month index
-	let monthDays = ref();
+	let selectedMinutes = ref();     // Select relist minute
+	let selectedHours = ref();    // Select relist hourse
+	let selectedDay = ref();      // Select relist day
+	let selectedMonth = ref();   // Select relist month
+	let selectedYear = ref(); // Select relist year
+	let getMonthIndex = ref();  // Get month index
 
 	onMounted(() => currentTime());
 
+	let scheduling = reactive({
+		'info': null,
+		'time': null,
+		'date': null,
+		'sending': false,
+	})
+
+	const clearDate = () => {
+		scheduling.info = null;
+		scheduling.time = null;
+		scheduling.sending = false
+    }
 
 	// Set release date
 	const selectedDate = () => {
@@ -109,10 +133,10 @@
 		let month = document.querySelectorAll('#month');
 		let minute = document.querySelector('#minute');
 		let monthParentItem = document.querySelectorAll('#monthParentItem');
-		selectedDay.value = day.value;
-		selectedYear.value = year.value;
-		selectedHourse.value = hours.value;
-		selectedMinute.value =  minute.value;
+		selectedDay.value =  day.value;
+		selectedYear.value =  year.value;
+		selectedHours.value = hours.value;
+		selectedMinutes.value =  minute.value;
 		month.forEach( (item, index) => {
 			if(item.value == monthParentItem[0].value) {
 				getMonthIndex.value = index
@@ -120,27 +144,46 @@
 		})
 	};
 
-	// Defult schedule value
+	console.log(updateDate.value)
+
+	// Defult date
 	const currentTime = () => {
 		let date = new Date();
-		getMonthIndex.value = date.getMonth() +1;
-		selectedDay.value = date.getDate();
-		selectedMinute.value = date.getMinutes();
-		selectedHourse.value = date.getHours();
+		selectedYear.value  = updateDate.value?.[0] ?? date.getFullYear() 
+		getMonthIndex.value = updateDate.value?.[1]  ?? date.getMonth() +1;
+		selectedDay.value = updateDate.value?.[2] ?? date.getDate();
+		selectedHours.value = updateDate.value?.[3] ?? date.getHours();
+		selectedMinutes.value = updateDate.value?.[4] ?? date.getMinutes();
 	}
-
 	// Date preview
-	const showSelectedTime = computed(() => {
-		let date = releaseDate.value
-		let [dayName, munth, munthDay, year] = date.toString().split(' ');
-		return `${dayName}, ${munth} ${selectedDay.value}, at ${year} ${selectedHourse.value}:${selectedMinute.value}`;
+	const sendingDateNotification = computed(() => {
+		let [dayName, month, day, year] = newDate.value.toString().split(' ');
+		let date = `Will send on ${dayName}, ${month} ${day}, ${year}  at ${timePeriod.value}`;
+		scheduling.info = date;
+		return date;
 	});
-	// Release date
-	const releaseDate = computed(() => {
-		 return new Date(selectedYear.value, getMonthIndex.value -1, selectedDay.value);
+
+	// Format time period
+	const timePeriod = computed(() => {
+		let hours = selectedHours.value;
+		let minute = selectedMinutes.value;
+		let period = hours < 12 ? 'AM': 'PM';
+		let formatHours = hours % 12 == 0 ?  12: hours % 12
+		return `${formatHours}:${minute} ${period}`
 	})
 
-	// Month arr 
+	// Formant number 
+	const formatNumber = computed(() => (num) =>  num < 10 ? '0' + num: num )
+
+	// Release date
+	const newDate = computed(() => {
+		let date = new Date(selectedYear.value, getMonthIndex.value -1, selectedDay.value, selectedHours.value, selectedMinutes.value);
+		scheduling.date = date;
+		scheduling.time = Math.abs(new Date() - new Date(date));
+		return date;
+	})
+
+	// Get munth name
 	const getMonths = computed(() => {
 		let month = [];
 		for(let index = 0; index < 12; index++) {
@@ -151,8 +194,5 @@
 	});
 
 	// POST SEND DATE END
-
-
-
 
 </script>

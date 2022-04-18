@@ -9,7 +9,8 @@
 		<TrendListCart/>
 		<TrendListCart/>
 		<TrendListCart/>
-		<div class="seeMoreTextStyle">
+		<TrendListCart/>
+		<div class="h-5 p-4 box-content text-[#1D9BF0]">
 			<a href="">Show more</a>
 		</div>
 	</article>

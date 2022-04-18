@@ -1,20 +1,32 @@
 <template>
-	<article class="w-full min-h-[6.375rem] h-auto py-1 px-3.75 inline-flex flex-row justify-betweenr">
+	<article class="w-full min-h-[6.375rem] h-auto py-1 pl-3.75 inline-flex flex-row justify-betweenr">
 	<div class="w-[3.563rem]">
-		<div class="w-[46px] h-[46px] bg-black rounded-full hi"></div>
+		<div class="w-[44px] h-[44px] bg-black rounded-full hi"></div>
 	</div>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
 			<!-- TEXTAREA START -->
+			<!-- POST Schedule INFO START -->
+			<div v-if="date.info" class="w-[516px] h-[17.5px] pl-2 inline-flex hover:underline cursor-pointer">
+				<!-- CALENDER ICON COMPONENT START  -->
+				<Calendar/> 
+				<!-- CALENDER ICON COMPONENT END  -->
+				<span class="text-[12px] text-[#536471]"> {{date.info}}</span>
+			</div>
+			<!-- POST Schedule INFO END -->
+			<!-- IMAGE DRAG AREA START -->
 			<TheImageDragArea @dragover="draggableAreaActive = true">
+				<!-- TEXT AREA START -->
 		        <TextArea @post="(text) => post = text" @click="whoCanAnswer = true"/>
+		        <!-- TEXT AREA END -->
 		    </TheImageDragArea>
+		    <!-- IMAGE DRAG AREA END -->
 		    <!-- POLL FORM START --> 
 		     <div>
 		    	<ThePoll v-if="showThePollForm" @hiddePoll="(hidde) => showThePollForm = hidde"/>
 		    </div>
 		    <!-- POLL FORM EMD --> 
-		    <div class="w-full h-[35px] border-b border-min-border-color pl-2" v-if="whoCanAnswer">
+		    <div class="w-[516px] h-[35px] border-b border-min-border-color pl-2" v-if="whoCanAnswer">
 		        <span class="w-auto h-auto inline-flex items-center flex-row">
 		            <World class="w-[15px] h-[15px] mr-1"/>
 		            <p class="text-[#1d9bf0]">Everyone can replay</p>
@@ -22,7 +34,7 @@
             </div>
 		 </div>
 		 <!-- TEXTAREA END -->
-	    <div class="w-auto h-[45px] inline-flex justify-between items-center px-0.5">
+	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 	    		<label for="image">
@@ -56,7 +68,9 @@
 	    	<!-- ICONS AREA END -->
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post">
+	    			<!-- POST LATTER PROGRESS CIRCLE START -->
 	    		    <TheCircle :post="post.length"/>
+	    		    <!-- POST LATTER PROGRESS CIRCLE END -->
 	    		    <div class="w-px h-[29px] ml-[9px] mr-2.75 bg-[#c0d0d8]"></div>
 	    		    <div class="w-[23px] flexCenter ">
 	    		   	    <div class="w-full h-[23px] flexCenter rounded-full border border-b border-min-border-color">
@@ -64,18 +78,25 @@
 	    		        </div>
 	    		   </div>
 	    		</div>
-	    		<button class="w-[4.563rem] h-8 bg-btn-bg-color text-white rounded-[2rem]">Tweet</button>
+	    		<!-- SEND NEW TWEET BUTTON START --> 
+	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]">
+	    			<span v-if="date.info" @click="updateDate(), wait(date.time)">Schedule</span>
+	    			<span v-else>Tweet</span>
+	    		</button>
+	    		<!-- SEND NEW TWEET BUTTON START --> 
 	    	</div>
 	    </div>
 	</div>
     </article>
+    <!-- POPUP COMPONENT START --> 
     <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
-      	<TheSchedule v-on:click.stop/>
+      	<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling"/>
     </PopUp>
+    <!-- POPUP COMPONENT END --> 
 </template>
 
 <script setup>
-	import { ref, computed, inject, provide } from 'vue';
+	import { ref, computed, inject, provide, reactive } from 'vue';
 	// Component
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
@@ -91,17 +112,30 @@
 	import Poll from './icons/NewPostIcons/Poll.vue';
 	import Schedule from './icons/NewPostIcons/Schedule.vue';
 	import Mark from './icons/NewPostIcons/Mark.vue';
+	import Calendar from './icons/NewPostIcons/Calendar.vue';
 	import Plus from './icons/Plus.vue';
 
 	let whoCanAnswer = ref(false);
 
-    
-    let post = ref(''); // Take Post Text
+	let date = ref({})
 
+	const updateDate = computed(() => {
+		if(!date.value.info) return;
+		console.log('test')
+		let z = new Date(date.value.date);
+		let munth = z.getMonth() +1;	
+		let [, , day, year, watch] = z.toString().split(' ');
+		let [hours, minutes] = watch.split(':')
+		return [year, munth, day, hours, minutes].reduce((a, v, i) => ({ ...a, [i]: v}), {}) 
+	})
+
+    const wait = ms => setTimeout(() => console.log('test') , ms)
+     
+    let post = ref(''); // Take Post Text
     let showThePollForm = ref(false); // Show Poll Form
 	
 
-	const draggableAreaActive = ref(false);
+	let draggableAreaActive = ref(false); // Drag area is aktive chake
 	const images = ref([]); // Take image.
 
     const imagePrevew = (e) => {
@@ -112,12 +146,13 @@
 		draggableAreaActive.value = false
 	}
 
-	provide('imagePrevew', imagePrevew);
-	provide('images', images);
-	provide('draggableAreaActive', draggableAreaActive);
+	provide('updateDate', updateDate)
+	provide('imagePrevew', imagePrevew); // Going to image drag area component
+	provide('images', images); // Going to image drag area component
+	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
 
-	const scrollHidden = inject('scrollHidden');
-	const scrollVisibil = inject('scrollVisibil');
-	const showTheScheduleForm = inject('showTheScheduleForm');
+	const scrollHidden = inject('scrollHidden'); // Coming from app vue
+	const scrollVisibil = inject('scrollVisibil'); // Coming from app vue
+	const showTheScheduleForm = inject('showTheScheduleForm'); // Coming from app vue
 
 </script>

@@ -14,12 +14,8 @@
 	@apply text-[1.188rem] hidden xl:block
 }
 
-.userCartTextStyle {
-	@apply text-[#0f1419] text-sm truncate font-bold
-}
-
-.userCartSubTextStyle {
-	@apply text-[0.938rem] text-[#6E767D] truncate
+.navigationMainTextStyle {
+	@apply text-[20px] text-[#0f1419]
 }
 
 .rightSideMainStyle {
@@ -30,17 +26,8 @@
 	@apply w-full h-12 px-4 pt-3 text-xl
 }
 
-.trandCartTextStyle {
-	@apply text-[#6E767D] text-[0.813rem]
-}
-
-.seeMoreTextStyle {
-	@apply w-full h-[3.125rem] p-4 text-[#1D9BF0]
-}
-
-
 .hoverEfect {
-	@apply duration-200 hover:bg-[#0f14191a] cursor-pointer
+	@apply duration-200 hover:bg-[#00000008] cursor-pointer
 }
 
 

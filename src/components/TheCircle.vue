@@ -6,8 +6,7 @@
 			:style="{'stroke-dasharray': circleOffset, 'stroke-dashoffset': circleOffset - circleDashoffset, 'stroke': circleStrokoColor }"></circle>
 		</svg>
 		<!-- LETTER COUNTER START -->
-		<span class="absolute text-[10px]" :class="{'text-[#f4212e]': num.post >= 280}" 
-		v-show="num.post >= 260">{{280 - num.post}}</span>
+		<span class="absolute text-[10px]" :class="{'text-[#f4212e]': num.post >= 280}" v-show="num.post >= 260">{{280 - num.post}}</span>
 		<!-- LETTER COUNTER END -->
 	</div>
 </template>

@@ -43,7 +43,7 @@
    	    	return 'backgrounImage'
    	    }
     });
-    // Image leyout
+    // Image container leyout
     const imageLeyout = computed(() => {
    		let numberOfPhotos = images.value.length;
    	    if(numberOfPhotos > 2) {

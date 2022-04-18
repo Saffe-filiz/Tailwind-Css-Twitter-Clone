@@ -1,5 +1,5 @@
 <template>
-	<span class="relative before:absolute before:content-['.'] before:top-[-4px] before:left-[-7px] before:w-1 before:h-auto" id="timer">
+	<span class="relative before:absolute before:content-['.'] before:top-[-4px] before:left-[-7px] before:w-1 before:h-auto text-[#536471] text-[15px] font-normal" id="timer">
 	    Now
     </span>
 </template>
