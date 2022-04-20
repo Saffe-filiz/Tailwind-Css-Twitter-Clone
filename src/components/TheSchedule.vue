@@ -14,7 +14,7 @@
 				<span class="h-[22px] border-b-2 border-black text-[16px] font-medium">Clear</span>
 			</span>
 			<button class="h-[30px] px-[15px] bg-[#0f1419] text-[13px] font-bold text-white rounded-[2rem]"
-			 :disabled="showErrorMassage[0]" :class="{'opacity-70': showErrorMassage[0]}" @click="$emit('date', scheduling), scrollVisibil()">
+			 :disabled="!!showErrorMassage[0]" :class="{'opacity-70': showErrorMassage[0]}" @click="$emit('date', scheduling), scrollVisibil()">
 			    <span v-if="!date.date.sending">Confirm</span>
 			    <span v-else>Update</span>
 		    </button>
