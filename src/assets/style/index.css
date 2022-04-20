@@ -35,6 +35,10 @@
 	@apply w-full h-[38px] cursor-pointer p-2 bg-transparent mt-[-8px] outline-none appearance-none
 }
 
+.sectionStyleError {
+	@apply bg-red-100
+}
+
 .sectionMainStyle {
 	@apply h-[55px] inputMainStyle rounded
 }
@@ -80,7 +84,7 @@
 
 
 .backgrounImage {
-	@apply relative bg-no-repeat bg-cover bg-center rounded-[15px]
+	@apply max-w-[517px] relative bg-no-repeat bg-cover bg-center rounded-[15px]
 }
 
 .imageStyleTwo{

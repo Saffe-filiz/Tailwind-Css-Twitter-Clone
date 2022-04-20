@@ -1,6 +1,6 @@
 <template>
     <span class="hoverDuration cursor-pointer hover:text-[#00ba7c] group" :class="{'text-[#00ba7c]': item.isActive}">
-	<div class="w-12 inline-flex items-center justify-between ">
+	<div class="w-[90px] inline-flex items-center justify-start ">
 	<span class="w-8.3 h-8.3 flexCenter rounded-full  hoverDuration group-hover:bg-[#00ba7c40] relative">
 	    <svg width="17.5" height="17.5" viewBox="0 0 18 18" class="fill-[#5B7083] group-hover:fill-[#00ba7c]"
         :class="{'fill-[#00ba7c]': item.isActive}">

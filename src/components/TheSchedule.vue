@@ -8,12 +8,14 @@
 		    <!-- EXIT BUTTON END -->
 			<span class="ml-[1.7rem]">Schedule</span>
 		</div>
-		<div class="w-[150px] inline-flex justify-between items-center mr-1">
-			<span @click="clearDate(), scrollVisibil()"  class="px-[15px] h-[30px] rounded-[15px] cursor-pointer flex items-center hover:bg-[#0c14191a] rounded-full">
-				<span class="h-[22px] border-b-2 border-black text-[16px] font-medium ">Clear</span>
+		<div class="inline-flex justify-between items-center mr-1">
+			<span  class="px-[15px] h-[30px] rounded-[15px] cursor-pointer flex items-center hover:bg-[#0c14191a] mr-4 rounded-full" v-if="date.date.sending"
+			 @click="scrollVisibil(), $emit('date', {})">
+				<span class="h-[22px] border-b-2 border-black text-[16px] font-medium">Clear</span>
 			</span>
-			<button class="h-[30px] px-[15px] bg-[#0f1419] text-[13px] font-bold text-white rounded-[2rem]" @click="$emit('date', scheduling), scrollVisibil(), scheduling.sending = true">
-			    <span v-if="!scheduling.sending">Confirm</span>
+			<button class="h-[30px] px-[15px] bg-[#0f1419] text-[13px] font-bold text-white rounded-[2rem]"
+			 :disabled="showErrorMassage[0]" :class="{'opacity-70': showErrorMassage[0]}" @click="$emit('date', scheduling), scrollVisibil()">
+			    <span v-if="!date.date.sending">Confirm</span>
 			    <span v-else>Update</span>
 		    </button>
 		</div>
@@ -21,9 +23,11 @@
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">
 			<!-- DATE INFO START -->
-			<span class="inline-flex items-center">
-				<Calendar/>
-				<span class="text-[12px] text-[#536471]">{{sendingDateNotification}}</span>
+			<span class="h-0.5">
+				<span class="inline-flex items-center" v-if="!showErrorMassage[1]">
+					<Calendar/>
+				    <span class="text-[12px] text-[#536471]">{{setTimeInfo}}</span>
+				</span>
 			</span>
 			<!-- DATE INFO END -->
 		<div>
@@ -36,14 +40,14 @@
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="monthParentItem">
 			            <option v-for="(month, index) in getMonths" :key="index" id="month" :selected="index == getMonthIndex">{{month}}</option>
 		            </select> 
-	            </div>	
+	            </div>
 	            <!-- SELECT MONTH END -->
 	            <!-- SELECT DAY START -->
 			    <div class="w-[7.813rem] sectionMainStyle focusInput relative">
 		            <label class="text-[12px] text-[#536471] ml-2" for="date">Day</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="day">
-			            <option v-for="(day, index) in 30" :key="index" :selected="index == selectedDay">{{formatNumber(day -1)}}</option>
+			            <option v-for="(day, index) in getMonthDay" :key="index" :selected="day == selectedDay">{{formatNumber(day)}}</option>
 		            </select>
 	            </div>
 	            <!-- SELECT DAY END -->
@@ -52,11 +56,12 @@
 		            <label class="text-[12px] text-[#536471] ml-2" for="date">Year</label>
 		            <DownArrow/>
 		            <select class="sectionStyle" name="date" @change="selectedDate" id="year">
-			            <option v-for="(year, index) in [2022, 2023, 2024]"  :key="index" :selected="year == selectedYear">{{year}}</option>
+			            <option v-for="(year, index) in [2024, 2023, 2022]"  :key="index" :selected="year == selectedYear">{{year}}</option>
 		            </select>
 	            </div>
 	            <!-- SELECT YEAR END -->
 		    </div>
+		    <span class="text-[14px] text-[#f4212e]">{{errorMassageForDate}}</span>
 		</div>
 		<!-- TIME SECTION START -->
 		<div>
@@ -81,6 +86,7 @@
 	            </div>
 	            <!-- SELECT MINUTE END -->
 		    </div>
+		    <span class="text-[14px] text-[#f4212e]" v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
 		</div>
 		<!-- TIME SECTION END -->
 		<div class="w-full" >
@@ -94,38 +100,31 @@
 </template>
 
 <script setup>
-	import { inject, ref, computed, onMounted, reactive } from 'vue';
+	import { inject, ref, computed, onMounted, reactive, watch } from 'vue';
 	import DownArrow from './icons/DownArrow.vue';
 	import Calendar from './icons/NewPostIcons/Calendar.vue';
 
 	const scrollVisibil = inject('scrollVisibil');
-	const updateDate = inject('updateDate')
 
 	// POST SEND DATE START
-
-	let selectedMinutes = ref();     // Select relist minute
-	let selectedHours = ref();    // Select relist hourse
+	let selectedMinutes = ref();    // Select relist minute
+	let selectedHours = ref();     // Select relist hourse
 	let selectedDay = ref();      // Select relist day
 	let selectedMonth = ref();   // Select relist month
-	let selectedYear = ref(); // Select relist year
-	let getMonthIndex = ref();  // Get month index
+	let selectedYear = ref();   // Select relist year
+	let getMonthIndex = ref(); // Get month index
+
+	const scheduling = reactive({
+		'info': null,
+	    'date': null,
+	    'sending': true,
+	})
 
 	onMounted(() => currentTime());
 
-	let scheduling = reactive({
-		'info': null,
-		'time': null,
-		'date': null,
-		'sending': false,
-	})
+	const newDate = ref(new Date());
 
-	const clearDate = () => {
-		scheduling.info = null;
-		scheduling.time = null;
-		scheduling.sending = false
-    }
-
-	// Set release date
+	// Get date values
 	const selectedDate = () => {
 		let day = document.querySelector('#day');
 		let year = document.querySelector('#year');
@@ -137,30 +136,41 @@
 		selectedYear.value =  year.value;
 		selectedHours.value = hours.value;
 		selectedMinutes.value =  minute.value;
-		month.forEach( (item, index) => {
-			if(item.value == monthParentItem[0].value) {
-				getMonthIndex.value = index
-			}
-		})
+		month.forEach((item, index) => (item.value == monthParentItem[0].value) ? getMonthIndex.value = index: null);
 	};
 
-	console.log(updateDate.value)
+	// SET NEW DATE START
 
-	// Defult date
+	// Date prop
+	let date = defineProps({date: Object});  
+    // Convert date prop to object
+	const updateDate = computed(() => {
+		if(!date.date.info) return;
+		let newDate = new Date(date.date.date);
+		let munth = newDate.getMonth() +1;	
+		let [, , day, year, watch] = newDate.toString().split(' ');
+		let [hours, minutes] = watch.split(':');
+		return [year, munth -1, day, hours, minutes].reduce((a, v, i) => ({ ...a, [i]: v}), {});
+	})
+
+	// Set new date
 	const currentTime = () => {
-		let date = new Date();
-		selectedYear.value  = updateDate.value?.[0] ?? date.getFullYear() 
-		getMonthIndex.value = updateDate.value?.[1]  ?? date.getMonth() +1;
-		selectedDay.value = updateDate.value?.[2] ?? date.getDate();
-		selectedHours.value = updateDate.value?.[3] ?? date.getHours();
-		selectedMinutes.value = updateDate.value?.[4] ?? date.getMinutes();
+		let date = newDate.value;
+		let dateUpdate = updateDate.value
+		selectedYear.value  = dateUpdate?.[0] ?? date.getFullYear();
+		getMonthIndex.value = dateUpdate?.[1] ?? date.getMonth();
+		selectedDay.value = dateUpdate?.[2] ?? date.getDate();
+		selectedHours.value = dateUpdate?.[3] ?? date.getHours();
+		selectedMinutes.value = dateUpdate?.[4] ?? date.getMinutes();
 	}
-	// Date preview
-	const sendingDateNotification = computed(() => {
-		let [dayName, month, day, year] = newDate.value.toString().split(' ');
-		let date = `Will send on ${dayName}, ${month} ${day}, ${year}  at ${timePeriod.value}`;
-		scheduling.info = date;
-		return date;
+	// SET NEW DATE END
+
+	// Date info
+	const setTimeInfo = computed(() => {
+		let [dayName, month, day, year] = setTime.value.toString().split(' ');
+		let info = `Will send on ${dayName}, ${month} ${day}, ${year}  at ${timePeriod.value}`;
+		scheduling.info = info;
+		return info;
 	});
 
 	// Format time period
@@ -173,25 +183,66 @@
 	})
 
 	// Formant number 
-	const formatNumber = computed(() => (num) =>  num < 10 ? '0' + num: num )
+	const formatNumber = computed(() => (num) => num < 10 ? '0' + num: num)
 
 	// Release date
-	const newDate = computed(() => {
-		let date = new Date(selectedYear.value, getMonthIndex.value -1, selectedDay.value, selectedHours.value, selectedMinutes.value);
+	const setTime = computed(() => {
+		let date = new Date(selectedYear.value, getMonthIndex.value, selectedDay.value, selectedHours.value, selectedMinutes.value);
 		scheduling.date = date;
-		scheduling.time = Math.abs(new Date() - new Date(date));
 		return date;
 	})
 
-	// Get munth name
+	// Get month with name
 	const getMonths = computed(() => {
 		let month = [];
 		for(let index = 0; index < 12; index++) {
-			month.push(new Date(selectedYear.value, index, 0).toLocaleString('en', { month: 'long' }));
+			month.push(new Date(selectedYear.value, index, 1).toLocaleString('en', { month: 'long' }));
 		}
 		return month;
-		
 	});
+
+	// Get number days
+	const getMonthDay = computed(() => {
+		let day = new Date(selectedYear.value, getMonthIndex.value +1, 0).getDate();
+		let days = [];
+		for(let i = 1; i <= day; i++){
+			days.push(i)
+		}
+		return days
+		console.log('test')
+	})
+
+	let errorMassageForDate = ref('');
+	let errorMassageForHours = ref('');
+	const showErrorMassage = computed(() => {
+		let [errorDate, errorHours] = [errorMassageForDate.value, errorMassageForHours.value];
+		return [errorDate || errorHours, errorDate && !errorHours, !errorDate && errorHours];
+	});
+    // Error messages
+	watch(() => [selectedYear.value, selectedDay.value, getMonthIndex.value, selectedHours.value, selectedMinutes.value], (value) => {
+		let date = newDate.value;
+		let [year, day, month, hours, minute] = value;
+		let calculateMonthRange = (year - date.getFullYear()) * 12;
+		calculateMonthRange -= date.getMonth();
+		calculateMonthRange += month;
+		let [past, future] = ['You can’t schedule a Tweet to send in the past.', 'You can’t schedule a Tweet more than 18 months in the future.'] 
+		 if(calculateMonthRange < 0){
+		 	errorMassageForDate.value = past;
+		 }else if(calculateMonthRange < 0 == true && day < date.getDate()) {
+		 	errorMassageForDate.value = past;
+		 }else if(calculateMonthRange == 0 && day < date.getDate()) {
+		 	errorMassageForDate.value = past;
+		 }else if(calculateMonthRange >= 18){
+		 	errorMassageForDate.value = future;
+		 }else if(day == date.getDate() && calculateMonthRange == 0 && minute < date.getMinutes()){
+		 	errorMassageForHours.value = past;
+		 }else if(day == date.getDate() && calculateMonthRange == 0 && hours < date.getHours()){
+		 	errorMassageForHours.value = past;
+		 }else {
+		 	errorMassageForDate.value = '';
+		 	errorMassageForHours.value = '';
+		 }
+	})
 
 	// POST SEND DATE END
 

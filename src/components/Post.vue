@@ -42,7 +42,7 @@
 						<!-- COMMENT ICON END -->
 						<span>
 							<Comment>
-								<span class="w-auto h-auto overflow-hidden">
+								<span class="w-auto h-auto overflow-hidden pl-0.5">
 									<p>3</p>
 								</span>
 							</Comment>
@@ -51,8 +51,8 @@
 						<!-- RETWEET ICON START -->
 						<span @click="increase('retweet')">
 							<ReTweet :isActive="item.retweet.isActive">
-								<span class="w-auto h-auto overflow-hidden">
-									<p :class="counterAnimationActiveClass" v-if="item.retweet.counter">{{item.retweet.counter}}</p>
+								<span class="w-auto h-auto overflow-hidden pl-0.5">
+									<p :class="counterAnimationActiveClass" v-if="item.retweet.counter">{{formatingCounterNumber(item.retweet.counter)}}</p>
 								</span>
 							</ReTweet>
 						</span>
@@ -60,8 +60,8 @@
 						<!-- LIKA ICON START -->	
 						<span @click="increase('like')">
 							<Like :isActive="item.like.isActive">
-								<span class="w-auto h-auto overflow-hidden">
-									<p :class="counterAnimationActiveClass" v-if="item.like.counter">{{item.like.counter}}</p>
+								<span class="w-auto h-auto overflow-hidden pl-0.5">
+									<p :class="counterAnimationActiveClass" v-if="item.like.counter">{{formatingCounterNumber(item.like.counter)}}</p>
 								</span>
 							</Like>
 						</span>
@@ -99,7 +99,7 @@
     	},
     	'like': {
     		'isActive': false,
-    		'counter':  0,
+    		'counter':  100,
     	},
     	'share': false,
     })
@@ -137,5 +137,17 @@
     	}else {
     		counterDecreaseAimation()
     	}
+    })
+
+    const formatingCounterNumber = computed(() => ( num ) =>  {
+    	let number = ('' + (num / 1000)).split('.')
+
+        if(num > 1000){
+        	return number[0] + (number[1] > 0 ? `.${number[1].slice(0,1)}k`: 'k')
+        }else if(num > 1000) {
+        	return `${number[0]}` + (number[1] >= 1 ? `${number[1].slice(0,1)}.${number[1].slice(-1)}k`: 'k' )
+        }else {
+        	return num
+        }
     })
 </script>

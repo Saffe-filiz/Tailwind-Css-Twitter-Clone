@@ -90,7 +90,7 @@
     </article>
     <!-- POPUP COMPONENT START --> 
     <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
-      	<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling"/>
+      	<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />
     </PopUp>
     <!-- POPUP COMPONENT END --> 
 </template>
@@ -119,16 +119,6 @@
 
 	let date = ref({})
 
-	const updateDate = computed(() => {
-		if(!date.value.info) return;
-		console.log('test')
-		let z = new Date(date.value.date);
-		let munth = z.getMonth() +1;	
-		let [, , day, year, watch] = z.toString().split(' ');
-		let [hours, minutes] = watch.split(':')
-		return [year, munth, day, hours, minutes].reduce((a, v, i) => ({ ...a, [i]: v}), {}) 
-	})
-
     const wait = ms => setTimeout(() => console.log('test') , ms)
      
     let post = ref(''); // Take Post Text
@@ -146,7 +136,6 @@
 		draggableAreaActive.value = false
 	}
 
-	provide('updateDate', updateDate)
 	provide('imagePrevew', imagePrevew); // Going to image drag area component
 	provide('images', images); // Going to image drag area component
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
