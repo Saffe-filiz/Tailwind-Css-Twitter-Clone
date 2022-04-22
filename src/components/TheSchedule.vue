@@ -9,13 +9,13 @@
 			<span class="ml-[1.7rem]">Schedule</span>
 		</div>
 		<div class="inline-flex justify-between items-center mr-1">
-			<span  class="px-[15px] h-[30px] rounded-[15px] cursor-pointer flex items-center hover:bg-[#0c14191a] mr-4 rounded-full" v-if="date.date.sending"
+			<span  class="px-[15px] h-[30px] rounded-[15px] cursor-pointer flex items-center hover:bg-[#0c14191a] mr-4 rounded-full" v-if="update.date.sending"
 			 @click="scrollVisibil(), $emit('date', {})">
 				<span class="h-[22px] border-b-2 border-black text-[16px] font-medium">Clear</span>
 			</span>
 			<button class="h-[30px] px-[15px] bg-[#0f1419] text-[13px] font-bold text-white rounded-[2rem]"
 			 :disabled="!!showErrorMassage[0]" :class="{'opacity-70': showErrorMassage[0]}" @click="$emit('date', scheduling), scrollVisibil()">
-			    <span v-if="!date.date.sending">Confirm</span>
+			    <span v-if="!update.date.sending">Confirm</span>
 			    <span v-else>Update</span>
 		    </button>
 		</div>
@@ -37,8 +37,8 @@
 			    <div class="w-[17rem] sectionMainStyle focusInput relative">
 		            <label class="text-[12px] text-[#536471] ml-2" for="date">Mouth</label>
 		            <DownArrow/>
-		            <select class="sectionStyle" name="date" @change="selectedDate" id="monthParentItem">
-			            <option v-for="(month, index) in getMonths" :key="index" id="month" :selected="index == getMonthIndex">{{month}}</option>
+		            <select class="sectionStyle" v-model="scheduling.date[1]">
+			            <option v-for="(munth, index) in getMonths" :key="index" :value="index" :selected="index == scheduling.date[1]">{{munth}}</option>
 		            </select> 
 	            </div>
 	            <!-- SELECT MONTH END -->
@@ -46,8 +46,8 @@
 			    <div class="w-[7.813rem] sectionMainStyle focusInput relative">
 		            <label class="text-[12px] text-[#536471] ml-2" for="date">Day</label>
 		            <DownArrow/>
-		            <select class="sectionStyle" name="date" @change="selectedDate" id="day">
-			            <option v-for="(day, index) in getMonthDay" :key="index" :selected="day == selectedDay">{{formatNumber(day)}}</option>
+		            <select class="sectionStyle" v-model="scheduling.date[2]">
+			            <option v-for="(day, index) in getMonthDay" :key="index" :value="index" :selected="index == scheduling.date[2]">{{formatNumber(day -1)}}</option>
 		            </select>
 	            </div>
 	            <!-- SELECT DAY END -->
@@ -55,8 +55,8 @@
 			    <div class="w-[8.938rem] sectionMainStyle focusInput relative">
 		            <label class="text-[12px] text-[#536471] ml-2" for="date">Year</label>
 		            <DownArrow/>
-		            <select class="sectionStyle" name="date" @change="selectedDate" id="year">
-			            <option v-for="(year, index) in [2024, 2023, 2022]"  :key="index" :selected="year == selectedYear">{{year}}</option>
+		            <select class="sectionStyle"  v-model="scheduling.date[0]">
+			            <option v-for="(year, index) in [2024, 2023, 2022]" :key="index" :selected="year == scheduling.date[0]">{{year}}</option>
 		            </select>
 	            </div>
 	            <!-- SELECT YEAR END -->
@@ -71,8 +71,8 @@
 				 <div class="w-[11.375rem] sectionMainStyle focusInput relative">
 		            <label class="text-[12px] text-[#536471] ml-2" for="date">Hours</label>
 		            <DownArrow/>
-		            <select class="sectionStyle" name="date" @change="selectedDate" id="hours">
-			            <option v-for="(hours, index) in 24" :key="index" :selected="index == selectedHours">{{formatNumber(hours -1)}}</option>
+		            <select class="sectionStyle" v-model="scheduling.date[3]">
+			            <option v-for="(hours, index) in 24" :key="index" :value="index" :selected="hours == scheduling.date[3]">{{formatNumber(hours -1)}}</option>
 		            </select> 
 	            </div>
 	            <!-- SELECT HOURS END -->
@@ -80,8 +80,8 @@
 	            <div class="w-[11.375rem] sectionMainStyle focusInput relative">
 		            <label class="text-[12px] text-[#536471] ml-2" for="date">Minute</label>
 		            <DownArrow/>
-		            <select class="sectionStyle" name="date" @change="selectedDate" id="minute">
-			            <option v-for="(minute, index) in 60" :key="index" :selected="index == selectedMinutes">{{formatNumber(minute -1)}}</option>
+		            <select class="sectionStyle"  v-model="scheduling.date[4]">
+			            <option v-for="(minute, index) in 60" :key="index" :value="index" :selected="minute == scheduling.date[4]">{{formatNumber(minute -1)}}</option>
 		            </select> 
 	            </div>
 	            <!-- SELECT MINUTE END -->
@@ -107,79 +107,48 @@
 	const scrollVisibil = inject('scrollVisibil');
 
 	// POST SEND DATE START
-	let selectedMinutes = ref();    // Select relist minute
-	let selectedHours = ref();     // Select relist hourse
-	let selectedDay = ref();      // Select relist day
-	let selectedMonth = ref();   // Select relist month
-	let selectedYear = ref();   // Select relist year
-	let getMonthIndex = ref(); // Get month index
-
 	const scheduling = reactive({
 		'info': null,
-	    'date': null,
+	    'date': ['', '', '', '', ''],
 	    'sending': true,
 	})
 
-	onMounted(() => currentTime());
 
 	const newDate = ref(new Date());
-
-	// Get date values
-	const selectedDate = () => {
-		let day = document.querySelector('#day');
-		let year = document.querySelector('#year');
-		let hours = document.querySelector('#hours');
-		let month = document.querySelectorAll('#month');
-		let minute = document.querySelector('#minute');
-		let monthParentItem = document.querySelectorAll('#monthParentItem');
-		selectedDay.value =  day.value;
-		selectedYear.value =  year.value;
-		selectedHours.value = hours.value;
-		selectedMinutes.value =  minute.value;
-		month.forEach((item, index) => (item.value == monthParentItem[0].value) ? getMonthIndex.value = index: null);
-	};
-
 	// SET NEW DATE START
 
 	// Date prop
-	let date = defineProps({date: Object});  
-    // Convert date prop to object
-	const updateDate = computed(() => {
-		if(!date.date.info) return;
-		let newDate = new Date(date.date.date);
-		let munth = newDate.getMonth() +1;	
-		let [, , day, year, watch] = newDate.toString().split(' ');
-		let [hours, minutes] = watch.split(':');
-		return [year, munth -1, day, hours, minutes].reduce((a, v, i) => ({ ...a, [i]: v}), {});
-	})
+	let update = defineProps({date: Object});  
 
+    onMounted(() => currentTime());
 	// Set new date
 	const currentTime = () => {
-		let date = newDate.value;
-		let dateUpdate = updateDate.value
-		selectedYear.value  = dateUpdate?.[0] ?? date.getFullYear();
-		getMonthIndex.value = dateUpdate?.[1] ?? date.getMonth();
-		selectedDay.value = dateUpdate?.[2] ?? date.getDate();
-		selectedHours.value = dateUpdate?.[3] ?? date.getHours();
-		selectedMinutes.value = dateUpdate?.[4] ?? date.getMinutes();
+		let dateUpdata = update.date
+		let date = currentDate.value
+		date.forEach( (item, index) =>  scheduling.date[index] = dateUpdata.date?.[index] || item )
 	}
 	// SET NEW DATE END
+
+	const currentDate = computed(() => {
+		let date = newDate.value;
+		return [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()];
+	})
 
 	// Date info
 	const setTimeInfo = computed(() => {
 		let [dayName, month, day, year] = setTime.value.toString().split(' ');
 		let info = `Will send on ${dayName}, ${month} ${day}, ${year}  at ${timePeriod.value}`;
-		scheduling.info = info;
+		scheduling.info = info
 		return info;
 	});
 
 	// Format time period
 	const timePeriod = computed(() => {
-		let hours = selectedHours.value;
-		let minute = selectedMinutes.value;
+		let hours = scheduling.date[3];
+		let minute = scheduling.date[4];
 		let period = hours < 12 ? 'AM': 'PM';
 		let formatHours = hours % 12 == 0 ?  12: hours % 12
-		return `${formatHours}:${minute} ${period}`
+		return `${formatHours}:${formatNumber.value(minute)} ${period}`
 	})
 
 	// Formant number 
@@ -187,29 +156,18 @@
 
 	// Release date
 	const setTime = computed(() => {
-		let date = new Date(selectedYear.value, getMonthIndex.value, selectedDay.value, selectedHours.value, selectedMinutes.value);
-		scheduling.date = date;
-		return date;
+		return new Date(scheduling.date[0], scheduling.date[1], scheduling.date[2], scheduling.date[3], scheduling.date[4]);;
 	})
 
 	// Get month with name
 	const getMonths = computed(() => {
-		let month = [];
-		for(let index = 0; index < 12; index++) {
-			month.push(new Date(selectedYear.value, index, 1).toLocaleString('en', { month: 'long' }));
-		}
-		return month;
+		return Array.from({length: 11}, (_, munth) => new Date(scheduling.date[0], munth, 1).toLocaleString('en', { month: 'long' }));
 	});
 
 	// Get number days
 	const getMonthDay = computed(() => {
-		let day = new Date(selectedYear.value, getMonthIndex.value +1, 0).getDate();
-		let days = [];
-		for(let i = 1; i <= day; i++){
-			days.push(i)
-		}
-		return days
-		console.log('test')
+		let day = new Date(scheduling.date[0], scheduling.date[1] +1, 0).getDate();
+		return Array.from({length: day}, (_, day) => day +1);
 	})
 
 	let errorMassageForDate = ref('');
@@ -219,24 +177,25 @@
 		return [errorDate || errorHours, errorDate && !errorHours, !errorDate && errorHours];
 	});
     // Error messages
-	watch(() => [selectedYear.value, selectedDay.value, getMonthIndex.value, selectedHours.value, selectedMinutes.value], (value) => {
-		let date = newDate.value;
-		let [year, day, month, hours, minute] = value;
-		let calculateMonthRange = (year - date.getFullYear()) * 12;
-		calculateMonthRange -= date.getMonth();
+	watch(() => [scheduling.date[0], scheduling.date[1], scheduling.date[2], scheduling.date[3], scheduling.date[4]], (value) => {
+		let [year, month, day, hours, minute] = value;
+		let currentTime = currentDate.value
+		console.log(hours < currentTime[3] && minute < currentTime[4])
+		let calculateMonthRange = (year - currentTime[0]) * 12;
+		calculateMonthRange -= currentTime[1];
 		calculateMonthRange += month;
 		let [past, future] = ['You can’t schedule a Tweet to send in the past.', 'You can’t schedule a Tweet more than 18 months in the future.'] 
 		 if(calculateMonthRange < 0){
 		 	errorMassageForDate.value = past;
-		 }else if(calculateMonthRange < 0 == true && day < date.getDate()) {
+		 }else if(calculateMonthRange < 0 == true && day < currentTime[2]) {
 		 	errorMassageForDate.value = past;
-		 }else if(calculateMonthRange == 0 && day < date.getDate()) {
+		 }else if(calculateMonthRange == 0 && day < currentTime[2]) {
 		 	errorMassageForDate.value = past;
 		 }else if(calculateMonthRange >= 18){
 		 	errorMassageForDate.value = future;
-		 }else if(day == date.getDate() && calculateMonthRange == 0 && minute < date.getMinutes()){
+		 }else if(day == currentTime[2] && calculateMonthRange == 0 && hours < currentTime[3]){
 		 	errorMassageForHours.value = past;
-		 }else if(day == date.getDate() && calculateMonthRange == 0 && hours < date.getHours()){
+		 }else if(day == currentTime[2] && calculateMonthRange == 0 && hours == currentTime[3] && minute < currentTime[4]){
 		 	errorMassageForHours.value = past;
 		 }else {
 		 	errorMassageForDate.value = '';

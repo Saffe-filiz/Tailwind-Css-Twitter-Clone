@@ -23,7 +23,7 @@
 		    <!-- IMAGE DRAG AREA END -->
 		    <!-- POLL FORM START --> 
 		     <div>
-		    	<ThePoll v-if="showThePollForm" @hiddePoll="(hidde) => showThePollForm = hidde"/>
+		    	<ThePoll v-if="showPoll" @hiddePoll="(pollObject) => poll(pollObject)"  :pollData="pollFormData"/>
 		    </div>
 		    <!-- POLL FORM EMD --> 
 		    <div class="w-[516px] h-[35px] border-b border-min-border-color pl-2" v-if="whoCanAnswer">
@@ -53,7 +53,7 @@
 	    			<span class="tooltip">Emoji</span>
 	    		</span>
 			   <span  class="group tooltipContainer">
-			   	    <Poll @click="showThePollForm = true"/>
+			   	    <Poll @click="showPoll = true"/>
 			   	    <span class="tooltip">Poll</span>
 			   </span>
 	    		<span class="group tooltipContainer ">
@@ -121,9 +121,7 @@
 
     const wait = ms => setTimeout(() => console.log('test') , ms)
      
-    let post = ref(''); // Take Post Text
-    let showThePollForm = ref(false); // Show Poll Form
-	
+    let post = ref(''); // Take post text
 
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
 	const images = ref([]); // Take image.
@@ -143,5 +141,14 @@
 	const scrollHidden = inject('scrollHidden'); // Coming from app vue
 	const scrollVisibil = inject('scrollVisibil'); // Coming from app vue
 	const showTheScheduleForm = inject('showTheScheduleForm'); // Coming from app vue
+
+	let pollFormData = ref(); // Poll form data
+	let showPoll = ref(false); // Show poll form
+
+	const poll = (obj) => {
+		console.log(obj)
+		showPoll.value = obj.showPoll,
+		pollFormData.value = obj.data
+	};
 
 </script>
