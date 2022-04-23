@@ -119,13 +119,15 @@
     watch(() => [...pollQuestions.pollLength], (oldValue, newValue ) => {
     	if(newValue[1] != 0){
     		pollQuestions.pollLength[1]
-    	    if(oldValue[0] == 0 && oldValue[1] == 0){
+    	    if(oldValue[1] == 0){
     		    pollQuestions.pollLength[2] = 5
     	    }else if(newValue[0] > 0 && newValue[1] > 0 ){
     	    	pollQuestions.pollLength[2]
     	    }
     	}else if(oldValue[0] == 0 && oldValue[2] == 0) {
     		pollQuestions.pollLength[1] = 1
+    	}else if(oldValue[0] == 0 && oldValue[1] == 0 && oldValue[2] < 5){
+    		pollQuestions.pollLength[2] = 5
     	}
     })
 
