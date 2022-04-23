@@ -34,31 +34,25 @@
 		<span class="text-[15px] text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
 		    	<!-- SELECT MONTH START -->
-			    <div class="w-[17rem] sectionMainStyle focusInput relative">
-		            <label class="text-[12px] text-[#536471] ml-2" for="date">Mouth</label>
-		            <DownArrow/>
-		            <select class="sectionStyle" v-model="scheduling.date[1]">
+	             <SelectBox class="w-[17.125rem]" name="Month">
+	             	  <select class="sectionStyle" v-model="scheduling.date[1]">
 			            <option v-for="(munth, index) in getMonths" :key="index" :value="index" :selected="index == scheduling.date[1]">{{munth}}</option>
 		            </select> 
-	            </div>
+	             </SelectBox>
 	            <!-- SELECT MONTH END -->
 	            <!-- SELECT DAY START -->
-			    <div class="w-[7.813rem] sectionMainStyle focusInput relative">
-		            <label class="text-[12px] text-[#536471] ml-2" for="date">Day</label>
-		            <DownArrow/>
-		            <select class="sectionStyle" v-model="scheduling.date[2]">
+	            <SelectBox class="w-[7.875rem]" name="Day">
+	            	<select class="sectionStyle" v-model="scheduling.date[2]">
 			            <option v-for="(day, index) in getMonthDay" :key="index" :value="index" :selected="index == scheduling.date[2]">{{formatNumber(day -1)}}</option>
 		            </select>
-	            </div>
+	            </SelectBox>
 	            <!-- SELECT DAY END -->
 	            <!-- SELECT YEAR START -->
-			    <div class="w-[8.938rem] sectionMainStyle focusInput relative">
-		            <label class="text-[12px] text-[#536471] ml-2" for="date">Year</label>
-		            <DownArrow/>
-		            <select class="sectionStyle"  v-model="scheduling.date[0]">
+	            <SelectBox class="w-[9.063rem]" name="Year">
+	            	<select class="sectionStyle"  v-model="scheduling.date[0]">
 			            <option v-for="(year, index) in [2024, 2023, 2022]" :key="index" :selected="year == scheduling.date[0]">{{year}}</option>
 		            </select>
-	            </div>
+	            </SelectBox>
 	            <!-- SELECT YEAR END -->
 		    </div>
 		    <span class="text-[14px] text-[#f4212e]">{{errorMassageForDate}}</span>
@@ -68,22 +62,18 @@
 		<span class="text-[15px] text-[#536471]">Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
 				<!-- SELECT HOURS START -->
-				 <div class="w-[11.375rem] sectionMainStyle focusInput relative">
-		            <label class="text-[12px] text-[#536471] ml-2" for="date">Hours</label>
-		            <DownArrow/>
+	            <SelectBox class="w-[11.375rem]" name="Hour">
 		            <select class="sectionStyle" v-model="scheduling.date[3]">
 			            <option v-for="(hours, index) in 24" :key="index" :value="index" :selected="hours == scheduling.date[3]">{{formatNumber(hours -1)}}</option>
 		            </select> 
-	            </div>
+	            </SelectBox>
 	            <!-- SELECT HOURS END -->
 	            <!-- SELECT MINUTE START --> 
-	            <div class="w-[11.375rem] sectionMainStyle focusInput relative">
-		            <label class="text-[12px] text-[#536471] ml-2" for="date">Minute</label>
-		            <DownArrow/>
+	             <SelectBox class="w-[11.375rem]" name="Minute">
 		            <select class="sectionStyle"  v-model="scheduling.date[4]">
 			            <option v-for="(minute, index) in 60" :key="index" :value="index" :selected="minute == scheduling.date[4]">{{formatNumber(minute -1)}}</option>
 		            </select> 
-	            </div>
+	            </SelectBox>
 	            <!-- SELECT MINUTE END -->
 		    </div>
 		    <span class="text-[14px] text-[#f4212e]" v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
@@ -103,6 +93,7 @@
 	import { inject, ref, computed, onMounted, reactive, watch } from 'vue';
 	import DownArrow from './icons/DownArrow.vue';
 	import Calendar from './icons/NewPostIcons/Calendar.vue';
+	import SelectBox from './SelectBox.vue'
 
 	const scrollVisibil = inject('scrollVisibil');
 
@@ -113,8 +104,6 @@
 	    'sending': true,
 	})
 
-
-	const newDate = ref(new Date());
 	// SET NEW DATE START
 
 	// Date prop
@@ -130,7 +119,7 @@
 	// SET NEW DATE END
 
 	const currentDate = computed(() => {
-		let date = newDate.value;
+		let date = new Date();
 		return [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()];
 	})
 
@@ -177,14 +166,14 @@
 		return [errorDate || errorHours, errorDate && !errorHours, !errorDate && errorHours];
 	});
     // Error messages
-	watch(() => [scheduling.date[0], scheduling.date[1], scheduling.date[2], scheduling.date[3], scheduling.date[4]], (value) => {
+	watch( scheduling.date, (value) => {
 		let [year, month, day, hours, minute] = value;
 		let currentTime = currentDate.value
-		console.log(hours < currentTime[3] && minute < currentTime[4])
 		let calculateMonthRange = (year - currentTime[0]) * 12;
 		calculateMonthRange -= currentTime[1];
 		calculateMonthRange += month;
-		let [past, future] = ['You can’t schedule a Tweet to send in the past.', 'You can’t schedule a Tweet more than 18 months in the future.'] 
+		let [past, future] = ['You can’t schedule a Tweet to send in the past.', 'You can’t schedule a Tweet more than 18 months in the future.'];
+
 		 if(calculateMonthRange < 0){
 		 	errorMassageForDate.value = past;
 		 }else if(calculateMonthRange < 0 == true && day < currentTime[2]) {

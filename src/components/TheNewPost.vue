@@ -146,9 +146,7 @@
 	let showPoll = ref(false); // Show poll form
 
 	const poll = (obj) => {
-		console.log(obj)
 		showPoll.value = obj.showPoll,
 		pollFormData.value = obj.data
 	};
-
 </script>
