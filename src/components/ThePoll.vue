@@ -116,14 +116,16 @@
     	return minute 
     })
 
-    watch(() => [...pollQuestions.pollLength], (oldValue, newValue ) => {
+    watch(() => [...pollQuestions.pollLength], ( oldValue, newValue ) => {
     	if(newValue[1] != 0){
     		pollQuestions.pollLength[1]
-    	    if(oldValue[1] == 0){
+    		//Inner if statement for minute start
+    	    if(oldValue[1] == 0 && oldValue[2] == 0){
     		    pollQuestions.pollLength[2] = 5
-    	    }else if(newValue[0] > 0 && newValue[1] > 0 ){
+    	    }else if(newValue[0] > 0 || newValue[1] > 0 ){
     	    	pollQuestions.pollLength[2]
     	    }
+    	    //Inner if statement minute end
     	}else if(oldValue[0] == 0 && oldValue[2] == 0) {
     		pollQuestions.pollLength[1] = 1
     	}else if(oldValue[0] == 0 && oldValue[1] == 0 && oldValue[2] < 5){
