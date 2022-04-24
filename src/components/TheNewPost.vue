@@ -146,7 +146,13 @@
 	let showPoll = ref(false); // Show poll form
 
 	const poll = (obj) => {
-		showPoll.value = obj.showPoll,
-		pollFormData.value = obj.data
+		showPoll.value = obj.showPoll;
+		pollFormData.value = obj.data;
 	};
+
+	const pollLength = computed(() => {
+		let date = new Date();
+		return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+	})
+
 </script>

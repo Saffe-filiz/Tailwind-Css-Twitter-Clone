@@ -5,21 +5,22 @@
 			<span class="w-full h-[53px] inputMainStyle rounded focusInput relative" v-for="num in pollQuestions.pollQuestCounter" :key="num">
 			<label>
 				<!-- QUESTİON INPUT START -->
-			    <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2"  type="text" v-model="pollQuestions.quest[num -1]" maxlength="25">  
+			    <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input" type="text" v-model="pollQuestions.quest[num -1]" maxlength="25">  
 			    <!-- QUESTİON INPUT END -->
 			        <!-- INPUT PLACEHOLDER START-->
-			        <span class="absolute focus top-3 text-lg left-2 duration-200"  :class="{'input-text': labelAnimation(num)}"> {{inputPlaceHolder(num)}}</span>
+			    <span class="absolute focus top-3 text-lg left-2 duration-200"  :class="{'input-text': labelAnimation(num)}"> {{inputPlaceHolder(num)}}</span>
 			        <!-- INPUT PLACEHOLDER START-->
 			        <!-- QUESTİON INPUT LATTER COUNTER START -->
-			        <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">{{pollQuestions.quest[num -1].length}} / 25</span>
+			    <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">{{pollQuestions.quest[num -1].length}} / 25</span>
 			        <!-- QUESTİON INPUT LATTER COUNTER END -->
 			 </label>
 			</span>
 		</div>
 		<!-- ADD NEW INPUT QUESTİON START -->
-		<div class="w-[3.063rem] relative pl-1" v-if="questCounter">
+		<div class="w-[3.063rem] relative pl-1 group relative" v-if="questCounter">
 			<div class="w-8 h-8 flexCenter rounded-full absolute hover:bg-[#1d9bf01a] bottom-6 cursor-pointer" @click="addNewQuestion">
-				<Plus class="w-[20px] h-[20px] text-[10px]"/>
+				<Plus class="w-[20px] h-[20px] text-[8px]"/>
+			    <span class="tooltip bottom-[-15px]">Add</span> 
 			</div>
 		</div>
 		<!-- ADD NEW INPUT QUESTİON END -->
@@ -30,22 +31,22 @@
 		<div class="w-full h-auto inline-flex justify-between" @change="test">
 		<!-- TIME SECTION START -->
 		    <!-- SELECT DAY START -->
-			<SelectBox class="w-[9.438rem]" name="Day">
+			<SelectBox class="w-[9.438rem]" name="Day" >
 			    <select class="sectionStyle"  v-model="pollQuestions.pollLength[0]">
 			        <option v-for="(day, index) in 8" :key="index" :selected="day == pollQuestions.pollLength[0]">{{day -1}}</option>
 		        </select>
 			</SelectBox>
 			<!-- SELECT DAY END -->
 		    <!-- SELECT HOURS START -->
-	        <SelectBox class="w-[9.438rem]" name="Hours">
-			    <select class="sectionStyle" v-model="pollQuestions.pollLength[1]">
+	        <SelectBox class="w-[9.438rem]" name="Hours" :class="{'bg-[#eff3f4]': disabledSelectInput}">
+			    <select class="sectionStyle" v-model="pollQuestions.pollLength[1]" :disabled="disabledSelectInput">
 			       <option v-for="(hours, index) in 24"  :key="index" :selected="hours == pollQuestions.pollLength[1]">{{hours -1}}</option>
 		        </select>  
 			</SelectBox>
 	        <!-- SELECT HOURS END -->
 	        <!-- SELECT MINUTE START --> 
-	        <SelectBox class="w-[9.438rem]" name="Minute">
-			    <select class="sectionStyle" v-model="pollQuestions.pollLength[2]">
+	        <SelectBox class="w-[9.438rem]" name="Minute" :class="{'bg-[#eff3f4]': disabledSelectInput}">
+			    <select class="sectionStyle" v-model="pollQuestions.pollLength[2]" :disabled="disabledSelectInput">
 			        <option v-for="(minute, index) in minutes" :key="index" :selected="minute == pollQuestions.pollLength[1]">{{minute}}</option>
 		        </select> 
 			</SelectBox>
@@ -64,7 +65,7 @@
 
 
 <script setup>
-	import { reactive, computed, onMounted, watch } from 'vue';
+	import {reactive, computed, onMounted, watch, nextTick } from 'vue';
 
 	import Plus from './icons/Plus.vue';
 	import SelectBox from './SelectBox.vue'
@@ -76,23 +77,31 @@
     	'pollQuestCounter': 2, 
     });
 
-    onMounted(() => setQuestiobData());
+    onMounted(() => {
+    	setQuestiobData()
+
+    	if(!pollQuestData.quest){
+    		
+    	}
+    });
 
     const pollData = defineProps({pollData: Object}); // Props from new post
 
-    const pollDataQuest = computed(() => {
-    	if(!pollData.pollData) return;
+    const pollQuestData = computed(() => {
+    	if(!pollData.pollData) return inputFocus.value(0);
     	let filterEmty = pollData.pollData.quest.filter( quest => quest != '');
     	let questLength = filterEmty.length <= 1 ? 2: filterEmty.length
     	pollData.pollData.pollQuestCounter = questLength;
     	Array.from({length: pollData.pollData.pollQuestCounter}, (_, i) => filterEmty.push(''))
-    	return filterEmty
+    	let result = filterEmty
+    	!result[0] ? inputFocus.value(0): null
+    	return result
     })
 
     // Set poll data
     const setQuestiobData = () => {
     	if(!pollData.pollData) return;
-    	pollDataQuest.value.forEach((item, index) => pollQuestions.quest[index] = item || '')
+    	pollQuestData.value.forEach((item, index) => pollQuestions.quest[index] = item || '')
     	pollData.pollData.pollLength.forEach((item, index) => pollQuestions.pollLength[index] = item || 0);
     	pollQuestions.pollQuestCounter = pollData.pollData.pollQuestCounter;
     }
@@ -100,14 +109,27 @@
     const questCounter = computed(() => pollQuestions.pollQuestCounter < 4 ); // Show new question button
     // Add new quest
     const addNewQuestion = () => {
-    	pollQuestions.pollQuestCounter++;
+    	++pollQuestions.pollQuestCounter;
     	pollQuestions.quest.push('');
     }
     const inputPlaceHolder = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`) // Input placeholer
     const labelAnimation = computed(() => (n) => pollQuestions.quest[n -1].length > 0); // Activate label animation
+
+    const disabledSelectInput = computed(() => pollQuestions.pollLength[0] == 7)
     
     // Start minute
-    let startIndex = computed(() =>  pollQuestions.pollLength[0] == 0 && pollQuestions.pollLength[1] == 0 ? 5: 0)
+    let startIndex = computed(() => {
+    	let [day, hours, minute] = [pollQuestions.pollLength[0], pollQuestions.pollLength[1], pollQuestions.pollLength[2]]
+    	if(day == 0 && hours == 0 && minute < 5){
+    		return 5
+    		minute = 5
+        }else if(day == 0 && hours == 0 && minute > 5){
+        	return 5;
+        }else{
+        	minute
+    	    return 0
+        }
+    })
     // Create minute 
     const minutes = computed(() => {
     	let minute = [];
@@ -116,21 +138,27 @@
     	return minute 
     })
 
-    watch(() => [...pollQuestions.pollLength], ( oldValue, newValue ) => {
-    	if(newValue[1] != 0){
-    		pollQuestions.pollLength[1]
-    		//Inner if statement for minute start
-    	    if(oldValue[1] == 0 && oldValue[2] == 0){
-    		    pollQuestions.pollLength[2] = 5
-    	    }else if(newValue[0] > 0 || newValue[1] > 0 ){
-    	    	pollQuestions.pollLength[2]
-    	    }
-    	    //Inner if statement minute end
-    	}else if(oldValue[0] == 0 && oldValue[2] == 0) {
-    		pollQuestions.pollLength[1] = 1
-    	}else if(oldValue[0] == 0 && oldValue[1] == 0 && oldValue[2] < 5){
-    		pollQuestions.pollLength[2] = 5
+    const inputFocus = computed(() => (index) => {
+    	nextTick(() => {
+    		let input = document.querySelectorAll('.input') 
+            input[index].focus()   
+        })
+    })
+
+
+    watch(() => [...pollQuestions.pollLength], (oldPollLength, newPollLength ) => {
+    	if(oldPollLength[0] == 7) {
+    		pollQuestions.pollLength[1] = 0;
+    		pollQuestions.pollLength[2] = 0;
+    	}else if(newPollLength[1] != 0){
+    		pollQuestions.pollLength[1];
+    	}else if(oldPollLength[0] == 0 && oldPollLength[2] == 0) {
+    		pollQuestions.pollLength[1] = 1;
     	}
+    })
+
+    watch(()=> pollQuestions.pollQuestCounter, (oldValue, newValue) => {
+    	!pollQuestions.quest[newValue] ? inputFocus.value(newValue): null
     })
 
 </script>

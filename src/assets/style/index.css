@@ -122,7 +122,7 @@
 /* POLL INPUT ANIMATION START */
 
 input[type="text"]:focus ~ .counter {
-	@apply opacity-100 text-[#287acb] 
+	@apply opacity-100 text-[#536471] 
 }
 
 
