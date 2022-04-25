@@ -65,7 +65,7 @@
 
 
 <script setup>
-	import {reactive, computed, onMounted, watch, nextTick } from 'vue';
+	import { reactive, computed, onMounted, watch, nextTick } from 'vue';
 
 	import Plus from './icons/Plus.vue';
 	import SelectBox from './SelectBox.vue'
@@ -77,52 +77,52 @@
     	'pollQuestCounter': 2, 
     });
 
-    onMounted(() => {
-    	setQuestiobData()
-
-    	if(!pollQuestData.quest){
-    		
-    	}
-    });
-
+    onMounted(() => setQuestiobData())
+    
     const pollData = defineProps({pollData: Object}); // Props from new post
 
     const pollQuestData = computed(() => {
-    	if(!pollData.pollData) return inputFocus.value(0);
+    	if(!pollData.pollData) return;
     	let filterEmty = pollData.pollData.quest.filter( quest => quest != '');
     	let questLength = filterEmty.length <= 1 ? 2: filterEmty.length
     	pollData.pollData.pollQuestCounter = questLength;
-    	Array.from({length: pollData.pollData.pollQuestCounter}, (_, i) => filterEmty.push(''))
-    	let result = filterEmty
-    	!result[0] ? inputFocus.value(0): null
-    	return result
+    	Array.from({length: pollData.pollData.pollQuestCounter}, (_, i) => filterEmty.push(''));
+    	!filterEmty[0] ? inputFocus.value(0): null;
+    	return filterEmty;
     })
 
     // Set poll data
     const setQuestiobData = () => {
-    	if(!pollData.pollData) return;
+    	if(!pollData.pollData) return inputFocus.value(0);
     	pollQuestData.value.forEach((item, index) => pollQuestions.quest[index] = item || '')
     	pollData.pollData.pollLength.forEach((item, index) => pollQuestions.pollLength[index] = item || 0);
     	pollQuestions.pollQuestCounter = pollData.pollData.pollQuestCounter;
     }
+    
+    // Show new question button
+    const questCounter = computed(() => pollQuestions.pollQuestCounter < 4 );
 
-    const questCounter = computed(() => pollQuestions.pollQuestCounter < 4 ); // Show new question button
     // Add new quest
     const addNewQuestion = () => {
-    	++pollQuestions.pollQuestCounter;
+    	pollQuestions.pollQuestCounter++
     	pollQuestions.quest.push('');
-    }
-    const inputPlaceHolder = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`) // Input placeholer
-    const labelAnimation = computed(() => (n) => pollQuestions.quest[n -1].length > 0); // Activate label animation
+    };
 
+    // Input placeholer
+    const inputPlaceHolder = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`);
+
+    // Activate label animation
+    const labelAnimation = computed(() => (n) => pollQuestions.quest[n -1].length > 0);
+    
+    // Max poll length
     const disabledSelectInput = computed(() => pollQuestions.pollLength[0] == 7)
     
     // Start minute
     let startIndex = computed(() => {
     	let [day, hours, minute] = [pollQuestions.pollLength[0], pollQuestions.pollLength[1], pollQuestions.pollLength[2]]
     	if(day == 0 && hours == 0 && minute < 5){
+    		pollQuestions.pollLength[2] = 5
     		return 5
-    		minute = 5
         }else if(day == 0 && hours == 0 && minute > 5){
         	return 5;
         }else{
@@ -137,15 +137,16 @@
     	for(let i = start; i < 60; i++){minute.push(i)};
     	return minute 
     })
-
+    
+    // Quest input auto focus
     const inputFocus = computed(() => (index) => {
     	nextTick(() => {
     		let input = document.querySelectorAll('.input') 
             input[index].focus()   
         })
     })
-
-
+    
+    // Poll date select input watcher
     watch(() => [...pollQuestions.pollLength], (oldPollLength, newPollLength ) => {
     	if(oldPollLength[0] == 7) {
     		pollQuestions.pollLength[1] = 0;
@@ -156,7 +157,8 @@
     		pollQuestions.pollLength[1] = 1;
     	}
     })
-
+    
+    // Quest input counter watcher
     watch(()=> pollQuestions.pollQuestCounter, (oldValue, newValue) => {
     	!pollQuestions.quest[newValue] ? inputFocus.value(newValue): null
     })

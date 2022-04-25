@@ -80,7 +80,7 @@
 	    		</div>
 	    		<!-- SEND NEW TWEET BUTTON START --> 
 	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]">
-	    			<span v-if="date.info" @click="updateDate(), wait(date.time)">Schedule</span>
+	    			<span v-if="date.info" @click="updateDate()">Schedule</span>
 	    			<span v-else>Tweet</span>
 	    		</button>
 	    		<!-- SEND NEW TWEET BUTTON START --> 
@@ -141,18 +141,23 @@
 	const scrollHidden = inject('scrollHidden'); // Coming from app vue
 	const scrollVisibil = inject('scrollVisibil'); // Coming from app vue
 	const showTheScheduleForm = inject('showTheScheduleForm'); // Coming from app vue
-
+    
 	let pollFormData = ref(); // Poll form data
 	let showPoll = ref(false); // Show poll form
 
+    // Emit from poll component
 	const poll = (obj) => {
 		showPoll.value = obj.showPoll;
 		pollFormData.value = obj.data;
 	};
-
-	const pollLength = computed(() => {
+    // Set poll ending date
+	const setPollDate = computed(() => {
+		if(!pollFormData) return;
 		let date = new Date();
-		return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+		let [day, hours, minute] =  [...pollFormData.value.pollLength].map(Number)
+		date.setDate(date.getDate() + day); 
+		date.setHours(date.getHours() + hours);
+		date.setMinutes(date.getMinutes() + minute);
+        return date
 	})
-
 </script>

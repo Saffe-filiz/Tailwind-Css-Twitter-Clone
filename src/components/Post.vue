@@ -17,7 +17,7 @@
 						    <a href="#" class="mr-[7px] text-[#536471] text-[15px] font-normal">@UserName</a>
 						    <!-- USERNAME END -->
 						    <!-- TIME CALCULATER START -->
-						    <TimeCalculteter :date="post.date"/>
+						    <TimeCalculator :date="post.date"/>
 						    <!-- TIME CALCULATER END -->
 						</div>
 						<!--MORE ICON START -->
@@ -34,7 +34,7 @@
 					<!-- POST END -->	
 				</div>
 				<div class="w-full h-auto my-3 empty:hidden">
-			     <!-- <ThePollChoceSection/>-->
+			     <ThePollChoceSection/>
 				</div>
 				 <!-- LIKA, COMMENT, SHARE, RETWEET ICONS START -->	
 				<div class="w-full h-8.5 flex items-end">
@@ -85,7 +85,7 @@
 	import Comment from './icons/PostIcons/Comment.vue';
 	import More from './icons//More.vue';
 	import ThePollChoceSection from './ThePollChoceSection.vue'
-	import TimeCalculteter from './TimeCalculteter.vue';
+	import TimeCalculator from './TimeCalculator.vue';
 
 
     let item = reactive({

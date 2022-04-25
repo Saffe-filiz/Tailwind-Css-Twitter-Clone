@@ -1,11 +1,9 @@
 <template>
-	<span class="relative before:absolute before:content-['.'] before:top-[-4px] before:left-[-7px] before:w-1 before:h-auto text-[#536471] text-[15px] font-normal" id="timer">
-	    Now
-    </span>
+	<span class="relative before:absolute before:content-['.'] before:top-[-4px] before:left-[-7px] before:w-1 before:h-auto text-[#536471] text-[15px] font-normal" id="timer">{{timer}}</span>
 </template>
 
 <script setup>
-	import { onMounted } from 'vue';
+	import {ref, onMounted } from 'vue';
 	const post = defineProps({date: String})
      
     onMounted(() => dataCalculete(post.date))
@@ -14,10 +12,11 @@
 		if(document.visibilityState == 'hidden') return;
 			dataCalculete(post.date);
 	})
-    
 
+   let timer = ref()
+    
    const dataCalculete = (postDate) => {
-        let timer = document.querySelector('#timer');
+       // let timer = document.querySelector('#timer');
         let date = new Date(postDate);
         let currentDate = new Date();
         let [_, month, day, year] = date.toString().split(' ');
@@ -25,6 +24,7 @@
         let minute = Math.ceil(second / 60);
         let hourse = Math.ceil(minute / 60);
         let result;
+        
         if (currentDate.getFullYear() > year){
            result = `${month} ${day} ${year}`;
         }else if(hourse >= 24) {
@@ -36,7 +36,7 @@
         }else {
            result = `${second}s`
         }
-        timer.innerText = result
+        timer.value = result
     }
 
 
