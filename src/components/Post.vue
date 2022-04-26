@@ -1,20 +1,20 @@
 <template>
-	<div class="w-full min-h-[88px] pb-[11px] px-4 inline-flex flex-row border-b border-min-border-color bg-white hoverEfect pt-[11px]">
+	<div class="w-full min-h-[88px] pt-[8px] px-3.5 inline-flex flex-row border-b border-min-border-color bg-white hoverEfect">
 		<!-- USER PROFILE IMAGE START -->
-			<div class="w-[3.75rem] h-full">
-				<div class="w-12 h-12 rounded-full bg-black"></div>
+			<div class="w-[2.688rem] h-full mr-[0.688rem]">
+				<div class="w-[2.688rem] h-[2.688rem] rounded-full bg-black"></div>
 			</div>
 	    <!-- USER PROFILE IMAGE END -->
-			<div class="w-[31.625rem] min-h-[5.563rem] inline-flex flex-col justify-between">	
+			<div class="w-full min-h-[5.563rem] inline-flex flex-col justify-between">	
 				<div class="w-full min-h-[2.688]">
 					 <!-- NAME, USER NAME AND TIME START -->
 					<div class="w-full h-[1.125rem] mb-0.5 inline-flex justify-between">
-						<div class="inline inline-flex gap-x-[4px]">
+						<div class="inline inline-flex items-center gap-x-[4px]">
 							<!-- NAME START -->
-							<span class="text-[#0f1419] text-base font-bold">Name</span>
+							<span class="text-[#0f1419] text-[16px] font-bold">Name</span>
 							<!-- NAME END -->
 							<!-- USERNAME START -->
-						    <a href="#" class="mr-[7px] text-[#536471] text-[15px] font-normal">@UserName</a>
+						    <a href="#" class="mr-[7px] text-[#536471] text-[14px] font-normal">@UserName</a>
 						    <!-- USERNAME END -->
 						    <!-- TIME CALCULATER START -->
 						    <TimeCalculator :date="post.date"/>
@@ -29,41 +29,36 @@
 						<!-- NAME AND USER NAME END -->	
 						<!-- POST START -->	
 					<div class="w-full h-auto break-words">
-						<span class="text-[15px] font-normal text-[#0f1419]">test</span>
+						<span class="text-[16px] font-normal text-[#0f1419]">test</span>
 					</div>
 					<!-- POST END -->	
 				</div>
-				<div class="w-full h-auto my-3 empty:hidden">
+				<div class="w-full mt-[11px] empty:hidden">
 			     <ThePollChoceSection/>
 				</div>
 				 <!-- LIKA, COMMENT, SHARE, RETWEET ICONS START -->	
-				<div class="w-full h-8.5 flex items-end">
-					<div class="w-[425px] h-[29px] inline-flex justify-between ml-[-8px]">
+				<div class="max-w-[425px]  flex items-end mt-[11px]">
+					<div class="w-full inline-flex justify-between ml-[-8px]">
 						<!-- COMMENT ICON END -->
-						<span>
-							<Comment>
-								<span class="w-auto h-auto overflow-hidden pl-0.5">
-									<p>3</p>
-								</span>
-							</Comment>
+						<span class="inline-flex items-center group hoverDuration">
+							<Comment/>
+							<span class="w-auto h-auto overflow-hidden pl-0.5 group-hover:text-[#1d9bf0]">3</span>
 						</span>
 						<!-- COMMENT ICON END -->
 						<!-- RETWEET ICON START -->
-						<span @click="increase('retweet')">
-							<ReTweet :isActive="item.retweet.isActive">
-								<span class="w-auto h-auto overflow-hidden pl-0.5">
-									<p :class="counterAnimationActiveClass" v-if="item.retweet.counter">{{formatingCounterNumber(item.retweet.counter)}}</p>
-								</span>
-							</ReTweet>
+						<span @click="increase('retweet')" class="inline-flex items-center group hoverDuration">
+							<ReTweet :isActive="item.retweet.isActive"/>
+							<span class="w-auto h-auto overflow-hidden pl-0.5 group-hover:text-[#00ba7c]" v-if="item.retweet.counter">
+							    {{formatingCounterNumber(item.retweet.counter)}}
+						    </span>
 						</span>
 						<!-- RETWEET ICON END -->	
 						<!-- LIKA ICON START -->	
-						<span @click="increase('like')">
-							<Like :isActive="item.like.isActive">
-								<span class="w-auto h-auto overflow-hidden pl-0.5">
-									<p :class="counterAnimationActiveClass" v-if="item.like.counter">{{formatingCounterNumber(item.like.counter)}}</p>
-								</span>
-							</Like>
+						<span @click="increase('like')" class="inline-flex items-center group hoverDuration">
+							<Like :isActive="item.like.isActive"/>
+							<span class="w-auto h-auto overflow-hidden pl-0.5 group-hover:text-[#f9189e]" v-if="item.like.counter">
+							    {{formatingCounterNumber(item.like.counter)}}
+						    </span>
 						</span>
 						<!-- LIKA ICON END -->	
 						<!-- SHARE ICON START -->	
@@ -99,7 +94,7 @@
     	},
     	'like': {
     		'isActive': false,
-    		'counter':  100,
+    		'counter':  0,
     	},
     	'share': false,
     })
