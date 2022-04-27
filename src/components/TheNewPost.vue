@@ -137,17 +137,17 @@
     
     const imgUpdate = (e) => {
 		let image = e.target.files || e.dataTransfer.files
-	    let updataType = [];
+	    let updateType = [];
 	    for(let index = 0; index < image.length; index++){
 	   		let src = image[index].name.split('.');
-	   		updataType.push(src[src.length -1]);
+	   		updateType.push(src[src.length -1]);
 	    }
-	    let indexOf = updataType.indexOf('gif')
-	    if(updataType.length == 1 && indexOf == 0){
+	    let indexOf = updateType.indexOf('gif')
+	    if(updateType.length == 1 && indexOf == 0){
 	    	images.value.push(URL.createObjectURL(image[0]))
 	    	selected.gif = true
 	    	draggableAreaActive.value = false
-	    }else if(updataType.length > 4 || indexOf > 0){
+	    }else if(updateType.length > 4 || indexOf > 0){
 	    	return imageError()
 	    }else {
 	    	Array.from({length: image.length}, (_, index) =>  images.value.push(URL.createObjectURL(image[index])))

@@ -83,17 +83,17 @@
 
     const pollQuestData = computed(() => {
     	if(!pollData.pollData) return;
-    	let filterEmty = pollData.pollData.quest.filter( quest => quest != '');
-    	let questLength = filterEmty.length < 0 ? 2: filterEmty.length
+    	let emptyIndex = pollData.pollData.quest.filter( item => item != '');
+    	let questLength = emptyIndex.length < 2 ? 2: emptyIndex.length
     	pollData.pollData.pollQuestCounter = questLength;
-    	Array.from({length: pollData.pollData.pollQuestCounter}, (_, i) => filterEmty.push(''));
-    	!filterEmty[0] ? inputFocus(0): null;
-    	return filterEmty;
+    	Array.from({length: pollData.pollData.pollQuestCounter}, (_, i) => emptyIndex.push(''));
+    	!emptyIndex[0] ? inputFocus.value(0): null;
+    	return emptyIndex;
     })
 
     // Set poll data
     const setQuestiobData = () => {
-    	if(!pollData.pollData) return inputFocus(0);
+    	if(!pollData.pollData) return inputFocus.value(0);
     	pollQuestData.value.forEach((item, index) => pollQuestions.quest[index] = item || '')
     	pollData.pollData.pollLength.forEach((item, index) => pollQuestions.pollLength[index] = item || 0);
     	pollQuestions.pollQuestCounter = pollData.pollData.pollQuestCounter;
@@ -139,12 +139,12 @@
     })
     
     // Quest input auto focus
-    const inputFocus = (index) => {
+    const inputFocus = computed(() => (index) => {
     	nextTick(() => {
     		let input = document.querySelectorAll('.input') 
             input[index].focus()   
         })
-    }
+    });
     
     // Poll date select input watcher
     watch(() => [...pollQuestions.pollLength], (oldPollLength, newPollLength ) => {
@@ -159,8 +159,6 @@
     })
     
     // Quest input counter watcher
-    watch(()=> pollQuestions.pollQuestCounter, (oldValue, newValue) => {
-    	!pollQuestions.quest[newValue] ? inputFocus(newValue): null
-    })
+   watch(()=> pollQuestions.pollQuestCounter, (oldValue, newValue) => !pollQuestions.quest[newValue] ? inputFocus.value(newValue): null)
 
 </script>
