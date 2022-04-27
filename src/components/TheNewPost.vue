@@ -37,33 +37,30 @@
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    		<label for="image">
+	    		<label for="img">
 	    			<span  class="group tooltipContainer">
-	    			    <Madia/>
-	    			    <input type="file" class="hidden" id="image" @change="imagePrevew"  multiple="multiple" accept="image/png, image/gif, image/jpeg">
-	    			    <span class="tooltip">Image</span>
+	    			    <Madia :isActive="images.length == 4 || selected.gif"/>
+	    			    <input type="file" id="img" class="hidden" @change="imgUpdate" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']" :disabled="images.length == 4 || selected.gif">
+	    			    <span class="tooltip" v-if="!(images.length == 4) || selected.gif">Image</span>
 	    		   </span>
 	    		</label>
 	    		<span  class="group tooltipContainer">
-	    			<Gift/>
-	    			<span class="tooltip">Gift</span>
+	    			<Gift :isActive="selected.image || selected.gif"/>
+	    			<span class="tooltip" v-if="selected.gif">Gift</span>
 	    		</span>
 	    		<span class="group tooltipContainer">
 	    			<Emoji/>
 	    			<span class="tooltip">Emoji</span>
 	    		</span>
 			   <span  class="group tooltipContainer">
-			   	    <Poll @click="showPoll = true"/>
-			   	    <span class="tooltip">Poll</span>
+			   	    <Poll @click="showPoll = true" :isActive="selected.gif || selected.image" :disabled="selected.gif || selected.image"/>
+			   	    <span class="tooltip" v-if="selected.gif">Poll</span>
 			   </span>
 	    		<span class="group tooltipContainer ">
 	    			<Schedule @click="scrollHidden(), showTheScheduleForm = true"/>
 	    			<span class="tooltip">Schedule</span>
 	    		</span>
-	    		<span class="group tooltipContainer">
-	    			<Mark/>
-	    			<span class="tooltip">Schedule</span>
-	    		</span>
+	    		<Mark/>
 	    	</div>
 	    	<!-- ICONS AREA END -->
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
@@ -93,10 +90,15 @@
       	<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />
     </PopUp>
     <!-- POPUP COMPONENT END --> 
+   <!-- IMAGE UPDATE ERROR START --> 
+    <div class="flex justify-center items-center text-[14px] text-white w-[323px] h-[40px] bg-red-700 fixed inset-x-[35%]  bottom-[20px] z-10" v-if="selected.imageError">
+        Please choose either 1 GIF or up to 4 photos.
+    </div>
+     <!-- IMAGE UPDATE ERROR END --> 
 </template>
 
 <script setup>
-	import { ref, computed, inject, provide, reactive } from 'vue';
+	import { ref, computed, inject, provide, reactive, watch } from 'vue';
 	// Component
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
@@ -123,18 +125,39 @@
      
     let post = ref(''); // Take post text
 
+    const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
-	const images = ref([]); // Take image.
+	let selected = reactive({
+		gif: false,
+		image: false,
+		imageError: false,
+	})
 
-    const imagePrevew = (e) => {
+	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000), draggableAreaActive.value = false];
+    
+    const imgUpdate = (e) => {
 		let image = e.target.files || e.dataTransfer.files
-		for(let index = 0; index < image.length; index++){
-			images.value.push(URL.createObjectURL(image[index]))
-		}
-		draggableAreaActive.value = false
+	    let updataType = [];
+	    for(let index = 0; index < image.length; index++){
+	   		let src = image[index].name.split('.');
+	   		updataType.push(src[src.length -1]);
+	    }
+	    let indexOf = updataType.indexOf('gif')
+	    if(updataType.length == 1 && indexOf == 0){
+	    	images.value.push(URL.createObjectURL(image[0]))
+	    	selected.gif = true
+	    	draggableAreaActive.value = false
+	    }else if(updataType.length > 4 || indexOf > 0){
+	    	return imageError()
+	    }else {
+	    	Array.from({length: image.length}, (_, index) =>  images.value.push(URL.createObjectURL(image[index])))
+	    	selected.image = true
+		    draggableAreaActive.value = false
+	    }
+	     e.target.value = ''
 	}
 
-	provide('imagePrevew', imagePrevew); // Going to image drag area component
+	provide('imagePrevew', imgUpdate); // Going to image drag area component
 	provide('images', images); // Going to image drag area component
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
 
@@ -152,7 +175,7 @@
 	};
     // Set poll ending date
 	const setPollDate = computed(() => {
-		if(!pollFormData) return;
+		if(!pollFormData.value) return;
 		let date = new Date();
 		let [day, hours, minute] =  [...pollFormData.value.pollLength].map(Number)
 		date.setDate(date.getDate() + day); 
@@ -160,4 +183,6 @@
 		date.setMinutes(date.getMinutes() + minute);
         return date
 	})
+
+	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => selected[v] = false): '')
 </script>
