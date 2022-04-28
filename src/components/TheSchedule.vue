@@ -43,7 +43,7 @@
 	            <!-- SELECT DAY START -->
 	            <SelectBox class="w-[7.875rem]" name="Day">
 	            	<select class="sectionStyle" v-model="scheduling.date[2]">
-			            <option v-for="(day, index) in getMonthDay" :key="index" :value="index" :selected="index == scheduling.date[2]">{{formatNumber(day -1)}}</option>
+			            <option v-for="(day, index) in getMonthDay" :key="index" :value="day" :selected="day == scheduling.date[2]">{{day}}</option>
 		            </select>
 	            </SelectBox>
 	            <!-- SELECT DAY END -->

@@ -1,7 +1,7 @@
 <template>
 	<article class="w-full min-h-[6.375rem] h-auto py-1 pl-3.75 inline-flex flex-row justify-betweenr">
 	<div class="w-[3.563rem]">
-		<div class="w-[44px] h-[44px] bg-black rounded-full hi"></div>
+		<div class="w-10.75 h-10.75 bg-black rounded-full"></div>
 	</div>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
@@ -11,7 +11,7 @@
 				<!-- CALENDER ICON COMPONENT START  -->
 				<Calendar/> 
 				<!-- CALENDER ICON COMPONENT END  -->
-				<span class="text-[12px] text-[#536471]"> {{date.info}}</span>
+				<span class="text-[12px] text-[#536471]">{{date.info}}</span>
 			</div>
 			<!-- POST Schedule INFO END -->
 			<!-- IMAGE DRAG AREA START -->
@@ -37,27 +37,27 @@
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    		<label for="img">
+	    		<label for="img" :class="{'pointer-events-none': images.length == 4 || selected.gif || showPoll}">
 	    			<span  class="group tooltipContainer">
-	    			    <Madia :isActive="images.length == 4 || selected.gif"/>
-	    			    <input type="file" id="img" class="hidden" @change="imgUpdate" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']" :disabled="images.length == 4 || selected.gif">
-	    			    <span class="tooltip" v-if="!(images.length == 4) || selected.gif">Image</span>
+	    			    <Madia :isActive="images.length == 4 || selected.gif || showPoll"/>
+	    			    <input type="file" id="img" class="hidden" @change="imgUpdate" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']" >
+	    			    <span class="tooltip">Image</span>
 	    		   </span>
 	    		</label>
-	    		<span  class="group tooltipContainer">
-	    			<Gift :isActive="selected.image || selected.gif"/>
-	    			<span class="tooltip" v-if="selected.gif">Gift</span>
+	    		<span  class="group tooltipContainer" :class="{'pointer-events-none': selected.image || selected.gif || showPoll}">
+	    			<Gift :isActive="selected.image || selected.gif || showPoll"/>
+	    			<span class="tooltip" >Gift</span>
 	    		</span>
+	    	    <span  class="group tooltipContainer"  :class="{'pointer-events-none': selected.gif || selected.image}">
+			   	    <Poll @click="showPoll = true" :isActive="selected.gif || selected.image"/>
+			   	    <span class="tooltip">Poll</span>
+			   </span>
 	    		<span class="group tooltipContainer">
 	    			<Emoji/>
 	    			<span class="tooltip">Emoji</span>
 	    		</span>
-			   <span  class="group tooltipContainer">
-			   	    <Poll @click="showPoll = true" :isActive="selected.gif || selected.image" :disabled="selected.gif || selected.image"/>
-			   	    <span class="tooltip" v-if="selected.gif">Poll</span>
-			   </span>
-	    		<span class="group tooltipContainer ">
-	    			<Schedule @click="scrollHidden(), showTheScheduleForm = true"/>
+	    		<span class="group tooltipContainer" :class="{'pointer-events-none': showPoll}">
+	    			<Schedule :isActive="showPoll" @click="scrollHidden(), showTheScheduleForm = true"/>
 	    			<span class="tooltip">Schedule</span>
 	    		</span>
 	    		<Mark/>
@@ -91,7 +91,7 @@
     </PopUp>
     <!-- POPUP COMPONENT END --> 
    <!-- IMAGE UPDATE ERROR START --> 
-    <div class="flex justify-center items-center text-[14px] text-white w-[323px] h-[40px] bg-red-700 fixed inset-x-[35%]  bottom-[20px] z-10" v-if="selected.imageError">
+    <div class="flex justify-center items-center text-[14px] text-white w-[323px] h-[40px] bg-[#1da1f2] rounded fixed inset-x-[35%]  bottom-[20px] z-10" v-if="selected.imageError">
         Please choose either 1 GIF or up to 4 photos.
     </div>
      <!-- IMAGE UPDATE ERROR END --> 
