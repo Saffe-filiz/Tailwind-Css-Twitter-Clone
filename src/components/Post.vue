@@ -37,7 +37,7 @@
 			     <ThePollChoceSection/>
 				</div>
 				 <!-- LIKA, COMMENT, SHARE, RETWEET ICONS START -->	
-				<div class="max-w-[425px]  flex items-end mt-[11px]">
+				<div class="max-w-[425px]  mb-1 flex items-end mt-[11px]">
 					<div class="w-full inline-flex justify-between ml-[-8px]">
 						<!-- COMMENT ICON END -->
 						<span class="inline-flex items-center group hoverDuration">
@@ -45,10 +45,10 @@
 							<span class="w-auto h-auto overflow-hidden pl-0.5 group-hover:text-[#1d9bf0]">3</span>
 						</span>
 						<!-- COMMENT ICON END -->
-						<!-- RETWEET ICON START -->
-						<span @click="increase('retweet')" class="inline-flex items-center group hoverDuration">
+						<!-- RETWEET ICON START --> 
+					    <span class="inline-flex items-center group hoverDuration" @click="increase('retweet')">
 							<ReTweet :isActive="item.retweet.isActive"/>
-							<span class="w-auto h-auto overflow-hidden pl-0.5 group-hover:text-[#00ba7c]" v-if="item.retweet.counter">
+							<span class="h-auto overflow-hidden pl-0.5 group-hover:text-[#00ba7c]" v-if="item.retweet.counter">
 							    {{formatingCounterNumber(item.retweet.counter)}}
 						    </span>
 						</span>
@@ -90,11 +90,11 @@
     	},
     	'retweet': {
     		'isActive': false,
-    		'counter':  0,
+    		'counter':  99,
     	},
     	'like': {
     		'isActive': false,
-    		'counter':  0,
+    		'counter':  9,
     	},
     	'share': false,
     })

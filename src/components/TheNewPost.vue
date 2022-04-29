@@ -26,40 +26,20 @@
 		    	<ThePoll v-if="showPoll" @hiddePoll="(pollObject) => poll(pollObject)"  :pollData="pollFormData"/>
 		    </div>
 		    <!-- POLL FORM EMD --> 
-		    <div class="w-[516px] h-[35px] border-b border-min-border-color pl-2" v-if="whoCanAnswer">
-		        <span class="w-auto h-auto inline-flex items-center flex-row">
-		            <World class="w-[15px] h-[15px] mr-1"/>
-		            <p class="text-[#1d9bf0]">Everyone can replay</p>
-		        </span>
-            </div>
+		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image"/>
 		 </div>
 		 <!-- TEXTAREA END -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    		<label for="img" :class="{'pointer-events-none': images.length == 4 || selected.gif || showPoll}">
-	    			<span  class="group tooltipContainer">
-	    			    <Madia :isActive="images.length == 4 || selected.gif || showPoll"/>
-	    			    <input type="file" id="img" class="hidden" @change="imgUpdate" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']" >
-	    			    <span class="tooltip">Image</span>
-	    		   </span>
+	    		<label for="img">
+	    	        <Madia :isActive="images.length == 4 || selected.gif || showPoll"/>
+	    			<input  type="file" id="img" class="hidden" @change="imgUpdate" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']" >
 	    		</label>
-	    		<span  class="group tooltipContainer" :class="{'pointer-events-none': selected.image || selected.gif || showPoll}">
-	    			<Gift :isActive="selected.image || selected.gif || showPoll"/>
-	    			<span class="tooltip" >Gift</span>
-	    		</span>
-	    	    <span  class="group tooltipContainer"  :class="{'pointer-events-none': selected.gif || selected.image}">
-			   	    <Poll @click="showPoll = true" :isActive="selected.gif || selected.image"/>
-			   	    <span class="tooltip">Poll</span>
-			   </span>
-	    		<span class="group tooltipContainer">
-	    			<Emoji/>
-	    			<span class="tooltip">Emoji</span>
-	    		</span>
-	    		<span class="group tooltipContainer" :class="{'pointer-events-none': showPoll}">
-	    			<Schedule :isActive="showPoll" @click="scrollHidden(), showTheScheduleForm = true"/>
-	    			<span class="tooltip">Schedule</span>
-	    		</span>
+	    		<Gift :isActive="selected.image || selected.gif || showPoll"/>	    	    
+			   	<Poll @click="showPoll = true" :isActive="selected.gif || selected.image"  />
+	    		<Emoji/>
+	    		<Schedule :isActive="showPoll" @click="scrollHidden(), showTheScheduleForm = true"/>
 	    		<Mark/>
 	    	</div>
 	    	<!-- ICONS AREA END -->
@@ -106,11 +86,11 @@
 	import TheSchedule from './TheSchedule.vue';
 	import TextArea from './TextArea.vue';
 	import TheImageDragArea from './TheImageDragArea.vue';
+	import TheWhoCanReply from './TheWhoCanReply.vue';
     // Icons 	
 	import Madia from './icons/NewPostIcons/Madia.vue';
 	import Gift from './icons/NewPostIcons/Gift.vue';
 	import Emoji from './icons/NewPostIcons/Emoji.vue';
-	import World from './icons/NewPostIcons/World.vue';
 	import Poll from './icons/NewPostIcons/Poll.vue';
 	import Schedule from './icons/NewPostIcons/Schedule.vue';
 	import Mark from './icons/NewPostIcons/Mark.vue';

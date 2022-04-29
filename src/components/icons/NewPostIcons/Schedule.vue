@@ -1,4 +1,5 @@
 <template>
+	<span class="group tooltipContainer" :class="{'pointer-events-none':  active.isActive}">
 <span class="w-8.5 h-8.5 flexCenter rounded-full hover:bg-[#1d9bf01a] cursor-pointer fill-[#1DA1F2]"
 :class="{'fill-[#8ecdf8] hover:bg-white cursor-auto  pointer-events-none' : active.isActive}">
 <svg class="w-[1.188rem] h-[1.188rem]" viewBox="0 0 24 24">
@@ -6,6 +7,8 @@
 <path d="M15.5 10.4C12.1 10.4 9.29999 13.2 9.29999 16.6C9.29999 20 12.1 22.8 15.5 22.8C18.9 22.8 21.7 20 21.7 16.6C21.7 13.2 18.9 10.4 15.5 10.4ZM15.5 21.4C12.9 21.4 10.8 19.3 10.8 16.7C10.8 14.1 12.9 12 15.5 12C18.1 12 20.2 14.1 20.2 16.7C20.2 19.2 18.1 21.4 15.5 21.4Z"/>
 <path d="M18.9 18.7C18.8 18.9 18.5 19.1 18.3 19.1C18.2 19.1 18 19.1 17.9 19L14.8 17V14C14.8 13.6 15.1 13.2 15.6 13.2C16 13.2 16.4 13.5 16.4 14V16.2L18.8 17.7C19 17.9 19.1 18.3 18.9 18.7Z"/>
 </svg>
+</span>
+<span class="tooltip">Schedule</span>
 </span>
 </template>
 <script setup>
