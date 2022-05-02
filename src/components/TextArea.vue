@@ -13,8 +13,6 @@
 <script setup>
 
 	import { ref } from 'vue';
-	import World from './icons/NewPostIcons/World.vue';
-
 	let placeholderMassage = ref('What\'s happening ?')
 	let showPlaceholderMassage = ref(true)
 </script>

@@ -76,6 +76,23 @@
 /* POLL ACTIVE CLASS END */
 
 
+/* WHO CAN REPLAY DROPDOWN START */
+
+.whoCanReplyDropDownStyle {
+	@apply absolute min-w-[18.125rem] h-auto pt-3.5 pb-1 bg-white z-20 top-8 rounded-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible shadow-[0_0_3px_1px_rgb(101,119,134,0.15)] shadow-[0_0_15px_rgb(101,119,134,0.20)]
+}
+
+.whoCanReplyListStyle {
+	@apply w-full h-[3.625rem] py-3.5 px-[0.938rem] hover:bg-[#f5f7f799] cursor-pointer inline-flex items-center
+}
+
+.whoCanReplyIconStyle {
+	@apply w-[36px] h-[36px] rounded-full bg-[#1d9bf0] flex items-center justify-center relative
+}
+
+/* WHO CAN REPLAY DROPDOWN END */
+
+
 /* IMAGE LEYOUT START */
 
 
