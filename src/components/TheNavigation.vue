@@ -54,7 +54,6 @@
 	import More from './icons/NavIcons/More.vue';
 	import ThreeDot from './icons/More.vue';
 	import PopUp from './PopUp.vue';
-	import TheSchedule from './TheSchedule.vue';
 
 	let showTheSchedule = ref(false)
 	const selected = ref(0)

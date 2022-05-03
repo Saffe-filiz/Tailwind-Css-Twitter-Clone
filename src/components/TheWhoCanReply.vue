@@ -11,42 +11,20 @@
 		        		<span class="text-sm text-[#677682]">Anyone mentioned can always reply.</span>
 		        	</div>
 		        	<ul class="w-full h-full">
-		        		<label for="stopFocus">
-		        		<li class="whoCanReplyListStyle outline-none" @click="selected = 0">
-		        			<span class="whoCanReplyIconStyle">
-		        				<World class="w-[16px] h-[16px] z-10 fill-white"/>
-		        			</span>
-		        			<span class="ml-[0.688rem]  text-[#505357] text-sm">Everyone</span>
-		        			<span class="absolute right-[15px]" v-if="selected == 0">
-		        				<Check/>
-		        			</span>
-		        		</li>
-		        		</label>
-		        		<label for="stopFocus">
-		        		<li class="whoCanReplyListStyle" @click="selected = 1">
-		        		    <span class="whoCanReplyIconStyle">
-		        				<People class="w-[16px] h-[16px] z-10 fill-white"/>
-		        			</span>
-		        			<span class="ml-[0.688rem] text-[#505357] text-sm">People you follow</span>
-		        			<span class="absolute right-[15px]" v-if="selected == 1">
-		        				<Check/>
-		        			</span>
-		        		</li>
-		        		</label>
-		        		<label for="stopFocus">
-		        		<li class="whoCanReplyListStyle" @click="selected = 2">
-		        			<span class="whoCanReplyIconStyle">
-		        				<MentionIcon class="w-[16px] h-[16px] z-10 fill-white"/>
-		        			</span>
-		        			<span class="ml-[0.688rem] text-[#505357] text-sm">Only people you mention</span>
-		        			<span class="absolute right-[15px]" v-if="selected == 2">
-		        				<Check/>
-		        			</span>
-		        		</li>
+		        		<label for="stopFocus" v-for="(_, index) in icons.length" :key="index">
+		        		     <li class="whoCanReplyListStyle outline-none" @click="selected = index">
+		        			     <span class="whoCanReplyIconStyle">
+		        				     <component :is="icons[index]"  class="w-[16px] h-[16px] z-10 fill-white"></component>
+		        			     </span>
+		        			     <span class="ml-[0.688rem]  text-[#505357] text-sm">{{whoCanReply[index]}}</span>
+		        			     <span class="absolute right-[15px]" v-if="selected == index">
+		        				     <Check/>
+		        			     </span>
+		        		     </li>
 		        		</label>
 		        	</ul>
 		        	<div class="w-full h-auto py-3.5 px-[0.938rem] rounded-2xl inline-flex md:hidden">
-		        		<button class="w-full h-[3.625rem] bg-red-100">Cancel</button>
+		        		<button class="w-full h-[3.625rem] bg-red-100"></button>
 		        	</div>
 		        </div>
 		    </div>
