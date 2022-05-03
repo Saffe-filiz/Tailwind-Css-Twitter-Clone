@@ -79,7 +79,7 @@
 /* WHO CAN REPLAY DROPDOWN START */
 
 .whoCanReplyDropDownStyle {
-	@apply absolute min-w-[18.125rem] h-auto pt-3.5 pb-1 bg-white z-20 top-8 rounded-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible shadow-[0_0_3px_1px_rgb(101,119,134,0.15)] shadow-[0_0_15px_rgb(101,119,134,0.20)]
+	@apply absolute min-w-[18.125rem] h-auto pt-3.5 pb-1 bg-white z-20 top-8 rounded-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible shadow-[0_0_3px_1px_rgb(101,119,134,0.15)] shadow-[0_0_15px_rgb(101,119,134,0.20)] hoverDuration
 }
 
 .whoCanReplyListStyle {
