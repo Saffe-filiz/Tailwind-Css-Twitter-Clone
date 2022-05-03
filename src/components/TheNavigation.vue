@@ -6,44 +6,16 @@
 		    		<li class="listContent">
 		    			<Logo/>
 		    		</li>
-		    		<li class="listContent">
-		    			<Home :active="false"/>
-		    			<p class="navigationMainTextStyle">Home</p>
-		    		</li>
-		    		<li class="listContent">
-		    		    <Explore :active="false"/>
-		    			<p class="navigationMainTextStyle">Explore</p>
-		    		</li>
-		    		<li class="listContent">
-		    		    <Notifications :active="false"/>
-		    			<p class="navigationMainTextStyle">Notifications</p>
-		    		</li>
-		    		<li class="listContent">
-		    		    <Massages :active="false"/>
-		    			<p class="navigationMainTextStyle">Massages</p>
-		    		</li>
-		    		<li class="listContent">
-		    		    <Bookmarks :active="false"/>
-		    			<p class="navigationMainTextStyle">Bookmarks</p>
-		    		</li>
-		    		<li class="listContent">
-		    		    <List :active="false"/>
-		    			<p class="navigationMainTextStyle">Lists</p>
-		    		</li>
-		    		<li class="listContent">
-		    		    <Profile :active="false"/>
-		    			<p class="navigationMainTextStyle">Profile</p>
-		    		</li>
-		    		<li class="listContent">
-		    		    <More :active="false"/>
-		    			<p class="navigationMainTextStyle">More</p>
+		    		<li class="listContent" v-for="(_, index) in icons.length" :key="index" @click="selected = index">
+		    			<component :is="icons[index]" :active="index == selected" ></component>
+		    			<p class="navigationMainTextStyle">{{iconsName[index]}}</p>
 		    		</li>
 		    	</ul>
 		    </div>
-		<div class="w-full h-[4.938rem] mt-4">
-			<button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full" @click="showTheSchedule = true">Tweet</button>
-		</div>
-    </nav>
+		    <div class="w-full h-[4.938rem] mt-4">
+			    <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full" @click="showTheSchedule = true">Tweet</button>
+		    </div>
+        </nav>
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
         <div class="w-full rounded-[4rem] inline-flex">
         	<!--USER IMAGE START -->
@@ -64,7 +36,7 @@
 	    </div>
 	</aside>
 	<PopUp v-if="showTheSchedule" @click="showTheSchedule = false">
-      	<TheSchedule v-on:click.stop/>
+      
     </PopUp>
 </template>
 
@@ -85,5 +57,8 @@
 	import TheSchedule from './TheSchedule.vue';
 
 	let showTheSchedule = ref(false)
+	const selected = ref(0)
+	const icons = [Home, Explore, Notifications, Massages, Bookmarks, List, Profile, More];
+	const iconsName = ['Home', 'Explore', 'Notifications', 'Massages', 'Bookmarks', 'List', 'Profile', 'More'];
 
 </script>
