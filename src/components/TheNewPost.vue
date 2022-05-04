@@ -26,7 +26,7 @@
 		    	<ThePoll v-if="showPoll" @hiddePoll="(pollObject) => poll(pollObject)"  :pollData="pollFormData"/>
 		    </div>
 		    <!-- POLL FORM EMD --> 
-		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image"/>
+		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image" @whoCanReply="(value) => whoCanReply = value "/>
 		 </div>
 		 <!-- TEXTAREA END -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
@@ -104,6 +104,8 @@
     const wait = ms => setTimeout(() => console.log('test') , ms)
      
     let post = ref(''); // Take post text
+
+    let whoCanReply = ref('Everyone')
 
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake

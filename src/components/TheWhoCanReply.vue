@@ -12,7 +12,7 @@
 		        	</div>
 		        	<ul class="w-full h-full">
 		        		<label for="stopFocus" v-for="(icon, index) in icons" :key="index">
-		        		     <li class="whoCanReplyListStyle outline-none" @click="selected = index">
+		        		     <li class="whoCanReplyListStyle outline-none" @click="selected = index, $emit('whoCanReply', whoCanReply[index])">
 		        			     <span class="whoCanReplyIconStyle">
 		        				     <component :is="icon"  class="w-[16px] h-[16px] z-10 fill-white"></component>
 		        			     </span>
