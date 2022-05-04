@@ -58,11 +58,15 @@
 /* DRAGABLE AREA ACTIVE CLASS START */
 
 .draggableArea {
-	@apply border-2 border-dashed border-[#1d9bf0] border-transparent rounded
+	@apply  w-full border-2  border-transparent rounded
 }
 
-.draggableAreaActive {
-	@apply border-[#1d9bf0] 
+.draggableAreaActiveValid {
+	@apply  border-[#1d9bf0] w-full border-2 border-dashed  rounded
+}
+
+.draggableAreaActiveInValid {
+	@apply border-red-600 w-full border-2 border-dashed  rounded
 }
 
 /* DRAGABLE AREA ACTIVE CLASS START */
@@ -101,7 +105,7 @@
 }
 
 .imageStyleTwo{
-	@apply w-[248px] h-[286px] rounded-[15px] backgrounImage
+	@apply w-[248px] h-[286px] backgrounImage 
 }
 
 .imageStyleThree {
@@ -113,11 +117,11 @@
 }
 
 .imageLeyoutTwo {
-	@apply h-[286px] grid grid-cols-2 gap-x-[11px] 
+	@apply w-[512px] h-[286px] grid grid-cols-2 gap-x-[6px] ml-2
 }
 
 .imageLeyoutThree {
-	@apply grid grid-cols-2 grid-rows-2 gap-x-[11px] gap-y-[11px]
+	@apply w-[512px]  grid grid-cols-2 grid-rows-2 gap-x-[11px] gap-y-[10px] ml-2
 }
 
 /* IMAGE LEYOUT END */

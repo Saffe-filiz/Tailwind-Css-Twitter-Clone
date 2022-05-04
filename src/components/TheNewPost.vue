@@ -15,11 +15,11 @@
 			</div>
 			<!-- POST Schedule INFO END -->
 			<!-- IMAGE DRAG AREA START -->
-			<TheImageDragArea @dragover="draggableAreaActive = true">
+			<imageDragArea @dragover="draggableAreaActive = true">
 				<!-- TEXT AREA START -->
 		        <TextArea @post="(text) => post = text" @click="whoCanAnswer = true"/>
 		        <!-- TEXT AREA END -->
-		    </TheImageDragArea>
+		    </imageDragArea>
 		    <!-- IMAGE DRAG AREA END -->
 		    <!-- POLL FORM START --> 
 		     <div>
@@ -32,7 +32,7 @@
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    		<label for="img">
+	    		<label for="img" :class="{'pointer-events-none': images.length == 4 || selected.gif || showPoll}">
 	    	        <Madia :isActive="images.length == 4 || selected.gif || showPoll"/>
 	    			<input  type="file" id="img" class="hidden" @change="imgUpdate" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']" >
 	    		</label>
@@ -85,7 +85,7 @@
 	import TheCircle from './TheCircle.vue';
 	import TheSchedule from './TheSchedule.vue';
 	import TextArea from './TextArea.vue';
-	import TheImageDragArea from './TheImageDragArea.vue';
+	import imageDragArea from './imageDragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';
     // Icons 	
 	import Madia from './icons/NewPostIcons/Madia.vue';
@@ -113,9 +113,11 @@
 		imageError: false,
 	})
 
-	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000), draggableAreaActive.value = false];
+	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
     
     const imgUpdate = (e) => {
+    	draggableAreaActive.value = false
+    	if(images.value.length == 4) return imageError();
 		let image = e.target.files || e.dataTransfer.files
 	    let updateType = [];
 	    for(let index = 0; index < image.length; index++){
@@ -126,13 +128,11 @@
 	    if(updateType.length == 1 && indexOf == 0){
 	    	images.value.push(URL.createObjectURL(image[0]))
 	    	selected.gif = true
-	    	draggableAreaActive.value = false
 	    }else if(updateType.length > 4 || indexOf > 0){
 	    	return imageError()
 	    }else {
 	    	Array.from({length: image.length}, (_, index) =>  images.value.push(URL.createObjectURL(image[index])))
 	    	selected.image = true
-		    draggableAreaActive.value = false
 	    }
 	     e.target.value = ''
 	}

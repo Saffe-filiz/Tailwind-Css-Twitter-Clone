@@ -1,6 +1,6 @@
 <template>
 	<!-- DRAGABEL AREA START -->
-	<article class="w-full draggableArea" :class="{draggableAreaActive}" @dragleave="draggableAreaActive = false" @drop.prevent="imagePrevew" @dragover.prevent>
+	<article  :class="dragAreaBorderColor" @dragleave="draggableAreaActive = false" @drop.prevent="imagePrevew" @dragover.prevent>
 		<!-- DRAGABEL AREA END -->
 		<!-- TEXT AREA SLOT -->
 	    <slot/>
@@ -8,9 +8,9 @@
 	    <!-- IMAGE GALLERY START -->
 	    <div :class="imageLeyout">
 	        <div v-for="(image, index) in images" :class="imageStyle" :style="{'background-image': `url(${image})`}">
-	            <img :src="image" class="w-full h-full opacity-0 ">
+	            <img :src="image" class="w-full h-full opacity-0">
 	            <!-- IMAGE REMOVE BUTTON START -->
-	            <button class="w-7 h-7 rounded-full bg-[#24282c] absolute top-1 left-1 text-white" @click="removeImage(index)">&#10005</button>
+	            <button class="w-7 h-7 rounded-full bg-[#0f1419bf] hover:bg-[#272c30bf] absolute top-1 left-1 text-white hoverDuration" @click="removeImage(index)">&#10005</button>
 	            <!-- IMAGE REMOVE BUTTON END -->
 	        </div>	
 	    </div>
@@ -26,7 +26,7 @@
 	const draggableAreaActive = inject('draggableAreaActive') // Draggable area active
     const images = inject('images'); // Images
     const imagePrevew = inject('imagePrevew'); // Image prevew function 
-   // Image style
+    // Image style
     const imageStyle = computed(() =>  {
    	    let numberOfPhotos = images.value.length;
    	    switch(numberOfPhotos){
@@ -54,4 +54,12 @@
    		    return 'empty:hidden w-auto'
    	    }
     });
+
+    const dragAreaBorderColor = computed(() => {
+    	if(draggableAreaActive.value){
+    		return  images.value.length < 4 ? 'draggableAreaActiveValid': 'draggableAreaActiveInValid'
+        }else {
+        	return 'draggableArea'
+        }
+    })
 </script>
