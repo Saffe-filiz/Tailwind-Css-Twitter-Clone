@@ -17,7 +17,7 @@
 			<!-- IMAGE DRAG AREA START -->
 			<imageDragArea @dragover="draggableAreaActive = true">
 				<!-- TEXT AREA START -->
-		        <TextArea @post="(text) => post = text" @click="whoCanAnswer = true"/>
+		        <TextArea @post="(text) => post.Massage = text" @click="whoCanAnswer = true"/>
 		        <!-- TEXT AREA END -->
 		    </imageDragArea>
 		    <!-- IMAGE DRAG AREA END -->
@@ -26,7 +26,7 @@
 		    	<ThePoll v-if="showPoll" @hiddePoll="(pollObject) => poll(pollObject)"  :pollData="pollFormData"/>
 		    </div>
 		    <!-- POLL FORM EMD --> 
-		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image" @whoCanReply="(value) => whoCanReply = value "/>
+		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image" @whoCanReply="(value) => post.WhoCanReply = value "/>
 		 </div>
 		 <!-- TEXTAREA END -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
@@ -44,9 +44,9 @@
 	    	</div>
 	    	<!-- ICONS AREA END -->
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
-	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post">
+	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.Massage">
 	    			<!-- POST LATTER PROGRESS CIRCLE START -->
-	    		    <TheCircle :post="post.length"/>
+	    		    <TheCircle :post="post.Massage.length"/>
 	    		    <!-- POST LATTER PROGRESS CIRCLE END -->
 	    		    <div class="w-px h-[29px] ml-[9px] mr-2.75 bg-[#c0d0d8]"></div>
 	    		    <div class="w-[23px] flexCenter ">
@@ -102,10 +102,6 @@
 	let date = ref({})
 
     const wait = ms => setTimeout(() => console.log('test') , ms)
-     
-    let post = ref(''); // Take post text
-
-    let whoCanReply = ref('Everyone')
 
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
@@ -167,4 +163,17 @@
 	})
 
 	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => selected[v] = false): '')
+
+
+	const post = reactive({
+    	User: null,
+    	Username: null,
+    	Massage: '',
+    	WhoCanReply: 'Everyone',
+    	Date: null,
+    	Schedule: null,
+    	Poll: null,
+    	Image: images.value,
+
+    }); // Take post text
 </script>
