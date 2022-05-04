@@ -11,7 +11,7 @@
 		        		<span class="text-sm text-[#677682]">Anyone mentioned can always reply.</span>
 		        	</div>
 		        	<ul class="w-full h-full">
-		        		<label for="stopFocus" v-for="(_, index) in icons.length" :key="index">
+		        		<label for="stopFocus" v-for="(icons, index) in icons" :key="index">
 		        		     <li class="whoCanReplyListStyle outline-none" @click="selected = index">
 		        			     <span class="whoCanReplyIconStyle">
 		        				     <component :is="icons[index]"  class="w-[16px] h-[16px] z-10 fill-white"></component>

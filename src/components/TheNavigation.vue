@@ -6,8 +6,8 @@
 		    		<li class="listContent">
 		    			<Logo/>
 		    		</li>
-		    		<li class="listContent" v-for="(_, index) in icons.length" :key="index" @click="selected = index">
-		    			<component :is="icons[index]" :active="index == selected" ></component>
+		    		<li class="listContent" v-for="(icon, index) in icons" :key="index" @click="selected = index">
+		    			<component :is="icon" :active="index == selected" ></component>
 		    			<p class="navigationMainTextStyle">{{iconsName[index]}}</p>
 		    		</li>
 		    	</ul>
@@ -43,15 +43,15 @@
 <script setup>
 	import { ref, computed } from 'vue';
 
- 	import Logo from './icons/NavIcons/Logo.vue';
-	import Home from './icons/NavIcons/Home.vue';
-	import Explore from './icons/NavIcons/Explore.vue';
-	import Notifications from './icons/NavIcons/Notifications.vue';
-	import Massages from './icons/NavIcons/Massages.vue';
-	import Bookmarks from './icons/NavIcons/Bookmarks.vue';
-	import List from './icons/NavIcons/List.vue';
-	import Profile from './icons/NavIcons/Profile.vue';
-	import More from './icons/NavIcons/More.vue';
+ 	import Logo from './icons/NavigationIcons/Logo.vue';
+	import Home from './icons/NavigationIcons/Home.vue';
+	import Explore from './icons/NavigationIcons/Explore.vue';
+	import Notifications from './icons/NavigationIcons/Notifications.vue';
+	import Massages from './icons/NavigationIcons/Massages.vue';
+	import Bookmarks from './icons/NavigationIcons/Bookmarks.vue';
+	import List from './icons/NavigationIcons/List.vue';
+	import Profile from './icons/NavigationIcons/Profile.vue';
+	import More from './icons/NavigationIcons/More.vue';
 	import ThreeDot from './icons/More.vue';
 	import PopUp from './PopUp.vue';
 
