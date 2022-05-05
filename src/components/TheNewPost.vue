@@ -23,23 +23,20 @@
 		    <!-- IMAGE DRAG AREA END -->
 		    <!-- POLL FORM START --> 
 		     <div>
-		    	<ThePoll v-if="showPoll" @hiddePoll="(pollObject) => poll(pollObject)"  :pollData="pollFormData"/>
+		    	<ThePoll v-if="showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
 		    </div>
 		    <!-- POLL FORM EMD --> 
-		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image" @whoCanReply="(value) => post.WhoCanReply = value "/>
+		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image" @whoCanReply="(value) => post.whoCanReply = value "/>
 		 </div>
 		 <!-- TEXTAREA END -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    		<label for="img" :class="{'pointer-events-none': images.length == 4 || selected.gif || showPoll}">
-	    	        <Madia :isActive="images.length == 4 || selected.gif || showPoll"/>
-	    			<input  type="file" id="img" class="hidden" @change="imgUpdate" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']" >
-	    		</label>
+	    	   <Madia :isActive="images.length == 4 || selected.gif || showPoll" :selectedImage="selected.image"/>
 	    		<Gift :isActive="selected.image || selected.gif || showPoll"/>	    	    
 			   	<Poll @click="showPoll = true" :isActive="selected.gif || selected.image"  />
 	    		<Emoji/>
-	    		<Schedule :isActive="showPoll" @click="scrollHidden(), showTheScheduleForm = true"/>
+	    		<Schedule :isActive="showPoll || post.whoCanReply != 'Everyone'" @click="scrollHidden(), showTheScheduleForm = true"/>
 	    		<Mark/>
 	    	</div>
 	    	<!-- ICONS AREA END -->
@@ -113,16 +110,20 @@
 
 	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
     
-    const imgUpdate = (e) => {
+    const uploadImage = (e) => {
     	draggableAreaActive.value = false
+
     	if(images.value.length == 4) return imageError();
-		let image = e.target.files || e.dataTransfer.files
+
+		let image = e.target.files || e.dataTransfer.files;
 	    let updateType = [];
+
 	    for(let index = 0; index < image.length; index++){
 	   		let src = image[index].name.split('.');
 	   		updateType.push(src[src.length -1]);
 	    }
 	    let indexOf = updateType.indexOf('gif')
+
 	    if(updateType.length == 1 && indexOf == 0){
 	    	images.value.push(URL.createObjectURL(image[0]))
 	    	selected.gif = true
@@ -135,9 +136,10 @@
 	     e.target.value = ''
 	}
 
-	provide('imagePrevew', imgUpdate); // Going to image drag area component
+	provide('uploadImage', uploadImage); // Going to image drag area component
 	provide('images', images); // Going to image drag area component
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
+	provide('selectedImage', selected.image)
 
 	const scrollHidden = inject('scrollHidden'); // Coming from app vue
 	const scrollVisibil = inject('scrollVisibil'); // Coming from app vue
@@ -147,7 +149,7 @@
 	let showPoll = ref(false); // Show poll form
 
     // Emit from poll component
-	const poll = (obj) => {
+	const pollData = (obj) => {
 		showPoll.value = obj.showPoll;
 		pollFormData.value = obj.data;
 	};
@@ -169,7 +171,7 @@
     	User: null,
     	Username: null,
     	Massage: '',
-    	WhoCanReply: 'Everyone',
+    	whoCanReply: 'Everyone',
     	Date: null,
     	Schedule: null,
     	Poll: null,

@@ -1,6 +1,6 @@
 <template>
 	<!-- DRAGABEL AREA START -->
-	<article  :class="dragAreaBorderColor" @dragleave="draggableAreaActive = false" @drop.prevent="imagePrevew" @dragover.prevent>
+	<article  :class="dragAreaBorderColor" @dragleave="draggableAreaActive = false" @drop.prevent="uploadImage" @dragover.prevent>
 		<!-- DRAGABEL AREA END -->
 		<!-- TEXT AREA SLOT -->
 	    <slot/>
@@ -25,7 +25,7 @@
 	const removeImage = ( index ) => images.value.splice(index, 1) // Remove image
 	const draggableAreaActive = inject('draggableAreaActive') // Draggable area active
     const images = inject('images'); // Images
-    const imagePrevew = inject('imagePrevew'); // Image prevew function 
+    const uploadImage = inject('uploadImage'); // Image prevew function 
     // Image style
     const imageStyle = computed(() =>  {
    	    let numberOfPhotos = images.value.length;

@@ -1,5 +1,6 @@
 <template>
-	<span  class="group tooltipContainer" :class="{'pointer-events-none': active.isActive}">
+    <label :class="{'pointer-events-none': isActive}">
+	<span  class="group tooltipContainer">
         <span class="w-8.5 h-8.5 flexCenter rounded-full hover:bg-[#1d9bf01a] cursor-pointer fill-[#1DA1F2]" 
         :class="{'fill-[#8ecdf8] hover:bg-white cursor-auto pointer-events-none' : active.isActive}">		
             <svg class="w-[1.188rem] h-[1.188rem]" viewBox="0 0 24 24">
@@ -8,8 +9,17 @@
         </span>
         <span class="tooltip">Image</span>
     </span>
+     <input  type="file" id="img" class="hidden" @change="uploadImage" multiple="multiple" :accept="[active.selectedImage ? 'image/png,image/jpeg':'']">
+    </label>
 </template>
 
 <script setup>
-	const active = defineProps({isActive: Boolean})
+    import { inject } from 'vue';
+
+	const active = defineProps({
+        isActive: Boolean,
+        selectedImage: Boolean
+    })
+    const images = inject('images'); // Images
+    const uploadImage = inject('uploadImage'); // Image prevew function 
 </script>
