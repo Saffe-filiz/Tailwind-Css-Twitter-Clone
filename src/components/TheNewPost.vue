@@ -17,7 +17,7 @@
 			<!-- IMAGE DRAG AREA START -->
 			<imageDragArea @dragover="draggableAreaActive = true">
 				<!-- TEXT AREA START -->
-		        <TextArea @post="(text) => post.Massage = text" @click="whoCanAnswer = true"/>
+		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
 		        <!-- TEXT AREA END -->
 		    </imageDragArea>
 		    <!-- IMAGE DRAG AREA END -->
@@ -32,7 +32,10 @@
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    	   <Madia :isActive="images.length == 4 || selected.gif || showPoll" :selectedImage="selected.image"/>
+	    		<label for="image" :class="{'pointer-events-none': images.length == 4 || selected.gif || showPoll}">
+	    	        <Madia :isActive="images.length == 4 ||  selected.gif || showPoll"/>
+	    	        <input  type="file" id="image" class="hidden" @change="uploadImage" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']">
+	    	    </label>
 	    		<Gift :isActive="selected.image || selected.gif || showPoll"/>	    	    
 			   	<Poll @click="showPoll = true" :isActive="selected.gif || selected.image"  />
 	    		<Emoji/>
@@ -41,9 +44,9 @@
 	    	</div>
 	    	<!-- ICONS AREA END -->
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
-	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.Massage">
+	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
 	    			<!-- POST LATTER PROGRESS CIRCLE START -->
-	    		    <TheCircle :post="post.Massage.length"/>
+	    		    <TheCircle :post="post.massage.length"/>
 	    		    <!-- POST LATTER PROGRESS CIRCLE END -->
 	    		    <div class="w-px h-[29px] ml-[9px] mr-2.75 bg-[#c0d0d8]"></div>
 	    		    <div class="w-[23px] flexCenter ">
@@ -107,39 +110,36 @@
 		image: false,
 		imageError: false,
 	})
-
+    // Image upload error massage
 	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
     
-    const uploadImage = (e) => {
+    const uploadImage =  (e) => {
     	draggableAreaActive.value = false
+    	let dragLength = e.dataTransfer?.files?.length ?? 0;
+    	let inputLength = document.getElementById('image').files.length;
 
-    	if(images.value.length == 4) return imageError();
+    	if(selected.gif || inputLength >= 4 || dragLength > 4 || images.value.length >= 4) return imageError();
 
-		let image = e.target.files || e.dataTransfer.files;
-	    let updateType = [];
+    	let image = e.target.files || e.dataTransfer.files;
+    	let madiaType =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
 
-	    for(let index = 0; index < image.length; index++){
-	   		let src = image[index].name.split('.');
-	   		updateType.push(src[src.length -1]);
-	    }
-	    let indexOf = updateType.indexOf('gif')
-
-	    if(updateType.length == 1 && indexOf == 0){
-	    	images.value.push(URL.createObjectURL(image[0]))
-	    	selected.gif = true
-	    }else if(updateType.length > 4 || indexOf > 0){
-	    	return imageError()
-	    }else {
-	    	Array.from({length: image.length}, (_, index) =>  images.value.push(URL.createObjectURL(image[index])))
-	    	selected.image = true
-	    }
-	     e.target.value = ''
+    	if(images.value.length > 0 && madiaType || dragLength > 1 && madiaType){
+    		return imageError();
+    	}else if(images.value.length == 0 && madiaType || dragLength == 1 && madiaType){
+    		images.value.push(URL.createObjectURL(image[0]))
+    		selected.gif = true
+    	}else {
+    	    Array.from({length: image.length}, (_, index) => images.value.push(URL.createObjectURL(image[index])));
+	        selected.image = true
+    	}
+    	e.target.value = ''
 	}
+
+
 
 	provide('uploadImage', uploadImage); // Going to image drag area component
 	provide('images', images); // Going to image drag area component
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
-	provide('selectedImage', selected.image)
 
 	const scrollHidden = inject('scrollHidden'); // Coming from app vue
 	const scrollVisibil = inject('scrollVisibil'); // Coming from app vue
@@ -168,14 +168,14 @@
 
 
 	const post = reactive({
-    	User: null,
-    	Username: null,
-    	Massage: '',
+    	user: null,
+    	username: null,
+    	massage: '',
     	whoCanReply: 'Everyone',
-    	Date: null,
+    	date: null,
     	Schedule: null,
-    	Poll: null,
-    	Image: images.value,
+    	poll: null,
+    	Image: null,
 
     }); // Take post text
 </script>
