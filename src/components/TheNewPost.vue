@@ -32,10 +32,7 @@
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    		<label for="image" :class="{'pointer-events-none': images.length == 4 || selected.gif || showPoll}">
-	    	        <Madia :isActive="images.length == 4 ||  selected.gif || showPoll"/>
-	    	        <input  type="file" id="image" class="hidden" @change="uploadImage" multiple="multiple" :accept="[selected.image ? 'image/png,image/jpeg':'']">
-	    	    </label>
+	    	    <Madia :isActive="images.length == 4 ||  selected.gif || showPoll" :madiaType="selected.image"/>
 	    		<Gift :isActive="selected.image || selected.gif || showPoll"/>	    	    
 			   	<Poll @click="showPoll = true" :isActive="selected.gif || selected.image"  />
 	    		<Emoji/>
@@ -117,9 +114,7 @@
     const uploadImage =  (e) => {
     	draggableAreaActive.value = false
     	let dragLength = e.dataTransfer?.files?.length ?? 0;
-    	let inputLength = document.getElementById('image').files.length;
-    	
-    	if(selected.gif || inputLength >= 4 || dragLength > 4 || images.value.length >= 4) return imageError();
+    	if(selected.gif || dragLength > 4 || images.value.length >= 4) return imageError();
 
     	let image = e.target.files || e.dataTransfer.files;
     	let madiaType =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
