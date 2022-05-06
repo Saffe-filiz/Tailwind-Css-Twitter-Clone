@@ -6,7 +6,7 @@
 	        <TheNewPost/>
 	    </TheFeed>
 	   	<div class="w-auto h-[1280px] relative hidden lg:block">
-	  		<TheTrends class="w-auto flex flex-col gap-y-4 pr-2.5 pl-[1.875rem]" :style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
+	  		<TheTrends class="w-auto flex flex-col gap-y-[14px] pr-2.5 pl-[1.875rem]" :style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
 	  	        <TheSearch :style="{position: setPositions.searchPosition, top: setPositions.searchTopValue}"/>
 	        </TheTrends>
 	   </div>
@@ -37,7 +37,7 @@
 
 	const setSideBarPosition = () => {
 		if(window.pageYOffset >= 510){
-			return [setPositions.sideBarPosition = 'fixed', setPositions.topValue = '-495px', 
+			return [setPositions.sideBarPosition = 'fixed', setPositions.topValue = '-445px', 
 			setPositions.searchPosition = 'fixed', setPositions.searchTopValue = '0px']
 		}else {
 			return [setPositions.sideBarPosition = 'static', setPositions.topValue = '0px',

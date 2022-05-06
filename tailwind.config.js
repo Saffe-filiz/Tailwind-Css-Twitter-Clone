@@ -33,7 +33,7 @@ module.exports = {
       },
       colors: {
         'btn-bg-color': '#1DA1F2',
-        'min-border-color': '#eff3f40',
+        'min-border-color': '#eff3f4',
         'input-main-border-color': '#cfd9de'
       },
        width: {
