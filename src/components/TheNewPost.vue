@@ -7,7 +7,7 @@
 		<div class="w-full h-auto">
 			<!-- TEXTAREA START -->
 			<!-- POST Schedule INFO START -->
-			<div v-if="date.info" class="w-[516px] h-[17.5px] pl-2 inline-flex hover:underline cursor-pointer">
+			<div v-if="date.info" class="w-[512px] h-[17.5px] pl-2 inline-flex hover:underline cursor-pointer">
 				<!-- CALENDER ICON COMPONENT START  -->
 				<Calendar/> 
 				<!-- CALENDER ICON COMPONENT END  -->
@@ -15,18 +15,17 @@
 			</div>
 			<!-- POST Schedule INFO END -->
 			<!-- IMAGE DRAG AREA START -->
-			<imageDragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image]">
+			<imageDragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, showPoll]">
 				<!-- TEXT AREA START -->
 		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
 		        <!-- TEXT AREA END -->
+		         <!-- POLL FORM START --> 
+		        <ThePoll v-if="showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
+		        <!-- POLL FORM EMD --> 
 		    </imageDragArea>
 		    <!-- IMAGE DRAG AREA END -->
 		    <!-- POLL FORM START --> 
-		     <div>
-		    	<ThePoll v-if="showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
-		    </div>
-		    <!-- POLL FORM EMD --> 
-		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image" @whoCanReply="(value) => post.whoCanReply = value "/>
+		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image || showPoll" @whoCanReply="(value) => post.whoCanReply = value "/>
 		 </div>
 		 <!-- TEXTAREA END -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
@@ -69,7 +68,8 @@
     <!-- POPUP COMPONENT END --> 
    <!-- IMAGE UPDATE ERROR START --> 
     <div class="flex justify-center items-center text-[14px] text-white w-[323px] h-[40px] bg-[#1da1f2] rounded fixed inset-x-[35%]  bottom-[20px] z-10" v-if="selected.imageError">
-        Please choose either 1 GIF or up to 4 photos.
+        <span v-if="!showPoll">Please choose either 1 GIF or up to 4 photos.</span>
+        <span v-else>You can only have 1 type of attachment</span>
     </div>
      <!-- IMAGE UPDATE ERROR END --> 
 </template>
@@ -115,7 +115,7 @@
     const uploadImage =  (e) => {
     	draggableAreaActive.value = false
     	let dragLength = e.dataTransfer?.files?.length ?? 0;
-    	if(selected.gif || dragLength > 4 || images.value.length >= 4) return imageError();
+    	if(showPoll.value || selected.gif || dragLength > 4 || images.value.length >= 4) return imageError();
 
     	let image = e.target.files || e.dataTransfer.files;
     	let madiaType =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)

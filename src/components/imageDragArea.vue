@@ -8,7 +8,7 @@
 	    <!-- IMAGE GALLERY START -->
 	    <div :class="imageLeyout">
 	        <div v-for="(image, index) in images" :class="imageStyle" :style="{'background-image': `url(${image})`}">
-	            <img :src="image" class="w-full h-full opacity-0">
+	            <img :src="image" class="w-full h-full opacity-0" draggable="false">
 	            <!-- IMAGE REMOVE BUTTON START -->
 	            <button class="w-7 h-7 rounded-full bg-[#0f1419bf] hover:bg-[#272c30bf] absolute top-1 left-1 text-white hoverDuration" @click="removeImage(index)">&#10005</button>
 	            <!-- IMAGE REMOVE BUTTON END -->

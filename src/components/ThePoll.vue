@@ -1,5 +1,5 @@
 <template>
-	<article class="w-[31.563rem] pt-3 inputMainStyle rounded-2xl">
+	<article class="w-[31.563rem] pt-3 mb-1 inputMainStyle rounded-2xl">
 	<div class="w-full h-auto inline-flex flex-row">
 		<div class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" :class="{'pr-2.75': !questCounter}">
 			<span class="w-full h-[53px] inputMainStyle rounded focusInput relative" v-for="num in pollQuestions.pollQuestCounter" :key="num">

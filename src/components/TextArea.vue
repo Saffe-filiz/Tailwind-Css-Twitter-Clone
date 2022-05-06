@@ -1,7 +1,7 @@
 <template>
 	<article>
 	<div class="w-full min-h-[48px] py-2 pl-2">
-		<div class="w-[507px] relative">
+		<div class="w-full relative">
 		    <div id="textArea" class="w-full outline-none" contenteditable 
 		    @input="$emit('post', $event.target.innerText), showPlaceholderMassage = false"></div>
 		    <div class="absolute top-0 left-0 pointer-events-none" v-if="showPlaceholderMassage">{{placeholderMassage}}</div>

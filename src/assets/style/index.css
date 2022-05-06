@@ -58,15 +58,15 @@
 /* DRAGABLE AREA ACTIVE CLASS START */
 
 .draggableArea {
-	@apply  w-full border-2  border-transparent rounded
+	@apply  max-w-[512px] w-full border-2 border-transparent rounded
 }
 
 .draggableAreaActiveValid {
-	@apply  border-[#1d9bf0] w-full border-2 border-dashed  rounded
+	@apply  border-[#1d9bf0] max-w-[512px] w-full border-2 border-dashed  rounded
 }
 
 .draggableAreaActiveInValid {
-	@apply border-red-600 w-full border-2 border-dashed  rounded
+	@apply border-red-600 max-w-[512px] w-full border-2 border-dashed  rounded
 }
 
 /* DRAGABLE AREA ACTIVE CLASS START */
@@ -101,15 +101,15 @@
 
 
 .backgrounImage {
-	@apply max-w-[517px] relative bg-no-repeat bg-cover bg-center rounded-[15px]
+	@apply max-w-[508x] relative bg-no-repeat bg-cover bg-center rounded-[15px]
 }
 
 .imageStyleTwo{
-	@apply w-[248px] h-[286px] backgrounImage 
+	@apply w-[250px] h-[286px] backgrounImage
 }
 
 .imageStyleThree {
-	@apply first:row-span-2 first:h-[286px] h-[137px] backgrounImage
+	@apply first:row-span-2 first:h-[286px] w-[250px] h-[137px] backgrounImage
 }
 
 .imageStyleFour {
@@ -117,11 +117,11 @@
 }
 
 .imageLeyoutTwo {
-	@apply w-[512px] h-[286px] grid grid-cols-2 gap-x-[6px] ml-2
+	@apply w-[508x] h-[286px] grid grid-cols-2 gap-x-[10px]
 }
 
 .imageLeyoutThree {
-	@apply w-[512px]  grid grid-cols-2 grid-rows-2 gap-x-[11px] gap-y-[10px] ml-2
+	@apply w-[508x]  grid grid-cols-2 grid-rows-2 gap-x-[11px] gap-y-[10px]
 }
 
 /* IMAGE LEYOUT END */

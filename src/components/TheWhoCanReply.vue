@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-[2.188rem] border-b border-min-border-color">
+    <div class="w-full h-[2.125rem] border-b border-min-border-color">
 		<span class="w-auto px-3 h-[22px] hover:bg-[#1d9bf01a] inline-flex items-center justify-center rounded-full">
 		    <div class="w-auto h-[20px] inline-flex items-center justify-center relative group "  tabindex="1">
 		    	<component :is="icons[selected]" class="w-[15px] h-[15px] mr-1"></component>
