@@ -22,6 +22,8 @@
 <script setup>
 	import { ref, inject, computed} from 'vue';
 
+	const meadia = defineProps({permission: Array})
+
 	const removeImage = ( index ) => images.value.splice(index, 1) // Remove image
 	const draggableAreaActive = inject('draggableAreaActive') // Draggable area active
     const images = inject('images'); // Images
@@ -56,10 +58,16 @@
     });
 
     const dragAreaBorderColor = computed(() => {
+    	let isValid = meadia.permission.some( value => value)
     	if(draggableAreaActive.value){
-    		return  images.value.length < 4 ? 'draggableAreaActiveValid': 'draggableAreaActiveInValid'
-        }else {
-        	return 'draggableArea'
-        }
+    	   if(isValid == meadia.permission[1] && images.value.length <= 3){
+    	      return  'draggableAreaActiveValid'
+    	   }else{
+    	   	return 'draggableAreaActiveInValid'
+    	   }
+    	}else {
+    	   	 return 'draggableArea'
+    	}
+    	
     })
 </script>

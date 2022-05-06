@@ -15,7 +15,7 @@
 			</div>
 			<!-- POST Schedule INFO END -->
 			<!-- IMAGE DRAG AREA START -->
-			<imageDragArea @dragover="draggableAreaActive = true">
+			<imageDragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image]">
 				<!-- TEXT AREA START -->
 		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
 		        <!-- TEXT AREA END -->
@@ -110,6 +110,7 @@
 		image: false,
 		imageError: false,
 	})
+
     // Image upload error massage
 	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
     
@@ -117,20 +118,21 @@
     	draggableAreaActive.value = false
     	let dragLength = e.dataTransfer?.files?.length ?? 0;
     	let inputLength = document.getElementById('image').files.length;
-
+    	
     	if(selected.gif || inputLength >= 4 || dragLength > 4 || images.value.length >= 4) return imageError();
 
     	let image = e.target.files || e.dataTransfer.files;
     	let madiaType =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
 
     	if(images.value.length > 0 && madiaType || dragLength > 1 && madiaType){
+    		selected.image = true
     		return imageError();
     	}else if(images.value.length == 0 && madiaType || dragLength == 1 && madiaType){
-    		images.value.push(URL.createObjectURL(image[0]))
     		selected.gif = true
+    		images.value.push(URL.createObjectURL(image[0]))
     	}else {
+    		selected.image = true
     	    Array.from({length: image.length}, (_, index) => images.value.push(URL.createObjectURL(image[index])));
-	        selected.image = true
     	}
     	e.target.value = ''
 	}
