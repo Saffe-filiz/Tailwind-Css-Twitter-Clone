@@ -53,8 +53,8 @@
 	    		   </div>
 	    		</div>
 	    		<!-- SEND NEW TWEET BUTTON START --> 
-	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]">
-	    			<span v-if="date.info" @click="updateDate()">Schedule</span>
+	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]" :class="{'pointer-events-none opacity-50': !post.massage}">
+	    			<span v-if="date.info">Schedule</span>
 	    			<span v-else>Tweet</span>
 	    		</button>
 	    		<!-- SEND NEW TWEET BUTTON START --> 
