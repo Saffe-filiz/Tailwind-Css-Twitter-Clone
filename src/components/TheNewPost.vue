@@ -53,8 +53,8 @@
 	    		   </div>
 	    		</div>
 	    		<!-- SEND NEW TWEET BUTTON START --> 
-	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]" :class="{'pointer-events-none opacity-50': !post.massage}">
-	    			<span v-if="date.info">Schedule</span>
+	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]" :class="{'pointer-events-none opacity-50': !post.massage}" @click="sendTweet">
+	    			<span v-if="date.info" >Schedule</span>
 	    			<span v-else>Tweet</span>
 	    		</button>
 	    		<!-- SEND NEW TWEET BUTTON START --> 
@@ -76,6 +76,7 @@
 
 <script setup>
 	import { ref, computed, inject, provide, reactive, watch } from 'vue';
+	import { useStore } from 'vuex';
 	// Component
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
@@ -175,4 +176,7 @@
     	Image: null,
 
     }); // Take post text
+
+
+    const sendTweet = () => useStore.state.tweets.push(post)
 </script>
