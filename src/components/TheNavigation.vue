@@ -1,14 +1,15 @@
 <template>
-	<aside class="h-screen inline-flex justify-between flex-col pb-2.5 pr-6 sticky top-0">
-	    <nav class="inline-flex flex-col px-3">
+	<aside class="max-w-[15.813rem] h-screen inline-flex justify-between flex-col pb-2.5 sticky top-0">
+	    <nav class="w-full inline-flex flex-col">
 		    <div class="">
 		    	<ul class="inline-flex w-full flex-col">
-		    		<li class="listContent">
+		    		<li class="w-[2.813rem] h-[2.813rem] flex items-center justify-center rounded-full hover:bg-[#1d9bf01a] hoverDuration cursor-pointer">
 		    			<Logo/>
 		    		</li>
-		    		<li class="listContent" v-for="(icon, index) in icons" :key="index" @click="selected = index">
+		    		<li class="w-fit p-2.5 flex items-center hover:bg-[#0f14191a] rounded-full cursor-pointer hoverDuration" 
+		    		v-for="(icon, index) in icons" :key="index" @click="selected = index">
 		    			<component :is="icon" :active="index == selected" ></component>
-		    			<p class="navigationMainTextStyle">{{iconsName[index]}}</p>
+		    			<p class="text-xl text-[#0f1419] hidden xl:block pl-3.5 pr-[1.125rem] truncate">{{iconsName[index]}}</p>
 		    		</li>
 		    	</ul>
 		    </div>
@@ -23,8 +24,8 @@
             <!--USER IMAGE END -->
             <!-- NAME AND USERNAME START -->
             <div class="w-[6.25rem] h-[2.313rem] leading-5 pl-2">
-              	<p class="userCartTextStyle">Bradley Ortiz</p>
-                <p class="userCartSubTextStyle">@bradley_</p>
+              	<p class="h-5 text-sm font-bold text-[#0f1419] font-bold truncate">Bradley Ortiz</p>
+                <p class="text-[15px] font-normal text-[#0f1419] font-normal truncate">@bradley_</p>
             </div>
              <!-- NAME AND USERNAME END -->
         </div>

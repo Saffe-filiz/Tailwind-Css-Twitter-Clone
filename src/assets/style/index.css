@@ -6,18 +6,6 @@
 	@apply flex items-center justify-center
 }
 
-.listContent {
-	@apply w-fit h-[3.125rem] inline-flex gap-5 p-3.5 items-center cursor-pointer duration-200 border-none hover:rounded-full hover:border hover:bg-[#0f14191a] hover:border-[#d9d9d91a]
-}
-
-.navigationTextStyle {
-	@apply text-[1.188rem] hidden xl:block
-}
-
-.navigationMainTextStyle {
-	@apply text-[20px] text-[#0f1419] 
-}
-
 .rightSideMainStyle {
 	@apply  xl:w-[21.875rem] lg:w-[18.125rem] rounded-[0.938rem] bg-[#f7f9f9]
 }
