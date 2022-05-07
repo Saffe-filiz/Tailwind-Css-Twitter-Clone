@@ -99,8 +99,6 @@
 
 	let date = ref({})
 
-    const wait = ms => setTimeout(() => console.log('test') , ms)
-
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
 	let selected = reactive({
@@ -114,16 +112,17 @@
     
     const uploadImage =  (e) => {
     	draggableAreaActive.value = false
-    	let dragLength = e.dataTransfer?.files?.length ?? 0;
-    	if(showPoll.value || selected.gif || dragLength > 4 || images.value.length >= 4) return imageError();
+    	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
+    	let uploadMadiaCount = images.value.length;
+    	if(showPoll.value || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return imageError();
 
     	let image = e.target.files || e.dataTransfer.files;
-    	let madiaType =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
+    	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
 
-    	if(images.value.length > 0 && madiaType || dragLength > 1 && madiaType){
+    	if(uploadMadiaCount > 0 && isGif || draggedMadiaCount > 1 && isGif){
     		selected.image = true
     		return imageError();
-    	}else if(images.value.length == 0 && madiaType || dragLength == 1 && madiaType){
+    	}else if(uploadMadiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
     		selected.gif = true
     		images.value.push(URL.createObjectURL(image[0]))
     	}else {

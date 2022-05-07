@@ -15,7 +15,7 @@
 }
 
 .navigationMainTextStyle {
-	@apply text-[20px] text-[#0f1419]
+	@apply text-[20px] text-[#0f1419] 
 }
 
 .rightSideMainStyle {
