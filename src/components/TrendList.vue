@@ -1,7 +1,7 @@
 <template>
 	<article class="rightSideMainStyle">
-		<div class="rightSiteCartHeadarStyle">
-			<h3>Trends for you</h3>
+		<div class="h-[1.375rem] pl-3.5 py-[0.688rem] box-content">
+			<span class="text-lg text-[#0f1419] font-bold">Trends for you</span>
 		</div>
 		<TrendListCart/>
 		<TrendListCart/>

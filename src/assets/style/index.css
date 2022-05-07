@@ -10,14 +10,9 @@
 	@apply  xl:w-[21.875rem] lg:w-[18.125rem] rounded-[0.938rem] bg-[#f7f9f9]
 }
 
-.rightSiteCartHeadarStyle {
-	@apply w-full h-12 px-4 pt-3 text-xl
-}
-
 .hoverEfect {
 	@apply duration-200 hover:bg-[#00000008] cursor-pointer
 }
-
 
 .sectionStyle {
 	@apply w-full h-[38px] cursor-pointer p-2 bg-transparent mt-[-8px] outline-none appearance-none

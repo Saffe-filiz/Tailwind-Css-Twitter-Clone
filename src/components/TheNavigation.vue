@@ -9,7 +9,7 @@
 		    		<li class="w-fit p-2.5 flex items-center hover:bg-[#0f14191a] rounded-full cursor-pointer hoverDuration" 
 		    		v-for="(icon, index) in icons" :key="index" @click="selected = index">
 		    			<component :is="icon" :active="index == selected" ></component>
-		    			<p class="text-xl text-[#0f1419] hidden xl:block pl-3.5 pr-[1.125rem] truncate">{{iconsName[index]}}</p>
+		    			<span class="text-xl text-[#0f1419]  hidden xl:block pl-[19px] pr-[1.125rem] truncate">{{iconsName[index]}}</span>
 		    		</li>
 		    	</ul>
 		    </div>
