@@ -1,20 +1,18 @@
 <template>
-	<!-- DRAGABEL AREA START -->
 	<article  :class="dragAreaBorderColor" @dragleave="draggableAreaActive = false" @drop.prevent="uploadImage" @dragover.prevent>
-		<!-- DRAGABEL AREA END -->
 		<!-- TEXT AREA SLOT -->
 	    <slot/>
 	    <!-- TEXT AREA SLOT -->
-	    <!-- IMAGE GALLERY START -->
-	    <ImageLayout :image="images"/>
-	    <!-- IMAGE GALLERY START --> 
+	    <ImageGallery :image="images">
+	    	<button class="w-7 h-7 rounded-full bg-[#0f1419bf] hover:bg-[#272c30bf] absolute top-1 left-1 text-white hoverDuration" @click="removeImage(index)">&#10005</button>
+	    </ImageGallery>
 	</article>
 </template>
 
 
 <script setup>
 	import { inject, computed} from 'vue';
-	import ImageLayout from './ImageLayout.vue';
+	import ImageGallery from './ImageGallery.vue';
 
 	const meadia = defineProps({permission: Array})
 
@@ -22,9 +20,6 @@
 	const draggableAreaActive = inject('draggableAreaActive') // Draggable area active
     const images = inject('images'); // Images
     const uploadImage = inject('uploadImage'); // Image prevew function 
-    // Image style
-
-
 
     const dragAreaBorderColor = computed(() => {
     	let isValid = meadia.permission.some( value => value)

@@ -15,14 +15,14 @@
 			</div>
 			<!-- POST Schedule INFO END -->
 			<!-- IMAGE DRAG AREA START -->
-			<imageDragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, showPoll]">
+			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, showPoll]">
 				<!-- TEXT AREA START -->
 		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
 		        <!-- TEXT AREA END -->
 		         <!-- POLL FORM START --> 
 		        <ThePoll v-if="showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
 		        <!-- POLL FORM EMD --> 
-		    </imageDragArea>
+		    </DragArea>
 		    <!-- IMAGE DRAG AREA END -->
 		    <!-- POLL FORM START --> 
 		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image || showPoll" @whoCanReply="(value) => post.whoCanReply = value "/>
@@ -83,7 +83,7 @@
 	import TheCircle from './TheCircle.vue';
 	import TheSchedule from './TheSchedule.vue';
 	import TextArea from './TextArea.vue';
-	import imageDragArea from './imageDragArea.vue';
+	import DragArea from './DragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';
     // Icons 	
 	import Madia from './icons/NewPostIcons/Madia.vue';
@@ -124,10 +124,10 @@
     		return imageError();
     	}else if(uploadMadiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
     		selected.gif = true
-    		images.value.push(URL.createObjectURL(image[0]))
+    		images.value.push((window.URL ? URL : webkitURL).createObjectURL(image[0]))
     	}else {
     		selected.image = true
-    	    Array.from({length: image.length}, (_, index) => images.value.push(URL.createObjectURL(image[index])));
+    	    Array.from({length: image.length}, (_, index) => images.value.push(window.webkitURL.createObjectURL(image[index])));
     	}
     	e.target.value = ''
 	}

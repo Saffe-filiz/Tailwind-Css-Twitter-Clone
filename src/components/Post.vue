@@ -34,7 +34,7 @@
 					<!-- POST END -->	
 				</div>
 				<div class="w-full mt-[11px] empty:hidden">
-			     <ThePollChoceSection/>
+			     <component :is="ImageGallery" :image="images" :isPost="true"/>
 				</div>
 				 <!-- LIKA, COMMENT, SHARE, RETWEET ICONS START -->	
 				<div class="max-w-[425px]  mb-1 flex items-end mt-[11px]">
@@ -81,7 +81,9 @@
 	import More from './icons//More.vue';
 	import ThePollChoceSection from './ThePollChoceSection.vue'
 	import TimeCalculator from './TimeCalculator.vue';
+	import ImageGallery from './ImageGallery.vue';
 
+	let attachments = [ThePollChoceSection, ImageGallery]
 
     let item = reactive({
     	'comment': {
@@ -102,6 +104,8 @@
     let post = reactive({
     	date: 'Wed Apr 13 2022 04:04:43 GMT+0300 (GMT+03:00)',
     })
+
+    let images = ref(["blob:http://localhost:3000/01470f82-2a24-4799-99c5-9179897cf08e"])
 
     const increase = ( str ) =>  {
         if(!item[str].isActive){
