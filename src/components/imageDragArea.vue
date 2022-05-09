@@ -6,21 +6,15 @@
 	    <slot/>
 	    <!-- TEXT AREA SLOT -->
 	    <!-- IMAGE GALLERY START -->
-	    <div :class="imageLeyout">
-	        <div v-for="(image, index) in images" :class="imageStyle" :style="{'background-image': `url(${image})`}">
-	            <img :src="image" class="w-full h-full opacity-0" draggable="false">
-	            <!-- IMAGE REMOVE BUTTON START -->
-	            <button class="w-7 h-7 rounded-full bg-[#0f1419bf] hover:bg-[#272c30bf] absolute top-1 left-1 text-white hoverDuration" @click="removeImage(index)">&#10005</button>
-	            <!-- IMAGE REMOVE BUTTON END -->
-	        </div>	
-	    </div>
+	    <ImageLayout :image="images"/>
 	    <!-- IMAGE GALLERY START --> 
 	</article>
 </template>
 
 
 <script setup>
-	import { ref, inject, computed} from 'vue';
+	import { inject, computed} from 'vue';
+	import ImageLayout from './ImageLayout.vue';
 
 	const meadia = defineProps({permission: Array})
 
@@ -29,33 +23,8 @@
     const images = inject('images'); // Images
     const uploadImage = inject('uploadImage'); // Image prevew function 
     // Image style
-    const imageStyle = computed(() =>  {
-   	    let numberOfPhotos = images.value.length;
-   	    switch(numberOfPhotos){
-   	    	case 4:
-   	    	    return 'imageStyleFour';
-   	    	    break;
-   	    	case 3:
-   	    	    return 'imageStyleThree';
-   	    	    break;
-   	    	case 2:
-   	    	    return 'imageStyleTwo';
-   	    	    break;
-   	    	default:
-   	    	return 'backgrounImage'
-   	    }
-    });
-    // Image container leyout
-    const imageLeyout = computed(() => {
-   		let numberOfPhotos = images.value.length;
-   	    if(numberOfPhotos > 2) {
-   		    return  'imageLeyoutThree'
-   	    } else if(numberOfPhotos > 1){
-   		    return 'imageLeyoutTwo'
-   	    } else {
-   		    return 'empty:hidden w-auto'
-   	    }
-    });
+
+
 
     const dragAreaBorderColor = computed(() => {
     	let isValid = meadia.permission.some( value => value)
