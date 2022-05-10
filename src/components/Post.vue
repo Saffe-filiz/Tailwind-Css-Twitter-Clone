@@ -34,7 +34,7 @@
 					<!-- POST END -->	
 				</div>
 				<div class="w-full mt-[11px] empty:hidden">
-			     <component :is="ImageGallery" :image="images" :isPost="true"/>
+			     <component :is="ThePollChoceSection" :image="images" :isPost="true"/>
 				</div>
 				 <!-- LIKA, COMMENT, SHARE, RETWEET ICONS START -->	
 				<div class="max-w-[425px]  mb-1 flex items-end mt-[11px]">
@@ -73,6 +73,7 @@
 
 <script setup>
 	import { reactive, watch, computed, ref } from 'vue';
+	import { useStore } from 'vuex'
 
 	import ReTweet from './icons/PostIcons/ReTweet.vue';
 	import Like from './icons/PostIcons/Like.vue';

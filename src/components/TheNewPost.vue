@@ -32,7 +32,7 @@
 	        <!-- ICONS AREA START -->	
 	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 	    	    <Madia :isActive="images.length == 4 ||  selected.gif || showPoll" :madiaType="selected.image"/>
-	    		<Gift :isActive="selected.image || selected.gif || showPoll"/>	    	    
+	    		<Gift :isActive="selected.image || selected.gif || showPoll" @click="api"/>	    	    
 			   	<Poll @click="showPoll = true" :isActive="selected.gif || selected.image"  />
 	    		<Emoji/>
 	    		<Schedule :isActive="showPoll || post.whoCanReply != 'Everyone'" @click="scrollHidden(), showTheScheduleForm = true"/>
@@ -63,7 +63,8 @@
     </article>
     <!-- POPUP COMPONENT START --> 
     <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
-      	<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />
+      	<!--<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />-->
+      	<TheGifts/>
     </PopUp>
     <!-- POPUP COMPONENT END --> 
    <!-- IMAGE UPDATE ERROR START --> 
@@ -85,6 +86,7 @@
 	import TextArea from './TextArea.vue';
 	import DragArea from './DragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';
+	import TheGifts from './TheGifts.vue';
     // Icons 	
 	import Madia from './icons/NewPostIcons/Madia.vue';
 	import Gift from './icons/NewPostIcons/Gift.vue';
@@ -98,6 +100,8 @@
 	let whoCanAnswer = ref(false);
 
 	let date = ref({})
+
+	const store = useStore()
 
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
@@ -178,4 +182,9 @@
 
 
     const sendTweet = () => useStore.state.tweets.push(post)
+
+
+        const api = () => {
+    	store.dispatch('getGifts').then(() => console.log('test'))
+    }
 </script>

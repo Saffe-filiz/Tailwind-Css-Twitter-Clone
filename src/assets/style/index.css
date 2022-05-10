@@ -38,21 +38,6 @@
 	@apply border border-input-main-border-color 
 }
 
-/* DRAGABLE AREA ACTIVE CLASS START */
-
-.draggableArea {
-	@apply  max-w-[512px] w-full border-2 border-transparent rounded
-}
-
-.draggableAreaActiveValid {
-	@apply  border-[#1d9bf0] max-w-[512px] w-full border-2 border-dashed  rounded
-}
-
-.draggableAreaActiveInValid {
-	@apply border-red-600 max-w-[512px] w-full border-2 border-dashed  rounded
-}
-
-/* DRAGABLE AREA ACTIVE CLASS START */
 
 /* POLL ACTIVE CLASS START */
 
