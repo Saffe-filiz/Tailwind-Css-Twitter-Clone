@@ -64,7 +64,7 @@
     <!-- POPUP COMPONENT START --> 
     <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
       	<!--<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />-->
-      	<TheGifts/>
+      	<TheGifts v-on:click.stop/>
     </PopUp>
     <!-- POPUP COMPONENT END --> 
    <!-- IMAGE UPDATE ERROR START --> 
