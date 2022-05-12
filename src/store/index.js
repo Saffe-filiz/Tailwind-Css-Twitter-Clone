@@ -6,6 +6,16 @@ const store = createStore({
 		gifs: [],
 	},
 
+	getters: {
+		getGifImages (state) {
+			return state.gifs.flat().map( item => item.images['480w_still'].url)
+		},
+
+		getGifs ( state ) {
+			return state.gifs.flat().map( item => item.url)
+		}
+	},
+
 	mutations: {
 		gifData (state, item) {
 			state.gifs.push(item);

@@ -184,7 +184,9 @@
     const sendTweet = () => useStore.state.tweets.push(post)
 
 
-        const api = () => {
-    	store.dispatch('getGifts').then(() => console.log('test'))
+    const api = () => {
+    	store.dispatch('getGifts')
     }
+
+   // const x = computed(() => store.getters.getGifImages)
 </script>
