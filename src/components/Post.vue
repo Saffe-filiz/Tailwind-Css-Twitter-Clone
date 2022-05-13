@@ -17,7 +17,7 @@
 						    <a href="#" class="mr-[7px] text-[#536471] text-[14px] font-normal">@UserName</a>
 						    <!-- USERNAME END -->
 						    <!-- TIME CALCULATER START -->
-						    <TimeCalculator :date="post.date"/>
+						    <ThePostDate :date="post.date"/>
 						    <!-- TIME CALCULATER END -->
 						</div>
 						<!--MORE ICON START -->
@@ -81,7 +81,7 @@
 	import Comment from './icons/PostIcons/Comment.vue';
 	import More from './icons//More.vue';
 	import ThePollChoceSection from './ThePollChoceSection.vue'
-	import TimeCalculator from './TimeCalculator.vue';
+	import ThePostDate from './ThePostDate.vue';
 	import ImageGallery from './ImageGallery.vue';
 
 	let attachments = [ThePollChoceSection, ImageGallery]

@@ -10,6 +10,9 @@
 	import TheGiftsSearch from './TheGiftsSearch.vue';
 
 	import { ref } from 'vue'
+		import { useStore } from 'vuex';
+		const store = useStore()
+	    const sendTweet = () => useStore.state.tweets.push(post)
 
 	let searchAreaIsActive = ref(false)
 

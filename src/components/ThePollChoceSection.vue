@@ -27,8 +27,6 @@
 	import { ref, computed, reactive, onMounted, watch } from 'vue';
     import { useStore } from 'vuex'
 
-	import TimeCalculator from './TimeCalculator.vue';
-
     let post = reactive({
     	date: 'Mon Apr 26 2022 18:37:00 GMT+0300 (GMT+03:00)',
     })

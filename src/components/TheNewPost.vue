@@ -5,40 +5,15 @@
 	</div>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
-			<!-- TEXTAREA START -->
-			<!-- POST Schedule INFO START -->
-			<div v-if="date.info" class="w-[512px] h-[17.5px] pl-2 inline-flex hover:underline cursor-pointer">
-				<!-- CALENDER ICON COMPONENT START  -->
-				<Calendar/> 
-				<!-- CALENDER ICON COMPONENT END  -->
-				<span class="text-[12px] text-[#536471]">{{date.info}}</span>
-			</div>
-			<!-- POST Schedule INFO END -->
-			<!-- IMAGE DRAG AREA START -->
-			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, showPoll]">
-				<!-- TEXT AREA START -->
-		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
-		        <!-- TEXT AREA END -->
-		         <!-- POLL FORM START --> 
-		        <ThePoll v-if="showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
-		        <!-- POLL FORM EMD --> 
+			<TheScheduleInfo :info="date.info"/>
+			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.showPoll]">
+		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer.show = true"/>
+		        <ThePoll v-if="selected.showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
 		    </DragArea>
-		    <!-- IMAGE DRAG AREA END -->
-		    <!-- POLL FORM START --> 
-		   <TheWhoCanReply  v-if="whoCanAnswer || selected.gif || selected.image || showPoll" @whoCanReply="(value) => post.whoCanReply = value "/>
+		   <TheWhoCanReply  v-if="showWhoCanAnswer || selected.gif || selected.image || selected.showPoll" @whoCanReply="(value) => "/>
 		 </div>
-		 <!-- TEXTAREA END -->
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
-	        <!-- ICONS AREA START -->	
-	    	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-	    	    <Madia :isActive="images.length == 4 ||  selected.gif || showPoll" :madiaType="selected.image"/>
-	    		<Gift :isActive="selected.image || selected.gif || showPoll" @click="api"/>	    	    
-			   	<Poll @click="showPoll = true" :isActive="selected.gif || selected.image"  />
-	    		<Emoji/>
-	    		<Schedule :isActive="showPoll || post.whoCanReply != 'Everyone'" @click="scrollHidden(), showTheScheduleForm = true"/>
-	    		<Mark/>
-	    	</div>
-	    	<!-- ICONS AREA END -->
+	    	<TheNewPostAttachments :attachment="selected" :imagesCount="images.length"/>
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
 	    			<!-- POST LATTER PROGRESS CIRCLE START -->
@@ -69,7 +44,7 @@
     <!-- POPUP COMPONENT END --> 
    <!-- IMAGE UPDATE ERROR START --> 
     <div class="flex justify-center items-center text-[14px] text-white w-[323px] h-[40px] bg-[#1da1f2] rounded fixed inset-x-[35%]  bottom-[20px] z-10" v-if="selected.imageError">
-        <span v-if="!showPoll">Please choose either 1 GIF or up to 4 photos.</span>
+        <span v-if="!selected.showPoll">Please choose either 1 GIF or up to 4 photos.</span>
         <span v-else>You can only have 1 type of attachment</span>
     </div>
      <!-- IMAGE UPDATE ERROR END --> 
@@ -77,8 +52,7 @@
 
 <script setup>
 	import { ref, computed, inject, provide, reactive, watch } from 'vue';
-	import { useStore } from 'vuex';
-	// Component
+
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
 	import TheCircle from './TheCircle.vue';
@@ -87,21 +61,14 @@
 	import DragArea from './DragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';
 	import TheGifts from './TheGifts.vue';
+	import TheNewPostAttachments from './TheNewPostAttachments.vue';
+	import TheScheduleInfo from './TheScheduleInfo.vue';
     // Icons 	
-	import Madia from './icons/NewPostIcons/Madia.vue';
-	import Gift from './icons/NewPostIcons/Gift.vue';
-	import Emoji from './icons/NewPostIcons/Emoji.vue';
-	import Poll from './icons/NewPostIcons/Poll.vue';
-	import Schedule from './icons/NewPostIcons/Schedule.vue';
-	import Mark from './icons/NewPostIcons/Mark.vue';
-	import Calendar from './icons/NewPostIcons/Calendar.vue';
 	import Plus from './icons/Plus.vue';
 
-	let whoCanAnswer = ref(false);
+	let showWhoCanAnswer = ref(false);
 
 	let date = ref({})
-
-	const store = useStore()
 
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
@@ -109,6 +76,7 @@
 		gif: false,
 		image: false,
 		imageError: false,
+		showPoll: false,
 	})
 
     // Image upload error massage
@@ -118,7 +86,7 @@
     	draggableAreaActive.value = false
     	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
     	let uploadMadiaCount = images.value.length;
-    	if(showPoll.value || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return imageError();
+    	if(selected.showPoll || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return imageError();
 
     	let image = e.target.files || e.dataTransfer.files;
     	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
@@ -147,11 +115,10 @@
 	const showTheScheduleForm = inject('showTheScheduleForm'); // Coming from app vue
     
 	let pollFormData = ref(); // Poll form data
-	let showPoll = ref(false); // Show poll form
 
     // Emit from poll component
 	const pollData = (obj) => {
-		showPoll.value = obj.showPoll;
+		selected.showPoll = obj.showPoll;
 		pollFormData.value = obj.data;
 	};
     // Set poll ending date
@@ -167,21 +134,17 @@
 
 	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => selected[v] = false): '')
 
-
 	const post = reactive({
     	user: null,
     	username: null,
     	massage: '',
-    	whoCanReply: 'Everyone',
+    	whoCanReply: 'w',
     	date: null,
     	Schedule: null,
     	poll: null,
     	Image: null,
 
     }); // Take post text
-
-
-    const sendTweet = () => useStore.state.tweets.push(post)
 
 
     const api = () => {
