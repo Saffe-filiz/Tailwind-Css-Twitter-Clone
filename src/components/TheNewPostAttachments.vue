@@ -4,7 +4,7 @@
 	    <Gift :isActive="active.attachment.image || active.attachment.gif || active.attachment.showPoll"/>	    	    
 		<Poll :isActive="active.attachment.gif || active.attachment.image" />
 	    <Emoji/>
-	    <Schedule :isActive="active.attachment.showPoll"/>
+	    <Schedule :isActive="active.attachment.showPoll || active.attachment.whoCanReply != 'Everyone'"/>
 	    <Mark/>
 	</div>
 </template>

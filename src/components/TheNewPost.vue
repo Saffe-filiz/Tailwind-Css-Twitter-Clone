@@ -7,10 +7,10 @@
 		<div class="w-full h-auto">
 			<TheScheduleInfo :info="date.info"/>
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.showPoll]">
-		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer.show = true"/>
+		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
 		        <ThePoll v-if="selected.showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
 		    </DragArea>
-		   <TheWhoCanReply  v-if="showWhoCanAnswer || selected.gif || selected.image || selected.showPoll" @whoCanReply="(value) => "/>
+		   <TheWhoCanReply v-if="whoCanAnswer || selected.gif || selected.image || selected.showPoll" @whoCanReply="(value) => selected.whoCanReply = value "/>
 		 </div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	    	<TheNewPostAttachments :attachment="selected" :imagesCount="images.length"/>
@@ -66,7 +66,7 @@
     // Icons 	
 	import Plus from './icons/Plus.vue';
 
-	let showWhoCanAnswer = ref(false);
+	let whoCanAnswer = ref(false);
 
 	let date = ref({})
 
@@ -77,6 +77,7 @@
 		image: false,
 		imageError: false,
 		showPoll: false,
+		whoCanReply: 'Everyone',
 	})
 
     // Image upload error massage
@@ -132,7 +133,7 @@
         return date
 	})
 
-	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => selected[v] = false): '')
+	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' )
 
 	const post = reactive({
     	user: null,
@@ -144,12 +145,6 @@
     	poll: null,
     	Image: null,
 
-    }); // Take post text
+    });
 
-
-    const api = () => {
-    	store.dispatch('getGifts')
-    }
-
-   // const x = computed(() => store.getters.getGifImages)
 </script>
