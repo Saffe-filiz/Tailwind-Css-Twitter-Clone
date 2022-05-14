@@ -3,7 +3,7 @@
 	<UserProfileImage :size="10.75" class="w-[3.563rem]"/>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :info="date.info"/>
+			<TheScheduleInfo :info="date.info" @click="showTheScheduleForm = true"/>
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.showPoll]">
 		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
 		        <ThePoll v-if="selected.showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
@@ -36,8 +36,8 @@
     </article>
     <!-- POPUP COMPONENT START --> 
     <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
-      	<!--<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />-->
-      	<TheGifts v-on:click.stop/>
+      	<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />
+      	<!--<TheGifts v-on:click.stop/>-->
     </PopUp>
     <!-- POPUP COMPONENT END --> 
    <!-- IMAGE UPDATE ERROR START --> 
