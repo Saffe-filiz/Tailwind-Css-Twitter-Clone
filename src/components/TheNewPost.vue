@@ -1,8 +1,6 @@
 <template>
 	<article class="w-full min-h-[6.375rem] h-auto py-1 pl-3.75 inline-flex flex-row justify-betweenr">
-	<div class="w-[3.563rem]">
-		<div class="w-10.75 h-10.75 bg-black rounded-full"></div>
-	</div>
+	<UserProfileImage :size="10.75" class="w-[3.563rem]"/>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
 			<TheScheduleInfo :info="date.info"/>
@@ -63,6 +61,7 @@
 	import TheGifts from './TheGifts.vue';
 	import TheNewPostAttachments from './TheNewPostAttachments.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
+	import UserProfileImage from './UserProfileImage.vue';
     // Icons 	
 	import Plus from './icons/Plus.vue';
 
@@ -139,7 +138,7 @@
     	user: null,
     	username: null,
     	massage: '',
-    	whoCanReply: 'w',
+    	whoCanReply: selected.whoCanReply,
     	date: null,
     	Schedule: null,
     	poll: null,

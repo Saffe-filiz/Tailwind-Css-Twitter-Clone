@@ -20,7 +20,8 @@
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
         <div class="w-full rounded-[4rem] inline-flex">
         	<!--USER IMAGE START -->
-            <div class="w-9 h-9 bg-black rounded-full"></div>
+         <!--   <div class="w-9 h-9 bg-black rounded-full"></div>-->
+            <UserProfileImage :size="9" class="bg-red-100 rounded-full"/>
             <!--USER IMAGE END -->
             <!-- NAME AND USERNAME START -->
             <div class="w-[6.25rem] h-[2.313rem] leading-5 pl-2">
@@ -55,6 +56,7 @@
 	import More from './icons/NavigationIcons/More.vue';
 	import ThreeDot from './icons/More.vue';
 	import PopUp from './PopUp.vue';
+	import UserProfileImage from './UserProfileImage.vue';
 
 	let showTheSchedule = ref(false)
 	const selected = ref(0)
