@@ -2,7 +2,7 @@
 	<section class="w-[600px] h-[591px] h-auto bg-white m-auto mt-[33px] rounded-2xl overflow-auto" @click="searchAreaIsActive = false">
 		<div class="h-full w-full overflow-y-scroll searchInput  inline-flex flex-wrap gap-1">
 		    <TheGiftsSearch :active="searchAreaIsActive" :ganre="selectedGanre" @active="(x) => searchAreaIsActive = x"/>
-		    <div  class="w-[289px] h-[140px] last:w-full relative cursor-pointer" v-for="ganere in genres" @click="selectedGanre = ganere.title">
+		    <div  class="w-[289px] h-[140px] last:w-full relative cursor-pointer" v-for="ganere in genres" @click="setSelectedGanre(ganere.title)">
 		    	<img :src="ganere.image_Url" class="w-full h-full object-cover">
 	    	<span class="absolute bottom-0 p-2 text-lg  text-white font-bold z-10">{{ganere.title}}</span>
 	    </div>
@@ -14,12 +14,19 @@
 	import TheGiftsSearch from './TheGiftsSearch.vue';
 
 	import { ref } from 'vue'
-		import { useStore } from 'vuex';
-		const store = useStore()
-		let selectedGanre = ref('')
-	    const sendTweet = () => useStore.state.tweets.push(post)
+	import { useStore } from 'vuex';
+	const store = useStore()
+	let selectedGanre = ref('')
+	const sendTweet = () => useStore.state.tweets.push(post)
 
 	let searchAreaIsActive = ref(false)
+
+	let setSelectedGanre = ( ganre ) => {
+		console.log(searchAreaIsActive.value)
+		searchAreaIsActive.value = true;
+		console.log(searchAreaIsActive.value)
+		selectedGanre.value = ganre;
+	}
 
 	let genres = [
 	{
