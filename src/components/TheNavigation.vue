@@ -13,15 +13,15 @@
 		    		</li>
 		    	</ul>
 		    </div>
-		    <div class="w-full h-[4.938rem] mt-4">
-			    <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full" @click="showTheSchedule = true">Tweet</button>
-		    </div>
-        </nav>
+		   <div class="w-full h-[4.938rem] mt-4">
+			   <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full" @click="showTheSchedule = true">Tweet</button>
+		   </div>
+      </nav>
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
         <div class="w-full rounded-[4rem] inline-flex">
         	<!--USER IMAGE START -->
          <!--   <div class="w-9 h-9 bg-black rounded-full"></div>-->
-            <UserProfileImage :size="9" class="bg-red-100 rounded-full"/>
+            <UserProfileImage :size="9"/>
             <!--USER IMAGE END -->
             <!-- NAME AND USERNAME START -->
             <div class="w-[6.25rem] h-[2.313rem] leading-5 pl-2">

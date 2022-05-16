@@ -23,15 +23,14 @@
 
     const dragAreaBorderColor = computed(() => {
     	let isValid = meadia.permission.some( value => value)
-    	if(draggableAreaActive.value){
-    	   if(isValid == meadia.permission[1] && images.value.length <= 3){
-    	      return  'border-[#1d9bf0] max-w-[512px] w-full border-2 border-dashed  rounded'
-    	   }else{
-    	   	return 'border-red-600 max-w-[512px] w-full border-2 border-dashed  rounded'
-    	   }
-    	}else {
-    	   	 return 'max-w-[512px] w-full border-2 border-transparent rounded'
+
+    	if(!draggableAreaActive.value){
+    	    return 'max-w-[512px] w-full border-2 border-transparent rounded'
     	}
-    	
+    	if(isValid == meadia.permission[1] && images.value.length <= 3){
+    	      return  'border-[#1d9bf0] max-w-[512px] w-full border-2 border-dashed  rounded'
+    	}else{
+    	   	  return 'border-red-600 max-w-[512px] w-full border-2 border-dashed  rounded'
+    	}
     })
 </script>

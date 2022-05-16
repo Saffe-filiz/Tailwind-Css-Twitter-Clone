@@ -1,6 +1,6 @@
 <template>
 	<article class="w-full min-h-[6.375rem] h-auto py-1 pl-3.75 inline-flex flex-row justify-betweenr">
-	<UserProfileImage :size="10.75" class="w-[3.563rem]"/>
+	<UserProfileImage :size="10.75" class="mr-2"/>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
 			<TheScheduleInfo :info="date.info" @click="showTheScheduleForm = true"/>
@@ -36,8 +36,8 @@
     </article>
     <!-- POPUP COMPONENT START --> 
     <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
-      	<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />
-      	<!--<TheGifts v-on:click.stop/>-->
+      	<!--<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />-->
+      	<TheGifts v-on:click.stop/>
     </PopUp>
     <!-- POPUP COMPONENT END --> 
    <!-- IMAGE UPDATE ERROR START --> 
