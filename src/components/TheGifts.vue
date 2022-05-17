@@ -20,7 +20,7 @@
 <script setup>
 	import TheGiftsSearch from './TheGiftsSearch.vue';
 
-	import { ref } from 'vue'
+	import { ref, computed } from 'vue'
 	import { useStore } from 'vuex';
 	const store = useStore()
 	let selectedGanre = ref('')
@@ -32,6 +32,10 @@
 		searchAreaIsActive.value = true;
 		selectedGanre.value = ganre;
 	}
+
+	const getMadia = computed(() => {
+    	return gifAutoPlayRadio.value ? store.getters.getGifs: store.getters.getGifImages
+    })
 
 	let genres = [
 	{
