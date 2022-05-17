@@ -3,9 +3,7 @@
 		<Cross :size="18" class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] fill-[696c70]"/>
 		<div class="w-[501px] h-9 bg-white rounded-full relative inline-flex items-center cursor-text" @click="$emit('active', true)" 
 		v-on:click.stop :class="[!searchArea.active ? 'justify-center border border-[#cfd9de]': 'border-2 border-[#1d9bf0]']">
-			<div class="w-[25px] h-full flexCenter" :class="{'ml-2':  searchArea.active}">
-				<Search class="w-3.5 h-3.5 fill-[#536471]"/>
-		    </div>
+			<Search :size="14"  class="flexCenter fill-[#536471]" :class="{'ml-[11px]':  searchArea.active}"/>
 		    <div class="w-auto h-3.5 flexCenter" v-if="!searchArea.active">
 		    	<span class="text-[13px]">{{inputPlaceHolder}}</span>
 		    </div> 
