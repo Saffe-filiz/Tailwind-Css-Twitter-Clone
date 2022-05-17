@@ -1,6 +1,9 @@
 <template>
 	<div class="w-full h-12 px-3.5 bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between sticky top-0 z-20">
-		<Cross :size="18" class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] fill-[696c70]"/>
+		<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter">
+			<Cross v-if="!search" :size="18" class="fill-[696c70]"/>
+		    <Arrow v-else :size="18"/>
+		</div>
 		<div class="w-[501px] h-9 bg-white rounded-full relative inline-flex items-center cursor-text" @click="$emit('active', true)" 
 		v-on:click.stop :class="[!searchArea.active ? 'justify-center border border-[#cfd9de]': 'border-2 border-[#1d9bf0]']">
 			<Search :size="14"  class="flexCenter fill-[#536471]" :class="{'ml-[11px]':  searchArea.active}"/>
@@ -18,6 +21,7 @@
 <script setup>
 	import Search from './icons/Search.vue';
 	import Cross from './icons/Cross.vue';
+	import Arrow from './icons/Arrow.vue';
 
 	import { ref, computed } from 'vue';
 

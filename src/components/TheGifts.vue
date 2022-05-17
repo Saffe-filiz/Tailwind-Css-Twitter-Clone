@@ -2,7 +2,7 @@
 	<section class="w-[600px] h-[591px] h-auto bg-white m-auto mt-[33px] rounded-2xl overflow-auto" @click="searchAreaIsActive = false">
 		<div class="h-full w-full overflow-y-scroll searchInput  inline-flex flex-wrap gap-1">
 		    <TheGiftsSearch :active="searchAreaIsActive" :ganre="selectedGanre" @active="(x) => searchAreaIsActive = x"/>
-		    	<div class="w-full h-5 my-[7px] bg-white px-[11px] inline-flex justify-between items-center">
+		    	<div class="w-full h-5 my-[7px] bg-white px-[11px] inline-flex justify-between items-center" v-if="getMadia.length">
 			        <span class="text-[#536471] text-sm">Auto-play GIFs</span>
 			        <label for="gifAutoPlayRadio" class="w-10 h-3.5 bg-[#939393] flex items-center rounded-full relative after:w-5 after:h-5 after:bg-white after:rounded-full after:absolute after:shadow-[0_1px_3px_rgb(0,0,0,0.5)] after:duration-100 cursor-pointer"  
 			        :class="{'after:ml-5 bg-[#6bc9fb] after:bg-[#1d9bf0]': gifAutoPlayRadio}">
