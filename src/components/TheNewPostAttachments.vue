@@ -2,7 +2,7 @@
 	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 		<Madia :isActive="active.imagesCount == 4 || active.attachment.gif || active.attachment.showPoll" :madiaType="active.attachment.image"/>
 	    <Gift :isActive="active.attachment.image || active.attachment.gif || active.attachment.showPoll"/>	    	    
-		<Poll :isActive="active.attachment.gif || active.attachment.image" />
+		<Poll @click="$emit('showPoll', true)" :isActive="active.attachment.gif || active.attachment.image" />
 	    <Emoji/>
 	    <Schedule :isActive="active.attachment.showPoll || active.attachment.whoCanReply != 'Everyone'" @click="scrollHidden(), showTheScheduleForm = true"/>
 	    <Mark/>

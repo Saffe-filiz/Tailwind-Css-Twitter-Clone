@@ -11,7 +11,7 @@
 		   <TheWhoCanReply v-if="whoCanAnswer || selected.gif || selected.image || selected.showPoll" @whoCanReply="(value) => selected.whoCanReply = value "/>
 		 </div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
-	    	<TheNewPostAttachments :attachment="selected" :imagesCount="images.length"/>
+	    	<TheNewPostAttachments :attachment="selected" :imagesCount="images.length" @showPoll="(value) => selected.showPoll = value"/>
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
 	    		    <TheCircle :post="post.massage.length"/>

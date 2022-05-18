@@ -35,8 +35,7 @@
     const inputPlaceHolder = computed(() => search.value == '' ? 'Search for GIFs' : search.value);
 
     const searchGif = () =>  store.dispatch('getGifts', search)
-    onMounted(() => inputFocus())
-    const inputFocus = () => document.querySelector('#gifSearch').focus()
+    onMounted(() => document.querySelector('#gifSearch').focus())
 
 
 </script>
