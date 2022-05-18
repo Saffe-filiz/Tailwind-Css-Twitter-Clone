@@ -76,7 +76,7 @@
     // Image upload error massage
 	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
     
-    const uploadImage =  (e) => {
+    const uploadImage =  ( e ) => {
     	draggableAreaActive.value = false
     	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
     	let uploadMadiaCount = images.value.length;
@@ -111,7 +111,7 @@
 	let pollFormData = ref(); // Poll form data
 
     // Emit from poll component
-	const pollData = (obj) => {
+	const pollData = ( obj ) => {
 		selected.showPoll = obj.showPoll;
 		pollFormData.value = obj.data;
 	};

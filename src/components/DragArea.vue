@@ -2,7 +2,6 @@
 	<article  :class="dragAreaBorderColor" @dragleave="draggableAreaActive = false" @drop.prevent="uploadImage" @dragover.prevent>
 		<!-- TEXT AREA SLOT -->
 	    <slot/>
-	    <!-- TEXT AREA SLOT -->
 	    <ImageGallery :image="images">
 	    	<button class="w-7 h-7 rounded-full bg-[#0f1419bf] hover:bg-[#272c30bf] absolute top-1 left-1 text-white hoverDuration" @click="removeImage(index)">&#10005</button>
 	    </ImageGallery>

@@ -18,12 +18,9 @@
 	@apply w-full h-[38px] cursor-pointer p-2 bg-transparent mt-[-8px] outline-none appearance-none
 }
 
-.sectionStyleError {
-	@apply bg-red-100
-}
 
 .sectionMainStyle {
-	@apply h-[55px] inputMainStyle rounded
+	@apply h-[55px] border border-input-main-border-color rounded
 }
 
 .hoverDuration {
@@ -34,9 +31,6 @@
 	@apply focus-within:border-[#1d9bf0] focus-within:fill-[#1d9bf0] focus-within:shadow-[0_0_0_1px_rgba(29,155,240,1)] hoverDuration
 }
 
-.inputMainStyle {
-	@apply border border-input-main-border-color 
-}
 
 
 /* POLL ACTIVE CLASS START */
