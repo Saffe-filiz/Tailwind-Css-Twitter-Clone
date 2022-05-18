@@ -40,12 +40,7 @@
       	<TheGifts v-on:click.stop/>
     </PopUp>
     <!-- POPUP COMPONENT END --> 
-   <!-- IMAGE UPDATE ERROR START --> 
-    <div class="flex justify-center items-center text-[14px] text-white w-[323px] h-[40px] bg-[#1da1f2] rounded fixed inset-x-[35%]  bottom-[20px] z-10" v-if="selected.imageError">
-        <span v-if="!selected.showPoll">Please choose either 1 GIF or up to 4 photos.</span>
-        <span v-else>You can only have 1 type of attachment</span>
-    </div>
-     <!-- IMAGE UPDATE ERROR END --> 
+  <TheDragAreaErorrMassage :error="[selected.imageError, selected.showPoll]"/> 
 </template>
 
 <script setup>
@@ -62,6 +57,7 @@
 	import TheNewPostAttachments from './TheNewPostAttachments.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
+	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
     // Icons 	
 	import Plus from './icons/Plus.vue';
 
