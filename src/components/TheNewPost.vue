@@ -14,9 +14,7 @@
 	    	<TheNewPostAttachments :attachment="selected" :imagesCount="images.length"/>
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
-	    			<!-- POST LATTER PROGRESS CIRCLE START -->
 	    		    <TheCircle :post="post.massage.length"/>
-	    		    <!-- POST LATTER PROGRESS CIRCLE END -->
 	    		    <div class="w-px h-[29px] ml-[9px] mr-2.75 bg-[#c0d0d8]"></div>
 	    		    <div class="w-[23px] flexCenter ">
 	    		   	    <div class="w-full h-[23px] flexCenter rounded-full border border-b border-min-border-color">

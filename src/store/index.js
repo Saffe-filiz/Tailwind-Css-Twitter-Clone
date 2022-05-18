@@ -17,13 +17,13 @@ const store = createStore({
 
 	mutations: {
 		gifData (state, item) {
-			state.gifs.push(item);
+			state.gifs = item;
 		},
 	},
 
 	actions: {
-		getGifts ({ commit }) {
-			fetch('https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=Agree&limit=25&offset=0&rating=g&lang=en')
+		getGifts ({ commit }, payload) {
+			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=25&offset=0&rating=g&lang=en`)
 			    .then( response => response.json())
 			    .then( response => commit('gifData', response.data)) 
 		},

@@ -1,15 +1,15 @@
 <template>
-	<section class="w-[600px] h-[591px] h-auto bg-white m-auto mt-[33px] rounded-2xl overflow-auto" @click="searchAreaIsActive = false">
+	<section class="w-[37.5rem] h-[36.938rem] h-auto bg-white m-auto mt-[2.063rem] rounded-2xl overflow-auto" @click="searchAreaIsActive = false">
 		<div class="h-full w-full overflow-y-scroll searchInput  inline-flex flex-wrap gap-1">
 		    <TheGiftsSearch :active="searchAreaIsActive" :ganre="selectedGanre" @active="(x) => searchAreaIsActive = x"/>
-		    	<div class="w-full h-5 my-[7px] bg-white px-[11px] inline-flex justify-between items-center" v-if="getMadia.length">
+		    	<div class="w-full h-5 my-[0.438rem] bg-white px-[0.688rem] inline-flex justify-between items-center">
 			        <span class="text-[#536471] text-sm">Auto-play GIFs</span>
 			        <label for="gifAutoPlayRadio" class="w-10 h-3.5 bg-[#939393] flex items-center rounded-full relative after:w-5 after:h-5 after:bg-white after:rounded-full after:absolute after:shadow-[0_1px_3px_rgb(0,0,0,0.5)] after:duration-100 cursor-pointer"  
 			        :class="{'after:ml-5 bg-[#6bc9fb] after:bg-[#1d9bf0]': gifAutoPlayRadio}">
 				        <input type="checkbox"  class="hidden" id="gifAutoPlayRadio" v-model="gifAutoPlayRadio">
 			        </label>
 		       </div>
-		    <div  class="w-[289px] h-[140px] last:w-full relative cursor-pointer" v-for="ganere in genres" @click="setSelectedGanre(ganere.title)">
+		    <div  class="w-[18.063rem] h-[8.75rem] last:w-full relative cursor-pointer" v-for="ganere in genres" @click="setSelectedGanre(ganere.title)" v-if="!getMadia.length">
 		    	<img :src="ganere.image_Url" class="w-full h-full object-cover" draggable="false">
 	    	    <span class="absolute bottom-0 p-2 text-lg  text-white font-bold z-10">{{ganere.title}}</span>
 	        </div>
@@ -26,7 +26,7 @@
 	let selectedGanre = ref('')
 	const sendTweet = () => useStore.state.tweets.push(post)
 
-	let searchAreaIsActive = ref(false)
+	let searchAreaIsActive = ref(true)
 	let gifAutoPlayRadio = ref(false)
 	let setSelectedGanre = ( ganre ) => {
 		searchAreaIsActive.value = true;
@@ -36,6 +36,7 @@
 	const getMadia = computed(() => {
     	return gifAutoPlayRadio.value ? store.getters.getGifs: store.getters.getGifImages
     })
+
 
 	let genres = [
 	{
