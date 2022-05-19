@@ -7,11 +7,11 @@ const store = createStore({
 
 	getters: {
 		getGifImages (state) {
-			return state.gifs.flat().map( item => item.images['480w_still'].url)
+			return state.gifs.flat().map( item => item.images['fixed_height_small_still'])
 		},
 
 		getGifs ( state ) {
-			return state.gifs.flat().map( item => item.url)
+			return state.gifs.flat().map( item => item.images['fixed_height_small'])
 		}
 	},
 
@@ -23,7 +23,7 @@ const store = createStore({
 
 	actions: {
 		getGifts ({ commit }, payload) {
-			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=25&offset=0&rating=g&lang=en`)
+			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=40&offset=0&rating=g&lang=en`)
 			    .then( response => response.json())
 			    .then( response => commit('gifData', response.data)) 
 		},

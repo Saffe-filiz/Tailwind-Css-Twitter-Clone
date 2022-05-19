@@ -90,7 +90,7 @@
     		return imageError();
     	}else if(uploadMadiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
     		selected.gif = true
-    		images.value.push( URL.createObjectURL(image[0]))
+    		images.value.push((window.URL ? URL : webkitURL).createObjectURL(image[0]))
     	}else {
     		selected.image = true
     	    Array.from({length: image.length}, (_, index) => images.value.push(window.webkitURL.createObjectURL(image[index])));

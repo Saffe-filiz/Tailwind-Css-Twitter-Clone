@@ -10,7 +10,7 @@
 		    <div class="w-auto h-3.5 flexCenter" v-show="!searchArea.active">
 		    	<span class="text-[0.813rem]">{{inputPlaceHolder}}</span>
 		    </div> 
-		    <input type="text" class="w-[26.25rem] h-3.5 text-[0.813rem] bg-transparent outline-none indent-0.5" @input="searchGif($event.target.value)" id="gifSearch" v-show="searchArea.active" v-model="search" placeholder="Search for GIFs"/>
+		    <input type="text" class="w-[26.25rem] h-3.5 text-[0.813rem] bg-transparent outline-none indent-0.5" @input="searchGif(search = $event.target.value)" id="gifSearch" v-show="searchArea.active" v-model="search" placeholder="Search for GIFs"/>
 			<div class="w-9 h-full flexCenter justify-start absolute right-1" v-if="searchArea.active && search">
 			    <Cross :size="11" class="w-[1.219rem] h-[1.219rem]  bg-black fill-white" @click="celarSearch"/>
 		    </div>
@@ -33,7 +33,8 @@
     const celarSearch = () => search.value = '';
     const inputPlaceHolder = computed(() => search.value == '' ? 'Search for GIFs' : search.value);
 
-    const searchGif = (e) =>  store.dispatch('getGifts', e)
+    const searchGif = async () => await  store.dispatch('getGifts', search.value).then(() => console.log('testtt'))
+   
     onMounted(() => document.querySelector('#gifSearch').focus())
 
 </script>
