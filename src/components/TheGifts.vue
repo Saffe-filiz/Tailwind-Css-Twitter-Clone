@@ -1,5 +1,5 @@
 <template>
-	<section class="w-[37.5rem] h-[36.938rem] h-auto bg-white m-auto mt-[2.063rem] rounded-2xl overflow-auto" >
+	<section class="w-[37.5rem] h-[36.938rem] h-auto bg-white m-auto mt-[2.063rem] rounded-2xl overflow-auto">
 		<div class="h-full w-full overflow-y-scroll searchInput  inline-flex flex-wrap gap-1">
 		    <TheGiftsSearch :ganre="serachAreaIsActive" />
 		    <div class="w-full h-5 my-[0.438rem] bg-white px-[0.688rem] inline-flex justify-between items-center" v-if="getMadia.length">
@@ -29,7 +29,8 @@
 	let ganre = ref('')
 
 	const serachAreaIsActive = computed(() => store.state.gifGanre)
-
+    const close = () => store.commit('searchIsActive', false)
+ 
 	const getMadia = computed(() => gifAutoPlayRadio.value ? store.getters.getGifs: store.getters.getGifImages)
 
 
