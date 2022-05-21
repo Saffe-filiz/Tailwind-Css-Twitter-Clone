@@ -1,17 +1,18 @@
 <template>
-	<div  class="w-[18.063rem] h-[8.75rem] last:w-full relative cursor-pointer" v-for="ganre in genres">
-		<img :src="ganre.url" class="w-full h-full object-cover" draggable="false" @click="searchGif(ganre.title)">
+	<div  class="w-[18.063rem] h-[8.75rem] last:w-full relative cursor-pointer" v-for="ganre in genres" @click="setGanre(ganre.title)">
+		<img :src="ganre.url" class="w-full h-full object-cover" draggable="false">
 	    <span class="absolute bottom-0 p-2 text-lg  text-white font-bold z-10">{{ganre.title}}</span>
 	</div>
 </template>
 
 
 <script setup>
+
 	import { useStore } from 'vuex';
-	
+
 	const store = useStore()
 
-	const searchGif = (search) =>  store.dispatch('getGifts', search)
+	const setGanre = (ganre) => store.state.gifGanre = ganre
 	
     let genres = [
 	{

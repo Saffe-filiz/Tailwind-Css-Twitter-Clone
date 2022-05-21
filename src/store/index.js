@@ -2,22 +2,24 @@ import { createStore } from 'vuex'
 
 const store = createStore({
 	state: {
-		gifs: [],
+	    gifts: [],
+	    gifGanre: '',
+	    gifSearchAreaIsActive: true,
 	},
 
 	getters: {
 		getGifImages (state) {
-			return state.gifs.flat().map( item => item.images['fixed_height_small_still'])
+			return state.gifts.flat().map( item => item.images['fixed_height_small_still'].url)
 		},
 
 		getGifs ( state ) {
-			return state.gifs.flat().map( item => item.images['fixed_height_small'])
+			return state.gifts.flat().map( item => item.images['fixed_height_small'].url)
 		}
 	},
 
 	mutations: {
 		gifData (state, item) {
-			state.gifs = item;
+			state.gifts = item;
 		},
 	},
 
