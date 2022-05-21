@@ -13,16 +13,20 @@ const store = createStore({
 	},
 
 	mutations: {
-		gifData (state, item) {
+		setGif (state, item) {
 			state.gifts = item;
 		},
+
+		setClearGifState (state, payload) {
+			state.gifts = payload
+		}
 	},
 
 	actions: {
 		getGifts ({ commit }, payload) {
 			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=40&offset=0&rating=g&lang=en`)
 			    .then( response => response.json())
-			    .then( response => commit('gifData', response.data)) 
+			    .then( response => commit('setGif', response.data)) 
 		},
 	}
 })

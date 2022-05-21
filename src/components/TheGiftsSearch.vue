@@ -5,14 +5,11 @@
 		    <ArrowIcon v-else :size="18" class="cursor-pointer" @click="celarSearch"/>
 		</div>
 		<div class="group">
-		<label for="gifSearch" class="w-[501px] group h-9 bg-white rounded-full inline-flex items-center cursor-text border border-[#cfd9de] px-3 group-focus-within:border-2 group-focus-within:border-[#1d9bf0] justify-center group-focus-within:justify-start">
+		<label for="gifSearch" class="w-[501px] group h-9 bg-white rounded-full inline-flex items-center cursor-text border border-[#cfd9de] px-3 group-focus-within:border-2 group-focus-within:border-[#1d9bf0] justify-center ">
 			<SearchIcon :size="14" class="flexCenter fill-[#536471]"/>
-		  <!--  <div class="w-auto h-3.5 flexCenter">
-		    	<span class="text-[0.813rem]">{{inputPlaceHolder}}</span>
-		    </div> -->
-		    <input type="text" class=" group-focus-within:w-[26.25rem] h-9 text-[0.813rem] bg-transparent outline-none pl-1 pb-1 mr-5" @input="searchGif(search)" 
-		    id="gifSearch"  v-model="search" placeholder="Search for GIFs"/>
-	
+		    <input type="text" class=" group-focus-within:w-[26.25rem]  h-9 text-[0.813rem] bg-transparent outline-none pl-1 pb-1 group-focus-within:mr-5" @input="searchGif(search)" 
+		         id="gifSearch" v-model="search" placeholder="Search for GIFs"/>
+		     <CrossIcon v-show="search"  tabindex="-1" :size="11" class="group-focus-within:visible invisible w-[1.219rem] h-[1.219rem] bg-black fill-white" @click="celarSearch"/>
 		</label>
 		</div>
 	</div>
@@ -31,7 +28,7 @@
 	const searchArea = defineProps({active: Boolean, ganre: String});
 	const search = ref('');
     const celarSearch = () =>  {
-    	store.state.gifs = [];
+    	store.commit('setClearGifState', [])
     	store.state.gifGanre = '';
     	search.value = ''
     };
