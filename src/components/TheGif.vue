@@ -2,7 +2,9 @@
 	<section class="w-[37.5rem] h-[36.938rem] h-auto bg-white m-auto mt-[2.063rem] rounded-2xl overflow-auto">
 		<div class="h-full w-full overflow-y-scroll searchInput  inline-flex flex-wrap gap-1">
 		    <TheGifSearch :ganre="searcHGanre"/>
-	        <TheGifAutoPlay v-if="getMadia.length" :autoPlay="autoPlay" @click="autoPlay = !autoPlay"/>
+	        <TheGifAutoPlay v-if="getMadia.length" :autoPlay="autoPlay">
+	            <input type="checkbox" class="hidden" id="gifAutoPlayRadio" v-model="autoPlay">
+	        </TheGifAutoPlay>
 		    <TheGifGanreList v-if="!getMadia.length"/>
 		    <TheGifList v-else :gif="getMadia" />
 	    </div> 

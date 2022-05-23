@@ -65,6 +65,8 @@
 		whoCanReply: 'Everyone',
 	})
 
+	const closePopUp = () => [showGifContent.value, showSchedule.value].map( v => v = false)
+
 	const showWhoCanAwserContent = computed(() => Object.keys(selected).some( item => selected[item] == true ) )
 
     // Image upload error massage
