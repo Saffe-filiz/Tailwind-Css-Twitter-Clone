@@ -1,7 +1,7 @@
 <template>
 	<div  class="inline-flex flex-row grow cursor-pointer" v-for="(madia, index) in list.gif" :key="index" >
-		<div class="w-auto h-auto grow"  :style="{'background-image': `url(${madia})`}" :class="bgColor(index)">
-			<img :src="madia" class="grow opacity-0" draggable="false">
+		<div class="w-full grow" :class="bgColor(index)">
+			<img :src="madia" class="w-full h-full grow  " draggable="false">
 		</div>
 	</div>
 </template>
