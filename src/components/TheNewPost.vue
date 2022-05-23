@@ -1,17 +1,17 @@
 <template>
-	<article class="w-full min-h-[6.375rem] h-auto py-1 pl-3.75 inline-flex flex-row justify-betweenr">
+	<article class="w-[598px] min-h-[6.375rem] h-auto py-1 pl-3.75 inline-flex flex-row justify-betweenr">
 	<UserProfileImage :size="10.75" class="mr-2"/>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :info="date.info" @click="showTheScheduleForm = true"/>
+			<TheScheduleInfo :info="date.info" @click="showSchedule = true"/>
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.showPoll]">
-		        <TextArea @post="(text) => post.massage = text" @click="whoCanAnswer = true"/>
+		        <TextArea @post="(text) => post.massage = text" @click="selected.whoCanAnswer = true"/>
 		        <ThePoll v-if="selected.showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
 		    </DragArea>
-		   <TheWhoCanReply v-if="whoCanAnswer || selected.gif || selected.image || selected.showPoll" @whoCanReply="(value) => selected.whoCanReply = value "/>
+		    <TheWhoCanReply v-if="showWhoCanAwserContent" @whoCanReply="(value) => selected.whoCanReply = value"/>
 		 </div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
-	    	<TheNewPostAttachments :attachment="selected" :imagesCount="images.length" @showPoll="(value) => selected.showPoll = value"/>
+	    	<TheAttachments :attachment="selected" :imagesCount="images.length" @showPoll="(value) => selected.showPoll = value"/>
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
 	    		    <TheCircle :post="post.massage.length"/>
@@ -45,14 +45,12 @@
 	import TextArea from './TextArea.vue';
 	import DragArea from './DragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';
-	import TheNewPostAttachments from './TheNewPostAttachments.vue';
+	import TheAttachments from './TheAttachments.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
 	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
     // Icons 	
 	import Plus from './icons/Plus.vue';
-
-	let whoCanAnswer = ref(false);
 
 	let date = ref({})
 
@@ -63,8 +61,11 @@
 		image: false,
 		imageError: false,
 		showPoll: false,
+		whoCanAnswer: false,
 		whoCanReply: 'Everyone',
 	})
+
+	const showWhoCanAwserContent = computed(() => Object.keys(selected).some( item => selected[item] == true ) )
 
     // Image upload error massage
 	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
@@ -98,7 +99,7 @@
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
 
 	const scrollHidden = inject('scrollHidden'); // Coming from app vue
-	const showTheScheduleForm = inject('showTheScheduleForm'); // Coming from app vue
+	const showSchedule = inject('showSchedule'); // Coming from app vue
     
 	let pollFormData = ref(); // Poll form data
 

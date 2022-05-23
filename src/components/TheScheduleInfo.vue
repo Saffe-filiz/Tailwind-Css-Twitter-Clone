@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-	import Calendar from './icons/NewPostIcons/Calendar.vue';
+	import Calendar from './icons/NewPost/Calendar.vue';
 	
 	const date = defineProps({info: String})
 </script>

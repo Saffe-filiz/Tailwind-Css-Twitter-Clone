@@ -6,7 +6,8 @@
 	        <TheNewPost/>
 	    </TheFeed>
 	   	<div class="w-auto h-[1280px] relative hidden lg:block">
-	  		<TheTrends class="w-auto flex flex-col gap-y-[14px] pr-2.5 pl-[1.875rem]" :style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
+	  		<TheTrends class="w-auto flex flex-col gap-y-[14px] pr-2.5 pl-[1.875rem]" 
+	  		:style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
 	  	        <TheSearch :style="{position: setPositions.searchPosition, top: setPositions.searchTopValue}"/>
 	        </TheTrends>
 	   </div>
@@ -45,8 +46,8 @@
 		}
 	}
 	
-    const showTheScheduleForm = ref(false);
-    const showTheGif = ref(false)
+    const showSchedule = ref(false);
+    const showGifContent = ref(false)
 
     // Hide page scroll
 	const scrollHidden = () => {
@@ -58,10 +59,11 @@
 	const scrollVisibil = () => {
 		let body = document.querySelector('body');
 		body.style.overflow = 'auto';
-		showTheScheduleForm.value = false;
+		showSchedule.value = false;
 	}
 
 	provide('scrollHidden', scrollHidden); // Hidden body scroll.
 	provide('scrollVisibil', scrollVisibil); // Show body scroll.
-	provide('showTheScheduleForm', showTheScheduleForm); // Toggle drag area css class.
+	provide('showSchedule', showSchedule); // Toggle drag area css class.
+	provide('showGifContent', showGifContent)
 </script> 

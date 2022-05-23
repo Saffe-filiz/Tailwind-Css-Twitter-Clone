@@ -92,7 +92,7 @@
 <script setup>
 	import { inject, ref, computed, onMounted, reactive, watch } from 'vue';
 	import DownArrow from './icons/DownArrow.vue';
-	import Calendar from './icons/NewPostIcons/Calendar.vue';
+	import Calendar from './icons/NewPost/Calendar.vue';
 	import SelectBox from './SelectBox.vue'
 
 	const scrollVisibil = inject('scrollVisibil');
