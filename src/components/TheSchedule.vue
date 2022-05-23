@@ -4,17 +4,17 @@
 		<div class="flex items-center justify-between ">
 			<!-- EXIT BUTTON START -->
 		    <span class="w-[2rem] h-[2rem] rounded-full hover:bg-[#0f14191a] cursor-pointer flex items-center justify-center text-[#2d3136] hoverDuration" 
-		    @click="scrollVisibil()">&#10005</span>
+		    @click="scrollVisibil">&#10005</span>
 		    <!-- EXIT BUTTON END -->
 			<span class="ml-[1.7rem]">Schedule</span>
 		</div>
 		<div class="inline-flex justify-between items-center mr-1">
 			<span  class="px-[15px] h-[30px] rounded-[15px] cursor-pointer flex items-center hover:bg-[#0c14191a] mr-4 rounded-full" v-if="update.date.sending"
-			 @click="scrollVisibil(), $emit('date', {})">
+			 @click="scrollVisibil, $emit('date', {})">
 				<span class="h-[22px] border-b-2 border-black text-[16px] font-medium">Clear</span>
 			</span>
 			<button class="h-[30px] px-[15px] bg-[#0f1419] text-[13px] font-bold text-white rounded-[2rem]"
-			 :disabled="!!showErrorMassage[0]" :class="{'opacity-70': showErrorMassage[0]}" @click="$emit('date', scheduling), scrollVisibil()">
+			 :disabled="!!showErrorMassage[0]" :class="{'opacity-70': showErrorMassage[0]}" @click="$emit('date', scheduling), scrollVisibil">
 			    <span v-if="!update.date.sending">Confirm</span>
 			    <span v-else>Update</span>
 		    </button>

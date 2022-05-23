@@ -32,13 +32,8 @@
 	    </div>
 	</div>
     </article>
-    <!-- POPUP COMPONENT START --> 
-    <PopUp v-if="showTheScheduleForm" @click="showTheScheduleForm = false, scrollVisibil()" >
-      	<!--<TheSchedule v-on:click.stop @date="(dateScheduling) => date = dateScheduling" :date="date" />-->
-      	<TheGifts v-on:click.stop/>
-    </PopUp>
-    <!-- POPUP COMPONENT END --> 
-  <TheDragAreaErorrMassage :error="[selected.imageError, selected.showPoll]"/> 
+    <PopUp/>
+    <TheDragAreaErorrMassage :error="[selected.imageError, selected.showPoll]"/> 
 </template>
 
 <script setup>
@@ -47,11 +42,9 @@
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
 	import TheCircle from './TheCircle.vue';
-	import TheSchedule from './TheSchedule.vue';
 	import TextArea from './TextArea.vue';
 	import DragArea from './DragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';
-	import TheGifts from './TheGifts.vue';
 	import TheNewPostAttachments from './TheNewPostAttachments.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
@@ -105,7 +98,6 @@
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
 
 	const scrollHidden = inject('scrollHidden'); // Coming from app vue
-	const scrollVisibil = inject('scrollVisibil'); // Coming from app vue
 	const showTheScheduleForm = inject('showTheScheduleForm'); // Coming from app vue
     
 	let pollFormData = ref(); // Poll form data

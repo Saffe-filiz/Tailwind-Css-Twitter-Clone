@@ -12,7 +12,7 @@
 
 	const store = useStore()
 
-	const setGanre = (ganre) => store.state.gifGanre = ganre
+	const setGanre = ( ganre ) => store.state.gifGanre = ganre
 	
     let genres = [
 	{

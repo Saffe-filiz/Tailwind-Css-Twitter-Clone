@@ -45,7 +45,8 @@
 		}
 	}
 	
-    const showTheScheduleForm = ref(true);
+    const showTheScheduleForm = ref(false);
+    const showTheGif = ref(false)
 
     // Hide page scroll
 	const scrollHidden = () => {
