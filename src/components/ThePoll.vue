@@ -4,26 +4,13 @@
 		<div class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" :class="{'pr-2.75': !questCounter}">
 			<span class="w-full h-[53px] border border-input-main-border-color  rounded focusInput relative" v-for="num in pollQuestions.pollQuestCounter" :key="num">
 			<label>
-				<!-- QUESTİON INPUT START -->
 			    <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input" type="text" v-model="pollQuestions.quest[num -1]" maxlength="25">  
-			    <!-- QUESTİON INPUT END -->
-			        <!-- INPUT PLACEHOLDER START-->
 			    <span class="absolute focus top-3 text-lg left-2 duration-200"  :class="{'input-text': labelAnimation(num)}"> {{inputPlaceHolder(num)}}</span>
-			        <!-- INPUT PLACEHOLDER START-->
-			        <!-- QUESTİON INPUT LATTER COUNTER START -->
 			    <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">{{pollQuestions.quest[num -1].length}} / 25</span>
-			        <!-- QUESTİON INPUT LATTER COUNTER END -->
 			 </label>
 			</span>
 		</div>
-		<!-- ADD NEW INPUT QUESTİON START -->
-		<div class="w-[3.063rem] relative pl-1 group relative" v-if="questCounter">
-			<div class="w-8 h-8 flexCenter rounded-full absolute hover:bg-[#1d9bf01a] bottom-6 cursor-pointer" @click="addNewQuestion">
-				<Plus class="w-[20px] h-[20px] text-[8px]"/>
-			    <span class="tooltip bottom-[-15px]">Add</span> 
-			</div>
-		</div>
-		<!-- ADD NEW INPUT QUESTİON END -->
+		<TheAddNewPollQuestion  @click="addNewQuestion"  v-if="questCounter"/>
 	</div>
 	<!-- POLL DURATIN TIMER START -->
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
@@ -67,8 +54,8 @@
 <script setup>
 	import { reactive, computed, onMounted, watch, nextTick } from 'vue';
 
-	import Plus from './icons/Plus.vue';
 	import SelectBox from './SelectBox.vue'
+	import TheAddNewPollQuestion from './TheAddNewPollQuestion.vue';
 
 	// All question
     const pollQuestions = reactive({
