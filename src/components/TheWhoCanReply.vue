@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-[2.125rem] border-b border-min-border-color">
+    <div class="w-full h-[2.125rem] border-b border-min-border-color" :class="{'opacity-70 pointer-events-none': is.active}">
 		<span class="w-auto px-3 h-[22px] hover:bg-[#1d9bf01a] inline-flex items-center justify-center rounded-full">
 		    <div class="w-auto h-[20px] inline-flex items-center justify-center relative group "  tabindex="1">
 		    	<component :is="icons[selected]" class="w-[15px] h-[15px] mr-1"></component>
@@ -40,7 +40,7 @@
 		import Check from './icons/WhoCanReplyIcons/Check.vue';
 
 		import { ref } from 'vue';
-
+        const is = defineProps({active: Boolean})
 		const selected = ref(0)
 		const icons = [World, People, MentionIcon];
 		const whoCanReply = ['Everyone', 'People you follow', 'Only people you mention'];

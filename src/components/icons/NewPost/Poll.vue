@@ -1,5 +1,5 @@
 <template>
-	<span  class="group tooltipContainer"  :class="{'pointer-events-none': active.isActive}">
+	<span  class="group tooltipContainer" :class="{'pointer-events-none': active.isActive}">
          <span class="w-8.5 h-8.5 flexCenter rounded-full hover:bg-[#1d9bf01a] cursor-pointer fill-[#1DA1F2]" 
          :class="{'fill-[#8ecdf8] hover:bg-white cursor-auto pointer-events-none' : active.isActive}">
              <svg class="w-[1.188rem] h-[1.188rem]" viewBox="0 0 24 24">

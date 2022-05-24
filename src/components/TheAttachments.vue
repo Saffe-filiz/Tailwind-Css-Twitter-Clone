@@ -1,10 +1,10 @@
 <template>
 	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-		<Madia :isActive="active.imagesCount == 4 || active.attachment.gif || active.attachment.showPoll" :madiaType="active.attachment.image"/>
-	    <Gif :isActive="active.attachment.image || active.attachment.gif || active.attachment.showPoll"  @click="showGifContent = true, scrollHidden()"/>
-		<Poll @click="$emit('showPoll', true)" :isActive="active.attachment.gif || active.attachment.image" />
+		<Madia :isActive="is.active[1] == 4 || is.active[0].gif || is.active[0].poll" :madiaType="is.active[0].image"/>
+	    <Gif :isActive="is.active[0].image || is.active[0].gif || is.active[0].poll"  @click="showGifContent = true, scrollHidden()"/>
+		<Poll @click="$emit('showPoll', true)" :isActive="is.active[0].gif || is.active[0].image || is.active[2]" />
 	    <Emoji/>
-	    <Schedule :isActive="active.attachment.showPoll || active.attachment.whoCanReply != 'Everyone'" @click="scrollHidden(), showSchedule = true"/>
+	    <Schedule :isActive="is.active[0].poll || is.active[0].whoCanReply != 'Everyone'" @click="scrollHidden(), showSchedule = true"/>
 	    <Mark/>
 	</div>
 </template>
@@ -17,9 +17,9 @@
 	import Schedule from './icons/NewPost/Schedule.vue';
 	import Mark from './icons/NewPost/Mark.vue';
 
-	import { inject } from 'vue'
+	import { inject, computed } from 'vue'
 
-	const active = defineProps(['attachment', 'imagesCount'])
+	const is = defineProps({active: Array})
 
 	const scrollHidden = inject('scrollHidden'); // Coming from app vue
 	const showSchedule = inject('showSchedule'); // Coming from app vue

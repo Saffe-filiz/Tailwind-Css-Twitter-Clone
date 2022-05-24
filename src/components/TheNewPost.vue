@@ -3,15 +3,15 @@
 	<UserProfileImage :size="10.75" class="mr-2"/>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :info="date.info" @click="showSchedule = true" v-if="date.info"/>
-			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.showPoll]">
+			<TheScheduleInfo :info="date.info" @click="showSchedule = true" />
+			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.poll]">
 		        <TextArea @post="(text) => post.massage = text" @click="selected.whoCanAnswer = true"/>
-		        <ThePoll v-if="selected.showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
+		        <ThePoll v-if="selected.poll" @hiddePoll="(pollObject) => pollData(pollObject)" :pollData="pollFormData"/>
 		    </DragArea>
-		    <TheWhoCanReply v-if="showWhoCanAwserContent" @whoCanReply="(value) => selected.whoCanReply = value"/>
+		    <TheWhoCanReply v-if="showWhoCanAwser" @whoCanReply="(value) => selected.whoCanReply = value" :active="date.sending"/>
 		 </div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
-	    	<TheAttachments :attachment="selected" :imagesCount="images.length" @showPoll="(value) => selected.showPoll = value"/>
+	    	<TheAttachments :active="[selected, images.length, date.sending]" @showPoll="(value) => selected.poll = value"/>
 	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
 	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
 	    		    <TheCircle :post="post.massage.length"/>
@@ -23,7 +23,7 @@
 	    		   </div>
 	    		</div>
 	    		<!-- SEND NEW TWEET BUTTON START --> 
-	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]" :class="{'pointer-events-none opacity-50': !post.massage}" @click="sendTweet">
+	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]" :class="{'pointer-events-none opacity-50': !post.massage}">
 	    			<span v-if="date.info" >Schedule</span>
 	    			<span v-else>Tweet</span>
 	    		</button>
@@ -55,22 +55,24 @@
 
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
-	let selected = reactive({
-		gif: false,
-		image: false,
-		imageError: false,
-		showPoll: false,
-		whoCanAnswer: false,
-		whoCanReply: 'Everyone',
-	})
 
 	const store = useStore();
     
     const date = computed(() => store.getters.getSchedule) 
 
+    let selected = reactive({
+		gif: false,
+		image: false,
+		imageError: false,
+		poll: false,
+		whoCanAnswer: false,
+		whoCanReply: 'Everyone',
+	})
+
+
 	const closePopUp = () => [showGifContent.value, showSchedule.value].map( v => v = false)
 
-	const showWhoCanAwserContent = computed(() => Object.keys(selected).some( item => selected[item] == true ) )
+	const showWhoCanAwser = computed(() => Object.keys(selected).some( item => selected[item] == true ) )
 
     // Image upload error massage
 	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
@@ -79,7 +81,7 @@
     	draggableAreaActive.value = false
     	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
     	let uploadMadiaCount = images.value.length;
-    	if(selected.showPoll || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return imageError();
+    	if(selected.poll || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return imageError();
 
     	let image = e.target.files || e.dataTransfer.files;
     	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
@@ -110,7 +112,7 @@
 
     // Emit from poll component
 	const pollData = ( obj ) => {
-		selected.showPoll = obj.showPoll;
+		selected.poll = obj.showPoll;
 		pollFormData.value = obj.data;
 	};
     // Set poll ending date

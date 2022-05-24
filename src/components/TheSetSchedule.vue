@@ -30,6 +30,5 @@
 	const scrollVisibil = inject('scrollVisibil');
 
 	const store = useStore();
-
 	const sendSchedule = ( obj ) => store.commit('setSchedule', obj)
 </script>
