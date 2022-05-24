@@ -6,7 +6,7 @@
 			<TheScheduleInfo :info="date.info" @click="showSchedule = true" />
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.poll]">
 		        <TextArea @post="(text) => post.massage = text" @click="selected.whoCanAnswer = true"/>
-		        <ThePoll v-if="selected.poll" @hiddePoll="(pollObject) => pollData(pollObject)" :pollData="pollFormData"/>
+		        <ThePoll v-if="selected.poll" @removePoll="(pollObject) => pollData(pollObject)" :pollData="pollFormData"/>
 		    </DragArea>
 		    <TheWhoCanReply v-if="showWhoCanAwser" @whoCanReply="(value) => selected.whoCanReply = value" :active="date.sending"/>
 		 </div>
@@ -22,12 +22,7 @@
 	    		        </div>
 	    		   </div>
 	    		</div>
-	    		<!-- SEND NEW TWEET BUTTON START --> 
-	    		<button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]" :class="{'pointer-events-none opacity-50': !post.massage}">
-	    			<span v-if="date.info" >Schedule</span>
-	    			<span v-else>Tweet</span>
-	    		</button>
-	    		<!-- SEND NEW TWEET BUTTON START --> 
+	    		<TheNewPostSend :isSchedule="date.info"  :isReady="!post.massage"/>
 	    	</div>
 	    </div>
 	</div>
@@ -50,6 +45,7 @@
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
 	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
+	import TheNewPostSend from './TheNewPostSend.vue';
     // Icons 	
 	import Plus from './icons/Plus.vue';
 

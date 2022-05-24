@@ -44,7 +44,7 @@
 	<!-- POLL DURATIN TIMER END -->
 	<!-- REMOVE POLL BUTTON START -->
 	<div class="w-full h-[3.125rem] rounded-b-2xl border-t border-[#cfd9de] hover:bg-[#f4212e1a] hoverDuration">
-		<button class="w-full h-full bg-red text-[#f4212e]" @click="$emit('hiddePoll', {'data': pollQuestions, 'showPoll': false})">Remove Poll</button>
+		<button class="w-full h-full bg-red text-[#f4212e]" @click="$emit('removePoll', {'data': pollQuestions, 'showPoll': false})">Remove Poll</button>
 	</div>
 	<!-- REMOVE POLL BUTTON END -->
 </article>
