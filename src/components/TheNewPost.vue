@@ -3,7 +3,7 @@
 	<UserProfileImage :size="10.75" class="mr-2"/>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :info="date.info" @click="showSchedule = true"/>
+			<TheScheduleInfo :info="date.info" @click="showSchedule = true" v-if="date.info"/>
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.showPoll]">
 		        <TextArea @post="(text) => post.massage = text" @click="selected.whoCanAnswer = true"/>
 		        <ThePoll v-if="selected.showPoll" @hiddePoll="(pollObject) => pollData(pollObject)"  :pollData="pollFormData"/>
@@ -38,6 +38,7 @@
 
 <script setup>
 	import { ref, computed, inject, provide, reactive, watch } from 'vue';
+	import { useStore } from 'vuex';
 
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
@@ -52,8 +53,6 @@
     // Icons 	
 	import Plus from './icons/Plus.vue';
 
-	let date = ref({})
-
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
 	let selected = reactive({
@@ -64,6 +63,10 @@
 		whoCanAnswer: false,
 		whoCanReply: 'Everyone',
 	})
+
+	const store = useStore();
+    
+    const date = computed(() => store.getters.getSchedule) 
 
 	const closePopUp = () => [showGifContent.value, showSchedule.value].map( v => v = false)
 

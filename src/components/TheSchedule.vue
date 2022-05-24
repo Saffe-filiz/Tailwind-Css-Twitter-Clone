@@ -1,35 +1,9 @@
 <template>
 	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto mt-7">
-	<div class="w-full h-[3.125rem] inline-flex flex-row items-center justify-between px-3">
-		<div class="flex items-center justify-between ">
-			<!-- EXIT BUTTON START -->
-		    <span class="w-[2rem] h-[2rem] rounded-full hover:bg-[#0f14191a] cursor-pointer flex items-center justify-center text-[#2d3136] hoverDuration" 
-		    @click="scrollVisibil">&#10005</span>
-		    <!-- EXIT BUTTON END -->
-			<span class="ml-[1.7rem]">Schedule</span>
-		</div>
-		<div class="inline-flex justify-between items-center mr-1">
-			<span  class="px-[15px] h-[30px] rounded-[15px] cursor-pointer flex items-center hover:bg-[#0c14191a] mr-4 rounded-full" v-if="update.date.sending"
-			 @click="scrollVisibil, $emit('date', {})">
-				<span class="h-[22px] border-b-2 border-black text-[16px] font-medium">Clear</span>
-			</span>
-			<button class="h-[30px] px-[15px] bg-[#0f1419] text-[13px] font-bold text-white rounded-[2rem]"
-			 :disabled="!!showErrorMassage[0]" :class="{'opacity-70': showErrorMassage[0]}" @click="$emit('date', scheduling), scrollVisibil">
-			    <span v-if="!update.date.sending">Confirm</span>
-			    <span v-else>Update</span>
-		    </button>
-		</div>
-	</div>
+        <TheSetSchedule :sending="update.sending" :scheduling="scheduling" :error="showErrorMassage[0]"/>
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">
-			<!-- DATE INFO START -->
-			<span class="h-0.5">
-				<span class="inline-flex items-center" v-if="!showErrorMassage[1]">
-					<Calendar/>
-				    <span class="text-[12px] text-[#536471]">{{setTimeInfo}}</span>
-				</span>
-			</span>
-			<!-- DATE INFO END -->
+			<TheScheduleInfo v-if="!showErrorMassage[1]" :info="setTimeInfo"/>
 		<div>
 		<span class="text-[15px] text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
@@ -90,12 +64,17 @@
 </template>
 
 <script setup>
+
 	import { inject, ref, computed, onMounted, reactive, watch } from 'vue';
+	import { useStore } from 'vuex';
+
 	import DownArrow from './icons/DownArrow.vue';
 	import Calendar from './icons/NewPost/Calendar.vue';
-	import SelectBox from './SelectBox.vue'
+	import SelectBox from './SelectBox.vue';
+	import TheScheduleInfo from './TheScheduleInfo.vue';
+	import TheSetSchedule from './TheSetSchedule.vue';
 
-	const scrollVisibil = inject('scrollVisibil');
+	
 
 	// POST SEND DATE START
 	const scheduling = reactive({
@@ -106,13 +85,14 @@
 
 	// SET NEW DATE START
 
+    const store = useStore();
 	// Date prop
-	let update = defineProps({date: Object});  
+	let update = computed(() => store.getters.getSchedule) 
 
-    onMounted(() => currentTime());
+   onMounted(() => currentTime());
 	// Set new date
 	const currentTime = () => {
-		let dateUpdata = update.date
+		let dateUpdata = update.value
 		let date = currentDate.value
 		date.forEach( (item, index) =>  scheduling.date[index] = dateUpdata.date?.[index] || item )
 	}

@@ -5,12 +5,15 @@ const store = createStore({
 	    gifts: [],
 	    gifGanre: '',
 	    error: '',
+	    schedule: {},
 	},
 
 	getters: {
 		getGifImages: state => state.gifts.flat().map( item => item.images['fixed_height_small_still'].url),
 
 		getGifs: state => state.gifts.flat().map( item => item.images['fixed_height_small'].url),
+
+		getSchedule: state => state.schedule
 
 	},
 
@@ -25,6 +28,10 @@ const store = createStore({
 
 		error ( state, item ) {
 			state.error = item
+		},
+
+		setSchedule (state, object) {
+			state.schedule = object
 		}
 	},
 

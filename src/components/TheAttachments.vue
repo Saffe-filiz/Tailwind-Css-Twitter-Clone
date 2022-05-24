@@ -25,5 +25,3 @@
 	const showSchedule = inject('showSchedule'); // Coming from app vue
 	const showGifContent = inject('showGifContent'); // Coming from app vue
 </script>
-
-//@click="scrollHidden(), showSchedule = true"
