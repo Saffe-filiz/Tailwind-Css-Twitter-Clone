@@ -2,7 +2,7 @@
 	<article class="w-[31.563rem] pt-3 mb-1 border border-input-main-border-color  rounded-2xl">
 	<div class="w-full h-auto inline-flex flex-row">
 		<div class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" :class="{'pr-2.75': !questCounter}">
-			<span class="w-full h-[53px] border border-input-main-border-color  rounded focusInput relative" v-for="num in pollQuestions.pollQuestCounter" :key="num">
+			<span class="w-full h-[53px] border border-input-main-border-color  rounded focusInput relative" v-for="num in pollQuestions.counter" :key="num">
 			<label>
 			    <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input" type="text" v-model="pollQuestions.quest[num -1]" maxlength="25">  
 			    <span class="absolute focus top-3 text-lg left-2 duration-200"  :class="{'input-text': labelAnimation(num)}"> {{inputPlaceHolder(num)}}</span>
@@ -43,9 +43,7 @@
 	</div>
 	<!-- POLL DURATIN TIMER END -->
 	<!-- REMOVE POLL BUTTON START -->
-	<div class="w-full h-[3.125rem] rounded-b-2xl border-t border-[#cfd9de] hover:bg-[#f4212e1a] hoverDuration">
-		<button class="w-full h-full bg-red text-[#f4212e]" @click="$emit('removePoll', {'data': pollQuestions, 'showPoll': false})">Remove Poll</button>
-	</div>
+    <TheRemovePoll @click="$emit('removePoll', {'data': pollQuestions, 'showPoll': false})"/>
 	<!-- REMOVE POLL BUTTON END -->
 </article>
 </template>
@@ -56,12 +54,12 @@
 
 	import SelectBox from './SelectBox.vue'
 	import TheAddNewPollQuestion from './TheAddNewPollQuestion.vue';
-
+	import TheRemovePoll from './TheRemovePoll.vue';
 	// All question
     const pollQuestions = reactive({
     	'quest': ['', '', '', ''],
     	'pollLength': [1, 0, 0],
-    	'pollQuestCounter': 2, 
+    	'counter': 2, 
     });
 
     onMounted(() => setQuestiobData())
@@ -72,8 +70,8 @@
     	if(!pollData.pollData) return;
     	let emptyIndex = pollData.pollData.quest.filter( item => item != '');
     	let questLength = emptyIndex.length < 2 ? 2: emptyIndex.length
-    	pollData.pollData.pollQuestCounter = questLength;
-    	Array.from({length: pollData.pollData.pollQuestCounter}, (_, i) => emptyIndex.push(''));
+    	pollData.pollData.counter = questLength;
+    	Array.from({length: pollData.pollData.counter}, (_, i) => emptyIndex.push(''));
     	!emptyIndex[0] ? inputFocus.value(0): null;
     	return emptyIndex;
     })
@@ -83,15 +81,15 @@
     	if(!pollData.pollData) return inputFocus.value(0);
     	pollQuestData.value.forEach((item, index) => pollQuestions.quest[index] = item || '')
     	pollData.pollData.pollLength.forEach((item, index) => pollQuestions.pollLength[index] = item || 0);
-    	pollQuestions.pollQuestCounter = pollData.pollData.pollQuestCounter;
+    	pollQuestions.pollQuestCounter = pollData.pollData.counter;
     }
     
     // Show new question button
-    const questCounter = computed(() => pollQuestions.pollQuestCounter < 4 );
+    const questCounter = computed(() => pollQuestions.counter < 4 );
 
     // Add new quest
     const addNewQuestion = () => {
-    	pollQuestions.pollQuestCounter++
+    	pollQuestions.counter++
     	pollQuestions.quest.push('');
     };
 
@@ -146,6 +144,6 @@
     })
     
     // Quest input counter watcher
-   watch(()=> pollQuestions.pollQuestCounter, (oldValue, newValue) => !pollQuestions.quest[newValue] ? inputFocus.value(newValue): null)
+   watch(()=> pollQuestions.counter, (oldValue, newValue) => !pollQuestions.quest[newValue] ? inputFocus.value(newValue): null)
 
 </script>

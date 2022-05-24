@@ -38,11 +38,15 @@
 
 	const setSideBarPosition = () => {
 		if(window.pageYOffset >= 510){
-			return [setPositions.sideBarPosition = 'fixed', setPositions.topValue = '-445px', 
-			setPositions.searchPosition = 'fixed', setPositions.searchTopValue = '0px']
+			setPositions.sideBarPosition = 'fixed';
+			setPositions.topValue = '-445px';
+			setPositions.searchPosition = 'fixed';
+			setPositions.searchTopValue = '0px';
 		}else {
-			return [setPositions.sideBarPosition = 'static', setPositions.topValue = '0px',
-			setPositions.searchPosition = 'sticky', setPositions.searchTopValue = '600']
+			setPositions.sideBarPosition = 'static';
+			setPositions.topValue = '0px';
+			setPositions.searchPosition = 'sticky';
+			setPositions.searchTopValue = '600';
 		}
 	}
 	
@@ -62,8 +66,8 @@
 		showSchedule.value = false;
 	}
 
-	provide('scrollHidden', scrollHidden); // Hidden body scroll.
-	provide('scrollVisibil', scrollVisibil); // Show body scroll.
-	provide('showSchedule', showSchedule); // Toggle drag area css class.
+	provide('scrollHidden', scrollHidden); 
+	provide('scrollVisibil', scrollVisibil);
+	provide('showSchedule', showSchedule);
 	provide('showGifContent', showGifContent)
 </script> 

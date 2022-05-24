@@ -9,21 +9,10 @@
 		        <ThePoll v-if="selected.poll" @removePoll="(pollObject) => pollData(pollObject)" :pollData="pollFormData"/>
 		    </DragArea>
 		    <TheWhoCanReply v-if="showWhoCanAwser" @whoCanReply="(value) => selected.whoCanReply = value" :active="date.sending"/>
-		 </div>
+		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	    	<TheAttachments :active="[selected, images.length, date.sending]" @showPoll="(value) => selected.poll = value"/>
-	    	<div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
-	    		<div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
-	    		    <TheCircle :post="post.massage.length"/>
-	    		    <div class="w-px h-[29px] ml-[9px] mr-2.75 bg-[#c0d0d8]"></div>
-	    		    <div class="w-[23px] flexCenter ">
-	    		   	    <div class="w-full h-[23px] flexCenter rounded-full border border-b border-min-border-color">
-	    		   	        <Plus class="w-3.75 h-3.75"/>
-	    		        </div>
-	    		   </div>
-	    		</div>
-	    		<TheNewPostSend :isSchedule="date.info"  :isReady="!post.massage"/>
-	    	</div>
+            <TheNewPostCircleGrup :massage="post.massage" :date="!date.info"/>
 	    </div>
 	</div>
     </article>
@@ -37,7 +26,6 @@
 
  	import ThePoll from './ThePoll.vue'
 	import PopUp from './PopUp.vue'
-	import TheCircle from './TheCircle.vue';
 	import TextArea from './TextArea.vue';
 	import DragArea from './DragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';
@@ -45,9 +33,8 @@
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
 	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
-	import TheNewPostSend from './TheNewPostSend.vue';
-    // Icons 	
-	import Plus from './icons/Plus.vue';
+	import TheNewPostCircleGrup from './TheNewPostCircleGrup.vue';
+	
 
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
