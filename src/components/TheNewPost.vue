@@ -12,7 +12,7 @@
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
 	    	<TheAttachments :active="[selected, images.length, date.sending]" @showPoll="(value) => selected.poll = value"/>
-            <TheNewPostCircleGrup :massage="post.massage" :date="!date.info"/>
+            <TheNewPostCircleAndSend :massage="post.massage" :date="!date.info"/>
 	    </div>
 	</div>
     </article>
@@ -33,7 +33,7 @@
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
 	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
-	import TheNewPostCircleGrup from './TheNewPostCircleGrup.vue';
+	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
 
     const images = ref([]); // Take image.
