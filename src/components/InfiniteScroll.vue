@@ -3,18 +3,23 @@
 </template>
 
 <script  setup>
-	import { ref, onMounted, defineEmits } from 'vue';
-	const emit = defineEmits(['test'])
+	import { ref, onMounted } from 'vue';
+	import { useStore } from 'vuex';
+
+	const store = useStore()
 
 	let observer = ref(null);
 	let trigger = ref(null)
-   onMounted(() => {
+	let incress = ref(20)
+
+    onMounted(() => {
    	   observer.value = new IntersectionObserver(([entery]) => {
    	   	if(entery && entery.isIntersecting){
-   	   	    emit('test', 10)
-   	   		
-   	   	}
-   	   })
+   	   		   incress.value += 10
+   	   	       store.commit('setGifOfNumber', incress.value)
+
+   	   	    }
+   	    })
    	   observer.value.observe(trigger.value)
    })
 

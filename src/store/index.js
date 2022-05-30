@@ -2,32 +2,39 @@ import { createStore } from 'vuex'
 
 const store = createStore({
 	state: {
-	    gifts: [],
-	    gifGanre: '',
-	    error: '',
+	    gifData: {
+	    	gifs: [],
+	    	numberOfGif: 20,
+	    	ganre: '',
+	    },
+
 	    schedule: {},
 	},
 
 	getters: {
-		getGifImages: state => state.gifts.flat().map( item => item.images['fixed_height_small_still'].url),
+		getGifImages: state => state.gifData.gifs.flat().map( item => item.images['fixed_height_small_still'].url),
 
-		getGifs: state => state.gifts.flat().map( item => item.images['fixed_height_small'].url),
+		getGifs: state => state.gifData.gifs.flat().map( item => item.images['fixed_height_small'].url),
+
+		getGifGanre: state => state.gifData.ganre,
+
+		getNumberOfGif: state => state.gifData.numberOfGif,
 
 		getSchedule: state => state.schedule,
 
 	},
 
 	mutations: {
-		setGif (state, item) {
-			state.gifts = item;
+		setGif(state, item) {
+			state.gifData.gifs = item;
 		},
 
-		setClearGifState (state, payload) {
-			state.gifts = payload;
+		setGifOfNumber(state, number) {
+			state.gifData.numberOfGif = number
 		},
 
-		error ( state, item ) {
-			state.error = item;
+		setGifGanre(state, ganre) {
+			state.gifData.ganre = ganre
 		},
 
 		setSchedule (state, object) {
@@ -37,7 +44,8 @@ const store = createStore({
 
 	actions: {
 		getGifts ({ commit }, payload) {
-			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload.ganre}&limit=${payload.number}&offset=0&rating=g&lang=en`)
+			console.log(payload)
+			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload.ganre}&limit=${payload.number}&offset=2&rating=g&lang=en`)
 			    .then( response => response.json())
 			    .then( response =>  {
 			    	console.log(response.data)
