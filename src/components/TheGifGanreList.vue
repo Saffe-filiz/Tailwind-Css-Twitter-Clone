@@ -1,18 +1,24 @@
 <template>
-	<div  class="w-[18.063rem] h-[8.75rem] last:w-full relative cursor-pointer" v-for="ganre in genres" @click="setGanre(ganre.title)">
-		<img :src="ganre.url" class="w-full h-full object-cover" draggable="false">
-	    <span class="absolute bottom-0 p-2 text-lg  text-white font-bold z-10">{{ganre.title}}</span>
+	<div  class="w-[18.063rem] h-[8.75rem] last:w-full relative cursor-pointer" v-for="(ganre, index) in genres" @click="setGanre(ganre.title)">
+		<div class="w-full h-full bg-red-100">
+			<img :src="ganre.url" class="w-full h-full object-cover" draggable="false">
+	        <span class="absolute bottom-0 p-2 text-lg  text-white font-bold z-10">{{ganre.title}}</span>
+		</div>
 	</div>
 </template>
 
 
 <script setup>
-
+	import {computed} from 'vue';
 	import { useStore } from 'vuex';
 
 	const store = useStore()
 
 	const setGanre = ( ganre ) => store.state.gifGanre = ganre
+
+	const bgColor = computed(() => (i) => {
+		return i % 3 == 0 ? 'bg-[#7856ff]': i % 2 == 0 ? 'bg-[#f91880]': i % 1 == 0 ? 'bg-[#ffd400]': 'bg-[#00ba7c]'
+	})
 	
     let genres = [
 	{

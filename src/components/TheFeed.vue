@@ -3,6 +3,7 @@
 		<slot/>
 		<div class="w-full h-px my-1 border-b border-min-border-color"></div>
 		<Post/>
+
 	</div>
 </template>
 

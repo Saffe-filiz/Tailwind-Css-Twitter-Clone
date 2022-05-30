@@ -13,7 +13,7 @@ const store = createStore({
 
 		getGifs: state => state.gifts.flat().map( item => item.images['fixed_height_small'].url),
 
-		getSchedule: state => state.schedule
+		getSchedule: state => state.schedule,
 
 	},
 
@@ -23,26 +23,27 @@ const store = createStore({
 		},
 
 		setClearGifState (state, payload) {
-			state.gifts = payload
+			state.gifts = payload;
 		},
 
 		error ( state, item ) {
-			state.error = item
+			state.error = item;
 		},
 
 		setSchedule (state, object) {
-			state.schedule = object
-		}
+			state.schedule = object;
+		},
 	},
 
 	actions: {
 		getGifts ({ commit }, payload) {
-			return new Promise((resolve, reject) => {
-				fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=40&offset=0&rating=g&lang=en`)
-			        .then( response => response.json())
-			        .then( response =>  resolve(commit('setGif', response.data)))
-			        .catch( error =>  reject(console.log(error)) ) 
-			})
+			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload.ganre}&limit=${payload.number}&offset=0&rating=g&lang=en`)
+			    .then( response => response.json())
+			    .then( response =>  {
+			    	console.log(response.data)
+			    	commit('setGif', response.data)
+			    })
+			    .catch( error =>  console.log(error))
 		},
 	}
 })

@@ -9,7 +9,7 @@
 		    	<SearchIcon :size="14" class="flexCenter fill-[#536471] mr-1"/>
 		        <div class="group-focus-within:w-[420px] inline h-full relative overflow-hidden" :class="[search.length ? 'w-auto': 'w-28']">
 		          	<span class="span relative z-[-1]">{{search}}</span>
-		        	<input type="text" class="w-full h-full absolute z-10 left-0 -top-[1px] outline-none gifSearch" @input="searchGif" v-model="search" placeholder="Search for GIFs" />
+		        	<input type="text" class="w-full h-full absolute z-10 left-0 -top-[1px] outline-none gifSearch" v-model="search" placeholder="Search for GIFs" />
 		        </div>
 		    <div class="w-9 inline-flex justify-end items-center" v-if="search">
 		    <CrossIcon tabindex="-1" :size="11" class="group-focus-within:visible invisible w-[1.219rem] h-[1.219rem] bg-black fill-white" @click="celarSearch"/>
@@ -24,16 +24,19 @@
 	import CrossIcon from './icons/Cross.vue';
 	import ArrowIcon from './icons/Arrow.vue';
 
-	import { ref, onMounted, watch, inject } from 'vue';
+	import { ref, onMounted, watch, inject, computed } from 'vue';
 	import { useStore } from 'vuex';
 
 	const store = useStore()
 
-	const searchArea = defineProps({ganre: String});
+	const gif = defineProps({ganre: String, number: Number});
 	const scrollVisibil = inject('scrollVisibil');
 	const showGifContent = inject('showGifContent');
 
-	const searchGif =  () => store.dispatch('getGifts', search.value).catch(() => console.log('dd'));
+	const searchGif = computed( () => {
+		store.dispatch('getGifts', {ganre: search.value, number: gif.number});
+		console.log('call', gif.number)
+	})
 	const search = ref('');
 
     const celarSearch = () =>  {
@@ -46,6 +49,6 @@
 
     const inputFocus = () => document.querySelector('.gifSearch').focus();
 
-    watch(() => searchArea.ganre, (ganre) => [inputFocus(), search.value = ganre, searchGif()])
+    watch(() => gif.ganre, (ganre) => [inputFocus(), search.value = ganre])
 
 </script>
