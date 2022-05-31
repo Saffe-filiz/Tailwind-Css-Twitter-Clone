@@ -1,6 +1,6 @@
 <template>
-	<section class="w-[37.5rem] h-[36.938rem] h-auto bg-white m-auto mt-[2.063rem] rounded-2xl overflow-auto">
-		<div class="h-full w-full overflow-y-scroll searchInput  inline-flex flex-wrap gap-1">
+	<section class="w-[37.5rem] h-[36.938rem] h-auto bg-white m-auto rounded-2xl overflow-auto">
+		<div class="h-full w-full overflow-y-scroll inline-flex flex-wrap gap-1">
 		    <TheGifSearch />
 	        <TheGifAutoPlay v-if="isActive" />
 	        <TheGifGanreList v-if="!isActive"/>

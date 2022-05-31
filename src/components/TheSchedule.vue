@@ -1,5 +1,5 @@
 <template>
-	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto mt-7">
+	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto">
         <TheSetSchedule :sending="update.sending" :scheduling="scheduling" :error="showErrorMassage[0]"/>
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">

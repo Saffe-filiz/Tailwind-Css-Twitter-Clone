@@ -1,5 +1,5 @@
 <template>
-	<article class="w-[598px] min-h-[6.375rem] h-auto py-1 pl-3.75 inline-flex flex-row justify-betweenr">
+	<article class="w-full py-1 pl-3.75 inline-flex flex-row justify-betweenr">
 	<UserProfileImage :size="10.75" class="mr-2"/>
 	<div class="w-full flex flex-col"> 
 		<div class="w-full h-auto">
@@ -16,7 +16,7 @@
 	    </div>
 	</div>
     </article>
-    <PopUp/>
+   
     <TheDragAreaErorrMassage :error="[selected.imageError, selected.showPoll]"/> 
 </template>
 

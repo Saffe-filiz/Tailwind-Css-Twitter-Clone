@@ -14,7 +14,8 @@
 		    	</ul>
 		    </div>
 		   <div class="w-full h-[4.938rem] mt-4">
-			   <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full" @click="showTheSchedule = true">Tweet</button>
+			   <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full"
+			   @click="showNewTweet = true">Tweet</button>
 		   </div>
       </nav>
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
@@ -37,13 +38,11 @@
         <!-- More BUTTON START -->
 	    </div>
 	</aside>
-	<PopUp v-if="showTheSchedule" @click="showTheSchedule = false">
-      
-    </PopUp>
+	<PopUp />
 </template>
 
 <script setup>
-	import { ref, computed } from 'vue';
+	import { ref, computed, inject } from 'vue';
 
  	import Logo from './icons/NavigationIcons/Logo.vue';
 	import Home from './icons/NavigationIcons/Home.vue';
@@ -62,5 +61,7 @@
 	const selected = ref(0)
 	const icons = [Home, Explore, Notifications, Massages, Bookmarks, List, Profile, More];
 	const iconsName = ['Home', 'Explore', 'Notifications', 'Massages', 'Bookmarks', 'List', 'Profile', 'More'];
+    
 
+    const showNewTweet = inject('showNewTweet');
 </script>

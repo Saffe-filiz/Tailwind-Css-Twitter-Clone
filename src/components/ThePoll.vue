@@ -5,7 +5,7 @@
 			<span class="w-full h-[53px] border border-input-main-border-color  rounded focusInput relative" v-for="num in poll.counter" :key="num">
 			    <label>
 			        <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input" type="text" v-model="poll.quest[num -1]" maxlength="25">  
-			        <span class="absolute focus top-3 text-lg left-2 duration-200"  :class="{'input-text': labelAnimation(num)}"> {{inputPlaceHolder(num)}}</span>
+			        <span class="absolute focus top-3 text-lg left-2 duration-200" :class="{'input-text': labelAnimation(num)}"> {{inputPlaceHolder(num)}}</span>
 			        <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">{{poll.quest[num -1].length}} / 25</span>
 			    </label>
 			</span>

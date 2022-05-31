@@ -41,6 +41,7 @@
     const celarSearch = () =>  {
     	store.commit('setGif', [])
     	store.commit('setGifOfNumber', 20)
+    	store.commit('setGifGanre', '')
     	store.state.gifGanre = '';
     	search.value = ''
     };
