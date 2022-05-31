@@ -20,9 +20,9 @@
 </template>
 
 <script setup>
-	import SearchIcon from './icons/Search.vue';
-	import CrossIcon from './icons/Cross.vue';
-	import ArrowIcon from './icons/Arrow.vue';
+	import SearchIcon from '../icons/Search.vue';
+	import CrossIcon from '../icons/Cross.vue';
+	import ArrowIcon from '../icons/Arrow.vue';
 
 	import { ref, onMounted, watch, inject, computed } from 'vue';
 	import { useStore } from 'vuex';
@@ -35,7 +35,7 @@
 	const getGanre = computed(() => store.getters.getGifGanre);
 	const getNumberOfGif = computed(() => store.getters.getNumberOfGif);
 
-	const searchGif = () => store.dispatch('getGifts', {ganre: search.value, number: getNumberOfGif.value});
+	const getGifs = () => store.dispatch('getGifts', {ganre: search.value, number: getNumberOfGif.value});
 
 
     const celarSearch = () =>  {
@@ -52,7 +52,11 @@
     watch(() => getGanre.value, (ganre) => {
     	inputFocus();
         search.value = ganre;
-    	searchGif();
+    	getGifs();
+    })
+
+    watch(()=> getNumberOfGif.value, (number) => {
+    	getGifs();
     })
 
     const scrollVisibil = inject('scrollVisibil');

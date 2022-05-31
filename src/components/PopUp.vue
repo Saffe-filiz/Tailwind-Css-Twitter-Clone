@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-	import TheGif from './TheGif.vue';
+	import TheGif from './Gif/TheGif.vue';
 	import TheSchedule from './TheSchedule.vue';
 	import { inject, computed } from 'vue';
 

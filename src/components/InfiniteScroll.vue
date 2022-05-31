@@ -10,13 +10,14 @@
 
 	let observer = ref(null);
 	let trigger = ref(null)
-	let incress = ref(20)
+	let increase = ref(20)
 
     onMounted(() => {
+    	console.log(increase.value)
    	   observer.value = new IntersectionObserver(([entery]) => {
    	   	if(entery && entery.isIntersecting){
-   	   		   incress.value += 10
-   	   	       store.commit('setGifOfNumber', incress.value)
+   	   		   increase.value += 10
+   	   	       store.commit('setGifOfNumber', increase.value)
 
    	   	    }
    	    })

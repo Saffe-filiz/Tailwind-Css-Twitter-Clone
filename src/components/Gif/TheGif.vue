@@ -2,11 +2,9 @@
 	<section class="w-[37.5rem] h-[36.938rem] h-auto bg-white m-auto mt-[2.063rem] rounded-2xl overflow-auto">
 		<div class="h-full w-full overflow-y-scroll searchInput  inline-flex flex-wrap gap-1">
 		    <TheGifSearch />
-	        <TheGifAutoPlay v-if="getMadia.length" :autoPlay="autoPlay">
-	            <input type="checkbox" class="hidden" id="gifAutoPlayRadio" v-model="autoPlay">
-	        </TheGifAutoPlay>
-	        <TheGifGanreList v-if="!getMadia.length"/>
-	        <TheGifList v-else :gif="getMadia" :showGanre="!getMadia.length"/>  
+	        <TheGifAutoPlay v-if="isActive" />
+	        <TheGifGanreList v-if="!isActive"/>
+	        <TheGifList v-else/>  
 	    </div> 
 	</section>
 </template>
@@ -17,13 +15,9 @@
 	import TheGifList from './TheGifList.vue';
 	import TheGifAutoPlay from './TheGifAutoPlay.vue';
 
-	import { ref, computed } from 'vue'
+	import { computed } from 'vue';
 	import { useStore } from 'vuex';
 
-	const store = useStore();
-
-
-	const autoPlay = ref(false);
-	const getMadia = computed(() => autoPlay.value ? store.getters.getGifs: store.getters.getGifImages)
-
+	const store = useStore()
+	const isActive = computed(() => store.getters.getGifIsReady)
 </script>
