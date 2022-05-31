@@ -16,7 +16,6 @@
 	    </div>
 	</div>
     </article>
-   
     <TheDragAreaErorrMassage :error="[selected.imageError, selected.showPoll]"/> 
 </template>
 
@@ -25,7 +24,6 @@
 	import { useStore } from 'vuex';
 
  	import ThePoll from './ThePoll.vue'
-	import PopUp from './PopUp.vue'
 	import TextArea from './TextArea.vue';
 	import DragArea from './DragArea.vue';
 	import TheWhoCanReply from './TheWhoCanReply.vue';

@@ -1,7 +1,6 @@
 <template>
 	<aside class="max-w-[15.813rem] h-screen inline-flex justify-between flex-col pb-2.5 sticky top-0">
 	    <nav class="w-full inline-flex flex-col">
-		    <div class="">
 		    	<ul class="inline-flex w-full flex-col">
 		    		<li class="w-[2.813rem] h-[2.813rem] flex items-center justify-center rounded-full hover:bg-[#1d9bf01a] hoverDuration cursor-pointer">
 		    			<Logo/>
@@ -12,7 +11,6 @@
 		    			<span class="text-xl text-[#0f1419]  hidden xl:block pl-[19px] pr-[1.125rem] truncate">{{iconsName[index]}}</span>
 		    		</li>
 		    	</ul>
-		    </div>
 		   <div class="w-full h-[4.938rem] mt-4">
 			   <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full"
 			   @click="showNewTweet = true">Tweet</button>
@@ -38,7 +36,6 @@
         <!-- More BUTTON START -->
 	    </div>
 	</aside>
-	<PopUp />
 </template>
 
 <script setup>
@@ -54,7 +51,6 @@
 	import Profile from './icons/NavigationIcons/Profile.vue';
 	import More from './icons/NavigationIcons/More.vue';
 	import ThreeDot from './icons/More.vue';
-	import PopUp from './PopUp.vue';
 	import UserProfileImage from './UserProfileImage.vue';
 
 	let showTheSchedule = ref(false)

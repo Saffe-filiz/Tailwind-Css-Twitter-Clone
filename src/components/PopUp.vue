@@ -1,11 +1,10 @@
 <template>
-	<div class="w-screen h-screen bg-[#00000066] fixed top-0 left-0 z-30 table overflow-hidden pt-[33px]"
-	 v-if="openPopUp" @click="closePopUp(),  scrollVisibil()">
+	<div class="w-screen h-screen bg-[#00000066] fixed top-0 left-0 z-30 table overflow-hidden pt-[33px]" v-if="openPopUp" @click="closePopUp(),  scrollVisibil()">
       	<TheGif v-on:click.stop v-if="showGifContent"/>
       	<TheSchedule v-on:click.stop v-if="showSchedule"/>
       	<div v-on:click.stop v-if="showNewTweet" class="w-[600px] max-h-[288px] px-3.5  bg-white rounded-2xl mx-auto">
       		<div class="w-full h-[44px] bg-red-400"></div>
-      <TheNewPost/>
+            <TheNewPost/>
       	</div>
 	</div>
 </template>
