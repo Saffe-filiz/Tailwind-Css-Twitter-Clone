@@ -13,7 +13,6 @@
 	let increase = ref(20)
 
     onMounted(() => {
-    	console.log(increase.value)
    	   observer.value = new IntersectionObserver(([entery]) => {
    	   	if(entery && entery.isIntersecting){
    	   		   increase.value += 10

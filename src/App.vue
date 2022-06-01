@@ -50,6 +50,28 @@
     const showSchedule = ref(false);
     const showGifContent = ref(false)
     const showNewTweet = ref(false)
+    const isNewTweet = ref(false)
+    const closeNewTweet = ref(false)
+
+    const closePopUp = () => {
+		if(closeNewTweet.value) {
+			isNewTweet.value = false;
+			showGifContent.value = false;
+		    showSchedule.value = false;
+		    showNewTweet.value = false; 
+		    closeNewTweet.value = false;
+		    scrollVisibil();
+		}else if(isNewTweet.value){
+			showGifContent.value = false;
+		    showSchedule.value = false;
+		    showNewTweet.value = true; 
+		}else {
+			showGifContent.value = false;
+		    showSchedule.value = false;
+		    scrollVisibil();
+		     console.log('test0000')
+		}
+	}
 
     // Hide page scroll
 	const scrollHidden = () => {
@@ -61,12 +83,14 @@
 	const scrollVisibil = () => {
 		let body = document.querySelector('body');
 		body.style.overflow = 'auto';
-		showSchedule.value = false;
 	}
 
 	provide('scrollHidden', scrollHidden); 
 	provide('scrollVisibil', scrollVisibil);
 	provide('showSchedule', showSchedule);
 	provide('showNewTweet', showNewTweet);
-	provide('showGifContent', showGifContent)
+	provide('isNewTweet', isNewTweet);
+	provide('showGifContent', showGifContent);
+	provide('closePopUp', closePopUp);
+	provide('closeNewTweet', closeNewTweet)
 </script> 

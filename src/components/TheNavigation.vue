@@ -13,7 +13,7 @@
 		    	</ul>
 		   <div class="w-full h-[4.938rem] mt-4">
 			   <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full"
-			   @click="showNewTweet = true">Tweet</button>
+			   @click="showNewTweet = true, isNewTweet = true, scrollHidden()">Tweet</button>
 		   </div>
       </nav>
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
@@ -60,4 +60,6 @@
     
 
     const showNewTweet = inject('showNewTweet');
+    const isNewTweet = inject('isNewTweet');
+    const scrollHidden = inject('scrollHidden'); // Coming from app vue
 </script>

@@ -1,7 +1,7 @@
 <template>
-	<div class="w-full h-12 px-3.5 bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between sticky top-0 z-20">
+	<div class="w-full h-12 px-2 bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between sticky top-0 z-20">
 		<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter">
-			<CrossIcon v-if="!search" :size="18" class="fill-[696c70]" @click="scrollVisibil, showGifContent = false"/>
+			<CrossIcon v-if="!search" :size="18" class="fill-[696c70]" @click="scrollVisibil, closePopUp()"/>
 		    <ArrowIcon v-else :size="18" class="cursor-pointer" @click="celarSearch"/>
 		</div>
 		<div class="group" @click="inputFocus">
@@ -56,11 +56,9 @@
     	getGifs();
     })
 
-    watch(()=> getNumberOfGif.value, (number) => {
-    	getGifs();
-    })
+    watch(()=> getNumberOfGif.value, (number) => getGifs())
 
     const scrollVisibil = inject('scrollVisibil');
-	const showGifContent = inject('showGifContent');
+	const closePopUp = inject('closePopUp');
 
 </script>
