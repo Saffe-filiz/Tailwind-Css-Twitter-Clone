@@ -1,10 +1,7 @@
 <template>
 	<div class="w-[79.063rem] inline-flex flex-row ml-4">
 	    <TheNavigation/>
-	    <TheFeed>
-	        <TheHeader/>
-	        <TheNewPost/>
-	    </TheFeed>
+	    <TheFeed/>
 	   	<div class="w-auto h-[1280px] relative hidden lg:block">
 	  		<TheTrends class="w-auto flex flex-col gap-y-[14px] pr-2.5 pl-[1.875rem]" 
 	  		:style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
@@ -12,6 +9,7 @@
 	        </TheTrends>
 	   </div>
 	</div>
+	<PopUp />
 </template>
 
 <script setup>
@@ -22,8 +20,7 @@
 	import TheFeed from './components/TheFeed.vue';
 	import TheTrends from './components/TheTrends.vue';
 	import TheSearch from './components/TheSearch.vue';
-	import TheHeader from './components/TheHeader.vue';
-	import TheNewPost from './components/TheNewPost.vue';
+	import PopUp from './components/PopUp.vue';
 
 	onMounted(() => {
 	    window.addEventListener("scroll", setSideBarPosition);
@@ -52,6 +49,7 @@
 	
     const showSchedule = ref(false);
     const showGifContent = ref(false)
+    const showNewTweet = ref(false)
 
     // Hide page scroll
 	const scrollHidden = () => {
@@ -69,5 +67,6 @@
 	provide('scrollHidden', scrollHidden); 
 	provide('scrollVisibil', scrollVisibil);
 	provide('showSchedule', showSchedule);
+	provide('showNewTweet', showNewTweet);
 	provide('showGifContent', showGifContent)
 </script> 

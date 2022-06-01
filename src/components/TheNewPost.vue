@@ -1,7 +1,7 @@
 <template>
-	<article class="w-full py-1 pl-3.75 inline-flex flex-row justify-betweenr">
-	<UserProfileImage :size="10.75" class="mr-2"/>
-	<div class="w-full flex flex-col"> 
+	<article class="w-full  py-1 px-3.5 inline-flex flex-row">
+	<UserProfileImage :size="10.75" class="mr-3"/>
+	<div class="w-full flex flex-col justify-between"> 
 		<div class="w-full h-auto">
 			<TheScheduleInfo :info="date.info" @click="showSchedule = true" />
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.poll]">
@@ -10,7 +10,7 @@
 		    </DragArea>
 		    <TheWhoCanReply v-if="showWhoCanAwser" @whoCanReply="(value) => selected.whoCanReply = value" :active="date.sending"/>
 		</div>
-	    <div class="w-auto h-[45px] inline-flex justify-between items-center pr-4">
+	    <div class="w-auto h-[45px] inline-flex justify-between items-center">
 	    	<TheAttachments :active="[selected, images.length, date.sending]" @showPoll="(value) => selected.poll = value"/>
             <TheNewPostCircleAndSend :massage="post.massage" :date="!date.info"/>
 	    </div>
@@ -22,7 +22,7 @@
 <script setup>
 	import { ref, computed, inject, provide, reactive, watch } from 'vue';
 	import { useStore } from 'vuex';
-
+  
  	import ThePoll from './ThePoll.vue'
 	import TextArea from './TextArea.vue';
 	import DragArea from './DragArea.vue';
@@ -33,7 +33,6 @@
 	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
-
     const images = ref([]); // Take image.
 	let draggableAreaActive = ref(false); // Drag area is aktive chake
 

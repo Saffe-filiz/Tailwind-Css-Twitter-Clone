@@ -5,16 +5,17 @@ const store = createStore({
 	    gifData: {
 	    	gifs: [],
 	    	numberOfGif: 20,
+	    	gifAutoPlay: false,
 	    	ganre: '',
 	    },
-
 	    schedule: {},
 	},
 
 	getters: {
-		getGifImages: state => state.gifData.gifs.flat().map( item => item.images['fixed_height_small_still'].url),
-
-		getGifs: state => state.gifData.gifs.flat().map( item => item.images['fixed_height_small'].url),
+		getGifs: state => {
+			let mediaType = state.gifData.gifAutoPlay ? 'fixed_height_small' : 'fixed_height_small_still';
+			return state.gifData.gifs.flat().map( item => item.images[mediaType].url);
+		},
 
 		getGifGanre: state => state.gifData.ganre,
 
@@ -22,11 +23,14 @@ const store = createStore({
 
 		getSchedule: state => state.schedule,
 
+		getGifIsReady: state => state.gifData.gifs.length,
+
 	},
 
 	mutations: {
-		setGif(state, item) {
-			state.gifData.gifs = item;
+		setGif(state, gifs) {
+			if(state.gifData.numberOfGif > 50) return;
+			state.gifData.gifs = gifs;
 		},
 
 		setGifOfNumber(state, number) {
@@ -37,20 +41,20 @@ const store = createStore({
 			state.gifData.ganre = ganre
 		},
 
-		setSchedule (state, object) {
-			state.schedule = object;
+		setSchedule (state, data) {
+			state.schedule = data;
 		},
+
+		setGifAutoPlay (state, isPlay) {
+			state.gifData.gifAutoPlay = isPlay;
+		}
 	},
 
 	actions: {
 		getGifts ({ commit }, payload) {
-			console.log(payload)
 			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload.ganre}&limit=${payload.number}&offset=2&rating=g&lang=en`)
 			    .then( response => response.json())
-			    .then( response =>  {
-			    	console.log(response.data)
-			    	commit('setGif', response.data)
-			    })
+			    .then( response =>  commit('setGif', response.data))
 			    .catch( error =>  console.log(error))
 		},
 	}
