@@ -65,7 +65,7 @@
 
 <script setup>
 
-	import { inject, ref, computed, onMounted, reactive, watch } from 'vue';
+	import {ref, computed, onMounted, reactive, watch } from 'vue';
 	import { useStore } from 'vuex';
 
 	import DownArrow from './icons/DownArrow.vue';

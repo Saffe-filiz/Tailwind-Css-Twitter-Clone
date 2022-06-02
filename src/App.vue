@@ -9,12 +9,12 @@
 	        </TheTrends>
 	   </div>
 	</div>
-	<PopUp />
+	<PopUp/>
 </template>
 
 <script setup>
 
-	import { ref, reactive, onMounted, provide } from 'vue'
+	import { reactive, onMounted, provide } from 'vue'
 
 	import TheNavigation from './components/TheNavigation.vue';
 	import TheFeed from './components/TheFeed.vue';
@@ -33,7 +33,48 @@
 		'searchTopValue': '0px'
 	});
 
+	const modal = reactive({
+		openScheduleModal: false,
+		openGifModal: false,
+		openNewTweetModal: false,
+		newTweetModalIsActiv: false,
+		closeNewTweetModal: false,
+
+		scrollVisibil () {
+		    let body = document.querySelector('body');
+		    body.style.marginRight = '0px';
+		    body.style.overflow = 'auto';
+		},
+
+		scrollHidden () {
+			let body = document.querySelector('body');
+		    body.style.overflow = 'hidden';	
+		    body.style.marginRight = '20px';
+		},
+
+		closePopUp  () {
+		    if(this.closeNewTweetModal) {
+			    this.newTweetModalIsActiv = false
+			    this.openGifModal = false
+		        this.openScheduleModal = false
+		        this.openNewTweetModal = false
+		        this.closeNewTweetModal = false
+		        this.scrollVisibil();
+		    }else if(this.newTweetModalIsActiv){
+			    this.openGifModal = false;
+		        this.openScheduleModal = false;
+		        this.openNewTweetModal = true; 
+		    }else {
+			    this.openGifModal = false;
+		        this.openScheduleModal = false;
+		        this.scrollVisibil();
+		    }
+	    }    
+    
+	})
+
 	const setSideBarPosition = () => {
+
 		if(window.pageYOffset >= 510){
 			setPositions.sideBarPosition = 'fixed';
 			setPositions.topValue = '-445px';
@@ -46,51 +87,6 @@
 			setPositions.searchTopValue = '600';
 		}
 	}
-	
-    const showSchedule = ref(false);
-    const showGifContent = ref(false)
-    const showNewTweet = ref(false)
-    const isNewTweet = ref(false)
-    const closeNewTweet = ref(false)
 
-    const closePopUp = () => {
-		if(closeNewTweet.value) {
-			isNewTweet.value = false;
-			showGifContent.value = false;
-		    showSchedule.value = false;
-		    showNewTweet.value = false; 
-		    closeNewTweet.value = false;
-		    scrollVisibil();
-		}else if(isNewTweet.value){
-			showGifContent.value = false;
-		    showSchedule.value = false;
-		    showNewTweet.value = true; 
-		}else {
-			showGifContent.value = false;
-		    showSchedule.value = false;
-		    scrollVisibil();
-		     console.log('test0000')
-		}
-	}
-
-    // Hide page scroll
-	const scrollHidden = () => {
-		let body = document.querySelector('body');
-		body.style.overflow = 'hidden';	
-	}
-
-	// Visibile page scroll
-	const scrollVisibil = () => {
-		let body = document.querySelector('body');
-		body.style.overflow = 'auto';
-	}
-
-	provide('scrollHidden', scrollHidden); 
-	provide('scrollVisibil', scrollVisibil);
-	provide('showSchedule', showSchedule);
-	provide('showNewTweet', showNewTweet);
-	provide('isNewTweet', isNewTweet);
-	provide('showGifContent', showGifContent);
-	provide('closePopUp', closePopUp);
-	provide('closeNewTweet', closeNewTweet)
+	provide('modal', modal);
 </script> 

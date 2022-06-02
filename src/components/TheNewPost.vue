@@ -3,7 +3,7 @@
 	<UserProfileImage :size="10.75" class="mr-3"/>
 	<div class="w-full flex flex-col justify-between"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :info="date.info" @click="showSchedule = true" />
+			<TheScheduleInfo :info="date.info" @click="modal.openScheduleModal = true" />
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.poll]">
 		        <TextArea @post="(text) => post.massage = text" @click="selected.whoCanAnswer = true"/>
 		        <ThePoll v-if="selected.poll" @removePoll="(pollObject) => pollData(pollObject)" :pollData="pollFormData"/>
@@ -49,9 +49,6 @@
 		whoCanReply: 'Everyone',
 	})
 
-
-	const closePopUp = () => [showGifContent.value, showSchedule.value].map( v => v = false)
-
 	const showWhoCanAwser = computed(() => Object.keys(selected).some( item => selected[item] == true ) )
 
     // Image upload error massage
@@ -85,8 +82,7 @@
 	provide('images', images); // Going to image drag area component
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
 
-	const scrollHidden = inject('scrollHidden'); // Coming from app vue
-	const showSchedule = inject('showSchedule'); // Coming from app vue
+	const modal = inject('modal'); // Coming from app vue
     
 	let pollFormData = ref(); // Poll form data
 
