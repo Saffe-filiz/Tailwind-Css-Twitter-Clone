@@ -10,10 +10,10 @@ const store = createStore({
 	    	ganre: '',
 	    },
 	    updataSchedule: {},
-	    scheduleData: {
-	    	info: '',
-	    	date: ['', '', '', '', ''],
-	    	sending: false,
+	    pollData: {
+	    	quest: ['', '', '', ''],
+	    	date: [1, 0, 0],
+	    	counter: 2,
 	    },
 	},
 
@@ -32,6 +32,8 @@ const store = createStore({
 		getGifIsReady: state => state.gifData.gifs.length,
 
 		getTweets: state => state.tweets,
+
+		getPollDataDate: state => state.pollData.date,
 
 	},
 
@@ -59,6 +61,10 @@ const store = createStore({
 
 		setNewTweet (state, tweet) {
 			state.tweets.push(tweet)
+		},
+
+		setPollDataDate ( state, data) {
+			state.pollData.date = data;
 		}
 	},
 

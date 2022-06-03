@@ -14,22 +14,10 @@
 	</div>
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
-		<div class="w-full h-auto inline-flex justify-between" @change="test">
-			<SelectBox class="w-[9.438rem]" name="Day" >
-			    <select class="sectionStyle"  v-model="poll.pollLength[0]">
-			        <option v-for="(day, index) in 8" :key="index" :selected="day == poll.pollLength[0]">{{day -1}}</option>
-		        </select>
-			</SelectBox>
-	        <SelectBox class="w-[9.438rem]" name="Hours" :class="{'bg-[#eff3f4]': disabledSelectInput}">
-			    <select class="sectionStyle" v-model="poll.pollLength[1]" :disabled="disabledSelectInput">
-			       <option v-for="(hours, index) in 24"  :key="index" :selected="hours == poll.pollLength[1]">{{hours -1}}</option>
-		        </select>  
-			</SelectBox> 
-	        <SelectBox class="w-[9.438rem]" name="Minute" :class="{'bg-[#eff3f4]': disabledSelectInput}">
-			    <select class="sectionStyle" v-model="poll.pollLength[2]" :disabled="disabledSelectInput">
-			        <option v-for="(minute, index) in minutes" :key="index" :selected="minute == poll.pollLength[1]">{{minute}}</option>
-		        </select>
-		   </SelectBox>
+		<div class="w-full h-auto inline-flex justify-between">
+			<SelectBox class="w-[9.438rem]" title="Day" :index="0" :length="8" :minusDate="1"/>
+			<SelectBox class="w-[9.438rem]" title="Hours" :index="1" :length="24" :class="{'bg-[#eff3f4]': disabledSelectInput}" :minusDate="1"/>
+			<SelectBox class="w-[9.438rem]" title="Minute" :index="2" :length="null" :class="{'bg-[#eff3f4]': disabledSelectInput}" :minusDate="0"/>
 	    </div>
 	</div>
     <ThePollRemove @click="$emit('removePoll', {'data': poll, 'showPoll': false})"/>
@@ -45,9 +33,9 @@
 	import ThePollRemove from './ThePollRemove.vue';
 	// All question
     const poll = reactive({
-    	'quest': ['', '', '', ''],
-    	'pollLength': [1, 0, 0],
-    	'counter': 2, 
+    	quest: ['', '', '', ''],
+    	pollLength: [1, 0, 0],
+    	counter: 2, 
     });
 
     onMounted(() => setQuestiobData())
@@ -82,27 +70,6 @@
     
     
     const disabledSelectInput = computed(() => poll.pollLength[0] == 7)
-    
-    // Start minute
-    let startIndex = computed(() => {
-    	let [day, hours, minute] = [poll.pollLength[0], poll.pollLength[1], poll.pollLength[2]]
-    	if(day == 0 && hours == 0 && minute < 5){
-    		poll.pollLength[2] = 5
-    		return 5
-        }else if(day == 0 && hours == 0 && minute > 5){
-        	return 5;
-        }else{
-        	minute
-    	    return 0
-        }
-    })
-    // Create minute 
-    const minutes = computed(() => {
-    	let minute = [];
-    	let start = startIndex.value;
-    	for(let i = start; i < 60; i++){minute.push(i)};
-    	return minute 
-    })
 
     const inputFocus = computed(() => (index) => {
     	nextTick(() => {
@@ -114,16 +81,7 @@
 	const labelAnimation = computed(() => (n) => poll.quest[n -1].length > 0);
 	const inputPlaceHolder = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`);
 
-    watch(() => [...poll.pollLength], (oldPollLength, newPollLength ) => {
-    	if(oldPollLength[0] == 7) {
-    		poll.pollLength[1] = 0;
-    		poll.pollLength[2] = 0;
-    	}else if(newPollLength[1] != 0){
-    		poll.pollLength[1];
-    	}else if(oldPollLength[0] == 0 && oldPollLength[2] == 0) {
-    		poll.pollLength[1] = 1;
-    	}
-    })
+
     
     watch(()=> poll.counter, (oldValue, newValue) => !poll.quest[newValue] ? inputFocus.value(newValue): console.log('test'))
 

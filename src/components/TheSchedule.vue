@@ -20,8 +20,6 @@
 			            <option v-for="(day, index) in getMonthDay" :key="index" :value="day" :selected="day == scheduling.date[2]">{{day}}</option>
 		            </select>
 	            </SelectBox>
-	            <!-- SELECT DAY END -->
-	            <!-- SELECT YEAR START -->
 	            <SelectBox class="w-[9.063rem]" name="Year">
 	            	<select class="sectionStyle"  v-model="scheduling.date[0]">
 			            <option v-for="(year, index) in [2024, 2023, 2022]" :key="index" :selected="year == scheduling.date[0]">{{year}}</option>
