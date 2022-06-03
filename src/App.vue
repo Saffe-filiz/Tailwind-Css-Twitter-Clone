@@ -33,6 +33,21 @@
 		'searchTopValue': '0px'
 	});
 
+	const setSideBarPosition = () => {
+
+		if(window.pageYOffset >= 510){
+			setPositions.sideBarPosition = 'fixed';
+			setPositions.topValue = '-445px';
+			setPositions.searchPosition = 'fixed';
+			setPositions.searchTopValue = '0px';
+		}else {
+			setPositions.sideBarPosition = 'static';
+			setPositions.topValue = '0px';
+			setPositions.searchPosition = 'sticky';
+			setPositions.searchTopValue = '600';
+		}
+	}
+
 	const modal = reactive({
 		openScheduleModal: false,
 		openGifModal: false,
@@ -71,22 +86,7 @@
 		    }
 	    }    
     
-	})
-
-	const setSideBarPosition = () => {
-
-		if(window.pageYOffset >= 510){
-			setPositions.sideBarPosition = 'fixed';
-			setPositions.topValue = '-445px';
-			setPositions.searchPosition = 'fixed';
-			setPositions.searchTopValue = '0px';
-		}else {
-			setPositions.sideBarPosition = 'static';
-			setPositions.topValue = '0px';
-			setPositions.searchPosition = 'sticky';
-			setPositions.searchTopValue = '600';
-		}
-	}
+	});
 
 	provide('modal', modal);
 </script> 

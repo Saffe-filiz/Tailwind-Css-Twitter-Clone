@@ -21,7 +21,6 @@
 	import { inject, computed, watch } from 'vue';
     
 
-	//const closePopUp = inject('closePopUp');
 	const modal = inject('modal');
 
 	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal].some( v => v));

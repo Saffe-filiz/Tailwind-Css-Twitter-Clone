@@ -1,6 +1,6 @@
 <template>
 	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto">
-        <TheSetSchedule :sending="update.sending" :scheduling="scheduling" :error="showErrorMassage[0]"/>
+        <TheSetSchedule :sending="updateSchedule.sending" :scheduling="scheduling" :error="showErrorMassage[0]"/>
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.438rem] px-3.75">
 			<TheScheduleInfo v-if="!showErrorMassage[1]" :info="setTimeInfo"/>
@@ -87,12 +87,12 @@
 
     const store = useStore();
 	// Date prop
-	let update = computed(() => store.getters.getSchedule) 
+	let updateSchedule = computed(() => store.getters.getUpdataSchedule) 
 
    onMounted(() => currentTime());
 	// Set new date
 	const currentTime = () => {
-		let dateUpdata = update.value
+		let dateUpdata = updateSchedule.value
 		let date = currentDate.value
 		date.forEach( (item, index) =>  scheduling.date[index] = dateUpdata.date?.[index] || item )
 	}
@@ -172,6 +172,6 @@
 		 }
 	})
 
-	// POST SEND DATE END
+
 
 </script>

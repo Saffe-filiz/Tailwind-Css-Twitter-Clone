@@ -3,16 +3,16 @@
 	<UserProfileImage :size="10.75" class="mr-3"/>
 	<div class="w-full flex flex-col justify-between"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :info="date.info" @click="modal.openScheduleModal = true" />
+			<TheScheduleInfo :info="updataSchedule.info" @click="modal.openScheduleModal = true" />
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.poll]">
 		        <TextArea @post="(text) => post.massage = text" @click="selected.whoCanAnswer = true"/>
 		        <ThePoll v-if="selected.poll" @removePoll="(pollObject) => pollData(pollObject)" :pollData="pollFormData"/>
 		    </DragArea>
-		    <TheWhoCanReply v-if="showWhoCanAwser" @whoCanReply="(value) => selected.whoCanReply = value" :active="date.sending"/>
+		    <TheWhoCanReply v-if="showWhoCanAwser" @whoCanReply="(value) => selected.whoCanReply = value" :active="updataSchedule.sending"/>
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center">
-	    	<TheAttachments :active="[selected, images.length, date.sending]" @showPoll="(value) => selected.poll = value"/>
-            <TheNewPostCircleAndSend :massage="post.massage" :date="!date.info"/>
+	    	<TheAttachments :active="[selected, images.length, updataSchedule.sending]" @showPoll="(value) => selected.poll = value"/>
+            <TheNewPostCircleAndSend :massage="post.massage" :date="!updataSchedule.info"/>
 	    </div>
 	</div>
     </article>
@@ -38,7 +38,7 @@
 
 	const store = useStore();
     
-    const date = computed(() => store.getters.getSchedule) 
+    const updataSchedule = computed(() => store.getters.getUpdataSchedule) 
 
     let selected = reactive({
 		gif: false,

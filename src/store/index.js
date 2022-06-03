@@ -2,13 +2,19 @@ import { createStore } from 'vuex'
 
 const store = createStore({
 	state: {
+		tweets: [],
 	    gifData: {
 	    	gifs: [],
 	    	numberOfGif: 20,
 	    	gifAutoPlay: false,
 	    	ganre: '',
 	    },
-	    schedule: {},
+	    updataSchedule: {},
+	    scheduleData: {
+	    	info: '',
+	    	date: ['', '', '', '', ''],
+	    	sending: false,
+	    },
 	},
 
 	getters: {
@@ -21,9 +27,11 @@ const store = createStore({
 
 		getNumberOfGif: state => state.gifData.numberOfGif,
 
-		getSchedule: state => state.schedule,
+		getUpdataSchedule: state => state.updataSchedule,
 
 		getGifIsReady: state => state.gifData.gifs.length,
+
+		getTweets: state => state.tweets,
 
 	},
 
@@ -41,12 +49,16 @@ const store = createStore({
 			state.gifData.ganre = ganre
 		},
 
-		setSchedule (state, data) {
-			state.schedule = data;
+		setUpdataSchedule (state, data) {
+			state.updataSchedule = data;
 		},
 
 		setGifAutoPlay (state, isPlay) {
 			state.gifData.gifAutoPlay = isPlay;
+		},
+
+		setNewTweet (state, tweet) {
+			state.tweets.push(tweet)
 		}
 	},
 

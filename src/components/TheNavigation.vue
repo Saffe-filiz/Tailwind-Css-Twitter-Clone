@@ -18,22 +18,15 @@
       </nav>
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
         <div class="w-full rounded-[4rem] inline-flex">
-        	<!--USER IMAGE START -->
-         <!--   <div class="w-9 h-9 bg-black rounded-full"></div>-->
             <UserProfileImage :size="9"/>
-            <!--USER IMAGE END -->
-            <!-- NAME AND USERNAME START -->
             <div class="w-[6.25rem] h-[2.313rem] leading-5 pl-2">
               	<p class="h-5 text-sm font-bold text-[#0f1419] font-bold truncate">Bradley Ortiz</p>
                 <p class="text-[15px] font-normal text-[#0f1419] font-normal truncate">@bradley_</p>
             </div>
-             <!-- NAME AND USERNAME END -->
         </div>
-        <!-- More BUTTON START -->
         <div class="w-[5.938rem] h-auto relative">
         	<ThreeDot class="pointer-events-none"/>
         </div>
-        <!-- More BUTTON START -->
 	    </div>
 	</aside>
 </template>

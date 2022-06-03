@@ -30,5 +30,5 @@
 	const modal = inject('modal');
 
 	const store = useStore();
-	const sendSchedule = ( obj ) => store.commit('setSchedule', obj)
+	const sendSchedule = ( obj ) => store.commit('setUpdataSchedule', obj)
 </script>

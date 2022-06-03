@@ -1,6 +1,6 @@
 <template>
-    <div class="sectionMainStyle focusInput relative">
-		<label class="text-[12px] text-[#536471] ml-2" for="date">{{title.name}}</label>
+    <div class="sectionMainStyle focusInput relative group">
+		<label class="text-[12px] text-[#536471] ml-2 " for="date">{{title.name}}</label>
 		<DownArrow/>
 		<slot/>
 	</div>
