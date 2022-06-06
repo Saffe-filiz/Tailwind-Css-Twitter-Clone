@@ -15,9 +15,26 @@
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
 		<div class="w-full h-auto inline-flex justify-between">
-			<SelectBox class="w-[9.438rem]" title="Day" :index="0" :length="8" :minusDate="1"/>
-			<SelectBox class="w-[9.438rem]" title="Hours" :index="1" :length="24" :class="{'bg-[#eff3f4]': disabledSelectInput}" :minusDate="1"/>
-			<SelectBox class="w-[9.438rem]" title="Minute" :index="2" :length="null" :class="{'bg-[#eff3f4]': disabledSelectInput}" :minusDate="0"/>
+			<SelectBox class="w-[9.438rem]" 
+			    title="Day" 
+			    :length="8" 
+			    :minusDate="1"
+			    :date="poll.length[0]" 
+			    @setDate=" number => poll.length[0] = number"/>
+			<SelectBox class="w-[9.438rem]" 
+			    :class="{'bg-[#eff3f4]': disabledSelectInput}"
+			    title="Hours" 
+			    :length="24" 
+			    :minusDate="1"
+			    :date="poll.length[1]" 
+			    @setDate=" number => poll.length[1] = number"/>
+			<SelectBox class="w-[9.438rem]" 
+			    :class="{'bg-[#eff3f4]': disabledSelectInput}"
+			    title="Minute" 
+			    :length="minutes" 
+			    :minusDate="0"
+			    :date="poll.length[2]" 
+			    @setDate=" number => poll.length[2] = number"/>
 	    </div>
 	</div>
     <ThePollRemove @click="$emit('removePoll', {'data': poll, 'showPoll': false})"/>
@@ -28,19 +45,19 @@
 <script setup>
 	import { reactive, computed, onMounted, watch, nextTick } from 'vue';
 
-	import SelectBox from './SelectBox.vue'
+	import SelectBox from './PollSelectBox.vue'
 	import TheAddNewPollQuestion from './TheAddNewPollQuestion.vue';
 	import ThePollRemove from './ThePollRemove.vue';
-	// All question
+
     const poll = reactive({
-    	quest: ['', '', '', ''],
-    	pollLength: [1, 0, 0],
-    	counter: 2, 
+    	 quest: ['', '', '', ''],
+    	 length: [1, 0, 0],
+    	 counter: 2, 
     });
 
     onMounted(() => setQuestiobData())
     
-    const pollData = defineProps({pollData: Object}); // Props from new post
+    const pollData = defineProps({pollData: Object}); 
 
     const pollQuestData = computed(() => {
     	if(!pollData.pollData) return;
@@ -52,11 +69,10 @@
     	return emptyIndex;
     })
 
-    // Set poll data
     const setQuestiobData = () => {
     	if(!pollData.pollData) return inputFocus.value(0);
     	pollQuestData.value.forEach((item, index) => poll.quest[index] = item || '')
-    	pollData.pollData.pollLength.forEach((item, index) => poll.pollLength[index] = item || 0);
+    	pollData.pollData.length.forEach((item, index) => poll.length[index] = item || 0);
     	poll.counter = pollData.pollData.counter;
     }
     
@@ -69,7 +85,7 @@
    	const questCounter = computed(() => poll.counter < 4 );
     
     
-    const disabledSelectInput = computed(() => poll.pollLength[0] == 7)
+    const disabledSelectInput = computed(() => poll.length[0] == 7)
 
     const inputFocus = computed(() => (index) => {
     	nextTick(() => {
@@ -81,8 +97,38 @@
 	const labelAnimation = computed(() => (n) => poll.quest[n -1].length > 0);
 	const inputPlaceHolder = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`);
 
+	const startIndex = computed(() => {
+    	let [day, hours, minute] = [poll.length[0], poll.length[1], poll.length[2]]
+    	if(day == 0 && hours == 0 && minute < 5){
+    		poll.length[2] = 5
+    		return 5
+        }else if(day == 0 && hours == 0 && minute > 5){
+        	return 5
+        }else {
+        	return 0 
+        }
+    })
 
-    
+
+    const minutes = computed(() => {
+    	let minute = [];
+    	let start = startIndex.value;
+    	for(let i = start; i < 60; i++){minute.push(i)};
+    	return minute 
+    })
+
+	watch(() => [...poll.length], (oldPollLength, newPollLength ) => {
+		console.log(oldPollLength, newPollLength)
+    	if(oldPollLength[0] == 7) {
+    		poll.length[1] = 0;
+    		poll.length[2] = 0;
+    	}else if(newPollLength[1] != 0){
+    		poll.length[1];
+    	}else if(oldPollLength[0] == 0 && oldPollLength[2] == 0) {
+    		poll.length[1] = 1;
+    	}
+    })
+
     watch(()=> poll.counter, (oldValue, newValue) => !poll.quest[newValue] ? inputFocus.value(newValue): console.log('test'))
 
 </script>

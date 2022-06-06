@@ -7,25 +7,21 @@
 		<div>
 		<span class="text-[15px] text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
-		    	<!-- SELECT MONTH START -->
-	             <SelectBox class="w-[17.125rem]" name="Month">
+                <ScheduleSelectBox class="w-[17.125rem]" title="Month">
 	             	  <select class="sectionStyle" v-model="scheduling.date[1]">
 			            <option v-for="(munth, index) in getMonths" :key="index" :value="index" :selected="index == scheduling.date[1]">{{munth}}</option>
 		            </select> 
-	             </SelectBox>
-	            <!-- SELECT MONTH END -->
-	            <!-- SELECT DAY START -->
-	            <SelectBox class="w-[7.875rem]" name="Day">
+	             </ScheduleSelectBox>
+	            <ScheduleSelectBox class="w-[7.875rem]" title="Day">
 	            	<select class="sectionStyle" v-model="scheduling.date[2]">
 			            <option v-for="(day, index) in getMonthDay" :key="index" :value="day" :selected="day == scheduling.date[2]">{{day}}</option>
 		            </select>
-	            </SelectBox>
-	            <SelectBox class="w-[9.063rem]" name="Year">
+	            </ScheduleSelectBox>
+	            <ScheduleSelectBox class="w-[9.063rem]" title="Year">
 	            	<select class="sectionStyle"  v-model="scheduling.date[0]">
 			            <option v-for="(year, index) in [2024, 2023, 2022]" :key="index" :selected="year == scheduling.date[0]">{{year}}</option>
 		            </select>
-	            </SelectBox>
-	            <!-- SELECT YEAR END -->
+	            </ScheduleSelectBox>
 		    </div>
 		    <span class="text-[14px] text-[#f4212e]">{{errorMassageForDate}}</span>
 		</div>
@@ -34,19 +30,16 @@
 		<span class="text-[15px] text-[#536471]">Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
 				<!-- SELECT HOURS START -->
-	            <SelectBox class="w-[11.375rem]" name="Hour">
+	          <ScheduleSelectBox class="w-[11.375rem]" title="Hour">
 		            <select class="sectionStyle" v-model="scheduling.date[3]">
 			            <option v-for="(hours, index) in 24" :key="index" :value="index" :selected="hours == scheduling.date[3]">{{formatNumber(hours -1)}}</option>
 		            </select> 
-	            </SelectBox>
-	            <!-- SELECT HOURS END -->
-	            <!-- SELECT MINUTE START --> 
-	             <SelectBox class="w-[11.375rem]" name="Minute">
+	            </ScheduleSelectBox>
+	             <ScheduleSelectBox class="w-[11.375rem]" title="Minute">
 		            <select class="sectionStyle"  v-model="scheduling.date[4]">
 			            <option v-for="(minute, index) in 60" :key="index" :value="index" :selected="minute == scheduling.date[4]">{{formatNumber(minute -1)}}</option>
 		            </select> 
-	            </SelectBox>
-	            <!-- SELECT MINUTE END -->
+	            </ScheduleSelectBox>
 		    </div>
 		    <span class="text-[14px] text-[#f4212e]" v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
 		</div>
@@ -66,9 +59,8 @@
 	import {ref, computed, onMounted, reactive, watch } from 'vue';
 	import { useStore } from 'vuex';
 
-	import DownArrow from './icons/DownArrow.vue';
-	import Calendar from './icons/NewPost/Calendar.vue';
-	import SelectBox from './SelectBox.vue';
+
+	import ScheduleSelectBox from './ScheduleSelectBox.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import TheSetSchedule from './TheSetSchedule.vue';
 

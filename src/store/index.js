@@ -15,6 +15,12 @@ const store = createStore({
 	    	date: [1, 0, 0],
 	    	counter: 2,
 	    },
+
+	    schedulingData: {
+	    	info: [],
+	    	date: ['', '', '', '', ''],
+	    	sending: false,
+	    }
 	},
 
 	getters: {
@@ -34,6 +40,8 @@ const store = createStore({
 		getTweets: state => state.tweets,
 
 		getPollDataDate: state => state.pollData.date,
+
+		getSchedulingData: state => state.schedulingData.date,
 
 	},
 
@@ -63,8 +71,12 @@ const store = createStore({
 			state.tweets.push(tweet)
 		},
 
-		setPollDataDate ( state, data) {
-			state.pollData.date = data;
+		setPollDataDate (state, date) {
+			state.pollData.date = date;
+		},
+
+		setSchedulingData (state, date) {
+			state.schedulingData.date = date;
 		}
 	},
 
