@@ -7,43 +7,20 @@
 		<div>
 		<span class="text-[15px] text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
-                <ScheduleSelectBox class="w-[17.125rem]" title="Month">
-	             	  <select class="sectionStyle" v-model="scheduling.date[1]">
-			            <option v-for="(munth, index) in getMonths" :key="index" :value="index" :selected="index == scheduling.date[1]">{{munth}}</option>
-		            </select> 
-	             </ScheduleSelectBox>
-	            <ScheduleSelectBox class="w-[7.875rem]" title="Day">
-	            	<select class="sectionStyle" v-model="scheduling.date[2]">
-			            <option v-for="(day, index) in getMonthDay" :key="index" :value="day" :selected="day == scheduling.date[2]">{{day}}</option>
-		            </select>
-	            </ScheduleSelectBox>
-	            <ScheduleSelectBox class="w-[9.063rem]" title="Year">
-	            	<select class="sectionStyle"  v-model="scheduling.date[0]">
-			            <option v-for="(year, index) in [2024, 2023, 2022]" :key="index" :selected="year == scheduling.date[0]">{{year}}</option>
-		            </select>
-	            </ScheduleSelectBox>
+		    	<SelectBox class="w-[17.125rem]" title="Month" :length="getMonths" :date="scheduling.date[1]" @setDate=" number => scheduling.date[1] = number"/>
+			    <SelectBox class="w-[7.875rem]" title="Day" :length="getMonthDay" :date="scheduling.date[2]"   @setDate=" number => scheduling.date[2] = number"/>
+			    <SelectBox class="w-[9.063rem]" title="Month" :length="[2024, 2023, 2022]" :date="scheduling.date[0]" @setDate=" number => scheduling.date[0] = number"/>
 		    </div>
 		    <span class="text-[14px] text-[#f4212e]">{{errorMassageForDate}}</span>
 		</div>
-		<!-- TIME SECTION START -->
 		<div>
 		<span class="text-[15px] text-[#536471]">Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
-				<!-- SELECT HOURS START -->
-	          <ScheduleSelectBox class="w-[11.375rem]" title="Hour">
-		            <select class="sectionStyle" v-model="scheduling.date[3]">
-			            <option v-for="(hours, index) in 24" :key="index" :value="index" :selected="hours == scheduling.date[3]">{{formatNumber(hours -1)}}</option>
-		            </select> 
-	            </ScheduleSelectBox>
-	             <ScheduleSelectBox class="w-[11.375rem]" title="Minute">
-		            <select class="sectionStyle"  v-model="scheduling.date[4]">
-			            <option v-for="(minute, index) in 60" :key="index" :value="index" :selected="minute == scheduling.date[4]">{{formatNumber(minute -1)}}</option>
-		            </select> 
-	            </ScheduleSelectBox>
+				 <SelectBox class="w-[9.063rem]" title="Hour" :length="24" :date="scheduling.date[3]" @setDate=" number => scheduling.date[3] = number" :formatDate="true"/>
+			     <SelectBox class="w-[9.063rem]" title="Minute" :length="60" :date="scheduling.date[4]" @setDate=" number => scheduling.date[4] = number" :formatDate="true"/>
 		    </div>
 		    <span class="text-[14px] text-[#f4212e]" v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
 		</div>
-		<!-- TIME SECTION END -->
 		<div class="w-full" >
 			<span class="text-[16px] text-[#536471]">Time zone</span>
 			<h4>GMT+03:00</h4>
@@ -60,7 +37,7 @@
 	import { useStore } from 'vuex';
 
 
-	import ScheduleSelectBox from './ScheduleSelectBox.vue';
+	import SelectBox from './SelectBox.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import TheSetSchedule from './TheSetSchedule.vue';
 
@@ -68,9 +45,9 @@
 
 	// POST SEND DATE START
 	const scheduling = reactive({
-		'info': null,
-	    'date': ['', '', '', '', ''],
-	    'sending': true,
+		info: null,
+	    date: ['', '', '', '', ''],
+	    sending: true,
 	})
 
 	// SET NEW DATE START
@@ -110,8 +87,6 @@
 		return `${formatHours}:${formatNumber.value(minute)} ${period}`
 	})
 
-	// Formant number 
-	const formatNumber = computed(() => (num) => num < 10 ? '0' + num: num)
 
 	// Release date
 	const setTime = computed(() => {
@@ -128,6 +103,8 @@
 		let day = new Date(scheduling.date[0], scheduling.date[1] +1, 0).getDate();
 		return Array.from({length: day}, (_, day) => day +1);
 	})
+
+	const formatNumber = computed(() => (num) => num < 10 ? '0' + num: num);
 
 	let errorMassageForDate = ref('');
 	let errorMassageForHours = ref('');

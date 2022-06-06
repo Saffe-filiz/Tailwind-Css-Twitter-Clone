@@ -25,14 +25,12 @@
 			    :class="{'bg-[#eff3f4]': disabledSelectInput}"
 			    title="Hours" 
 			    :length="24" 
-			    :minusDate="1"
 			    :date="poll.length[1]" 
 			    @setDate=" number => poll.length[1] = number"/>
 			<SelectBox class="w-[9.438rem]" 
 			    :class="{'bg-[#eff3f4]': disabledSelectInput}"
 			    title="Minute" 
 			    :length="minutes" 
-			    :minusDate="0"
 			    :date="poll.length[2]" 
 			    @setDate=" number => poll.length[2] = number"/>
 	    </div>
@@ -45,7 +43,7 @@
 <script setup>
 	import { reactive, computed, onMounted, watch, nextTick } from 'vue';
 
-	import SelectBox from './PollSelectBox.vue'
+	import SelectBox from './SelectBox.vue'
 	import TheAddNewPollQuestion from './TheAddNewPollQuestion.vue';
 	import ThePollRemove from './ThePollRemove.vue';
 
