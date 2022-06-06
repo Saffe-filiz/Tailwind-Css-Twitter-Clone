@@ -7,8 +7,8 @@
 		<div>
 		<span class="text-[15px] text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
-		    	<SelectBox class="w-[17.125rem]" title="Month" :length="getMonths" :date="scheduling.date[1]" @setDate=" number => scheduling.date[1] = number"/>
-			    <SelectBox class="w-[7.875rem]" title="Day" :length="getMonthDay" :date="scheduling.date[2]"   @setDate=" number => scheduling.date[2] = number"/>
+		    	<SelectBox class="w-[17.125rem]" title="Month" :length="12" :date="scheduling.date[1]" @setDate=" number => scheduling.date[1] = number" :isMonth="true"/>
+			    <SelectBox class="w-[7.875rem]" title="Day" :length="getMonthDay" :date="scheduling.date[2]"  @setDate=" number => scheduling.date[2] = number"/>
 			    <SelectBox class="w-[9.063rem]" title="Month" :length="[2024, 2023, 2022]" :date="scheduling.date[0]" @setDate=" number => scheduling.date[0] = number"/>
 		    </div>
 		    <span class="text-[14px] text-[#f4212e]">{{errorMassageForDate}}</span>
@@ -92,11 +92,6 @@
 	const setTime = computed(() => {
 		return new Date(scheduling.date[0], scheduling.date[1], scheduling.date[2], scheduling.date[3], scheduling.date[4]);;
 	})
-
-	// Get month with name
-	const getMonths = computed(() => {
-		return Array.from({length: 11}, (_, munth) => new Date(scheduling.date[0], munth, 1).toLocaleString('en', { month: 'long' }));
-	});
 
 	// Get number days
 	const getMonthDay = computed(() => {
