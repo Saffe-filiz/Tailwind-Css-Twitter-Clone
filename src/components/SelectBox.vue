@@ -1,8 +1,8 @@
 <template>
-    <div class="sectionMainStyle focusInput relative group">
-		<label class="text-[12px] text-[#536471] ml-2 " for="date">{{data.title}}</label>
+    <div class="sectionMainStyle focusInput relative group" :class="{'bg-[#eff3f4]': data.isDisable}">
+		<label class="text-[12px] text-[#536471] ml-2  focus:text-red-100" for="date">{{data.title}}</label>
 		<DownArrow/>
-		<select class="sectionStyle" v-model="selectenValue" id="date"  @change="$emit('setDate', selectenValue)" >
+		<select class="sectionStyle" v-model="selectenValue" id="date"  @change="$emit('setDate', selectenValue)" :disabled="data.isDisable"> 
 			<option v-for="(num, index) in data.length" :value="num" :key="index" >{{getMonths(num)}}</option>
 		</select> 
 	</div>
@@ -13,7 +13,7 @@
 	import DownArrow from './icons/DownArrow.vue';
 	import { ref, computed, nextTick, onUpdated } from 'vue';
 
-	const data = defineProps({title: String, length: [String, Number, Array], date: [String, Number, Array], formatDate: Boolean, isMonth: Boolean});
+	const data = defineProps({title: String, length: [String, Number, Array], date: [String, Number, Array], formatDate: Boolean, isMonth: Boolean, isDisable: Boolean});
 
 	let selectenValue = ref();
 

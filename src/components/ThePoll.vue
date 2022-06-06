@@ -15,24 +15,9 @@
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
 		<div class="w-full h-auto inline-flex justify-between">
-			<SelectBox class="w-[9.438rem]" 
-			    title="Day" 
-			    :length="8" 
-			    :minusDate="1"
-			    :date="poll.length[0]" 
-			    @setDate=" number => poll.length[0] = number"/>
-			<SelectBox class="w-[9.438rem]" 
-			    :class="{'bg-[#eff3f4]': disabledSelectInput}"
-			    title="Hours" 
-			    :length="24" 
-			    :date="poll.length[1]" 
-			    @setDate=" number => poll.length[1] = number"/>
-			<SelectBox class="w-[9.438rem]" 
-			    :class="{'bg-[#eff3f4]': disabledSelectInput}"
-			    title="Minute" 
-			    :length="minutes" 
-			    :date="poll.length[2]" 
-			    @setDate=" number => poll.length[2] = number"/>
+			<SelectBox class="w-[9.438rem]" title="Day" :length="dateLeangth(8)"  :date="poll.length[0]" @setDate=" number => poll.length[0] = number"/>
+			<SelectBox class="w-[9.438rem]" title="Hours" :isDisable="inputDisable" :length="dateLeangth(24)" :date="poll.length[1]" @setDate=" number => poll.length[1] = number"/>
+			<SelectBox class="w-[9.438rem]" title="Minute" :isDisable="inputDisable" :length="minutes" :date="poll.length[2]" @setDate=" number => poll.length[2] = number"/>
 	    </div>
 	</div>
     <ThePollRemove @click="$emit('removePoll', {'data': poll, 'showPoll': false})"/>
@@ -73,6 +58,8 @@
     	pollData.pollData.length.forEach((item, index) => poll.length[index] = item || 0);
     	poll.counter = pollData.pollData.counter;
     }
+
+    const dateLeangth = computed(() => (num) => Array.from({length: num}, (_, index) => index))
     
 
     const addNewQuestion = () => {
@@ -83,7 +70,7 @@
    	const questCounter = computed(() => poll.counter < 4 );
     
     
-    const disabledSelectInput = computed(() => poll.length[0] == 7)
+    const inputDisable = computed(() => poll.length[0] == 7)
 
     const inputFocus = computed(() => (index) => {
     	nextTick(() => {
@@ -116,7 +103,7 @@
     })
 
 	watch(() => [...poll.length], (oldPollLength, newPollLength ) => {
-		console.log(oldPollLength, newPollLength)
+
     	if(oldPollLength[0] == 7) {
     		poll.length[1] = 0;
     		poll.length[2] = 0;
