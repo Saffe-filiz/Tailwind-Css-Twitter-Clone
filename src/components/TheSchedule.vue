@@ -28,7 +28,7 @@
 		</div>
 	</div>
     <div class="w-full h-[2.813rem] px-3.75 border-t border-[#cfd9de] flex items-center">
-    	<span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnTweetsModal">
+    	<span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="modal.openUnsentTweets = true">
     		<span class="text-sm text-[#1d9bf0] font-medium">Scheduled Tweets</span>
     	</span>
     </div>
@@ -55,11 +55,6 @@
 	})
 
 	// SET NEW DATE START
-
-	const openUnTweetsModal = () => {
-		modal.openScheduleModal = false;
-		modal.openUnsentTweets = true;
-	}
 
     const store = useStore();
 	// Date prop

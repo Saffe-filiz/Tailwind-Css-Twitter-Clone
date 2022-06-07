@@ -28,22 +28,29 @@
 	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets].some( v => v));
 
 	const exitPopUp = () =>  {	
-		if(modal.newTweetModalIsActiv && !modal.openGifModal && !modal.openScheduleModal){
+		if(modal.newTweetModalIsActiv && !modal.openGifModal && !modal.openScheduleModal && !modal.openUnsentTweets){
 		    modal.closeNewTweetModal = true
+		    console.log('sssssssssss')
 		    modal.closePopUp()
 		}else {
 			modal.closePopUp()
 		}
 	}
 	
-	watch(() => [modal.openGifModal, modal.openScheduleModal, modal.newTweetModalIsActiv], ( arr ) => {
-		let [gif, schedule, isActive] = arr
+	watch(() => [modal.openGifModal, modal.openScheduleModal, modal.newTweetModalIsActiv, modal.openUnsentTweets], ( arr ) => {
+		let [gif, schedule, isActive, unsentTweets] = arr
+		console.log(isActive)
 		if(isActive){
-			if(schedule) {
+			if(unsentTweets){
+		        modal.openScheduleModal = false;
+		        modal.openNewTweetModal = false;
+		    }else if(schedule) {
 			    modal.openNewTweetModal = false;
 		    }else if(gif){
 			    modal.openNewTweetModal = false;
 		    }
+		}else if(unsentTweets ){
+		    modal.openScheduleModal = false;
 		}
 	})
 </script>

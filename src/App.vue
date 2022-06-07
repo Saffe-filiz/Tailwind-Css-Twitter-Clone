@@ -75,13 +75,12 @@
 		        this.openScheduleModal = false;
 		        this.openNewTweetModal = false;
 		        this.closeNewTweetModal = false;
-		        this.openUnsentTweets = false;
 		        this.scrollVisibil();
 		    }else if(this.newTweetModalIsActiv){
 			    this.openGifModal = false;
 		        this.openScheduleModal = false;
-		        this.openUnsentTweets = false;
 		        this.openNewTweetModal = true; 
+		        this.openUnsentTweets = false;
 		    }else {
 			    this.openGifModal = false;
 		        this.openScheduleModal = false;
