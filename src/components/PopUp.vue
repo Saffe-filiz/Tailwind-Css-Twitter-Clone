@@ -30,7 +30,6 @@
 	const exitPopUp = () =>  {	
 		if(modal.newTweetModalIsActiv && !modal.openGifModal && !modal.openScheduleModal && !modal.openUnsentTweets){
 		    modal.closeNewTweetModal = true
-		    console.log('sssssssssss')
 		    modal.closePopUp()
 		}else {
 			modal.closePopUp()
@@ -39,7 +38,6 @@
 	
 	watch(() => [modal.openGifModal, modal.openScheduleModal, modal.newTweetModalIsActiv, modal.openUnsentTweets], ( arr ) => {
 		let [gif, schedule, isActive, unsentTweets] = arr
-		console.log(isActive)
 		if(isActive){
 			if(unsentTweets){
 		        modal.openScheduleModal = false;
