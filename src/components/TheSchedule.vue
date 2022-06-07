@@ -2,38 +2,42 @@
 	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto">
         <TheSetSchedule :sending="updateSchedule.sending" :scheduling="scheduling" :error="showErrorMassage[0]"/>
 	<div class="w-full h-auto bg-yellow py-3.125">
-		<div class="flex flex-col gap-[1.438rem] px-3.75">
+		<div class="flex flex-col gap-[1.125rem] px-3.5 py-[11px]">
 			<TheScheduleInfo v-if="!showErrorMassage[1]" :info="setTimeInfo"/>
 		<div>
-		<span class="text-[15px] text-[#536471]">Date</span>
+		<span class="text-sm text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
 		    	<SelectBox class="w-[17.125rem]" title="Month" :length="12" :date="scheduling.date[1]" @setDate=" number => scheduling.date[1] = number" :isMonth="true"/>
 			    <SelectBox class="w-[7.875rem]" title="Day" :length="getMonthDay" :date="scheduling.date[2]"  @setDate=" number => scheduling.date[2] = number"/>
 			    <SelectBox class="w-[9.063rem]" title="Month" :length="[2024, 2023, 2022]" :date="scheduling.date[0]" @setDate=" number => scheduling.date[0] = number"/>
 		    </div>
-		    <span class="text-[14px] text-[#f4212e]">{{errorMassageForDate}}</span>
+		    <span class="text-sm text-[#f4212e]">{{errorMassageForDate}}</span>
 		</div>
 		<div>
-		<span class="text-[15px] text-[#536471]">Time</span>
+		<span class="text-sm text-[#536471]">Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
 				 <SelectBox class="w-[9.063rem]" title="Hour" :length="24" :date="scheduling.date[3]" @setDate=" number => scheduling.date[3] = number" :formatDate="true"/>
 			     <SelectBox class="w-[9.063rem]" title="Minute" :length="60" :date="scheduling.date[4]" @setDate=" number => scheduling.date[4] = number" :formatDate="true"/>
 		    </div>
-		    <span class="text-[14px] text-[#f4212e]" v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
+		    <span class="text-base text-[#f4212e]" v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
 		</div>
-		<div class="w-full" >
-			<span class="text-[16px] text-[#536471]">Time zone</span>
-			<h4>GMT+03:00</h4>
+		<div class="w-full flex flex-col">
+			<span class="text-sm text-[#536471] h-4">Time zone</span>
+			<span class="text-lg">{{timeZone}}</span>
 		</div>
 		</div>
 	</div>
-    <div class="w-full h-[2.813rem] px-3.75 border-t border-[#cfd9de]"></div>
+    <div class="w-full h-[2.813rem] px-3.75 border-t border-[#cfd9de] flex items-center">
+    	<span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnTweetsModal">
+    		<span class="text-sm text-[#1d9bf0] font-medium">Scheduled Tweets</span>
+    	</span>
+    </div>
 </article>
 </template>
 
 <script setup>
 
-	import {ref, computed, onMounted, reactive, watch } from 'vue';
+	import {ref, computed, onMounted, reactive, watch, inject } from 'vue';
 	import { useStore } from 'vuex';
 
 
@@ -41,7 +45,7 @@
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import TheSetSchedule from './TheSetSchedule.vue';
 
-	
+	const modal = inject('modal')
 
 	// POST SEND DATE START
 	const scheduling = reactive({
@@ -51,6 +55,11 @@
 	})
 
 	// SET NEW DATE START
+
+	const openUnTweetsModal = () => {
+		modal.openScheduleModal = false;
+		modal.openUnsentTweets = true;
+	}
 
     const store = useStore();
 	// Date prop
@@ -92,6 +101,8 @@
 	const setTime = computed(() => {
 		return new Date(scheduling.date[0], scheduling.date[1], scheduling.date[2], scheduling.date[3], scheduling.date[4]);;
 	})
+
+	const timeZone = computed(() => setTime.value.toString().split(' ').slice(-1)[0].slice(1, -1))
 
 	// Get number days
 	const getMonthDay = computed(() => {

@@ -1,7 +1,7 @@
 <template>
 	<div  class="inline-flex flex-row grow cursor-pointer relative" v-for="(gif, index) in gifs" :key="index" >
 		<div class="w-auto grow" :class="bgColor(index)">
-			<img :src="gif" class="w-full h-full grow  " draggable="false">
+			<img :src="gif" class="w-full h-full grow " draggable="false">
 		</div>
 	</div>
 	<InfiniteScroll class="w-full h-1 relative border-0" /> 

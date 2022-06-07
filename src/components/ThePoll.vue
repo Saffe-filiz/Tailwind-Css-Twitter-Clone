@@ -15,9 +15,9 @@
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
 		<div class="w-full h-auto inline-flex justify-between">
-			<SelectBox class="w-[9.438rem]" title="Day" :length="dateLeangth(8)"  :date="poll.length[0]" @setDate=" number => poll.length[0] = number"/>
-			<SelectBox class="w-[9.438rem]" title="Hours" :isDisable="inputDisable" :length="dateLeangth(24)" :date="poll.length[1]" @setDate=" number => poll.length[1] = number"/>
-			<SelectBox class="w-[9.438rem]" title="Minute" :isDisable="inputDisable" :length="minutes" :date="poll.length[2]" @setDate=" number => poll.length[2] = number"/>
+			<SelectBox class="w-[9.438rem]" title="Day" :length="pollLength(8)"  :date="poll.length[0]" @setDate=" number => poll.length[0] = number"/>
+			<SelectBox class="w-[9.438rem]" title="Hours" :isDisable="inputDisable" :length="pollLength(24)" :date="poll.length[1]" @setDate=" number => poll.length[1] = number"/>
+			<SelectBox class="w-[9.438rem]" title="Minute" :isDisable="inputDisable" :length="pollLength(60).slice(startIndex)" :date="poll.length[2]" @setDate=" number => poll.length[2] = number"/>
 	    </div>
 	</div>
     <ThePollRemove @click="$emit('removePoll', {'data': poll, 'showPoll': false})"/>
@@ -59,7 +59,7 @@
     	poll.counter = pollData.pollData.counter;
     }
 
-    const dateLeangth = computed(() => (num) => Array.from({length: num}, (_, index) => index))
+    const pollLength = computed(() => (num) => Array.from({length: num}, (_, index) => index))
     
 
     const addNewQuestion = () => {
@@ -92,14 +92,6 @@
         }else {
         	return 0 
         }
-    })
-
-
-    const minutes = computed(() => {
-    	let minute = [];
-    	let start = startIndex.value;
-    	for(let i = start; i < 60; i++){minute.push(i)};
-    	return minute 
     })
 
 	watch(() => [...poll.length], (oldPollLength, newPollLength ) => {

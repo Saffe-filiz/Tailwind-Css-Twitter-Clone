@@ -15,12 +15,12 @@
 }
 
 .sectionStyle {
-	@apply w-full h-[38px] cursor-pointer p-2 bg-transparent mt-[-8px] outline-none appearance-none
+	@apply w-full  h-[36px] cursor-pointer p-2 bg-transparent p-[7px] pt-[11px]  outline-none appearance-none mt-3
 }
 
 
 .sectionMainStyle {
-	@apply h-[55px] border border-input-main-border-color rounded
+	@apply h-[50px] border border-input-main-border-color rounded
 }
 
 .hoverDuration {

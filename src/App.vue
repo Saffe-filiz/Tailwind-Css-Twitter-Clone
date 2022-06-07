@@ -52,6 +52,7 @@
 		openScheduleModal: false,
 		openGifModal: false,
 		openNewTweetModal: false,
+		openUnsentTweets: false,
 		newTweetModalIsActiv: false,
 		closeNewTweetModal: false,
 
@@ -69,19 +70,22 @@
 
 		closePopUp  () {
 		    if(this.closeNewTweetModal) {
-			    this.newTweetModalIsActiv = false
-			    this.openGifModal = false
-		        this.openScheduleModal = false
-		        this.openNewTweetModal = false
-		        this.closeNewTweetModal = false
+			    this.newTweetModalIsActiv = false;
+			    this.openGifModal = false;
+		        this.openScheduleModal = false;
+		        this.openNewTweetModal = false;
+		        this.closeNewTweetModal = false;
+		        this.openUnsentTweets = false;
 		        this.scrollVisibil();
 		    }else if(this.newTweetModalIsActiv){
 			    this.openGifModal = false;
 		        this.openScheduleModal = false;
+		        this.openUnsentTweets = false;
 		        this.openNewTweetModal = true; 
 		    }else {
 			    this.openGifModal = false;
 		        this.openScheduleModal = false;
+		        this.openUnsentTweets = false;
 		        this.scrollVisibil();
 		    }
 	    }    
