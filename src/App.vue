@@ -55,6 +55,7 @@
 		openUnsentTweets: false,
 		newTweetModalIsActiv: false,
 		closeNewTweetModal: false,
+		previousComponent: '',
 
 		scrollVisibil () {
 		    let body = document.querySelector('body');

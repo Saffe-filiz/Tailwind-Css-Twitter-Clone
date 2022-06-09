@@ -4,10 +4,13 @@
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
       	<div v-on:click.stop v-if="modal.openNewTweetModal" class="min-w-[600px] w-fit h-auto bg-white rounded-2xl mx-auto flex justify-between flex-col pb-1">
-      		<div class="w-full h-12">
-      			<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter m-2 cursor-pointer" @click="exitPopUp">
-			         <CrossIcon :size="18" class="fill-[696c70]"/>
+      		<div class="w-full h-12 inline-flex items-center justify-between pl-2 pr-3.5">
+      			<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="exitPopUp">
+			        <CrossIcon :size="18" class="fill-[696c70]"/>
 		        </div>
+		        <span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnsentTweets">
+    		        <span class="text-sm text-[#1d9bf0] font-medium">Unsent Tweets</span>
+    	        </span>
       		</div>
             <TheNewPost/>
       	</div>
@@ -26,6 +29,11 @@
 	const modal = inject('modal');
 
 	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets].some( v => v));
+
+	const openUnsentTweets = () => {
+		modal.openUnsentTweets = true;
+		modal.previousComponent = 'openNewTweetModal';
+	}
 
 	const exitPopUp = () =>  {	
 		if(modal.newTweetModalIsActiv && !modal.openGifModal && !modal.openScheduleModal && !modal.openUnsentTweets){

@@ -30,7 +30,7 @@
 
     const closeUnsetTweets = () => {
     	modal.openUnsentTweets = false;
-    	modal.openScheduleModal = true;
+    	modal[modal.previousComponent] = true;
     }
 
 </script>
