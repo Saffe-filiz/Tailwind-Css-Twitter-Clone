@@ -82,6 +82,7 @@
 		        this.openScheduleModal = false;
 		        this.openNewTweetModal = true; 
 		        this.openUnsentTweets = false;
+		        
 		    }else {
 			    this.openGifModal = false;
 		        this.openScheduleModal = false;
