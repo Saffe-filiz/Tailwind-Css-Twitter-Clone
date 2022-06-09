@@ -8,7 +8,7 @@
       			<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="exitPopUp">
 			        <CrossIcon :size="18" class="fill-[696c70]"/>
 		        </div>
-		        <span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnsentTweets()">
+		        <span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnsentTweets">
     		        <span class="text-sm text-[#1d9bf0] font-medium">Unsent Tweets</span>
     	        </span>
       		</div>

@@ -1,8 +1,8 @@
 <template>
-	<div class="w-[37.5rem] h-[37.5rem] mx-auto bg-white rounded-2xl">
-		<div class="w-full h-24">
+	<div class="w-[37.5rem] h-[37.5rem] mx-auto bg-white rounded-2xl relative">
+		<div class="w-full h-24 border border-[#eff3f4] bg-[#ffffffa6] backdrop-blur-md rounded-t-2xl sticky top-0">
 		<div class="w-full h-12 pl-2 pr-3.5 inline-flex justify-between items-center">
-			<div class="inline-flex">
+			<div class="inline-flex rounded-t-2xl">
 				<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="closeUnsetTweets">
 			        <ArrowIcon :size="18" class="cursor-pointer"/>
 		        </div>
@@ -12,13 +12,17 @@
 		</div>
 		<div class="inline-flex w-full">
 			<div class="w-2/4 h-12 flex justify-center hover:bg-[#0f14191a] cursor-pointer duration-200 ">
-				<button :class="[ modal.previousComponent == 'openNewTweetModal' ? [style]: '']">Drafts</button>
+				<button :class="[modal.previousComponent == 'openNewTweetModal' ? [style]: 'text-[#536471]']">Drafts</button>
 			</div>
 			<div class="w-2/4 h-12 flex justify-center hover:bg-[#0f14191a] cursor-pointer duration-200">
-			    <button :class="[modal.previousComponent == 'openScheduleModal' ? [style]: '']">Scheduled</button>
+			    <button :class="[modal.previousComponent == 'openScheduleModal' ? [style]: 'text-[#536471]']">Scheduled</button>
 			</div>
 		</div>
 	   </div>
+	    <div class="w-full h-10 px-2 absolute bottom-0 rounded-b-2xl border-t border-[#eff3f4] bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between">
+	    	<span class="px-[11px] py-1 hover:bg-[#1dfff01a] cursor-pointer rounded-full text-sm text-[#1d9bf0] font-medium duration-200">Select All</span>
+	    	<span class="px-[11px] py-1 hover:bg-red-100 cursor-pointer rounded-full text-sm text-red-400 font-medium duration-200">Delete</span>
+	    </div>
 	</div>
 </template>
 
