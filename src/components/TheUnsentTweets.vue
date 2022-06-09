@@ -12,11 +12,10 @@
 		</div>
 		<div class="inline-flex w-full">
 			<div class="w-2/4 h-12 flex justify-center hover:bg-[#0f14191a] cursor-pointer duration-200 ">
-				<button :class="{'relative after:absolute after:left-0 after:rounded-full after:bottom-0 after:w-full after:h-1 after:bg-[#1d9bf0]': isActive}">Drafts</button>
+				<button :class="[ modal.previousComponent == 'openNewTweetModal' ? [style]: '']">Drafts</button>
 			</div>
 			<div class="w-2/4 h-12 flex justify-center hover:bg-[#0f14191a] cursor-pointer duration-200">
-			    <button :class="{'relative after:absolute after:left-0 after:rounded-full after:bottom-0 after:w-full after:h-1 after:bg-[#1d9bf0]':
-			    !isActive}">Scheduled</button>
+			    <button :class="[modal.previousComponent == 'openScheduleModal' ? [style]: '']">Scheduled</button>
 			</div>
 		</div>
 	   </div>
@@ -25,10 +24,11 @@
 
 <script setup>
 	import ArrowIcon from './icons/Arrow.vue';
-	import { inject, computed } from 'vue';
+	import { inject, ref } from 'vue';
 
+	let style = 'relative after:absolute after:left-0 after:rounded-full after:bottom-0 after:w-full after:h-1 after:bg-[#1d9bf0]'
+    
 	const modal = inject('modal'); 
-    const isActive = computed(() => modal.previousComponent == 'openNewTweetModal')
 
     const closeUnsetTweets = () => {
     	modal.openUnsentTweets = false;
