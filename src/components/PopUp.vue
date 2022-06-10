@@ -1,5 +1,5 @@
 <template>
-	<div class="w-screen h-screen bg-[#00000066] fixed top-0 left-0 z-30 table overflow-hidden pt-[33px]" v-if="openPopUp" @click="exitPopUp">
+	<div class="w-screen h-screen bg-[#00000066] fixed top-0 left-0 z-30 table overflow-hidden pt-[33px]" @click="exitPopUp">
       	<TheGif v-on:click.stop v-if="modal.openGifModal"/>
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
@@ -27,8 +27,6 @@
     
 
 	const modal = inject('modal');
-
-	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets].some( v => v));
 
 	const openUnsentTweets = () => {
 		modal.openUnsentTweets = true;

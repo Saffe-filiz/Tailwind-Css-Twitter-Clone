@@ -1,12 +1,30 @@
 <template>
-	<div v-if="date.info" class="w-[512px] h-[17.5px] inline-flex hover:underline cursor-pointer">
+	<div class="w-[512px] h-[17.5px] inline-flex hover:underline cursor-pointer">
 		<Calendar/> 
-	    <span class="text-[12px] text-[#536471]">{{date.info}}</span>
+	    <span class="text-[12px] text-[#536471]">{{info}}</span>
 	</div>
 </template>
 
 <script setup>
 	import Calendar from './icons/NewPost/Calendar.vue';
+	import { computed } from 'vue';
 	
-	const date = defineProps({info: String})
+	const data = defineProps({time: Array});
+
+	const date = computed(() =>  new Date(data.time[0], data.time[1], data.time[2], data.time[3], data.time[4]));
+
+    const timePeriod = computed(() => {
+		let hours = data.time[3];
+		let minute = data.time[4];
+		let period = hours < 12 ? 'AM': 'PM';
+	    hours = hours % 12 == 0 ?  12: hours % 12;
+	    minute = minute < 10 ? '0' + minute: minute
+		return `${hours}:${minute} ${period}`
+	});
+
+	const info = computed(()  => {
+		let [dayName, month, day, year] = date.value.toString().split(' ');
+		return `Will send on ${dayName}, ${month} ${day}, ${year} at ${timePeriod.value}`;
+	});
+
 </script>

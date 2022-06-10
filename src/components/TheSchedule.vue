@@ -3,7 +3,7 @@
         <TheSetSchedule :sending="updateSchedule.sending" :scheduling="scheduling" :error="showErrorMassage[0]"/>
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.125rem] px-3.5 py-[11px]">
-			<TheScheduleInfo v-if="!showErrorMassage[1]" :info="setTimeInfo"/>
+			<TheScheduleInfo v-if="!showErrorMassage[1]" :time="scheduling.date"/>
 		<div>
 		<span class="text-sm text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
@@ -49,7 +49,6 @@
 
 	// POST SEND DATE START
 	const scheduling = reactive({
-		info: null,
 	    date: ['', '', '', '', ''],
 	    sending: true,
 	})
@@ -79,39 +78,14 @@
 		let date = new Date();
 		return [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()];
 	})
-
-	// Date info
-	const setTimeInfo = computed(() => {
-		let [dayName, month, day, year] = setTime.value.toString().split(' ');
-		let info = `Will send on ${dayName}, ${month} ${day}, ${year}  at ${timePeriod.value}`;
-		scheduling.info = info
-		return info;
-	});
-
-	// Format time period
-	const timePeriod = computed(() => {
-		let hours = scheduling.date[3];
-		let minute = scheduling.date[4];
-		let period = hours < 12 ? 'AM': 'PM';
-		let formatHours = hours % 12 == 0 ?  12: hours % 12
-		return `${formatHours}:${formatNumber.value(minute)} ${period}`
-	})
-
-
-	// Release date
-	const setTime = computed(() => {
-		return new Date(scheduling.date[0], scheduling.date[1], scheduling.date[2], scheduling.date[3], scheduling.date[4]);;
-	})
-
-	const timeZone = computed(() => setTime.value.toString().split(' ').slice(-1)[0].slice(1, -1))
+	
+	const timeZone = computed(() => new Date().toString().split(' ').slice(-1)[0].slice(1, -1))
 
 	// Get number days
 	const getMonthDay = computed(() => {
 		let day = new Date(scheduling.date[0], scheduling.date[1] +1, 0).getDate();
 		return Array.from({length: day}, (_, day) => day +1);
 	})
-
-	const formatNumber = computed(() => (num) => num < 10 ? '0' + num: num);
 
 	let errorMassageForDate = ref('');
 	let errorMassageForHours = ref('');

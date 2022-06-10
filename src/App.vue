@@ -9,12 +9,12 @@
 	        </TheTrends>
 	   </div>
 	</div>
-	<PopUp/>
+	<PopUp v-if="openPopUp"/>
 </template>
 
 <script setup>
 
-	import { reactive, onMounted, provide } from 'vue'
+	import { reactive, onMounted, provide, computed } from 'vue'
 
 	import TheNavigation from './components/TheNavigation.vue';
 	import TheFeed from './components/TheFeed.vue';
@@ -95,4 +95,6 @@
 	});
 
 	provide('modal', modal);
+
+	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets].some( v => v));
 </script> 
