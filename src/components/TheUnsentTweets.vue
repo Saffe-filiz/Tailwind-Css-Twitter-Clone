@@ -12,10 +12,10 @@
 		</div>
 		<div class="inline-flex w-full">
 			<div class="w-2/4 h-12 flex justify-center hover:bg-[#0f14191a] cursor-pointer duration-200" @click="chanceSection('openNewTweetModal')">
-				<button :class="[modal.previousComponent == 'openNewTweetModal' ? [style]: 'text-[#536471]']">Drafts</button>
+				<button :class="[modal.selectetUnSentTweetSection == 'openNewTweetModal' ? [style]: 'text-[#536471]']">Drafts</button>
 			</div>
 			<div class="w-2/4 h-12 flex justify-center hover:bg-[#0f14191a] cursor-pointer duration-200" @click="chanceSection('openScheduleModal')">
-			    <button :class="[modal.previousComponent == 'openScheduleModal' ? [style]: 'text-[#536471]']">Scheduled</button>
+			    <button :class="[modal.selectetUnSentTweetSection == 'openScheduleModal' ? [style]: 'text-[#536471]']">Scheduled</button>
 			</div>
 		</div>
 	   </div>
@@ -40,7 +40,7 @@
 
 	const chanceSection = (section) => {
 		editUnsentTweets.value = false;
-		modal.previousComponent = section
+		modal.selectetUnSentTweetSection = section
 	}
 
     const closeUnsetTweets = () => {

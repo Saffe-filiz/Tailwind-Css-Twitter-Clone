@@ -59,6 +59,7 @@
 	const openUnsentTweets = () => {
 		modal.openUnsentTweets = true;
 		modal.previousComponent = 'openScheduleModal';
+		modal.selectetUnSentTweetSection =  'openScheduleModal';
 	}
 
     const store = useStore();

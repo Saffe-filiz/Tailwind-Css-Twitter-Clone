@@ -56,6 +56,7 @@
 		newTweetModalIsActiv: false,
 		closeNewTweetModal: false,
 		previousComponent: '',
+		selectetUnSentTweetSection: '',
 
 		scrollVisibil () {
 		    let body = document.querySelector('body');

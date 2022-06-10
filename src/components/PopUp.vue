@@ -33,6 +33,7 @@
 	const openUnsentTweets = () => {
 		modal.openUnsentTweets = true;
 		modal.previousComponent = 'openNewTweetModal';
+		modal.selectetUnSentTweetSection = 'openNewTweetModal'
 	}
 
 	const exitPopUp = () =>  {	
