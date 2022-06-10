@@ -23,7 +23,7 @@
 	import TheNewPost from './TheNewPost.vue'
 	import CrossIcon from './icons/Cross.vue';
 	import TheUnsentTweets from './TheUnsentTweets.vue';
-	import { inject, computed, watch } from 'vue';
+	import { inject, watch } from 'vue';
     
 
 	const modal = inject('modal');

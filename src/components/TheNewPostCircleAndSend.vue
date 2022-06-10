@@ -1,6 +1,6 @@
 <template>
     <div class="w-auto h-auto inline-flex items-center mt-2.75 justify-between">
-	    <div class="w-auto h-auto inline-flex mr-2.75" v-show="post.massage">
+	    <div class="w-auto h-auto inline-flex mr-2.75" v-if="post.massage">
 	    	<TheCircle :post="post.massage.length"/>
 	        <div class="w-px h-[29px] ml-[9px] mr-2.75 bg-[#c0d0d8]"></div>
 	    	<div class="w-[23px] flexCenter ">

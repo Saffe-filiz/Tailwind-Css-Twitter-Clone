@@ -3,7 +3,7 @@
 	<UserProfileImage :size="10.75" class="mr-3"/>
 	<div class="w-full flex flex-col justify-between"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :time="updataSchedule.date" @click="modal.openScheduleModal = true" class="pl-2" v-if="updataSchedule.date"/>
+			<TheScheduleInfo :time="updataSchedule.date" @click="modal.openScheduleModal = true" class="pl-2 hover:underline cursor-pointer" v-if="updataSchedule.date"/>
 			<DragArea @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.poll]">
 		        <TextArea @post="(text) => post.massage = text" @click="selected.whoCanAnswer = true"/>
 		        <ThePoll v-if="selected.poll" @removePoll="(pollObject) => pollData(pollObject)" :pollData="pollFormData"/>

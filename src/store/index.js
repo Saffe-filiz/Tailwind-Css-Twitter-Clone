@@ -23,13 +23,13 @@ const store = createStore({
 	    		post: 'TEST 1',
 	    		date: [2022, 6, 10, 16, 29]
 	    	},{
-	    		post: 'Test2'
+	    		post: 'Test2',
 	    		date: [2022, 7, 2, 16, 19]
 	    	},{
-	    		post: 'Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2'
+	    		post: 'Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2',
 	    		date: [2022, 7, 2, 16, 19]
 	    	},{
-	    		post: 'TeTest2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2st2'
+	    		post: 'TeTest2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2st2',
 	    		date: [2023, 2, 2, 16, 19]
 	    	}
 	    	],

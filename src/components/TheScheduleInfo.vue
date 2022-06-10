@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[512px] h-[17.5px] inline-flex hover:underline cursor-pointer">
+	<div class="w-[512px] h-[17.5px] inline-flex">
 		<Calendar/> 
 	    <span class="text-[12px] text-[#536471]">{{info}}</span>
 	</div>
