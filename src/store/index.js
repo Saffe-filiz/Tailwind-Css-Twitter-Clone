@@ -21,16 +21,16 @@ const store = createStore({
 	    	scheduled: [
 	    	{
 	    		post: 'TEST 1',
-	    		date: [2022, 6, 10, 16, 29]
+	    		date: [2022, 6, 10, 16, 29],
 	    	},{
 	    		post: 'Test2',
-	    		date: [2022, 7, 2, 16, 19]
+	    		date: [2022, 7, 2, 16, 19],
 	    	},{
 	    		post: 'Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2',
-	    		date: [2022, 7, 2, 16, 19]
+	    		date: [2022, 7, 2, 16, 19],
 	    	},{
 	    		post: 'TeTest2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2Test2st2',
-	    		date: [2023, 2, 2, 16, 19]
+	    		date: [2023, 2, 2, 16, 19],
 	    	}
 	    	],
 	    }
@@ -54,9 +54,9 @@ const store = createStore({
 
 		getPollDataDate: state => state.pollData.date,
 
-		getUnSendTweetsDrafts: state => state.unSendTweets.drafts,
+		getUnSendDrafts: state => state.unSendTweets.drafts,
 
-		getUnSendTweetsScheduled: state => state.unSendTweets.scheduled,
+		getUnSendScheduled: state => state.unSendTweets.scheduled,
 
 	},
 
@@ -89,6 +89,10 @@ const store = createStore({
 		setPollDataDate (state, date) {
 			state.pollData.date = date;
 		},
+
+		setUnSendTweetScheduled (state, data) {
+			state.unSendTweets.scheduled = data;
+		}
 
 	},
 
