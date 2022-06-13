@@ -21,7 +21,7 @@ const store = createStore({
 	    	{
 	    		post: '0',
 	    		date: [2022, 6, 10, 16, 29],
-	    		id: 1,
+	    		id: 0,
 	    	},{
 	    		post: '1',
 	    		date: [2022, 7, 2, 16, 15],
@@ -37,26 +37,26 @@ const store = createStore({
 	    	},{
 	    		post: '0',
 	    		date: [2023, 2, 1, 5, 19],
-	    		id: 3,
+	    		id: 4,
 	    	},{
 	    		post: '1',
 	    		date: [2023, 2, 4, 16, 39],
-	    		id: 3,
+	    		id: 5,
 	    	},{
 	    		post: '0',
 	    		date: [2023, 2, 9, 11, 19],
-	    		id: 3,
+	    		id: 6,
 	    	},{
 	    		post: '1',
 	    		date: [2023, 2, 10, 12, 19],
-	    		id: 3,
+	    		id: 7,
 	    	}
 	    	],
 	    	scheduled: [
 	    	{
 	    		post: '0',
 	    		date: [2022, 6, 10, 16, 29],
-	    		id: 1,
+	    		id: 0,
 	    	},{
 	    		post: '1',
 	    		date: [2022, 7, 2, 16, 15],
@@ -72,19 +72,19 @@ const store = createStore({
 	    	},{
 	    		post: '0',
 	    		date: [2023, 2, 1, 5, 19],
-	    		id: 3,
+	    		id: 4,
 	    	},{
 	    		post: '1',
 	    		date: [2023, 2, 4, 16, 39],
-	    		id: 3,
+	    		id: 5,
 	    	},{
 	    		post: '0',
 	    		date: [2023, 2, 9, 11, 19],
-	    		id: 3,
+	    		id: 6,
 	    	},{
 	    		post: '1',
 	    		date: [2023, 2, 10, 12, 19],
-	    		id: 3,
+	    		id: 7,
 	    	}
 	    	],
 	    }
@@ -144,10 +144,13 @@ const store = createStore({
 			state.pollData.date = date;
 		},
 
-		setUnSendTweetScheduled (state, data) {
+		setUnSendScheduled (state, data) {
 			state.unSendTweets.scheduled = data;
-		}
+		},
 
+		setUnSendDraft (state, data) {
+			state.unSendTweets.drafts = data;
+		}
 	},
 
 	actions: {

@@ -58,17 +58,21 @@
 	const editUnsent = ref(false);
 	const selectedForDelet = ref([])
 
-	const x = (value) => {
+	const currentSection = computed(() => modal.selectetUnSentTweetSection == 'openScheduleModal')
+
+	const x = computed(() => (value) => {
 		let index = selectedForDelet.value.indexOf(value)
     	if(!editUnsent.value) return;
     	if(index != -1){
     		selectedForDelet.value.splice(index, 1)
     	}else {
-    		selectedForDelet.value.unshift(value)
+    		selectedForDelet.value.push(value)
     	};
-    };
+    });
 
-     const isSelected = (index) => selectedForDelet.value.indexOf(index) != -1;
+
+
+    const isSelected = (index) => selectedForDelet.value.indexOf(index) != -1;
 
 	const edit = computed(() => editUnsent.value ? 'Done': 'Edit');
 	const select = computed(() => selectedForDelet.value.length ? 'Deselect All': 'Select All')
@@ -89,7 +93,7 @@
     }
 
     const data = computed(() => {
-    	if(modal.selectetUnSentTweetSection == 'openScheduleModal'){
+    	if(currentSection.value){
     		return  store.getters.getUnSendScheduled;
     	}else {
     		return  store.getters.getUnSendDrafts;
@@ -97,19 +101,28 @@
     });
 
     const selectAll = () => {
-    	if(selectedForDelet.value.length) return selectedForDelet.value = [];
-    	selectedForDelet.value = Array.from({length: data.value.length}, (_, index) => index);
+    	if(selectedForDelet.value.length){
+    		selectedForDelet.value = [];
+    	}else {
+    		selectedForDelet.value = Array.from({length: data.value.length}, (_, index) => index);
+    	}
     }
 
     const remove = () => {
-    	let delet = selectedForDelet.value
-    	let tweets = data.value;
-    	for(let index = delet.length -1; index >= 0; index--){
-    		tweets.splice(delet[index], 1)
-    		selectedForDelet.value.splice(index, 1)
+    	let tweets = data.value
+    	let deletsItem = selectedForDelet.value
+    		tweets = tweets.filter((_, index) =>  selectedForDelet.value.indexOf(index) == -1);
+    		selectedForDelet.value = [];
+
+       	if(currentSection.value) {
+    		store.commit('setUnSendScheduled', tweets)
+    	}else {
+    		store.commit('setUnSendDraft', tweets)
     	}
 
     }
+
+    const del = (arr, index) => arr.splice(index, 1)
    
 
 </script>
