@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<div class="w-full">
-				<TheScheduleInfo :time="tweet.date"/>
+				<TheScheduleInfo :time="tweet.date" v-if="modal.selectetUnSentTweetSection == 'openScheduleModal'"/>
 			    <p class="break-all	 text-sm font-normal">{{tweet.post}}</p>
 			</div>
 		</div>
@@ -97,10 +97,8 @@
     });
 
     const selectAll = () => {
-    	let tweetsLength = data.value.length;
-    	if(tweetsLength == selectedForDelet.value.length) return selectedForDelet.value = [];
-    	selectedForDelet.value = Array.from({length: tweetsLength}, (_, index) => index);
-    	console.log(selectedForDelet.value)
+    	if(selectedForDelet.value.length) return selectedForDelet.value = [];
+    	selectedForDelet.value = Array.from({length: data.value.length}, (_, index) => index);
     }
 
     const remove = () => {

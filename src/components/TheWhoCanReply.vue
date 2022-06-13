@@ -44,5 +44,4 @@
 		const selected = ref(0)
 		const icons = [World, People, MentionIcon];
 		const whoCanReply = ['Everyone', 'People you follow', 'Only people you mention'];
-
 </script>

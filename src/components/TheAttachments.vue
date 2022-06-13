@@ -4,7 +4,7 @@
 	    <Gif :isActive="is.active[0].image || is.active[0].gif || is.active[0].poll"  @click="modal.openGifModal = true, modal.scrollHidden()"/>
 		<Poll @click="$emit('showPoll', true)" :isActive="is.active[0].gif || is.active[0].image || is.active[2]" />
 	    <Emoji/>
-	    <Schedule :isActive="is.active[0].poll || is.active[0].whoCanReply != 'Everyone'" @click="modal.scrollHidden(), modal.openScheduleModal = true"/>
+	    <Schedule v-memo="[is]" :isActive="is.active[0].poll || is.active[0].whoCanReply != 'Everyone'" @click="modal.scrollHidden(), modal.openScheduleModal = true"/>
 	    <Mark/>
 	</div>
 </template>

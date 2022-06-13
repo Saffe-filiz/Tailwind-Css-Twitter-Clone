@@ -1,5 +1,5 @@
 <template>
-	<article  :class="dragAreaBorderColor" @dragleave="draggableAreaActive = false" @drop.prevent="uploadImage" @dragover.prevent>
+	<article :class="dragAreaBorderColor" @dragleave="draggableAreaActive = false" @drop.prevent="uploadImage" @dragover.prevent>
 		<!-- TEXT AREA SLOT -->
 	    <slot/>
 	    <ImageGallery :image="images">
