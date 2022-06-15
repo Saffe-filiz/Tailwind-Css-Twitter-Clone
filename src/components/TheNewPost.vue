@@ -12,7 +12,12 @@
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center">
 	    	<TheAttachments :active="[selected, images.length, updataSchedule.sending]" @showPoll="(value) => selected.poll = value"/>
-            <TheNewPostCircleAndSend :massage="post.massage" :date="!updataSchedule.date"/>
+            <TheNewPostCircleAndSend :massage="post.massage" :date="!updataSchedule.date">
+                <button class="w-auto h-8 px-[15px] bg-btn-bg-color text-white rounded-[2rem]" :class="{'opacity-50': !post.massage}" :disabled="!post.massage">
+	                <span v-if="post.date" @click="sendNeWTweet">Tweet</span>
+	                <span v-else >Schedule</span>
+	            </button>
+            </TheNewPostCircleAndSend>
 	    </div>
 	</div>
     </article>
@@ -33,8 +38,8 @@
 	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
-    const images = ref([]); // Take image.
-	let draggableAreaActive = ref(false); // Drag area is aktive chake
+    const images = ref([]);
+	let draggableAreaActive = ref(false);
 
 	const store = useStore();
     

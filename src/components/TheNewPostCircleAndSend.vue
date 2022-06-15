@@ -9,14 +9,13 @@
 	    		</div>
 	    	</div>
 	    </div>
-	    <TheSendNewPost  :isReady="!post.massage" :isSchedule="post.date"/>
-	    </div>
+	    <slot/>
+	 </div>
 </template>
 
 <script setup>
 	import Plus from './icons/Plus.vue';
 	import TheCircle from './TheCircle.vue';
-	import TheSendNewPost from './TheSendNewPost.vue';
 
 	const post = defineProps({massage: String, date: Boolean })
 </script>
