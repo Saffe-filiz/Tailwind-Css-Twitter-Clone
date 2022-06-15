@@ -113,7 +113,7 @@
     	user: null,
     	username: null,
     	post: '',
-    	whoCanReply: selected.whoCanReply,
+    	whoCanReply: null,
     	date: null,
     	Schedule: null,
     	poll: null,

@@ -51,8 +51,9 @@
 	const modal = reactive({
 		openScheduleModal: false,
 		openGifModal: false,
-		openNewTweetModal: false,
+		openNewTweetModal: true,
 		openUnsentTweets: false,
+		openSaveToTweet: true,
 		newTweetModalIsActiv: false,
 		closeNewTweetModal: false,
 		previousComponent: '',
@@ -96,5 +97,5 @@
 
 	provide('modal', modal);
 
-	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets].some( v => v));
+	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets, true].some( v => v));
 </script> 
