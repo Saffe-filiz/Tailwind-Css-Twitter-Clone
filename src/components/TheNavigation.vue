@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-	import { ref, computed, inject } from 'vue';
+	import { ref, inject } from 'vue';
 
  	import Logo from './icons/NavigationIcons/Logo.vue';
 	import Home from './icons/NavigationIcons/Home.vue';

@@ -127,7 +127,7 @@
     	selectedForDelet.value = [];
 
        	if(currentSection.value) {
-    		store.commit('setUnSendScheduled', data)
+    		store.commit('deletUnSendScheduled', data)
     	}else {
     		store.commit('setUnSendDraft', data)
     	}

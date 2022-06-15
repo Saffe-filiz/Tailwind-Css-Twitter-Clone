@@ -177,11 +177,15 @@ const store = createStore({
 		},
 
 		setUnSendScheduled (state, data) {
-			state.unSendTweets.scheduled = data;
+			state.unSendTweets.scheduled.push(data);
 		},
 
 		setUnSendDraft (state, data) {
-			state.unSendTweets.drafts = data;
+			state.unSendTweets.drafts.push(data);
+		},
+
+		deletUnSendScheduled (state, data) {
+			state.unSendTweets.scheduled = data;
 		}
 	},
 
