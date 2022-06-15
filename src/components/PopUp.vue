@@ -16,7 +16,7 @@
       		</div>
             <TheNewPost />
       	</div>
-      	<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-[16px] m-auto absolute top-1/2 translate-y-[-50%] left-1/2 translate-x-[-50%]" 
+      	<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-[16px] m-auto absolute top-1/2 translate-y-[-50%] left-1/2 translate-x-[-50%] z-30" 
       	v-if="modal.openSaveToTweet">
       		<span>
       			<h2 class="text-lg font-bold">Save Tweet?</h2>
