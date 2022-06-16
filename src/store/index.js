@@ -17,108 +17,8 @@ const store = createStore({
 	    },
 
 	    unSendTweets: {
-	    	drafts: [
-	    	{
-	    		post: '0',
-	    		date: [2022, 6, 10, 16, 29],
-	    		id: 0,
-	    	},{
-	    		post: '1',
-	    		date: [2022, 7, 2, 16, 15],
-	    		id: 1,
-	    	},{
-	    		post: '0',
-	    		date: [2022, 7, 2, 16, 19],
-	    		id: 2,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 3, 16, 59],
-	    		id: 3,
-	    	},{
-	    		post: '0',
-	    		date: [2023, 2, 1, 5, 19],
-	    		id: 4,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 4, 16, 39],
-	    		id: 5,
-	    	},{
-	    		post: '0',
-	    		date: [2023, 2, 9, 11, 19],
-	    		id: 6,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 10, 12, 19],
-	    		id: 7,
-	    	}
-	    	],
-	    	scheduled: [
-	    	{
-	    		post: '0',
-	    		date: [2022, 6, 10, 16, 29],
-	    		id: 0,
-	    	},{
-	    		post: '1',
-	    		date: [2022, 7, 2, 16, 15],
-	    		id: 1,
-	    	},{
-	    		post: '0',
-	    		date: [2022, 7, 2, 16, 19],
-	    		id: 2,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 3, 16, 59],
-	    		id: 3,
-	    	},{
-	    		post: '0',
-	    		date: [2023, 2, 1, 5, 19],
-	    		id: 4,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 4, 16, 39],
-	    		id: 5,
-	    	},{
-	    		post: '0',
-	    		date: [2023, 2, 9, 11, 19],
-	    		id: 6,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 10, 12, 19],
-	    		id: 7,
-	    	},{
-	    		post: '0',
-	    		date: [2022, 6, 10, 16, 29],
-	    		id: 0,
-	    	},{
-	    		post: '1',
-	    		date: [2022, 7, 2, 16, 15],
-	    		id: 1,
-	    	},{
-	    		post: '0',
-	    		date: [2022, 7, 2, 16, 19],
-	    		id: 2,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 3, 16, 59],
-	    		id: 3,
-	    	},{
-	    		post: '0',
-	    		date: [2023, 2, 1, 5, 19],
-	    		id: 4,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 4, 16, 39],
-	    		id: 5,
-	    	},{
-	    		post: '0',
-	    		date: [2023, 2, 9, 11, 19],
-	    		id: 6,
-	    	},{
-	    		post: '1',
-	    		date: [2023, 2, 10, 12, 19],
-	    		id: 7,
-	    	}
-	    	],
+	    	drafts: [],
+	    	scheduled: [],
 	    }
 	},
 
@@ -143,6 +43,8 @@ const store = createStore({
 		getUnSendDrafts: state => state.unSendTweets.drafts,
 
 		getUnSendScheduled: state => state.unSendTweets.scheduled,
+
+		getGifAutoPlay: state => state.gifData.gifAutoPlay
 
 	},
 
