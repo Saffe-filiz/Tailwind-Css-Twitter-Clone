@@ -5,7 +5,6 @@
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
       	<div v-on:click.stop v-if="modal.openNewTweetModal" class="min-w-[600px] w-fit h-auto bg-white rounded-2xl mx-auto flex justify-between flex-col pb-1 relative" >
-      		<div class="absolute w-full h-full rounded-2xl "></div>
       		<div class="w-full h-12 inline-flex items-center justify-between pl-2 pr-3.5">
       			<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="exitPopUp">
 			        <CrossIcon :size="18" class="fill-[696c70]"/>

@@ -12,7 +12,7 @@
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center">
 	    	<TheAttachments :active="[selected, images.length, updataSchedule.sending]" @showPoll="(value) => selected.poll = value"/>
-            <TheNewPostCircleAndSend :massage="post.massage" :date="!updataSchedule.date">
+            <TheNewPostCircleAndSend :massage="post.post" :date="!updataSchedule.date">
                 <button class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem]" :class="{'opacity-50': !post.post}" :disabled="!post.post">
 	                <span v-if="!updataSchedule.date" @click="sendNeWTweet">Tweet</span>
 	                <span v-else @click="goToSendNewTweet">Schedule</span>
@@ -127,6 +127,8 @@
 
 	const modal = inject('modal'); // Coming from app vue
     
+
+    //const saveToDrafd = computed(() =>  modal.textAreaIsEmty = post.post  != '')
 
 	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' )
 
