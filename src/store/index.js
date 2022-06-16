@@ -184,8 +184,12 @@ const store = createStore({
 			state.unSendTweets.drafts.push(data);
 		},
 
-		deletUnSendScheduled (state, data) {
+		deletUnScheduled (state, data) {
 			state.unSendTweets.scheduled = data;
+		},
+
+		deletUnDraft (state, data) {
+			state.unSendTweets.drafts = data;
 		}
 	},
 

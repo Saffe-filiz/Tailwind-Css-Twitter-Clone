@@ -15,9 +15,8 @@
       		</div>
             <TheNewPost />
       	</div>
-      	<div class="w-full h-full  absolute left-0 top-0 flex items-center justify-center z-30 bg-[#00000066]" v-if="modal.openSaveToTweet"
-      	 @click="modal.openSaveToTweet = false" v-on:click.stop >
-      		<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-4 m-auto" >
+      	<div class="w-full h-full  absolute left-0 top-0 flex items-center justify-center z-30 bg-[#00000066]" v-if="modal.openSaveToTweet">
+      		<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-4 m-auto">
       		<span>
       			<h2 class="text-lg font-bold">Save Tweet?</h2>
       			<p class="text-sm">You can save this to send later from your unsent Tweets. </p>
@@ -72,4 +71,5 @@
 		    modal.openScheduleModal = false;
 		}
 	})
+
 </script>
