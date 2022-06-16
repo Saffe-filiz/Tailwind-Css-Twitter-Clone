@@ -54,7 +54,7 @@
 		openNewTweetModal: false,
 		openUnsentTweets: false,
 		openSaveToTweet: true,
-		textAreaIsEmty: false,
+		textAreaIsEmty: true,
 		newTweetModalIsActiv: false,
 		closeNewTweetModal: false,
 		previousComponent: '',
@@ -74,21 +74,15 @@
 
 		closePopUp  () {
 		   	if(this.closeNewTweetModal) {
-		   		if(this.openSaveToTweet){
-		   			this.openSaveToTweet = false;
-		   		}else {
-		   			this.newTweetModalIsActiv = false;
-		            this.openNewTweetModal = false;
-		            this.closeNewTweetModal = false;
-		            this.openSaveToTweet = false;
-		            this.scrollVisibil();
-		   		}
+		   		this.newTweetModalIsActiv = false;
+		        this.openNewTweetModal = false;
+		        this.closeNewTweetModal = false;
+		        this.scrollVisibil();
 		    }else if(this.newTweetModalIsActiv){
 			    this.openGifModal = false;
 		        this.openScheduleModal = false;
 		        this.openNewTweetModal = true; 
-		        this.openUnsentTweets = false;
-		        
+		        this.openUnsentTweets = false;  
 		    }else {
 			    this.openGifModal = false;
 		        this.openScheduleModal = false;
