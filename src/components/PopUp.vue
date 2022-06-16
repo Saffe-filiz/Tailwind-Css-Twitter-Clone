@@ -5,7 +5,7 @@
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
       	<div v-on:click.stop v-if="modal.openNewTweetModal" class="min-w-[600px] w-fit h-auto bg-white rounded-2xl mx-auto flex justify-between flex-col pb-1 relative" >
-      		<div class="absolute w-full h-full bg-[#00000066] rounded-2xl z-10"></div>
+      		<div class="absolute w-full h-full rounded-2xl "></div>
       		<div class="w-full h-12 inline-flex items-center justify-between pl-2 pr-3.5">
       			<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="exitPopUp">
 			        <CrossIcon :size="18" class="fill-[696c70]"/>
@@ -16,8 +16,9 @@
       		</div>
             <TheNewPost />
       	</div>
-      	<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-[16px] m-auto absolute top-1/2 translate-y-[-50%] left-1/2 translate-x-[-50%] z-30" 
-      	v-if="modal.openSaveToTweet">
+      	<div class="w-full h-full  absolute left-0 top-0 flex items-center justify-center z-30 bg-[#00000066]" v-if="modal.openSaveToTweet"
+      	 @click="modal.openSaveToTweet = false" v-on:click.stop >
+      		<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-4 m-auto" >
       		<span>
       			<h2 class="text-lg font-bold">Save Tweet?</h2>
       			<p class="text-sm">You can save this to send later from your unsent Tweets. </p>
@@ -26,6 +27,7 @@
       			<button class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200">Save</button>
       			<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200">Discard</button>
       		</span>
+      	</div>
       	</div>
 	</div>
 </template>
