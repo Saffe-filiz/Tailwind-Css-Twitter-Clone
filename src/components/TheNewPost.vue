@@ -42,7 +42,6 @@
 	let store = useStore();
     
    
-
 	let pollData = ref(); // Poll form data
 
 	const setPollData = ( obj ) => {
@@ -113,10 +112,6 @@
     	}
     }
 
-    const sendTweet = (val) => {
-    	console.log('Send Tweet tttttttttttttttt', val)
-    }
-
     const post = reactive({
     	user: null,
     	username: null,
@@ -128,6 +123,13 @@
     	Image: null,
 
     });
+
+    const sendTweet = () => {
+    	store.commit('setUnSendDraft', post);
+    	console.log('asdasdasds')
+    	modal.openNewTweetModal = false;
+    }
+
 
 
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component

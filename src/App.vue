@@ -55,6 +55,7 @@
 		openUnsentTweets: false,
 		openSaveToTweet: false,
 		textAreaIsEmty: false,
+		saveToUnSendTweet: false,
 		newTweetModalIsActiv: false,
 		closeNewTweetModal: false,
 		previousComponent: '',

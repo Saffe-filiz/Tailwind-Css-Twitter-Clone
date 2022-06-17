@@ -41,7 +41,7 @@
     
 
 	const modal = inject('modal');
-	const saveToDrafd = ref(null)
+	const saveToDrafd = ref()
 
 	const openUnsentTweets = () => {
 		modal.openUnsentTweets = true;
@@ -85,12 +85,14 @@
 	const close = () => {
 		modal.textAreaIsEmty = false;
 		modal.openSaveToTweet = false;
+		saveToDrafd.value = false;
 		exitPopUp()
 	}
 
 	const saveTweet = () => {
-		saveToDrafd.value = true;
-		console.log('test socces')
+		saveToDrafd.value =  true;
+    	modal.textAreaIsEmty = false;
+		modal.openSaveToTweet = false;
 	}
 
 </script>
