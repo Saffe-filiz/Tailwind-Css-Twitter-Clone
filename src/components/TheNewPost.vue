@@ -14,8 +14,8 @@
 	    	<TheAttachments :active="[selected, images.length, updataSchedule.sending]" @showPoll="(value) => selected.poll = value"/>
             <TheNewPostCircleAndSend :massage="post.post" :date="!updataSchedule.date">
                 <button class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem]" :class="{'opacity-50': !post.post}" :disabled="!post.post">
-	                <span v-if="!updataSchedule.date" @click="sendNeWTweet">Tweet</span>
-	                <span v-else @click="goToSendNewTweet">Schedule</span>
+	                <span v-if="!updataSchedule.date">Tweet</span>
+	                <span v-else @click="sendSchedule">Schedule</span>
 	            </button>
             </TheNewPostCircleAndSend>
 	    </div>
@@ -38,9 +38,7 @@
 	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
-    let images = ref([]);
-	let draggableAreaActive = ref(false);
-
+	const saveToDraft = defineProps({data: Boolean})
 	let store = useStore();
     
    
@@ -71,9 +69,12 @@
 		whoCanReply: 'Everyone',
 	})
 
-	const showWhoCanAwser = computed(() => Object.keys(selected).some( item => selected[item] == true ) )
+	const showWhoCanAwser = computed(() => Object.keys(selected).some( item => selected[item] == true ) );
 
-    // Image upload error massage
+	let draggableAreaActive = ref(false);
+
+	let images = ref([]);
+
 	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
     
     const uploadImage =  ( e ) => {
@@ -97,16 +98,23 @@
     	}
     	e.target.value = ''
 	}
+
+	provide('uploadImage', uploadImage); // Going to image drag area component
+	provide('images', images); // Going to image drag area component
     
 
     
     const updataSchedule = computed(() => store.getters.getUpdataSchedule);
    
-    const goToSendNewTweet = () => {
+    const sendSchedule = () => {
     	if(!updataSchedule.data){
     		post.date = updataSchedule.value.date;
     		store.commit('setUnSendScheduled', post);
     	}
+    }
+
+    const sendTweet = (val) => {
+    	console.log('Send Tweet tttttttttttttttt', val)
     }
 
     const post = reactive({
@@ -121,15 +129,13 @@
 
     });
 
-	provide('uploadImage', uploadImage); // Going to image drag area component
-	provide('images', images); // Going to image drag area component
+
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
 
 	const modal = inject('modal'); // Coming from app vue
-    
 
-    //const saveToDrafd = computed(() =>  modal.textAreaIsEmty = post.post  != '')
+	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' );
 
-	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' )
+	watch(() => saveToDraft.data, (value) => sendTweet())
 
 </script>

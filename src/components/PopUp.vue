@@ -13,7 +13,7 @@
     		        <span class="text-sm text-[#1d9bf0] font-medium">Unsent Tweets</span>
     	        </span>
       		</div>
-            <TheNewPost />
+            <TheNewPost :data="saveToDrafd"/>
       	</div>
       	<div class="w-full h-full  absolute left-0 top-0 flex items-center justify-center z-30 bg-[#00000066]" v-if="modal.openSaveToTweet">
       		<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-4 m-auto" v-on:click.stop>
@@ -23,8 +23,8 @@
       		</span>
       		<span>
       			<button class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200"
-      			 @click="t">Save</button>
-      			<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200">Discard</button>
+      			 @click="saveTweet">Save</button>
+      			<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" @click="close">Discard</button>
       		</span>
       	</div>
       	</div>
@@ -37,10 +37,11 @@
 	import TheNewPost from './TheNewPost.vue'
 	import CrossIcon from './icons/Cross.vue';
 	import TheUnsentTweets from './TheUnsentTweets.vue';
-	import { inject, watch } from 'vue';
+	import { ref, inject, watch } from 'vue';
     
 
 	const modal = inject('modal');
+	const saveToDrafd = ref(null)
 
 	const openUnsentTweets = () => {
 		modal.openUnsentTweets = true;
@@ -81,10 +82,15 @@
 		}
 	})
 
-	const t = () => {
+	const close = () => {
 		modal.textAreaIsEmty = false;
 		modal.openSaveToTweet = false;
 		exitPopUp()
+	}
+
+	const saveTweet = () => {
+		saveToDrafd.value = true;
+		console.log('test socces')
 	}
 
 </script>
