@@ -43,14 +43,18 @@
 	    	<span class="px-2.75 py-1 hover:bg-[#1dfff01a] cursor-pointer rounded-full text-sm text-[#1d9bf0] font-medium duration-200" 
 	    	@click="selectAll">{{select}}</span>
 	    	<span class="px-2.75 py-1 hover:bg-red-100 cursor-pointer rounded-full text-sm text-red-400 font-medium duration-200" 
-	    	@click="remove">Delete</span>
+	    	@click="openConfirmationBox = true">Delete</span>
 	    </div>
+	    <Confirmation v-if="openConfirmationBox" :isSaveTweet="false">
+      		<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" @click="remove">Delete</button>
+      	</Confirmation>
 	</div>
 </template>
 
 <script setup>
 	import ArrowIcon from './icons/Arrow.vue';
 	import Check from './icons/Check.vue';
+	import Confirmation from './Confirmation.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import { useStore } from 'vuex';
 	import { ref, inject, computed } from 'vue';
@@ -121,6 +125,8 @@
     	}
     }
 
+    let openConfirmationBox = ref(false);
+
     const remove = () => {
     	let data = tweets.value
     	data = data.filter((_, index) =>  selectedForDelet.value.indexOf(index) == -1);
@@ -131,6 +137,8 @@
     	}else {
     		store.commit('deletUnDraft', data)
     	}
+
+    	openConfirmationBox.value = false;
 
     }
 

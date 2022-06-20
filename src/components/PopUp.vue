@@ -15,19 +15,11 @@
       		</div>
             <TheNewPost :data="saveToDrafd"/>
       	</div>
-      	<div class="w-full h-full  absolute left-0 top-0 flex items-center justify-center z-30 bg-[#00000066]" v-if="modal.openSaveToTweet">
-      		<div class="w-80 h-[236px] p-[29px] bg-white rounded-2xl flex flex-col gap-4 m-auto" v-on:click.stop>
-      		<span>
-      			<h2 class="text-lg font-bold">Save Tweet?</h2>
-      			<p class="text-sm">You can save this to send later from your unsent Tweets. </p>
-      		</span>
-      		<span>
-      			<button class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200"
+      	<Confirmation v-if="modal.openSaveToTweet" :isSaveTweet="true">
+      		<button class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200"
       			 @click="saveTweet">Save</button>
-      			<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" @click="close">Discard</button>
-      		</span>
-      	</div>
-      	</div>
+      		<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" @click="close">Discard</button>
+      	</Confirmation>
 	</div>
 </template>
 
@@ -37,7 +29,8 @@
 	import TheNewPost from './TheNewPost.vue'
 	import CrossIcon from './icons/Cross.vue';
 	import TheUnsentTweets from './TheUnsentTweets.vue';
-	import { ref, inject, watch } from 'vue';
+	import Confirmation from './Confirmation.vue';
+	import { ref, inject, watch, computed } from 'vue';
     
 
 	const modal = inject('modal');
@@ -85,7 +78,8 @@
 	const close = () => {
 		modal.textAreaIsEmty = false;
 		modal.openSaveToTweet = false;
-		saveToDrafd.value = false;
+		modal.newTweetModalIsActiv = false;
+		modal.openNewTweetModal = false;
 		exitPopUp()
 	}
 
@@ -93,6 +87,7 @@
 		saveToDrafd.value =  true;
     	modal.textAreaIsEmty = false;
 		modal.openSaveToTweet = false;
+		modal.newTweetModalIsActiv = false
 	}
 
 </script>
