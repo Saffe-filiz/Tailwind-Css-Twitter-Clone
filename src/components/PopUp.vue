@@ -1,6 +1,5 @@
 <template>
-	<div class="w-screen h-screen bg-[#00000066] fixed top-0 left-0 z-30 z- table overflow-hidden p-[33px]" 
-	 @click="exitPopUp">
+	<div class="w-screen h-screen bg-[#00000066] fixed top-0 left-0 z-30 overflow-hidden p-[33px]" @click="exitPopUp">
       	<TheGif v-on:click.stop v-if="modal.openGifModal"/>
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
@@ -16,8 +15,7 @@
             <TheNewPost :data="saveToDrafd"/>
       	</div>
       	<Confirmation v-if="modal.openSaveToTweet" :isSaveTweet="true">
-      		<button class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200"
-      			 @click="saveTweet">Save</button>
+      		<button class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200" @click="saveTweet">Save</button>
       		<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" @click="close">Discard</button>
       	</Confirmation>
 	</div>
@@ -80,6 +78,7 @@
 		modal.openSaveToTweet = false;
 		modal.newTweetModalIsActiv = false;
 		modal.openNewTweetModal = false;
+		console.log('test1')
 		exitPopUp()
 	}
 

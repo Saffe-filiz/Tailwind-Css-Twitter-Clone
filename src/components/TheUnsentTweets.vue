@@ -1,5 +1,6 @@
 <template>
-	<div class="w-[37.5rem]  mx-auto bg-whites relative rounded-2xl overflow-hidden">
+	<div class="w-fit h-fit  mx-auto">
+	<div class="w-[37.5rem] bg-whites relative rounded-2xl overflow-hidden">
 		<div class="w-full h-[37.5rem]  overflow-auto bg-white" :class="{'pb-[40px]': editUnsentTweet}">
 					<div class="w-full border border-[#eff3f4] bg-[#ffffffa6] backdrop-blur-md rounded-t-2xl sticky top-0 ">
 		<div class="w-full h-12 pl-2 pr-3.5 inline-flex justify-between items-center">
@@ -42,13 +43,15 @@
 	   	 v-if="editUnsentTweet && tweets.length">
 	    	<span class="px-2.75 py-1 hover:bg-[#1dfff01a] cursor-pointer rounded-full text-sm text-[#1d9bf0] font-medium duration-200" 
 	    	@click="selectAll">{{select}}</span>
-	    	<span class="px-2.75 py-1 hover:bg-red-100 cursor-pointer rounded-full text-sm text-red-400 font-medium duration-200" 
+	    	<span class="px-2.75 py-1 hover:bg-red-100 cursor-pointer rounded-full text-sm text-[#f4212e] font-medium duration-200" 
 	    	@click="openConfirmationBox = true">Delete</span>
 	    </div>
-	    <Confirmation v-if="openConfirmationBox" :isSaveTweet="false">
-      		<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" @click="remove">Delete</button>
-      	</Confirmation>
 	</div>
+	    <Confirmation v-if="openConfirmationBox" :isSaveTweet="false" >
+	    	<button class="w-full h-[38px] text-white  border border-[#cfd9de] rounded-full bg-[#f4212e] hover:bg-[#dc1e29] duration-200" @click="remove">Delete</button>
+	    	<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200 mt-2" @click="openConfirmationBox = false">Cancel</button>
+      	</Confirmation>
+    </div>
 </template>
 
 <script setup>
@@ -68,7 +71,6 @@
 
 	const goToSendNewTweet = (id) => {
 		if(editUnsentTweet.value) return;
-		console.log(id)
 		modal.selectetUnSentTweetSection = '';
 		modal.openUnsentTweets = false;
 		modal.newTweetModalIsActiv = true;
@@ -111,9 +113,9 @@
 
     const tweets = computed(() => {
     	if(currentSection.value){
-    		return  store.getters.getUnSendScheduled;
+    		return store.getters.getUnSendScheduled;
     	}else {
-    		return  store.getters.getUnSendDrafts;
+    		return store.getters.getUnSendDrafts;
     	}
     });
 
@@ -137,9 +139,7 @@
     	}else {
     		store.commit('deletUnDraft', data)
     	}
-
     	openConfirmationBox.value = false;
-
     }
 
 </script>
