@@ -21,7 +21,7 @@
 	    </div>
 	</div>
     </article>
-    <TheDragAreaErorrMassage :error="[selected.imageError, selected.showPoll]"/> 
+    <Massage :error="[selected.imageError, selected.showPoll]"/> 
 </template>
 
 <script setup>
@@ -35,7 +35,7 @@
 	import TheAttachments from './TheAttachments.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
-	import TheDragAreaErorrMassage from './TheDragAreaErorrMassage.vue';
+	import Massage from './Massage.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
 	const saveToDraft = defineProps({data: Boolean})
