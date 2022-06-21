@@ -1,5 +1,6 @@
 <template>
-	<div class="w-full min-h-[88px] pt-[8px] px-3.5 inline-flex flex-row border-b border-min-border-color bg-white hoverEfect">			<UserProfileImage :size="10.75" class="w-10.75 h-10.75 mr-[0.688rem]"/>
+	<div class="w-full min-h-[88px] pt-[8px] px-3.5 inline-flex flex-row border-b border-min-border-color bg-white hoverEfect">			
+		<UserProfileImage :size="10.75" class="w-10.75 h-10.75 mr-[0.688rem]"/>
 			<div class="w-full min-h-[5.563rem] inline-flex flex-col justify-between">	
 				<div class="w-full min-h-[2.688]">
 					 <!-- NAME, USER NAME AND TIME START -->
@@ -54,11 +55,8 @@
 							<span class="w-auto h-auto overflow-hidden pl-0.5 group-hover:text-[#f9189e]" v-if="item.like.counter">
 							    {{formatingCounterNumber(item.like.counter)}}
 						    </span>
-						</span>
-						<!-- LIKA ICON END -->	
-						<!-- SHARE ICON START -->	
+						</span>	
 					   <Share/>
-					   <!-- SHARE ICON END -->	
 					</div>
 				</div>
 				<!-- LIKA, COMMENT, SHARE, RETWEET ICONS END -->	

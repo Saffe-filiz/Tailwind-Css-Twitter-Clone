@@ -1,23 +1,50 @@
 <template>
 	<article class="w-[31.563rem] pt-3 mb-1 border border-input-main-border-color  rounded-2xl">
 	<div class="w-full h-auto inline-flex flex-row">
-		<div class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" :class="{'pr-2.75': !questCounter}">
-			<span class="w-full h-[53px] border border-input-main-border-color  rounded focusInput relative" v-for="num in poll.counter" :key="num">
+		<div 
+		    class="w-full flex flex-col gap-[11px] py-2.75 pl-2.75" 
+		    :class="{'pr-2.75': !questCounter}">
+			<span 
+			    class="w-full h-[53px] border border-input-main-border-color  rounded focusInput relative" 
+			    v-for="num in poll.counter" 
+			    :key="num">
 			    <label>
-			        <input class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input" type="text" v-model="poll.quest[num -1]" maxlength="25">  
-			        <span class="absolute focus top-3 text-lg left-2 duration-200" :class="{'input-text': labelAnimation(num)}"> {{inputPlaceHolder(num)}}</span>
+			        <input 
+			            class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input" 
+			            type="text" 
+			            v-model="poll.quest[num -1]" 
+			            maxlength="25">  
+			        <span 
+			            class="absolute focus top-3 text-lg left-2 duration-200" 
+			            :class="{'input-text': labelAnimation(num)}">{{inputPlaceHolder(num)}}</span>
 			        <span class="counter opacity-0 absolute top-1 text-xs right-4 duration-200">{{poll.quest[num -1].length}} / 25</span>
 			    </label>
 			</span>
 		</div>
-		<TheAddNewPollQuestion  @click="addNewQuestion"  v-if="questCounter"/>
+		<TheAddNewPollQuestion @click="addNewQuestion" v-if="questCounter"/>
 	</div>
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
 		<div class="w-full h-auto inline-flex justify-between">
-			<SelectBox class="w-[9.438rem]" title="Day" :length="pollLength(8)"  :date="poll.length[0]" @setDate=" number => poll.length[0] = number"/>
-			<SelectBox class="w-[9.438rem]" title="Hours" :isDisable="inputDisable" :length="pollLength(24)" :date="poll.length[1]" @setDate=" number => poll.length[1] = number"/>
-			<SelectBox class="w-[9.438rem]" title="Minute" :isDisable="inputDisable" :length="pollLength(60).slice(startIndex)" :date="poll.length[2]" @setDate=" number => poll.length[2] = number"/>
+			<SelectBox 
+			    class="w-[9.438rem]" 
+			    title="Day" :length="pollLength(8)" 
+			    :date="poll.length[0]" 
+			    @setDate=" number => poll.length[0] = number"/>
+			<SelectBox 
+			    class="w-[9.438rem]" 
+			    title="Hours" 
+			    :isDisable="inputDisable" 
+			    :length="pollLength(24)" 
+			    :date="poll.length[1]" 
+			    @setDate=" number => poll.length[1] = number"/>
+			<SelectBox 
+			    class="w-[9.438rem]" 
+			    title="Minute" 
+			    :isDisable="inputDisable" 
+			    :length="pollLength(60).slice(startIndex)" 
+			    :date="poll.length[2]" 
+			    @setDate=" number => poll.length[2] = number"/>
 	    </div>
 	</div>
     <ThePollRemove @click="$emit('removePoll', {'data': poll, 'showPoll': false})"/>

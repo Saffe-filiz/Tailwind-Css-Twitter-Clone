@@ -7,12 +7,16 @@
 			<span class="ml-[1.7rem]">Schedule</span>
 		</div>
 		<div class="inline-flex justify-between items-center mr-1">
-			<span  class="px-3.75 h-[1.875rem] rounded-3.75 cursor-pointer flex items-center hover:bg-[#0c14191a] mr-4 rounded-full" v-if="data.sending" 
-			 @click="modal.closePopUp(), sendSchedule({})">
+			<span  
+			    class="px-3.75 h-[1.875rem] rounded-3.75 cursor-pointer flex items-center hover:bg-[#0c14191a] mr-4 rounded-full" 
+			    v-if="data.sending" 
+			    @click="modal.closePopUp(), sendSchedule({})">
 				<span class="h-[1.375rem] border-b-2 border-black text-base font-medium">Clear</span>
 			</span>
-			<button class="h-[1.875rem] px-3.75 bg-[#0f1419] text-sm font-bold text-white rounded-[2rem]"
-			 :class="{'opacity-70 pointer-events-none': data.error}" @click="sendSchedule(data.scheduling), modal.closePopUp()">
+			<button 
+			    class="h-[1.875rem] px-3.75 bg-[#0f1419] text-sm font-bold text-white rounded-[2rem]"
+			    :class="{'opacity-70 pointer-events-none': data.error}" 
+			    @click="sendSchedule(data.scheduling), modal.closePopUp()">
 			    <span v-if="!data.sending">Confirm</span>
 			    <span v-else>Update</span>
 		    </button>

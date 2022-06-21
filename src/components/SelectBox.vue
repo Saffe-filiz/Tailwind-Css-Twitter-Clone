@@ -1,9 +1,23 @@
 <template>
-    <div class="sectionMainStyle focusInput relative group" :class="{'bg-[#eff3f4]': data.isDisable}">
-		<label class="text-xs font-normal text-[#536471] absolute top-[7px] left-[7px] " for="date">{{data.title}}</label>
+    <div 
+        class="sectionMainStyle focusInput relative group" 
+        :class="{'bg-[#eff3f4]': data.isDisable}">
+		<label 
+		    class="text-xs font-normal text-[#536471] absolute top-[7px] left-[7px]" 
+		    for="date">{{data.title}}
+	    </label>
 		<DownArrow/>
-		<select class="sectionStyle" v-model="selectenValue" id="date"  @change="$emit('setDate', selectenValue)" :disabled="data.isDisable"> 
-			<option v-for="(num, index) in data.length" :value="num" :key="index" >{{getMonths(num)}}</option>
+		<select 
+		    class="sectionStyle" 
+		    v-model="selectenValue" 
+		    id="date"  
+		    @change="$emit('setDate', selectenValue)" 
+		    :disabled="data.isDisable"> 
+			<option 
+			    v-for="(num, index) in data.length" 
+			    :value="num" 
+			    :key="index" >{{getMonths(num)}}
+			</option>
 		</select> 
 	</div>
 </template>

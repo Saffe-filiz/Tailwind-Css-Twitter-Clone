@@ -1,10 +1,19 @@
 <template>
 	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
-		<Madia :isActive="is.active[1] == 4 || is.active[0].gif || is.active[0].poll" :madiaType="is.active[0].image"/>
-	    <Gif :isActive="is.active[0].image || is.active[0].gif || is.active[0].poll"  @click="modal.openGifModal = true, modal.scrollHidden()"/>
-		<Poll @click="$emit('showPoll', true)" :isActive="is.active[0].gif || is.active[0].image || is.active[2]" />
+		<Madia 
+		    :isActive="is.active[1] == 4 || is.active[0].gif || is.active[0].poll" 
+		    :madiaType="is.active[0].image"/>
+	    <Gif 
+	        :isActive="is.active[0].image || is.active[0].gif || is.active[0].poll" 
+	        @click="modal.openGifModal = true, modal.scrollHidden()"/>
+		<Poll 
+		    @click="$emit('showPoll', true)" 
+		    :isActive="is.active[0].gif || is.active[0].image || is.active[2]" />
 	    <Emoji/>
-	    <Schedule v-memo="[is]" :isActive="is.active[0].poll || is.active[0].whoCanReply != 'Everyone'" @click="modal.scrollHidden(), modal.openScheduleModal = true"/>
+	    <Schedule 
+	        v-memo="[is]" 
+	        :isActive="is.active[0].poll || is.active[0].whoCanReply != 'Everyone'" 
+	        @click="modal.scrollHidden(), modal.openScheduleModal = true"/>
 	    <Mark/>
 	</div>
 </template>
@@ -20,6 +29,5 @@
 	import { inject } from 'vue'
 
 	const is = defineProps({active: Array})
-	
 	const modal = inject('modal'); // Coming from app vue
 </script>

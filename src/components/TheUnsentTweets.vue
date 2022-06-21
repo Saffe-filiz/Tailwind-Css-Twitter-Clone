@@ -15,37 +15,59 @@
 			    </span>
 		    </div>
 		<div class="inline-flex w-full">
-			<div class="unSentTweetSectionButton" @click="chanceSection('openNewTweetModal')">
+			<div 
+			    class="unSentTweetSectionButton" 
+			    @click="chanceSection('openNewTweetModal')">
 				<button :class="[!currentSection ? 'unSentTweetSectionButtonActive': 'text-[#536471]']">Drafts</button>
 			</div>
-			<div class="unSentTweetSectionButton" @click="chanceSection('openScheduleModal')">
+			<div
+			    class="unSentTweetSectionButton" 
+			    @click="chanceSection('openScheduleModal')">
 			    <button :class="[currentSection ? 'unSentTweetSectionButtonActive': 'text-[#536471]']">Scheduled</button>
 			</div>
 		</div>
 	   </div>
-		    <div class="w-full  bg-white" >
-		    	<div v-for="(tweet, index) in tweets" :key="index" class="w-full h-auto px-3.5 py-2.75 border-b border-[#eff3f4] inline-flex flex-row items-center cursor-pointer hover:bg-[#f7f9f9] duration-200" @click="selectTweet(index), goToSendNewTweet(tweet.id)">
-			<div class="h-full mr-2.75" v-if="editUnsentTweet">
-				<div class="w-[18px] h-[18px] rounded border-2 border-[#536471] flex items-center justify-center" :class="{'bg-[#1d9bf0] !border-[#1d9bf0]': isSelected(index)}">
-					<Check v-if="isSelected(index)"/>
-				</div>
-			</div>
-			<div class="w-full">
-				<TheScheduleInfo :time="tweet.date" v-if="currentSection"/>
-			    <p class="break-all	 text-sm font-normal">{{tweet.post}}</p>
-			</div>
-		</div>
+		<div class="w-full  bg-white" >
+		    <div 
+		        class="w-full h-auto px-3.5 py-2.75 border-b border-[#eff3f4] inline-flex flex-row items-center cursor-pointer hover:bg-[#f7f9f9] duration-200"
+		    	v-for="(tweet, index) in tweets" :key="index" 
+		    	@click="selectTweet(index), goToSendNewTweet(tweet.id)">
+			    <div class="h-full mr-2.75" v-if="editUnsentTweet">
+				    <div 
+				        class="w-[18px] h-[18px] rounded border-2 border-[#536471] flex items-center justify-center" 
+				        :class="{'bg-[#1d9bf0] !border-[#1d9bf0]': isSelected(index)}">
+					    <Check v-if="isSelected(index)"/>
+				   </div>
+			    </div>
+			    <div class="w-full">
+				    <TheScheduleInfo :time="tweet.date" v-if="currentSection"/>
+			        <p class="break-all	 text-sm font-normal">{{tweet.post}}</p>
+			   </div>
 		    </div>
+		</div>
 	   </div>
-	   	<div class="w-full h-10 px-2 absolute  bottom-0 rounded-b-2xl border-t border-[#eff3f4] bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between"
-	   	 v-if="editUnsentTweet && tweets.length">
-	    	<span class="px-2.75 py-1 hover:bg-[#1dfff01a] cursor-pointer rounded-full text-sm text-[#1d9bf0] font-medium duration-200" @click="selectAllUnSend">{{select}}</span>
-	    	<span class="px-2.75 py-1 hover:bg-red-100 cursor-pointer rounded-full text-sm text-[#f4212e] font-medium duration-200" @click="openConfirmationBox = true">Delete</span>
+	   	<div 
+	   	    class="w-full h-10 px-2 absolute  bottom-0 rounded-b-2xl border-t border-[#eff3f4] bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between"
+	   	    v-if="editUnsentTweet && tweets.length">
+	    	<span 
+	    	    class="px-2.75 py-1 hover:bg-[#1dfff01a] cursor-pointer rounded-full text-sm text-[#1d9bf0] font-medium duration-200" 
+	    	    @click="selectAllUnSend">{{select}}
+	    	</span>
+	    	<span 
+	    	    class="px-2.75 py-1 hover:bg-red-100 cursor-pointer rounded-full text-sm text-[#f4212e] font-medium duration-200"
+	    	    @click="openConfirmationBox = true">Delete
+	    	</span>
 	    </div>
 	</div>
-	    <Confirmation v-if="openConfirmationBox" :isSaveTweet="false" >
-	    	<button class="w-full h-[38px] text-white  border border-[#cfd9de] rounded-full bg-[#f4212e] hover:bg-[#dc1e29] duration-200" @click="remove">Delete</button>
-	    	<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200 mt-2" @click="openConfirmationBox = false">Cancel</button>
+	    <Confirmation 
+	        v-if="openConfirmationBox" 
+	        :isSaveTweet="false" >
+	    	<button 
+	    	    class="w-full h-[38px] text-white  border border-[#cfd9de] rounded-full bg-[#f4212e] hover:bg-[#dc1e29] duration-200" 
+	    	    @click="remove">Delete</button>
+	    	<button 
+	    	    class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200 mt-2"
+	    	    @click="openConfirmationBox = false">Cancel</button>
       	</Confirmation>
       	<Massage v-if="infoMassage" :index="2"/> 
     </div>

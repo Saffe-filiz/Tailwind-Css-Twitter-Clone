@@ -6,14 +6,21 @@
 		    			<Logo/>
 		    		</li>
 		    		<li class="w-fit p-2.5 flex items-center hover:bg-[#0f14191a] rounded-full cursor-pointer hoverDuration" 
-		    		v-for="(icon, index) in icons" :key="index" @click="selected = index">
-		    			<component :is="icon" :active="index == selected" ></component>
-		    			<span class="text-xl text-[#0f1419]  hidden xl:block pl-[19px] pr-[1.125rem] truncate">{{iconsName[index]}}</span>
+		    		    v-for="(icon, index) in icons" 
+		    		    :key="index" 
+		    		    @click="selected = index">
+		    			<component 
+		    			    :is="icon" 
+		    			    :active="index == selected">	
+		    			</component>
+		    			<span class="text-xl text-[#0f1419] hidden xl:block pl-[19px] pr-[1.125rem] truncate">{{iconsName[index]}}</span>
 		    		</li>
 		    	</ul>
 		   <div class="w-full h-[4.938rem] mt-4">
-			   <button class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full"
-			   @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden()">Tweet</button>
+			   <button 
+			        class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full"
+			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden()">Tweet
+			    </button>
 		   </div>
       </nav>
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">

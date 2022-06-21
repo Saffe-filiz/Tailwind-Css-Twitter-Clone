@@ -1,7 +1,13 @@
 <template>
 	<div :class="imageLeyout">
-	    <div v-for="(image, index) in allImages.image" :class="imageStyle" :style="{'background-image': `url(${image})`}">
-	        <img :src="image" class="w-full h-full opacity-0" draggable="false">
+	    <div
+	        v-for="(image, index) in allImages.image" 
+	        :class="imageStyle" 
+	        :style="{'background-image': `url(${image})`}">
+	        <img
+	            class="w-full h-full opacity-0" 
+	            :src="image" 
+	            draggable="false">
 	        <slot/>
 	    </div>	
 	 </div>
@@ -12,9 +18,6 @@
 	import { computed } from 'vue';
 	const allImages = defineProps({image: Array, isPost: Boolean})
 
-
-
-	// Image container leyout
     const imageLeyout = computed(() => {
    		let numberOfPhotos = allImages.image.length;
    	    if(numberOfPhotos > 2) {

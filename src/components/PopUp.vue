@@ -3,10 +3,13 @@
       	<TheGif v-on:click.stop v-if="modal.openGifModal"/>
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
-      	<div v-on:click.stop v-if="modal.openNewTweetModal" class="min-w-[600px] w-fit h-auto bg-white rounded-2xl mx-auto flex justify-between flex-col pb-1 relative" >
+      	<div 
+      	    class="min-w-[600px] w-fit h-auto bg-white rounded-2xl mx-auto flex justify-between flex-col pb-1 relative"
+      	    v-on:click.stop 
+      	    v-if="modal.openNewTweetModal">
       		<div class="w-full h-12 inline-flex items-center justify-between pl-2 pr-3.5">
       			<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="exitPopUp">
-			        <CrossIcon :size="18" class="fill-[696c70]"/>
+			        <CrossIcon  class="fill-[696c70]" :size="18"/>
 		        </div>
 		        <span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnsentTweets">
     		        <span class="text-sm text-[#1d9bf0] font-medium">Unsent Tweets</span>
@@ -14,9 +17,15 @@
       		</div>
             <TheNewPost :data="saveToDrafd"/>
       	</div>
-      	<Confirmation v-if="modal.openSaveToTweet" :isSaveTweet="true">
-      		<button class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200" @click="saveTweet">Save</button>
-      		<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" @click="close">Discard</button>
+      	<Confirmation 
+      	    v-if="modal.openSaveToTweet" 
+      	    :isSaveTweet="true">
+      		<button 
+      		    class="w-full h-[38px] rounded-full bg-[#0f1419] text-white mb-[11px] hover:opacity-90 duration-200" 
+      		    @click="saveTweet">Save</button>
+      		<button 
+      		    class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200" 
+      		    @click="close">Discard</button>
       	</Confirmation>
 	</div>
 </template>
