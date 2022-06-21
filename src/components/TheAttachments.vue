@@ -17,10 +17,9 @@
 	import Schedule from './icons/NewPost/Schedule.vue';
 	import Mark from './icons/NewPost/Mark.vue';
 
-	import { inject, computed } from 'vue'
+	import { inject } from 'vue'
 
 	const is = defineProps({active: Array})
-
-//	const scrollHidden = inject('scrollHidden'); // Coming from app vue
+	
 	const modal = inject('modal'); // Coming from app vue
 </script>

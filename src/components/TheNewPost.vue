@@ -21,7 +21,7 @@
 	    </div>
 	</div>
     </article>
-    <Massage v-if="selected.imageError" :error="selected.showPoll ? 0: 1"/> 
+    <Massage v-if="selected.imageMassage" :index="infoMassageIndex"/> 
 </template>
 
 <script setup>
@@ -62,7 +62,7 @@
     let selected = reactive({
 		gif: false,
 		image: false,
-		imageError: false,
+		imageMassage: false,
 		poll: false,
 		whoCanAnswer: false,
 		whoCanReply: 'Everyone',
@@ -72,22 +72,22 @@
 
 	let draggableAreaActive = ref(false);
 
-	let images = ref([]);
+	const infoMassage = () => [selected.imageMassage = true, setTimeout(() => selected.imageMassage = false , 3000)];
 
-	const imageError = () => [selected.imageError = true, setTimeout(() => selected.imageError = false , 3000)];
+	let images = ref([]);
     
     const uploadImage =  ( e ) => {
     	draggableAreaActive.value = false
     	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
     	let uploadMadiaCount = images.value.length;
-    	if(selected.poll || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return imageError();
+    	if(selected.poll || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return infoMassage();
 
     	let image = e.target.files || e.dataTransfer.files;
     	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
 
     	if(uploadMadiaCount > 0 && isGif || draggedMadiaCount > 1 && isGif){
     		selected.image = true
-    		return imageError();
+    		return infoMassage();
     	}else if(uploadMadiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
     		selected.gif = true
     		images.value.push((window.URL ? URL : webkitURL).createObjectURL(image[0]))
@@ -100,6 +100,7 @@
 
 	provide('uploadImage', uploadImage); // Going to image drag area component
 	provide('images', images); // Going to image drag area component
+	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
     
 
     
@@ -124,6 +125,7 @@
 
     });
 
+
     const modal = inject('modal'); // Coming from app vue
 
     const sendTweet = () => {
@@ -132,8 +134,18 @@
     	modal.openNewTweetModal = false;
     }
 
-	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
-
+    const infoMassageIndex = computed(() => {
+		if(selected.imageMassage){
+			return 0;
+			infoMassage()
+		}else if(post.Schedule){
+		    return 3;
+			infoMassage()
+		}else {
+			return 1;
+			infoMassage()
+		}
+	})
 
 	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' );
 

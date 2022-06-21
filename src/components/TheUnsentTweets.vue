@@ -39,7 +39,7 @@
 	   </div>
 	   	<div class="w-full h-10 px-2 absolute  bottom-0 rounded-b-2xl border-t border-[#eff3f4] bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between"
 	   	 v-if="editUnsentTweet && tweets.length">
-	    	<span class="px-2.75 py-1 hover:bg-[#1dfff01a] cursor-pointer rounded-full text-sm text-[#1d9bf0] font-medium duration-200" @click="selectAll">{{select}}</span>
+	    	<span class="px-2.75 py-1 hover:bg-[#1dfff01a] cursor-pointer rounded-full text-sm text-[#1d9bf0] font-medium duration-200" @click="selectAllUnSend">{{select}}</span>
 	    	<span class="px-2.75 py-1 hover:bg-red-100 cursor-pointer rounded-full text-sm text-[#f4212e] font-medium duration-200" @click="openConfirmationBox = true">Delete</span>
 	    </div>
 	</div>
@@ -47,6 +47,7 @@
 	    	<button class="w-full h-[38px] text-white  border border-[#cfd9de] rounded-full bg-[#f4212e] hover:bg-[#dc1e29] duration-200" @click="remove">Delete</button>
 	    	<button class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200 mt-2" @click="openConfirmationBox = false">Cancel</button>
       	</Confirmation>
+      	<Massage v-if="infoMassage" :index="2"/> 
     </div>
 </template>
 
@@ -55,6 +56,7 @@
 	import Check from './icons/Check.vue';
 	import Confirmation from './Confirmation.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
+	import Massage from './Massage.vue';
 	import { useStore } from 'vuex';
 	import { ref, inject, computed } from 'vue';
 
@@ -115,7 +117,7 @@
     	}
     });
 
-    const selectAll = () => {
+    const selectAllUnSend = () => {
     	if(selectedForDelet.value.length){
     		selectedForDelet.value = [];
     	}else {
@@ -124,6 +126,7 @@
     }
 
     let openConfirmationBox = ref(false);
+    let infoMassage = ref(false)
 
     const remove = () => {
     	let data = tweets.value
@@ -135,6 +138,8 @@
     	}else {
     		store.commit('deletUnDraft', data)
     	}
+    	infoMassage.value = true;
+    	setTimeout(() => infoMassage.value = false, 3000)
     	openConfirmationBox.value = false;
     }
 
