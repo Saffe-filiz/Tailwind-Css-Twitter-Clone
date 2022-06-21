@@ -44,12 +44,10 @@
 		if(modal.newTweetModalIsActiv && !modal.openGifModal && !modal.openScheduleModal && !modal.openUnsentTweets){
 		    if(modal.textAreaIsEmty){
 		   	    let openSaveTweet = !modal.openSaveToTweet;
-		   	    modal.openSaveToTweet = openSaveTweet
-		   	    
+		   	    modal.openSaveToTweet = openSaveTweet   
 		    }else {
 		    	modal.closeNewTweetModal = true
 		        modal.closePopUp()
-		    	
 		    }
 		}else {
 			modal.openSaveToTweet = false;

@@ -21,7 +21,7 @@
 	    </div>
 	</div>
     </article>
-    <Massage :error="[selected.imageError, selected.showPoll]"/> 
+    <Massage v-if="selected.imageError" :error="selected.showPoll ? 0: 1"/> 
 </template>
 
 <script setup>
@@ -124,17 +124,16 @@
 
     });
 
+    const modal = inject('modal'); // Coming from app vue
+
     const sendTweet = () => {
     	store.commit('setUnSendDraft', post);
     	console.log('asdasdasds')
     	modal.openNewTweetModal = false;
     }
 
-
-
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
 
-	const modal = inject('modal'); // Coming from app vue
 
 	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' );
 

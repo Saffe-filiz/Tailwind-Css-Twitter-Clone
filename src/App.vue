@@ -3,8 +3,7 @@
 	    <TheNavigation/>
 	    <TheFeed/>
 	   	<div class="w-auto h-[1280px] relative hidden lg:block">
-	  		<TheTrends class="w-auto flex flex-col gap-y-[14px] pr-2.5 pl-[1.875rem]" 
-	  		:style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
+	  		<TheTrends class="w-auto flex flex-col gap-y-[14px] pr-2.5 pl-[1.875rem]" :style="{position: setPositions.sideBarPosition, top: setPositions.topValue}">
 	  	        <TheSearch :style="{position: setPositions.searchPosition, top: setPositions.searchTopValue}"/>
 	        </TheTrends>
 	   </div>

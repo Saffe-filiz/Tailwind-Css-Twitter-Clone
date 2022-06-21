@@ -17,5 +17,4 @@
 
 <script setup>
 	const data = defineProps({isSaveTweet: Boolean})
-	console.log('run')
 </script>
