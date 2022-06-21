@@ -3,17 +3,39 @@
 	<UserProfileImage :size="10.75" class="mr-3"/>
 	<div class="w-full flex flex-col justify-between"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo :time="updataSchedule.date" @click="modal.openScheduleModal = true" class="pl-2 hover:underline cursor-pointer" v-if="updataSchedule.date"/>
-			<DragArea v-memo="[draggableAreaActive]" @dragover="draggableAreaActive = true" :permission="[selected.gif, selected.image, selected.poll]">
-		        <TextArea @post="(text) => post.post = text" @click="selected.whoCanAnswer = true"/>
-		        <ThePoll v-if="selected.poll" @removePoll="(pollObject) => setPollData(pollObject)" :pollData="pollData"/>
+			<TheScheduleInfo 
+			class="pl-2 hover:underline cursor-pointer"
+			:time="updataSchedule.date"
+			@click="modal.openScheduleModal = true" 
+			v-if="updataSchedule.date"/>
+			<DragArea 
+			v-memo="[draggableAreaActive]" 
+			@dragover="draggableAreaActive = true" 
+			:permission="[selected.gif, selected.image, selected.poll]">
+		        <TextArea 
+		        @post="(text) => post.post = text" 
+		        @click="selected.whoCanAnswer = true"/>
+		        <ThePoll 
+		        v-if="selected.poll" 
+		        @removePoll="(pollObject) => setPollData(pollObject)" 
+		        :pollData="pollData"/>
 		    </DragArea>
-		    <TheWhoCanReply v-if="showWhoCanAwser" @whoCanReply="(value) => selected.whoCanReply = value" :active="updataSchedule.sending"/>
+		    <TheWhoCanReply 
+		    v-if="showWhoCanAwser" 
+		    @whoCanReply="(value) => selected.whoCanReply = value" 
+		    :active="updataSchedule.sending"/>
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center">
-	    	<TheAttachments :active="[selected, images.length, updataSchedule.sending]" @showPoll="(value) => selected.poll = value"/>
-            <TheNewPostCircleAndSend :massage="post.post" :date="!updataSchedule.date">
-                <button class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem]" :class="{'opacity-50': !post.post}" :disabled="!post.post">
+	    	<TheAttachments 
+	    	:active="[selected, images.length, updataSchedule.sending]" 
+	    	@showPoll="(value) => selected.poll = value"/>
+            <TheNewPostCircleAndSend 
+            :massage="post.post" 
+            :date="!updataSchedule.date">
+                <button 
+                class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem]" 
+                :class="{'opacity-50': !post.post}" 
+                :disabled="!post.post">
 	                <span v-if="!updataSchedule.date">Tweet</span>
 	                <span v-else @click="sendSchedule">Schedule</span>
 	            </button>
@@ -21,7 +43,7 @@
 	    </div>
 	</div>
     </article>
-    <Massage v-if="selected.imageMassage" :index="infoMassageIndex"/> 
+    <Massage v-if="selected.imageMassage" :index="0"/> 
 </template>
 
 <script setup>
@@ -130,22 +152,9 @@
 
     const sendTweet = () => {
     	store.commit('setUnSendDraft', post);
-    	console.log('asdasdasds')
     	modal.openNewTweetModal = false;
     }
 
-    const infoMassageIndex = computed(() => {
-		if(selected.imageMassage){
-			return 0;
-			infoMassage()
-		}else if(post.Schedule){
-		    return 3;
-			infoMassage()
-		}else {
-			return 1;
-			infoMassage()
-		}
-	})
 
 	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' );
 

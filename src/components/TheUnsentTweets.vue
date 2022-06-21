@@ -11,7 +11,7 @@
 		            <span class="pl-6 text-lg font-bold">Unsent Tweets</span>
 			    </div>
 			    <span v-if="tweets.length">
-				    <button class="px-3.5 h-[29px] bg-black rounded-full text-sm text-white font-medium"  @click="openEdit">{{edit}}</button>
+				    <button class="px-3.5 h-[29px] bg-black rounded-full text-sm text-white font-medium" @click="openEdit">{{edit}}</button>
 			    </span>
 		    </div>
 		<div class="inline-flex w-full">

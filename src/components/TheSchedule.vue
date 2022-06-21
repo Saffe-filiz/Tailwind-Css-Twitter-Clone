@@ -1,25 +1,60 @@
 <template>
 	<article class="w-[37.5rem] h-auto rounded-2xl overflow-auto bg-white m-auto">
-        <TheSetSchedule :sending="updateSchedule.sending" :scheduling="scheduling" :error="showErrorMassage[0]"/>
+        <TheSetSchedule 
+            :sending="updateSchedule.sending" 
+            :scheduling="scheduling" 
+            :error="showErrorMassage[0]"/>
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.125rem] px-3.5 py-[11px]">
-			<TheScheduleInfo v-if="!showErrorMassage[1]" :time="scheduling.date"/>
+			<TheScheduleInfo 
+			    v-if="!showErrorMassage[1]" 
+			    :time="scheduling.date"/>
 		<div>
 		<span class="text-sm text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
-		    	<SelectBox class="w-[17.125rem]" title="Month" :length="12" :date="scheduling.date[1]" @setDate=" number => scheduling.date[1] = number" :isMonth="true"/>
-			    <SelectBox class="w-[7.875rem]" title="Day" :length="getMonthDay" :date="scheduling.date[2]"  @setDate=" number => scheduling.date[2] = number"/>
-			    <SelectBox class="w-[9.063rem]" title="Month" :length="[2024, 2023, 2022]" :date="scheduling.date[0]" @setDate=" number => scheduling.date[0] = number"/>
+		    	<SelectBox 
+		    	    class="w-[17.125rem]" 
+		    	    title="Month" 
+		    	    :length="12" 
+		    	    :date="scheduling.date[1]" 
+		    	    @setDate=" number => scheduling.date[1] = number" 
+		    	    :isMonth="true"/>
+			    <SelectBox 
+			        class="w-[7.875rem]" 
+			        title="Day" 
+			        :length="getMonthDay" 
+			        :date="scheduling.date[2]" 
+			        @setDate=" number => scheduling.date[2] = number"/>
+			    <SelectBox 
+			        class="w-[9.063rem]" 
+			        title="Month" 
+			        :length="[2024, 2023, 2022]" 
+			        :date="scheduling.date[0]" 
+			        @setDate=" number => scheduling.date[0] = number"/>
 		    </div>
 		    <span class="text-sm text-[#f4212e]">{{errorMassageForDate}}</span>
 		</div>
 		<div>
 		<span class="text-sm text-[#536471]">Time</span>
 			<div class="w-auto flex flex-row gap-[11px]">
-				 <SelectBox class="w-[9.063rem]" title="Hour" :length="24" :date="scheduling.date[3]" @setDate=" number => scheduling.date[3] = number" :formatDate="true"/>
-			     <SelectBox class="w-[9.063rem]" title="Minute" :length="60" :date="scheduling.date[4]" @setDate=" number => scheduling.date[4] = number" :formatDate="true"/>
+				<SelectBox 
+				    class="w-[9.063rem]" 
+				    title="Hour" 
+				    :length="24" 
+				    :date="scheduling.date[3]" 
+				    @setDate=" number => scheduling.date[3] = number" 
+				    :formatDate="true"/>
+			    <SelectBox 
+			        class="w-[9.063rem]" 
+			        title="Minute" 
+			        :length="60" 
+			        :date="scheduling.date[4]" 
+			        @setDate=" number => scheduling.date[4] = number" 
+			        :formatDate="true"/>
 		    </div>
-		    <span class="text-base text-[#f4212e]" v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
+		    <span 
+		        class="text-base text-[#f4212e]" 
+		        v-if="showErrorMassage[2]">{{errorMassageForHours}}</span>
 		</div>
 		<div class="w-full flex flex-col">
 			<span class="text-sm text-[#536471] h-4">Time zone</span>
@@ -58,7 +93,7 @@
 	const openUnsentTweets = () => {
 		modal.openUnsentTweets = true;
 		modal.previousComponent = 'openScheduleModal';
-		modal.selectetUnSentTweetSection =  'openScheduleModal';
+		modal.selectetUnSentTweetSection = 'openScheduleModal';
 	}
 
     const store = useStore();
