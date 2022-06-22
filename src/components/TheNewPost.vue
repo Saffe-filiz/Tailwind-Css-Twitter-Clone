@@ -43,7 +43,7 @@
 	    </div>
 	</div>
     </article>
-    <Massage :isActive="showMassageBox" :massage="massage" :date="updataSchedule"/> 
+    <Massage :isActive="showMassageBox" :massage="massage" :date="massageDateInfo"/> 
 </template>
 
 <script setup>
@@ -132,11 +132,12 @@
     
     const updataSchedule = computed(() => store.getters.getUpdataSchedule);
    
+    let massageDateInfo = ref()
+
     const sendSchedule = () => {
     	if(!updataSchedule.data){
     		showMassageBox.value = !showMassageBox.value;
-    	    massage.value =  updataSchedule.value.date
-    	    console.log()
+    	    massageDateInfo.value =  updataSchedule.value.date
     		post.date = updataSchedule.value.date;
     		store.commit('setUnSendScheduled', post);
     	}
