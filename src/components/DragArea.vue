@@ -20,10 +20,10 @@
 
 	const meadia = defineProps({permission: Array})
 
-	const removeImage = ( index ) => images.value.splice(index, 1) // Remove image
-	const draggableAreaActive = inject('draggableAreaActive') // Draggable area active
-    const images = inject('images'); // Images
-    const uploadImage = inject('uploadImage'); // Image prevew function 
+	const removeImage = ( index ) => images.value.splice(index, 1);
+	const draggableAreaActive = inject('draggableAreaActive');
+    const images = inject('images');
+    const uploadImage = inject('uploadImage'); 
 
     const dragAreaBorderColor = computed(() => {
     	let isValid = meadia.permission.some( value => value)

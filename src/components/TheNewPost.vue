@@ -43,7 +43,7 @@
 	    </div>
 	</div>
     </article>
-    <Massage :isActive="selected.imageMassage" :index="0"/> 
+    <Massage :isActive="showMassageBox" :massage="massage" :date="updataSchedule"/> 
 </template>
 
 <script setup>
@@ -61,8 +61,11 @@
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
 	const saveToDraft = defineProps({data: Boolean})
-	let store = useStore();
-    
+	const store = useStore();
+
+	let massage = ref('');
+	let showMassageBox = ref(false)
+
    
 	let pollData = ref(); // Poll form data
 
@@ -84,7 +87,6 @@
     let selected = reactive({
 		gif: false,
 		image: false,
-		imageMassage: false,
 		poll: false,
 		whoCanAnswer: false,
 		whoCanReply: 'Everyone',
@@ -100,14 +102,20 @@
     	draggableAreaActive.value = false
     	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
     	let madiaCount = images.value.length;
-    	if(selected.poll || selected.gif || draggedMadiaCount > 4 || madiaCount >= 4) return selected.imageMassage = !selected.imageMassage;
+    	if(selected.poll || selected.gif || draggedMadiaCount > 4 || madiaCount >= 4){
+    		showMassageBox.value = !showMassageBox.value;
+    		massage.value = 'Please choose either 1 GIF or up to 4 photos.'
+    		return;
+    	}
 
     	let image = e.target.files || e.dataTransfer.files;
     	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
 
     	if(madiaCount > 0 && isGif || draggedMadiaCount > 1 && isGif){
     		selected.image = true
-    		return selected.imageMassage = !selected.imageMassage;
+    		showMassageBox.value = !showMassageBox.value;
+    		massage.value = 'Please choose either 1 GIF or up to 4 photos.'
+    		return;
     	}else if(madiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
     		selected.gif = true
     		images.value.push((window.URL ? URL : webkitURL).createObjectURL(image[0]))
@@ -126,14 +134,13 @@
    
     const sendSchedule = () => {
     	if(!updataSchedule.data){
+    		showMassageBox.value = !showMassageBox.value;
+    	    massage.value =  updataSchedule.value.date
+    	    console.log()
     		post.date = updataSchedule.value.date;
     		store.commit('setUnSendScheduled', post);
     	}
     }
-
-    const infoMassage = computed(() => {
-    	return selected.poll ? console.log('isTrue'): console.log('fasdasdadas')
-    })
 
     const post = reactive({
     	user: null,
@@ -151,8 +158,10 @@
     const modal = inject('modal'); // Coming from app vue
 
     const sendTweet = () => {
+    	showMassageBox.value = !showMassageBox.value;
+    	massage.value = 'Your draft was saved.'
     	store.commit('setUnSendDraft', post);
-    	modal.openNewTweetModal = false;
+ 
     }
 
 

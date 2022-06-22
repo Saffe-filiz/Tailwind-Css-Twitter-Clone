@@ -1,7 +1,7 @@
 <template>
-	<div class="w-[512px] h-[17.5px] inline-flex">
-		<Calendar/> 
-	    <span class="text-[12px] text-[#536471]">{{info}}</span>
+	<div class="w-fit h-[17.5px] inline-flex">
+		<Calendar v-if="!data.isInfoMassage"/> 
+	    <span class="text-[12px] text-[#536471]" :class="{'!text-white' :data.isInfoMassage}">{{info}}</span>
 	</div>
 </template>
 
@@ -9,7 +9,7 @@
 	import Calendar from './icons/NewPost/Calendar.vue';
 	import { computed } from 'vue';
 	
-	const data = defineProps({time: Array});
+	const data = defineProps({time: Array, isInfoMassage: Boolean});
 
 	const date = computed(() =>  new Date(data.time[0], data.time[1], data.time[2], data.time[3], data.time[4]));
 
