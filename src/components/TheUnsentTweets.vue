@@ -69,7 +69,7 @@
 	    	    class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200 mt-2"
 	    	    @click="openConfirmationBox = false">Cancel</button>
       	</Confirmation>
-      	<Massage v-if="infoMassage" :index="2"/> 
+      	<Massage :isActive="infoIsActive" :massage="'Your selected unsent Tweets were deleted.'"/> 
     </div>
 </template>
 
@@ -148,7 +148,7 @@
     }
 
     let openConfirmationBox = ref(false);
-    let infoMassage = ref(false)
+    let infoIsActive = ref(false)
 
     const remove = () => {
     	let data = tweets.value
@@ -160,8 +160,7 @@
     	}else {
     		store.commit('deletUnDraft', data)
     	}
-    	infoMassage.value = true;
-    	setTimeout(() => infoMassage.value = false, 3000)
+    	infoIsActive.value = !infoIsActive.value;
     	openConfirmationBox.value = false;
     }
 

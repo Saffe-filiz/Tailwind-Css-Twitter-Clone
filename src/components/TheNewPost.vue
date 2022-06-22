@@ -43,7 +43,7 @@
 	    </div>
 	</div>
     </article>
-    <Massage v-if="selected.imageMassage" :index="0"/> 
+    <Massage :isActive="selected.imageMassage" :index="0"/> 
 </template>
 
 <script setup>
@@ -94,23 +94,21 @@
 
 	let draggableAreaActive = ref(false);
 
-	const infoMassage = () => [selected.imageMassage = true, setTimeout(() => selected.imageMassage = false , 3000)];
-
 	let images = ref([]);
     
     const uploadImage =  ( e ) => {
     	draggableAreaActive.value = false
     	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
-    	let uploadMadiaCount = images.value.length;
-    	if(selected.poll || selected.gif || draggedMadiaCount > 4 || uploadMadiaCount >= 4) return infoMassage();
+    	let madiaCount = images.value.length;
+    	if(selected.poll || selected.gif || draggedMadiaCount > 4 || madiaCount >= 4) return selected.imageMassage = !selected.imageMassage;
 
     	let image = e.target.files || e.dataTransfer.files;
     	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1)
 
-    	if(uploadMadiaCount > 0 && isGif || draggedMadiaCount > 1 && isGif){
+    	if(madiaCount > 0 && isGif || draggedMadiaCount > 1 && isGif){
     		selected.image = true
-    		return infoMassage();
-    	}else if(uploadMadiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
+    		return selected.imageMassage = !selected.imageMassage;
+    	}else if(madiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
     		selected.gif = true
     		images.value.push((window.URL ? URL : webkitURL).createObjectURL(image[0]))
     	}else {
@@ -124,8 +122,6 @@
 	provide('images', images); // Going to image drag area component
 	provide('draggableAreaActive', draggableAreaActive); // Going to image drag area component
     
-
-    
     const updataSchedule = computed(() => store.getters.getUpdataSchedule);
    
     const sendSchedule = () => {
@@ -134,6 +130,10 @@
     		store.commit('setUnSendScheduled', post);
     	}
     }
+
+    const infoMassage = computed(() => {
+    	return selected.poll ? console.log('isTrue'): console.log('fasdasdadas')
+    })
 
     const post = reactive({
     	user: null,
@@ -156,7 +156,9 @@
     }
 
 
-	watch(images.value, (oldValue, newValue) => oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): '' );
+	watch(images.value, (oldValue, newValue) => {
+		oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): ''
+	});
 
 	watch(() => saveToDraft.data, (value) => sendTweet())
 
