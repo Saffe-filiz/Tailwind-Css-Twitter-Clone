@@ -132,16 +132,6 @@
     
     const updataSchedule = computed(() => store.getters.getUpdataSchedule);
    
-    let massageDateInfo = ref()
-
-    const sendSchedule = () => {
-    	if(!updataSchedule.data){
-    		showMassageBox.value = !showMassageBox.value;
-    	    massageDateInfo.value =  updataSchedule.value.date
-    		post.date = updataSchedule.value.date;
-    		store.commit('setUnSendScheduled', post);
-    	}
-    }
 
     const post = reactive({
     	user: null,
@@ -154,6 +144,20 @@
     	Image: null,
 
     });
+    let massageDateInfo = ref()
+
+    const sendSchedule = () => {
+    	//let tweet = {...post}
+    	if(!updataSchedule.data){
+    		showMassageBox.value = !showMassageBox.value;
+    	    massageDateInfo.value =  updataSchedule.value.date
+    		post.date = updataSchedule.value.date;
+    		store.commit('setUnSendScheduled', post);
+    		store.commit('setUpdataSchedule', {});
+    	}
+    }
+
+
 
 
     const modal = inject('modal'); // Coming from app vue
