@@ -19,7 +19,7 @@
 		   <div class="w-full h-[4.938rem] mt-4">
 			   <button 
 			        class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full"
-			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden()">Tweet
+			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden(), clearSchedule()">Tweet
 			    </button>
 		   </div>
       </nav>
@@ -40,6 +40,7 @@
 
 <script setup>
 	import { ref, inject } from 'vue';
+	import { useStore } from 'vuex';
 
  	import Logo from './icons/NavigationIcons/Logo.vue';
 	import Home from './icons/NavigationIcons/Home.vue';
@@ -59,4 +60,8 @@
     
 
     const modal = inject('modal');
+
+    let store = useStore();
+
+    let clearSchedule =	() => store.commit('setUpdataSchedule', {});
 </script>

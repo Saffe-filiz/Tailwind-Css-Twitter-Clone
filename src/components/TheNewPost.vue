@@ -133,7 +133,7 @@
     const updataSchedule = computed(() => store.getters.getUpdataSchedule);
    
 
-    const post = reactive({
+    let post = reactive({
     	user: null,
     	username: null,
     	post: '',
@@ -147,7 +147,6 @@
     let massageDateInfo = ref()
 
     const sendSchedule = () => {
-    	//let tweet = {...post}
     	if(!updataSchedule.data){
     		showMassageBox.value = !showMassageBox.value;
     	    massageDateInfo.value =  updataSchedule.value.date
@@ -157,18 +156,13 @@
     	}
     }
 
-
-
-
     const modal = inject('modal'); // Coming from app vue
 
     const sendTweet = () => {
     	showMassageBox.value = !showMassageBox.value;
     	massage.value = 'Your draft was saved.'
     	store.commit('setUnSendDraft', post);
- 
     }
-
 
 	watch(images.value, (oldValue, newValue) => {
 		oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): ''

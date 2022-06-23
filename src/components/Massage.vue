@@ -28,8 +28,6 @@
     let isDate = ref(Array.isArray(info.massage))
 
     watch(() => info.isActive, (value) => {
-        console.log(typeof isDate.massage)
-
         isActive.value = true;
         setTimeout(() => isActive.value = false, 3000)
     })
