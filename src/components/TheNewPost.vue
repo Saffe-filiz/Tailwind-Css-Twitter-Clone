@@ -21,11 +21,12 @@
 		            :pollData="pollData"/>
 		    </DragArea>
 		    <TheWhoCanReply 
+		        v-show="hidden"
 		        v-if="showWhoCanAwser" 
 		        @whoCanReply="(value) => selected.whoCanReply = value" 
 		        :active="updataSchedule.sending"/>
 		</div>
-	    <div class="w-auto h-[45px] inline-flex justify-between items-center">
+	    <div class="w-auto h-[45px] inline-flex justify-between items-center" v-show="hidden">
 	    	<TheAttachments 
 	    	    :active="[selected, images.length, updataSchedule.sending]" 
 	    	    @showPoll="(value) => selected.poll = value"/>
@@ -65,6 +66,12 @@
 
 	let massage = ref('');
 	let showMassageBox = ref(false)
+	let hidden = ref(true)
+
+	const hiddenA = () => {
+		hidden.value = false;
+		setTimeout(() => hidden.value = true, 1500)
+	}
 
    
 	let pollData = ref(); // Poll form data
@@ -153,6 +160,7 @@
     		post.date = updataSchedule.value.date;
     		store.commit('setUnSendScheduled', post);
     		store.commit('setUpdataSchedule', {});
+    		hiddenA()
     	}
     }
 
@@ -162,6 +170,7 @@
     	showMassageBox.value = !showMassageBox.value;
     	massage.value = 'Your draft was saved.'
     	store.commit('setUnSendDraft', post);
+    	setTimeout(() => modal.openNewTweetModal = false, 800)
     }
 
 	watch(images.value, (oldValue, newValue) => {
