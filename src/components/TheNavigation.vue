@@ -18,7 +18,7 @@
 		    	</ul>
 		   <div class="w-full h-[4.938rem] mt-4">
 			   <div 
-			        class="xl:w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full flexCenter"
+			        class="w-11 h-11 xl:w-[14.063rem] xl:h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full flexCenter"
 			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden(), clearSchedule()">
 			        <span class="hidden xl:visible">Tweet</span>
 			        <span><NewPostIcon/></span>
