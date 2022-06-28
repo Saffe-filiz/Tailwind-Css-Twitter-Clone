@@ -25,15 +25,15 @@
 			    </div>
 		   </div>
       </nav>
-    	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
-        <div class="w-full rounded-[4rem] inline-flex">
+    	<div class="w-auto h-auto xl:w-[15.688rem] xl:h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
+        <div class="w-auto xl:w-full rounded-[4rem] inline-flex">
             <UserProfileImage :size="9"/>
-            <div class="w-[6.25rem] h-[2.313rem] leading-5 pl-2">
+            <div class="xl:w-[6.25rem] xl:h-[2.313rem] leading-5 pl-2 hidden">
               	<p class="h-5 text-sm font-bold text-[#0f1419] font-bold truncate">Bradley Ortiz</p>
                 <p class="text-[15px] font-normal text-[#0f1419] font-normal truncate">@bradley_</p>
             </div>
         </div>
-        <div class="w-[5.938rem] h-auto relative">
+        <div class="hidden xl:visible w-[5.938rem] h-auto relative">
         	<ThreeDot class="pointer-events-none"/>
         </div>
 	    </div>
