@@ -36,12 +36,12 @@
 	const getGanre = computed(() => store.getters.getGifGanre);
 	const getNumberOfGif = computed(() => store.getters.getNumberOfGif);
 
-	const getGifs = () => store.dispatch('getGifts', {ganre: search.value, number: getNumberOfGif.value})
+	const getGifs = () => store.dispatch('getGifts', search.value)
 
 
     const celarSearch = () =>  {
     	store.commit('setGif', [])
-    	store.commit('setGifOfNumber', 20)
+    	store.commit('setGifOfNumber', 50)
     	store.commit('setGifGanre', '')
     	store.state.gifGanre = '';
     	search.value = ''

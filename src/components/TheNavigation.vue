@@ -17,10 +17,12 @@
 		    		</li>
 		    	</ul>
 		   <div class="w-full h-[4.938rem] mt-4">
-			   <button 
-			        class="w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full"
-			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden(), clearSchedule()">Tweet
-			    </button>
+			   <div 
+			        class="xl:w-[14.063rem] h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full flexCenter"
+			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden(), clearSchedule()">
+			        <span class="hidden xl:visible">Tweet</span>
+			        <span><NewPostIcon/></span>
+			    </div>
 		   </div>
       </nav>
     	<div class="w-[15.688rem] h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
@@ -53,6 +55,7 @@
 	import More from './icons/NavigationIcons/More.vue';
 	import ThreeDot from './icons/More.vue';
 	import UserProfileImage from './UserProfileImage.vue';
+	import NewPostIcon from './icons/NewPost/NewPost.vue';
 
 	const selected = ref(0)
 	const icons = [Home, Explore, Notifications, Massages, Bookmarks, List, Profile, More];
