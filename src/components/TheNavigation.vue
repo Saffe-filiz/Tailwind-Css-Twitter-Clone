@@ -1,11 +1,11 @@
 <template>
-	<aside class="max-w-[15.813rem] h-screen inline-flex justify-between flex-col pb-2.5 sticky top-0">
-	    <nav class="w-full inline-flex flex-col">
+	<aside class="w-[88px] xl:w-[15.813rem] h-screen inline-flex justify-between flex-col justify-center pb-2.5 sticky top-0">
+	    <nav class="w-full xl:inline-flex xl:flex-col">
 		    	<ul class="inline-flex w-full flex-col">
-		    		<li class="w-[2.813rem] h-[2.813rem] flex items-center justify-center rounded-full hover:bg-[#1d9bf01a] hoverDuration cursor-pointer">
+		    		<li class="w-[2.813rem] h-[2.813rem] flex items-center justify-center rounded-full hover:bg-[#1d9bf01a] hoverDuration cursor-pointer mx-auto xl:mx-0">
 		    			<Logo/>
 		    		</li>
-		    		<li class="w-fit p-2.5 flex items-center hover:bg-[#0f14191a] rounded-full cursor-pointer hoverDuration" 
+		    		<li class="w-fit p-2.5 flex items-center hover:bg-[#0f14191a] rounded-full cursor-pointer hoverDuration mx-auto xl:mx-0" 
 		    		    v-for="(icon, index) in icons" 
 		    		    :key="index" 
 		    		    @click="selected = index">
@@ -18,22 +18,22 @@
 		    	</ul>
 		   <div class="w-full h-[4.938rem] mt-4">
 			   <div 
-			        class="w-11 h-11 xl:w-[14.063rem] xl:h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full flexCenter"
+			        class="w-11 h-11 xl:w-[14.063rem] xl:h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full cursor-pointer flexCenter mx-auto xl:mx-0"
 			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden(), clearSchedule()">
-			        <span class="hidden xl:visible">Tweet</span>
-			        <span><NewPostIcon/></span>
+			        <span class="hidden xl:block">Tweet</span>
+			        <span class="visible xl:invisible w-fit h-fit"><NewPostIcon/></span>
 			    </div>
 		   </div>
       </nav>
-    	<div class="w-auto h-auto xl:w-[15.688rem] xl:h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full ">
+    	<div class="w-fit h-fit xl:w-[15.688rem] xl:h-[3.625rem] p-[11px] relative inline-flex hover:bg-[#0c14191a] rounded-full mx-auto xl:mx-0">
         <div class="w-auto xl:w-full rounded-[4rem] inline-flex">
             <UserProfileImage :size="9"/>
-            <div class="xl:w-[6.25rem] xl:h-[2.313rem] leading-5 pl-2 hidden">
+            <div class="w-[6.25rem] h-[2.313rem] leading-5 pl-2 hidden xl:inline">
               	<p class="h-5 text-sm font-bold text-[#0f1419] font-bold truncate">Bradley Ortiz</p>
                 <p class="text-[15px] font-normal text-[#0f1419] font-normal truncate">@bradley_</p>
             </div>
         </div>
-        <div class="hidden xl:visible w-[5.938rem] h-auto relative">
+        <div class="hidden xl:inline w-[5.938rem] h-auto relative">
         	<ThreeDot class="pointer-events-none"/>
         </div>
 	    </div>
