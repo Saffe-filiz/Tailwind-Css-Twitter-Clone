@@ -26,7 +26,7 @@
 		        @whoCanReply="(value) => selected.whoCanReply = value" 
 		        :active="updataSchedule.sending"/>
 		</div>
-	    <div class="w-auto h-[45px] inline-flex justify-between items-center" v-show="hidden">
+	    <div class="w-auto h-[45px] inline-flex justify-between items-center duration-100" v-show="hidden">
 	    	<TheAttachments 
 	    	    :active="[selected, images.length, updataSchedule.sending]" 
 	    	    @showPoll="(value) => selected.poll = value"/>
@@ -37,7 +37,7 @@
                     class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem]" 
                     :class="{'opacity-50': !post.post}" 
                     :disabled="!post.post">
-	                <span v-if="!updataSchedule.date">Tweet</span>
+	                <span v-if="!updataSchedule.date" @click="hiddenA">Tweet</span>
 	                <span v-else @click="sendSchedule">Schedule</span>
 	            </button>
             </TheNewPostCircleAndSend>
