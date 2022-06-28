@@ -97,7 +97,7 @@ const store = createStore({
 
 	actions: {
 		getGifts ({ commit }, payload) {
-			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload.ganre}&limit=${payload.number}&offset=2&rating=g&lang=en`)
+			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload.ganre}&limit=50&offset=2&rating=g&lang=en`)
 			    .then( response => response.json())
 			    .then( response =>  commit('setGif', response.data))
 			    .catch( error =>  console.log(error))
