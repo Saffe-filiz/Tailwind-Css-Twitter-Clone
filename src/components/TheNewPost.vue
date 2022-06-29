@@ -34,8 +34,7 @@
                 :massage="post.post" 
                 :date="!updataSchedule.date">
                 <button 
-                    class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem]" 
-                    :class="{'opacity-50': !post.post}" 
+                    class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem] disabled:opacity-50" 
                     :disabled="!post.post">
 	                <span v-if="!updataSchedule.date" @click="hiddenA">Tweet</span>
 	                <span v-else @click="sendSchedule">Schedule</span>
@@ -74,7 +73,7 @@
 	}
 
    
-	let pollData = ref(); // Poll form data
+	let pollData = ref();
 
 	const setPollData = ( obj ) => {
 		selected.poll = obj.showPoll;
