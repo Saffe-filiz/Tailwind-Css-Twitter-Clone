@@ -11,7 +11,6 @@
 		    :isActive="is.active[0].gif || is.active[0].image || is.active[2]" />
 	    <Emoji/>
 	    <Schedule 
-	        v-memo="[is]" 
 	        :isActive="is.active[0].poll || is.active[0].whoCanReply != 'Everyone'" 
 	        @click="modal.scrollHidden(), modal.openScheduleModal = true"/>
 	    <Mark/>

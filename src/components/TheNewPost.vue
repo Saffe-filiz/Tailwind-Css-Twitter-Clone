@@ -62,7 +62,8 @@
 	
 	const saveToDraft = defineProps({data: Boolean})
 	const store = useStore();
-
+    
+    let toastMassageDate = ref()
 	let toastMassage = ref('');
 	let showToast = ref(false)
 	let hidden = ref(true)
@@ -150,7 +151,6 @@
     	Image: null,
 
     });
-    let toastMassageDate = ref()
 
     const sendSchedule = () => {
     	if(!updataSchedule.data){

@@ -15,11 +15,18 @@ const store = createStore({
 	    	date: [1, 0, 0],
 	    	counter: 2,
 	    },
-
 	    unSendTweets: {
 	    	drafts: [],
 	    	scheduled: [],
-	    }
+	    },
+	    tweetAttachments: {
+	    	type: {
+	    		IsGif: false,
+		        isImage: false,
+		        isPoll: false,
+	    	},
+	    	media: [],
+	    },
 	},
 
 	getters: {
@@ -49,29 +56,29 @@ const store = createStore({
 	},
 
 	mutations: {
-		setGif(state, gifs) {
+		setGif(state, data) {
 			if(state.gifData.numberOfGif > 50) return;
-			state.gifData.gifs = gifs;
+			state.gifData.gifs = data;
 		},
 
 		setGifOfNumber(state, number) {
 			state.gifData.numberOfGif = number
 		},
 
-		setGifGanre(state, ganre) {
-			state.gifData.ganre = ganre
+		setGifGanre(state, data) {
+			state.gifData.ganre = data
 		},
 
 		setUpdataSchedule (state, data) {
 			state.updataSchedule = data;
 		},
 
-		setGifAutoPlay (state, isPlay) {
-			state.gifData.gifAutoPlay = isPlay;
+		setGifAutoPlay (state, data) {
+			state.gifData.gifAutoPlay = data;
 		},
 
-		setNewTweet (state, tweet) {
-			state.tweets.push(tweet)
+		setNewTweet (state, data) {
+			state.tweets.push(data)
 		},
 
 		setPollDataDate (state, date) {
@@ -92,6 +99,10 @@ const store = createStore({
 
 		deletUnDraft (state, data) {
 			state.unSendTweets.drafts = data;
+		},
+
+		setAttachments (state, data) {
+			state.tweetAttachments = data;
 		}
 	},
 
