@@ -1,6 +1,6 @@
 <template>
 	<div 
-        class="flex justify-center items-center text-sm text-white w-fit px-3 h-10 bg-[#1da1f2] rounded fixed inset-x-[35%] bottom-5 z-50" 
+        class="flexCenter text-sm text-white w-fit px-3 h-10 bg-[#1da1f2] rounded fixed left-2/4 -translate-x-2/4 bottom-5 z-50" 
         v-if="isActive">
         <span>
             <span v-if="info.date">Your Tweet <TheScheduleInfo :time="info.date" :isDate="!info.Date"/></span>
