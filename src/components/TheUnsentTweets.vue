@@ -69,7 +69,7 @@
 	    	    class="w-full h-[38px] border border-[#cfd9de] rounded-full hover:bg-[#f7f9f9] duration-200 mt-2"
 	    	    @click="openConfirmationBox = false">Cancel</button>
       	</Confirmation>
-      	<Massage :isActive="infoIsActive" :massage="'Your selected unsent Tweets were deleted.'"/> 
+      	<Toast :isActive="showToast" :massage="'Your selected unsent Tweets were deleted.'"/> 
     </div>
 </template>
 
@@ -78,7 +78,7 @@
 	import Check from './icons/Check.vue';
 	import Confirmation from './Confirmation.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
-	import Massage from './Massage.vue';
+	import Toast from './Toast.vue';
 	import { useStore } from 'vuex';
 	import { ref, inject, computed } from 'vue';
 
@@ -148,7 +148,7 @@
     }
 
     let openConfirmationBox = ref(false);
-    let infoIsActive = ref(false)
+    let showToast = ref(false)
 
     const remove = () => {
     	let data = tweets.value
@@ -160,7 +160,7 @@
     	}else {
     		store.commit('deletUnDraft', data)
     	}
-    	infoIsActive.value = !infoIsActive.value;
+    	showToast.value = !showToast.value;
     	openConfirmationBox.value = false;
     }
 

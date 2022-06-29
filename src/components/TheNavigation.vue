@@ -21,7 +21,7 @@
 			        class="w-11 h-11 xl:w-[14.063rem] xl:h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full cursor-pointer flexCenter mx-auto xl:mx-0"
 			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden(), clearSchedule()">
 			        <span class="hidden xl:block">Tweet</span>
-			        <span class="visible xl:invisible w-fit h-fit"><NewPostIcon/></span>
+			        <span class="block xl:hidden w-fit h-fit"><NewPostIcon/></span>
 			    </div>
 		   </div>
       </nav>

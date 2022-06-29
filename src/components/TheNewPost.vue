@@ -43,7 +43,7 @@
 	    </div>
 	</div>
     </article>
-    <Massage :isActive="showMassageBox" :massage="massage" :date="massageDateInfo"/> 
+    <Toast :isActive="showToast" :massage="toastMassage" :date="toastMassageDate"/> 
 </template>
 
 <script setup>
@@ -57,14 +57,14 @@
 	import TheAttachments from './TheAttachments.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
 	import UserProfileImage from './UserProfileImage.vue';
-	import Massage from './Massage.vue';
+	import Toast from './Toast.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
 	const saveToDraft = defineProps({data: Boolean})
 	const store = useStore();
 
-	let massage = ref('');
-	let showMassageBox = ref(false)
+	let toastMassage = ref('');
+	let showToast = ref(false)
 	let hidden = ref(true)
 
 	const hiddenA = () => {
@@ -109,8 +109,8 @@
     	let draggedMadiaCount = e.dataTransfer?.files?.length ?? 0;
     	let madiaCount = images.value.length;
     	if(selected.poll || selected.gif || draggedMadiaCount > 4 || madiaCount >= 4){
-    		showMassageBox.value = !showMassageBox.value;
-    		massage.value = 'Please choose either 1 GIF or up to 4 photos.'
+    		showToast.value = !showToast.value;
+    		toastMassage.value = 'Please choose either 1 GIF or up to 4 photos.'
     		return;
     	}
 
@@ -119,8 +119,8 @@
 
     	if(madiaCount > 0 && isGif || draggedMadiaCount > 1 && isGif){
     		selected.image = true
-    		showMassageBox.value = !showMassageBox.value;
-    		massage.value = 'Please choose either 1 GIF or up to 4 photos.'
+    		showToast.value = !showToast.value;
+    		toastMassage.value = 'Please choose either 1 GIF or up to 4 photos.'
     		return;
     	}else if(madiaCount == 0 && isGif || draggedMadiaCount == 1 && isGif){
     		selected.gif = true
@@ -150,12 +150,12 @@
     	Image: null,
 
     });
-    let massageDateInfo = ref()
+    let toastMassageDate = ref()
 
     const sendSchedule = () => {
     	if(!updataSchedule.data){
-    		showMassageBox.value = !showMassageBox.value;
-    	    massageDateInfo.value =  updataSchedule.value.date
+    		showToast.value = !showToast.value;
+    	    toastMassageDate.value =  updataSchedule.value.date
     		post.date = updataSchedule.value.date;
     		store.commit('setUnSendScheduled', post);
     		store.commit('setUpdataSchedule', {});
@@ -166,8 +166,8 @@
     const modal = inject('modal'); // Coming from app vue
 
     const sendTweet = () => {
-    	showMassageBox.value = !showMassageBox.value;
-    	massage.value = 'Your draft was saved.'
+    	showToast.value = !showToast.value;
+    	toastMassage.value = 'Your draft was saved.'
     	store.commit('setUnSendDraft', post);
     	setTimeout(() => modal.openNewTweetModal = false, 800)
     }
