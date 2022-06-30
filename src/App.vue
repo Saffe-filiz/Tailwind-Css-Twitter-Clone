@@ -1,5 +1,5 @@
 <template>
-	<div class="w-[79.063rem] inline-flex flex-row ml-4">
+	<div class="xl:w-[79.063rem] inline-flex flex-row xl:ml-4">
 	    <TheNavigation/>
 	    <TheFeed/>
 	   	<div class="w-auto h-[1280px] relative hidden lg:block">

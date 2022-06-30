@@ -1,5 +1,5 @@
 <template>
-	<div :class="imageLeyout">
+	<div :class="imageLeyout" v-if="false">
 	    <div
 	        v-for="(image, index) in allImages.image" 
 	        :class="imageStyle" 

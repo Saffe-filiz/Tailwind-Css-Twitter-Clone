@@ -3,7 +3,7 @@
 	<UserProfileImage :size="10.75" class="mr-3"/>
 	<div class="w-full flex flex-col justify-between"> 
 		<div class="w-full h-auto">
-			<TheScheduleInfo 
+			<TheScheduleInfo  
 			    class="pl-2 hover:underline cursor-pointer"
 			    :time="updataSchedule.date"
 			    @click="modal.openScheduleModal = true" 
