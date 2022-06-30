@@ -24,8 +24,7 @@
 		        v-show="hidden"
 		        v-if="showWhoCanAwser" 
 		        @whoCanReply="(value) => selected.whoCanReply = value" 
-		        :active="updataSchedule.sending"/>
-		    <TheEmoji/>    
+		        :active="updataSchedule.sending"/>  
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center duration-100" v-show="hidden">
 	    	<TheAttachments 
@@ -57,7 +56,6 @@
 	import TheWhoCanReply from './TheWhoCanReply.vue';
 	import TheAttachments from './TheAttachments.vue';
 	import TheScheduleInfo from './TheScheduleInfo.vue';
-	import TheEmoji from './TheEmoji.vue';
 	import UserProfileImage from './UserProfileImage.vue';
 	import Toast from './Toast.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
