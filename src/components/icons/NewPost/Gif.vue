@@ -1,5 +1,5 @@
 <template>
-	<span  class="group tooltipContainer disabled:pointer-events-none">
+	<span  class="group tooltipContainer disabled:pointer-events-none" :disabled="!active.isActive">
         <span class="w-8.5 h-8.5 flexCenter rounded-full hover:bg-[#1d9bf01a] cursor-pointer fill-[#1DA1F2]" :class="{'fill-[#8ecdf8] hover:bg-white cursor-auto' : active.isActive}">
             <svg class="w-[1.188rem] h-[1.188rem]" viewBox="0 0 24 24" >
             <path d="M19 10.5V8.79999H14.6V15.2H16.3V13.2H18.3V11.5H16.3V10.5H19ZM11.7 8.79999H13.4V15.2H11.7V8.79999ZM8.10002 10.4C8.50002 10.4 9.00002 10.6 9.30002 10.9L10.5 9.89999C9.90002 9.19999 9.00002 8.79999 8.10002 8.79999C6.30002 8.79999 4.90002 10.2 4.90002 12C4.90002 13.8 6.30002 15.2 8.10002 15.2C9.10002 15.2 9.90002 14.8 10.5 14.1V11.6H7.70002V12.8H8.90002V13.4C8.70002 13.5 8.40002 13.6 8.10002 13.6C7.20002 13.6 6.50002 12.9 6.50002 12C6.50002 11.2 7.20002 10.4 8.10002 10.4Z"/>
