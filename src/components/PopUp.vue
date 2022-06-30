@@ -3,19 +3,21 @@
       	<TheGif v-on:click.stop v-if="modal.openGifModal"/>
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
-      	<div 
-      	    class="min-w-[600px] w-fit h-auto bg-white rounded-2xl mx-auto flex justify-between flex-col pb-1 relative"
+        	<div 
+      	    class="mx-auto w-fit bg-white h-auto selectedItem"
       	    v-on:click.stop 
       	    v-if="modal.openNewTweetModal">
-      		<div class="w-full h-12 inline-flex items-center justify-between pl-2 pr-3.5">
-      			<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="exitPopUp">
-			        <CrossIcon  class="fill-[696c70]" :size="18"/>
-		        </div>
-		        <span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnsentTweets">
-    		        <span class="text-sm text-[#1d9bf0] font-medium">Unsent Tweets</span>
-    	        </span>
-      		</div>
-            <TheNewPost :data="saveToDrafd"/>
+      	        <div class="w-[600px] h-12 inline-flex items-center justify-between pl-2 pr-3.5 sticky top-0 bg-[#ffffffa6] backdrop-blur-md">
+      			    <div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter cursor-pointer" @click="exitPopUp">
+			            <CrossIcon  class="fill-[696c70]" :size="18"/>
+		            </div>
+		            <span class="px-[11px] hover:bg-[#1dfff01a] cursor-pointer rounded-full" @click="openUnsentTweets">
+    		            <span class="text-sm text-[#1d9bf0] font-medium">Unsent Tweets</span>
+    	            </span>
+      		    </div>
+      		    <div class="w-[600px] h-auto bg-red-100">
+      		    	<TheNewPost :data="saveToDrafd" :key="0"/>
+      		    </div>    	
       	</div>
       	<Confirmation 
       	    v-if="modal.openSaveToTweet" 
@@ -37,7 +39,7 @@
 	import CrossIcon from './icons/Cross.vue';
 	import TheUnsentTweets from './TheUnsentTweets.vue';
 	import Confirmation from './Confirmation.vue';
-	import { ref, inject, watch, computed } from 'vue';
+	import { ref, inject, watch, computed, onMounted } from 'vue';
     
 
 	const modal = inject('modal');
@@ -48,6 +50,18 @@
 		modal.previousComponent = 'openNewTweetModal';
 		modal.selectetUnSentTweetSection = 'openNewTweetModal'
 	}
+
+	onMounted(() => {
+		let element = document.querySelector('.selectedItem')
+		 const resizeObserver = new ResizeObserver(function(event) {
+		 let {height} = event[0].contentRect
+         if(height <= 600) return;
+         element.style.overflowY = 'auto';
+         element.style.height = '90vh';
+    });
+
+		resizeObserver.observe(element);
+	})
 
 	const exitPopUp = () =>  {	
 		if(modal.newTweetModalIsActiv && !modal.openGifModal && !modal.openScheduleModal && !modal.openUnsentTweets){

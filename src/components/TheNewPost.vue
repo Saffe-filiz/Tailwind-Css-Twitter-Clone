@@ -1,5 +1,5 @@
 <template>
-	<article class="w-full  py-1 px-3.5 inline-flex flex-row">
+	<article class="w-full h-auto py-1 px-3.5 inline-flex flex-row">
 	<UserProfileImage :size="10.75" class="mr-3"/>
 	<div class="w-full flex flex-col justify-between"> 
 		<div class="w-full h-auto">
@@ -20,11 +20,11 @@
 		            @removePoll="(pollObject) => setPollData(pollObject)" 
 		            :pollData="pollData"/>
 		    </DragArea>
-		    <TheWhoCanReply 
+		   <TheWhoCanReply 
 		        v-show="hidden"
 		        v-if="showWhoCanAwser" 
 		        @whoCanReply="(value) => selected.whoCanReply = value" 
-		        :active="updataSchedule.sending"/>  
+		        :active="updataSchedule.sending"/>
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center duration-100" v-show="hidden">
 	    	<TheAttachments 

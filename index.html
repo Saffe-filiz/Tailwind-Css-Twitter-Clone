@@ -6,10 +6,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Twitter</title>
         <script type="module" src="/src/main.js" defer></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 
     </head>
     <body class="w-full max-w-[79.063rem] h-auto h-auto bg-white">
         <div id="app"></div>
+        <script>
+            twemoji.parse(document.body);
+
+            const emoji = "📮"
+/*twemoji.parse(emoji, {
+    callback: (icon, options) => {
+        console.log(icon, options)
+    }
+})
+function constructTwemojiURL(icon, options) {
+    return ''.concat(
+        options.base, 
+        options.size, 
+        '/',
+        icon,         
+        options.ext   
+    );
+}
+twemoji.parse(emoji, {
+    callback: (icon, options) => {
+        
+        // create the image tag
+        const img = document.createElement('img');
+
+        // assign the image source
+        img.src = constructTwemojiURL(icon, options)        
+        img.alt = "Twemoji"
+
+        // append the tag to our document body
+        document.body.append(img)
+
+    }
+})*/
+
+        </script>
   </body>
 </html>
 
