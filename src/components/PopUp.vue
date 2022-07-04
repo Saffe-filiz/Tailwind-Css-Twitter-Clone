@@ -4,7 +4,7 @@
       	<TheSchedule v-on:click.stop v-if="modal.openScheduleModal"/>
       	<TheUnsentTweets v-on:click.stop v-if="modal.openUnsentTweets"/>
         	<div 
-      	    class="mx-auto w-fit bg-white selectedItem h-auto"
+      	    class="mx-auto w-fit bg-white min-h-[140px] h-auto max-h-[80vh] pb-[15px] overflow-y-auto"
       	    v-on:click.stop 
       	    v-if="modal.openNewTweetModal">
       	        <div class="w-[600px] h-12 inline-flex items-center justify-between pl-2 pr-3.5 sticky top-0 bg-[#ffffffa6] backdrop-blur-md">
@@ -15,8 +15,8 @@
     		            <span class="text-sm text-[#1d9bf0] font-medium">Unsent Tweets</span>
     	            </span>
       		    </div>
-      		    <div class="w-[600px] h-auto bg-red-100">
-      		    	<TheNewPost :isPopUp="true" :isActive="saveToDrafd" :changePosition="WhoCanAnswerPosition"/>
+      		    <div class="w-[600px] bg-red-100">
+      		    	<TheNewPost :isPopUp="true" :isActive="saveToDrafd"/>
       		    </div>    	
       	</div>
       	<Confirmation 
@@ -50,23 +50,7 @@
 		modal.previousComponent = 'openNewTweetModal';
 		modal.selectetUnSentTweetSection = 'openNewTweetModal'
 	}
-    
-   let WhoCanAnswerPosition = ref(false);
-/*	onMounted(() => {
-	let element = document.querySelector('.selectedItem')
-	   const resizeObserver = new ResizeObserver(function(event) {
-		//let height = event[0].contentRect.height
-
-      if(height >= 590){
-      	WhoCanAnswerPosition.value = true;
-         element.style.overflowY = 'auto';
-         element.style.height = '90vh'
-      }
-      		
-    });
-
-		resizeObserver.observe(element);
-	})*/
+   
 
 	const exitPopUp = () =>  {	
 		if(modal.newTweetModalIsActiv && !modal.openGifModal && !modal.openScheduleModal && !modal.openUnsentTweets){
@@ -104,7 +88,6 @@
 		modal.openSaveToTweet = false;
 		modal.newTweetModalIsActiv = false;
 		modal.openNewTweetModal = false;
-		console.log('test1')
 		exitPopUp()
 	}
 

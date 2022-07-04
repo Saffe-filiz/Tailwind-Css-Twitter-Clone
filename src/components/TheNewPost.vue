@@ -10,6 +10,7 @@
 			    v-if="updataSchedule.date"/>
 			<DragArea  @dragover="draggableAreaActive = true">
 		        <TextArea 
+		            class="selectedItem"
 		            @post="(text) => post.post = text" 
 		            @click="selected.whoCanAnswer = true"/>
 		        <ThePoll 
@@ -19,10 +20,10 @@
 		    </DragArea>
 		    <TheWhoCanReply 
 		        v-show="hidden"
-		        v-if="false" 
+		        v-if="true" 
 		        @whoCanReply="(value) => selected.whoCanReply = value" 
 		        :isActive="updataSchedule.sending"
-		        :position="data.changePosition"
+		        :position="position"
 		        />
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center duration-100" v-show="hidden">
@@ -46,7 +47,7 @@
 </template>
 
 <script setup>
-	import { ref, computed, inject, provide, reactive, watch } from 'vue';
+	import { ref, computed, inject, provide, reactive, watch, onMounted } from 'vue';
 	import { useStore } from 'vuex';
   
  	import ThePoll from './ThePoll.vue'
@@ -71,6 +72,24 @@
 		hidden.value = false;
 		setTimeout(() => hidden.value = true, 1500)
 	}
+
+	const position = ref('')
+
+	onMounted(() => {
+
+   	let element = document.querySelector('.selectedItem')
+	    const resizeObserver = new ResizeObserver( event => {
+		let height = event[0].contentRect.height
+
+      if(height >= 500){
+          position.value = 'top-[-365px]'
+      }else {
+      	 position.value = 'top-[30px]'
+      }
+    });
+
+		resizeObserver.observe(element);
+   })
 
    
 	let pollData = ref();

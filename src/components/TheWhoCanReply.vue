@@ -6,7 +6,7 @@
 		        <p class="text-[#1d9bf0] text-sm font-bold cursor-pointer">{{whoCanReply[selected]}} can replay</p>
 		        <div 
 		            class="absolute min-w-[18.125rem] h-auto pt-3.5 pb-1 bg-white z-20  rounded-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible shadow-[0_0_3px_1px_rgb(101,119,134,0.15)] shadow-[0_0_15px_rgb(101,119,134,0.20)] hoverDuration" 
-		            :class="[data.position ? 'top-[-120px]' : 'top-[30px]']">
+		            :class="data.position">
 		        	<div class="flex flex-col px-3.5 mb-[0.688rem]">
 		        		<span class="text-sm text-[#0f1419] font-bold">Who can reply?</span>
 		        		<span class="text-sm text-[#677682]">Choose who can reply to this Tweet.</span>
@@ -47,7 +47,7 @@
 		import Check from './icons/WhoCanReplyIcons/Check.vue';
 
 		import { ref } from 'vue';
-        const data = defineProps({isActive: Boolean, position: Boolean})
+        const data = defineProps({isActive: Boolean, position: String})
 		const selected = ref(0)
 		const icons = [World, People, MentionIcon];
 		const whoCanReply = ['Everyone', 'People you follow', 'Only people you mention'];

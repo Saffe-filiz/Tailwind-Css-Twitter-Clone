@@ -15,7 +15,7 @@
 }
 
 .sectionStyle {
-	@apply w-full  h-[36px] cursor-pointer p-2 bg-transparent p-[7px] pt-[11px]  outline-none appearance-none mt-3
+	@apply w-full  h-[30px] cursor-pointer px-2 bg-transparent outline-none appearance-none mt-4
 }
 
 
