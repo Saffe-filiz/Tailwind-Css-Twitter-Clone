@@ -1,14 +1,17 @@
 <template>
 	<div :class="imageLeyout">
 	    <div
-	        v-for="(image, index) in allImages.image" 
+	        v-for="(image, index) in media" 
 	        :class="imageStyle" 
 	        :style="{'background-image': `url(${image})`}">
 	        <img
 	            class="w-full h-full opacity-0" 
 	            :src="image" 
 	            draggable="false">
-	        <slot/>
+	        <button 
+	    	    class="w-7 h-7 rounded-full bg-[#0f1419bf] hover:bg-[#272c30bf] absolute top-1 left-1 text-white hoverDuration"
+	    	    @click="removeMedia(index)">&#10005
+	    	</button>
 	    </div>	
 	 </div>
 </template>
@@ -16,10 +19,16 @@
 <script setup>
 
 	import { computed } from 'vue';
-	const allImages = defineProps({image: Array, isPost: Boolean})
+	import { useStore } from 'vuex';
+
+	const allImages = defineProps({isPost: Boolean});
+
+	const store = useStore();
+	const media = computed(() => store.getters.getMedia);
+	const removeMedia = ( index ) => store.commit('removeMedia', index);
 
     const imageLeyout = computed(() => {
-   		let numberOfPhotos = allImages.image.length;
+   		let numberOfPhotos = media.value.length;
    	    if(numberOfPhotos > 2) {
    		     if(allImages.isPost){
    		     	return 'w-[514x] grid grid-cols-2 grid-rows-2 rounded-[15px] overflow-hidden gap-[1px]';
@@ -38,7 +47,7 @@
     });
 
 	const imageStyle = computed(() =>  {
-   	    let numberOfPhotos = allImages.image.length;
+   	    let numberOfPhotos = media.value.length;
    	    if(numberOfPhotos > 3) {
    		    if(allImages.isPost){
    		     	return 'h-[144px] backgrounImage';

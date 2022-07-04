@@ -7,8 +7,8 @@
 	<div class="w-full h-auto bg-yellow py-3.125">
 		<div class="flex flex-col gap-[1.125rem] px-3.5 py-[11px]">
 			<TheScheduleInfo 
-			    v-if="!showErrorMassage[1]" 
-			    :time="scheduling.date"/>
+			    v-if="!showErrorMassage[1]"
+			    :date="scheduling.date"/>
 		<div>
 		<span class="text-sm text-[#536471]">Date</span>
 		    <div class="flex flex-row justify-between">
@@ -105,7 +105,7 @@
 	const currentTime = () => {
 		let dateUpdata = updateSchedule.value
 		let date = currentDate.value
-		date.forEach( (item, index) =>  scheduling.date[index] = dateUpdata.date?.[index] || item )
+		date.forEach( (item, index) => scheduling.date[index] = dateUpdata.date?.[index] || item )
 	}
 	// SET NEW DATE END
 

@@ -5,35 +5,31 @@
 	    @drop.prevent="uploadImage" 
 	    @dragover.prevent>
 	    <slot/>
-	    <ImageGallery :image="images">
-	    	<button 
-	    	    class="w-7 h-7 rounded-full bg-[#0f1419bf] hover:bg-[#272c30bf] absolute top-1 left-1 text-white hoverDuration"
-	    	    @click="removeImage(index)">&#10005</button>
-	    </ImageGallery>
+	    <ImageGallery/>
 	</article>
 </template>
 
 
 <script setup>
-	import { inject, computed} from 'vue';
+	import { ref, inject, computed, nextTick} from 'vue';
+	import { useStore } from 'vuex'
 	import ImageGallery from './ImageGallery.vue';
 
-	const meadia = defineProps({permission: Array})
+    const uploadImage = inject('uploadImage');
+    const draggableAreaActive = inject('draggableAreaActive'); 
+    const selected = inject('selected');
 
-	const removeImage = ( index ) => images.value.splice(index, 1);
-	const draggableAreaActive = inject('draggableAreaActive');
-    const images = inject('images');
-    const uploadImage = inject('uploadImage'); 
+    const store = useStore();
+    const mediaLength = computed(() => store.getters.getMediaLength)
 
     const dragAreaBorderColor = computed(() => {
-    	let isValid = meadia.permission.some( value => value)
-
     	if(!draggableAreaActive.value){
     	    return 'max-w-[512px] w-full border-2 border-transparent rounded'
     	}
-    	if(isValid == meadia.permission[1] && images.value.length <= 3){
+    	else if(!selected.gif && mediaLength.value <= 3){
     	      return  'border-[#1d9bf0] max-w-[512px] w-full border-2 border-dashed  rounded'
     	}else{
+    		
     	   	  return 'border-red-600 max-w-[512px] w-full border-2 border-dashed  rounded'
     	}
     })

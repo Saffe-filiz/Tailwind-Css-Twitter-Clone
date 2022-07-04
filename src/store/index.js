@@ -3,30 +3,27 @@ import { createStore } from 'vuex'
 const store = createStore({
 	state: {
 		tweets: [],
+		
 	    gifData: {
 	    	gifs: [],
 	    	numberOfGif: 20,
 	    	gifAutoPlay: false,
 	    	ganre: '',
 	    },
+
 	    updataSchedule: {},
 	    pollData: {
 	    	quest: ['', '', '', ''],
 	    	date: [1, 0, 0],
 	    	counter: 2,
 	    },
+
 	    unSendTweets: {
 	    	drafts: [],
 	    	scheduled: [],
 	    },
-	    tweetAttachments: {
-	    	type: {
-	    		IsGif: false,
-		        isImage: false,
-		        isPoll: false,
-	    	},
-	    	media: [],
-	    },
+	 
+	    media: [],
 	},
 
 	getters: {
@@ -51,7 +48,11 @@ const store = createStore({
 
 		getUnSendScheduled: state => state.unSendTweets.scheduled,
 
-		getGifAutoPlay: state => state.gifData.gifAutoPlay
+		getGifAutoPlay: state => state.gifData.gifAutoPlay,
+
+		getMedia: state => state.media,
+
+		getMediaLength: state => state.media.length,
 
 	},
 
@@ -101,8 +102,12 @@ const store = createStore({
 			state.unSendTweets.drafts = data;
 		},
 
-		setAttachments (state, data) {
-			state.tweetAttachments = data;
+		setMedia (state, data) {
+			state.media.push(data);
+		},
+
+		removeMedia (state, data) {
+			state.media.splice(data, 1)
 		}
 	},
 

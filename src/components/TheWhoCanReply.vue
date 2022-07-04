@@ -1,10 +1,12 @@
 <template>
-    <div class="w-full h-[2.125rem] border-b border-min-border-color" :class="{'opacity-70 pointer-events-none': is.active}">
+    <div class="w-full h-[2.125rem] border-b border-min-border-color" :class="{'opacity-70 pointer-events-none': data.isActive}">
 		<span class="w-auto h-[22px] hover:bg-[#1d9bf01a] inline-flex items-center justify-center rounded-full">
 		    <div class="w-auto h-[20px] inline-flex items-center justify-center relative group" tabindex="1">
 		    	<component :is="icons[selected]" class="w-3.75 h-3.75 mr-1"></component>
 		        <p class="text-[#1d9bf0] text-sm font-bold cursor-pointer">{{whoCanReply[selected]}} can replay</p>
-		        <div class="absolute min-w-[18.125rem] h-auto pt-3.5 pb-1 bg-white z-20 top-8 rounded-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible shadow-[0_0_3px_1px_rgb(101,119,134,0.15)] shadow-[0_0_15px_rgb(101,119,134,0.20)] hoverDuration">
+		        <div 
+		            class="absolute min-w-[18.125rem] h-auto pt-3.5 pb-1 bg-white z-20  rounded-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible shadow-[0_0_3px_1px_rgb(101,119,134,0.15)] shadow-[0_0_15px_rgb(101,119,134,0.20)] hoverDuration" 
+		            :class="[data.position ? 'top-[-120px]' : 'top-[30px]']">
 		        	<div class="flex flex-col px-3.5 mb-[0.688rem]">
 		        		<span class="text-sm text-[#0f1419] font-bold">Who can reply?</span>
 		        		<span class="text-sm text-[#677682]">Choose who can reply to this Tweet.</span>
@@ -45,7 +47,7 @@
 		import Check from './icons/WhoCanReplyIcons/Check.vue';
 
 		import { ref } from 'vue';
-        const is = defineProps({active: Boolean})
+        const data = defineProps({isActive: Boolean, position: Boolean})
 		const selected = ref(0)
 		const icons = [World, People, MentionIcon];
 		const whoCanReply = ['Everyone', 'People you follow', 'Only people you mention'];

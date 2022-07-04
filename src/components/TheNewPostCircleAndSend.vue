@@ -17,5 +17,5 @@
 	import Plus from './icons/Plus.vue';
 	import TheCircle from './TheCircle.vue';
 
-	const post = defineProps({massage: String, date: Boolean })
+	const post = defineProps({massage: String})
 </script>

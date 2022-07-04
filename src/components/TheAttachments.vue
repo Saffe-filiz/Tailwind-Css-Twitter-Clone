@@ -1,17 +1,17 @@
 <template>
 	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 		<Madia 
-		    :isActive="is.active[1] == 4 || is.active[0].gif || is.active[0].poll" 
-		    :madiaType="is.active[0].image"/>
+		    :isActive="media || selected.gif || selected.poll" 
+		    :madiaType="selected.image"/>
 	    <Gif 
-	        :isActive="is.active[0].image || is.active[0].gif || is.active[0].poll" 
+	        :isActive="selected.image || selected.gif || selected.poll" 
 	        @click="modal.openGifModal = true, modal.scrollHidden()"/>
 		<Poll 
 		    @click="$emit('showPoll', true)" 
-		    :isActive="is.active[0].gif || is.active[0].image || is.active[2]" />
+		    :isActive="selected.gif || selected.image" />
 	    <Emoji/>
 	    <Schedule 
-	        :isActive="is.active[0].poll || is.active[0].whoCanReply != 'Everyone'" 
+	        :isActive="selected.poll || selected.whoCanReply != 'Everyone'" 
 	        @click="modal.scrollHidden(), modal.openScheduleModal = true"/>
 	    <Mark/>
 	</div>
@@ -25,8 +25,14 @@
 	import Schedule from './icons/NewPost/Schedule.vue';
 	import Mark from './icons/NewPost/Mark.vue';
 
-	import { inject } from 'vue'
-
+	import { ref, inject, computed } from 'vue'
+	import { useStore } from 'vuex'; 
+	const store = useStore();
+	
 	const is = defineProps({active: Array})
-	const modal = inject('modal'); // Coming from app vue
+	const selected = inject('selected'); // Coming from app vue
+	const modal = inject('modal');
+	const media = computed(() => store.getters.getMedia.length == 4)
+
+
 </script>

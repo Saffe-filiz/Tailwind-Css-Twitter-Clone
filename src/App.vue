@@ -9,16 +9,19 @@
 	   </div>
 	</div>
 	<PopUp v-if="openPopUp"/>
+	<Toast :isActive="showToast" :massage="toastMassage" /> 
 </template>
 
 <script setup>
 
-	import { reactive, onMounted, provide, computed } from 'vue'
+	import { ref, reactive, onMounted, provide, computed, watch } from 'vue'
+	import { useStore } from 'vuex';
 
 	import TheNavigation from './components/TheNavigation.vue';
 	import TheFeed from './components/TheFeed.vue';
 	import TheTrends from './components/TheTrends.vue';
 	import TheSearch from './components/TheSearch.vue';
+	import Toast from './components/Toast.vue';
 	import PopUp from './components/PopUp.vue';
 
 	onMounted(() => {
@@ -95,5 +98,57 @@
 
 	provide('modal', modal);
 
-	const openPopUp = computed(() => [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets].some( v => v));
+	let selected = reactive({
+		gif: false,
+		image: false,
+		poll: false,
+		whoCanAnswer: false,
+		whoCanReply: 'Everyone',
+	})
+
+	const mediaLength = computed(() => store.getters.getMediaLength)
+
+
+	const store = useStore();
+	let draggableAreaActive = ref(false);
+	let showToast = ref(false);
+	let toastMassage = ref('');
+
+    const uploadImage =  ( e ) => {
+    	draggableAreaActive.value = false
+    	let draggedCount = e.dataTransfer?.files?.length ?? 0;
+    	let imageCount = mediaLength.value;
+
+    	let image = e.target.files || e.dataTransfer.files;
+    	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1);
+
+    	if(!isGif && !selected.gif && draggedCount <= 4 && imageCount < 4){
+    		selected.image = true
+    	    Array.from({length: image.length}, (_, index) => store.commit('setMedia', URL.createObjectURL(image[index])) );
+    	}
+        else if(isGif && !selected.image && draggedCount <= 1 && imageCount <= 0 || draggedCount <= 0 && imageCount <= 1 ){
+        	console.log('drag', draggedCount, imageCount, 'count')
+        	selected.isGif = isGif;
+    		selected.gif = true
+    		store.commit('setMedia', URL.createObjectURL(image[0]))
+    	}else{
+    		showToast.value = !showToast.value;
+    		toastMassage.value = 'Please choose either 1 GIF or up to 4 photos.'
+    	}
+        selected.imageLength = imageCount;
+    	e.target.value = ''
+	};
+
+
+	watch( mediaLength, number => {
+		number == 0 ? Object.keys(selected).map( item => item == 'whoCanReply' ? selected[item] : selected[item] = false): null
+	});
+
+	provide('uploadImage', uploadImage);
+	provide('selected', selected)
+	provide('draggableAreaActive', draggableAreaActive);
+
+	const openPopUp = computed(() => {
+		return [modal.openNewTweetModal, modal.openGifModal, modal.openScheduleModal, modal.openUnsentTweets].some( v => v)
+	});
 </script> 

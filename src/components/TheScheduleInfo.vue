@@ -9,13 +9,13 @@
 	import Calendar from './icons/NewPost/Calendar.vue';
 	import { computed } from 'vue';
 	
-	const data = defineProps({time: Array, isDate: {type: Boolean, default: false}});
+	const data = defineProps({date: Array, isDate: {type: Boolean, default: false}});
 
-	const date = computed(() =>  new Date(data.time[0], data.time[1], data.time[2], data.time[3], data.time[4]));
+	const date = computed(() =>  new Date(data.date[0], data.date[1], data.date[2], data.date[3], data.date[4]));
 
     const timePeriod = computed(() => {
-		let hours = data.time[3];
-		let minute = data.time[4];
+		let hours = data.date[3];
+		let minute = data.date[4];
 		let period = hours < 12 ? 'AM': 'PM';
 	    hours = hours % 12 == 0 ?  12: hours % 12;
 	    minute = minute < 10 ? '0' + minute: minute
