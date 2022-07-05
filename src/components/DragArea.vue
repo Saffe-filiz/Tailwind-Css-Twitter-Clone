@@ -20,17 +20,17 @@
     const selected = inject('selected');
 
     const store = useStore();
-    const mediaLength = computed(() => store.getters.getMediaLength)
+    const imagesArrLength = computed(() => store.getters.getMediaLength)
 
     const dragAreaBorderColor = computed(() => {
     	if(!draggableAreaActive.value){
-    	    return 'max-w-[512px] w-full border-2 border-transparent rounded'
+    	    return 'max-w-[512px] w-full h-auto border-2 border-transparent rounded'
     	}
-    	else if(!selected.gif && mediaLength.value <= 3){
-    	      return  'border-[#1d9bf0] max-w-[512px] w-full border-2 border-dashed  rounded'
+    	else if(!selected.gif && imagesArrLength.value <= 3){
+    	      return  'border-[#1d9bf0] max-w-[512px] w-full h-auto border-2 border-dashed  rounded'
     	}else{
     		
-    	   	  return 'border-red-600 max-w-[512px] w-full border-2 border-dashed  rounded'
+    	   	  return 'border-red-600 max-w-[512px] w-full border-2 h-auto  border-dashed  rounded'
     	}
     })
 </script>

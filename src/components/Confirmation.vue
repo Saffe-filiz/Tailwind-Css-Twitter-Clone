@@ -14,7 +14,6 @@
     </div>
 </template>
 
-
 <script setup>
 	const data = defineProps({isSaveTweet: Boolean})
 </script>

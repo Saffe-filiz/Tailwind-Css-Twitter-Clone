@@ -1,6 +1,6 @@
 <template>
 		<div class="w-auto h-auto">
-			<div :class="`w-${userImage.size} h-${userImage.size} rounded-full bg-black`"></div>
+			<div :class="`w-${userImage.size} h-${userImage.size} rounded-full bg-black`" draggable="false"></div>
 		</div>
 </template>
 

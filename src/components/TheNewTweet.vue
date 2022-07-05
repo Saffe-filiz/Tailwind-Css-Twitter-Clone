@@ -23,7 +23,6 @@
 		        v-if="true" 
 		        @whoCanReply="(value) => selected.whoCanReply = value" 
 		        :isActive="updataSchedule.sending"
-		        :position="position"
 		        />
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center duration-100" v-show="hidden">
@@ -60,7 +59,7 @@
 	import Toast from './Toast.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
-	const data = defineProps({isActive: Boolean, changePosition: Boolean, isPopUp: Boolean})
+	const data = defineProps({isActive: Boolean, isPopUp: Boolean})
 	const store = useStore();
     
     let toastMassageDate = ref()
@@ -74,22 +73,6 @@
 	}
 
 	const position = ref('')
-
-	onMounted(() => {
-
-   	let element = document.querySelector('.selectedItem')
-	    const resizeObserver = new ResizeObserver( event => {
-		let height = event[0].contentRect.height
-
-      if(height >= 500){
-          position.value = 'top-[-365px]'
-      }else {
-      	 position.value = 'top-[30px]'
-      }
-    });
-
-		resizeObserver.observe(element);
-   })
 
    
 	let pollData = ref();

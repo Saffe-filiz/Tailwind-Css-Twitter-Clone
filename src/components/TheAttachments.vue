@@ -1,7 +1,7 @@
 <template>
 	<div class="w-auto h-full inline-flex flex-row items-end justify-between">
 		<Madia 
-		    :isActive="media || selected.gif || selected.poll" 
+		    :isActive="mediaLength || selected.gif || selected.poll" 
 		    :madiaType="selected.image"/>
 	    <Gif 
 	        :isActive="selected.image || selected.gif || selected.poll" 
@@ -32,7 +32,7 @@
 	const is = defineProps({active: Array})
 	const selected = inject('selected'); // Coming from app vue
 	const modal = inject('modal');
-	const media = computed(() => store.getters.getMedia.length == 4)
+	const mediaLength = computed(() => store.getters.getMediaLength == 4)
 
 
 </script>

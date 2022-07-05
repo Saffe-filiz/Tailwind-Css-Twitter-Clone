@@ -23,7 +23,11 @@ const store = createStore({
 	    	scheduled: [],
 	    },
 	 
-	    media: [],
+	    media: {
+	    	modalMedia: [],
+	    	isModal: false,
+	    	postMedia: [],
+	    },
 	},
 
 	getters: {
@@ -50,9 +54,16 @@ const store = createStore({
 
 		getGifAutoPlay: state => state.gifData.gifAutoPlay,
 
-		getMedia: state => state.media,
+		getMedia (state) {
+			return state.media.isModal ? state.media.modalMedia: state.media.postMedia
+		},
 
-		getMediaLength: state => state.media.length,
+		getMediaLength (state) {
+			return state.media.isModal ? state.media.modalMedia.length: state.media.postMedia.length
+		},
+
+		getIsModal: state => state.media.isModal
+
 
 	},
 
@@ -102,13 +113,22 @@ const store = createStore({
 			state.unSendTweets.drafts = data;
 		},
 
+		setIsModal (state, data) {
+			state.media.isModal = data;
+		},
+
 		setMedia (state, data) {
-			state.media.push(data);
+			state.media.isModal ? state.media.modalMedia.push(data): state.media.postMedia.push(data)
 		},
 
 		removeMedia (state, data) {
-			state.media.splice(data, 1)
-		}
+			state.media.isModal ? state.media.modalMedia.splice(data, 1): state.media.postMedia.splice(data, 1)
+		},
+
+		deletModalMedia (state, data) {
+			state.media.modalMedia = data;
+		},
+
 	},
 
 	actions: {

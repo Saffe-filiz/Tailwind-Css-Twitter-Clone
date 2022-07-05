@@ -11,7 +11,7 @@
 		    		    @click="selected = index">
 		    			<component 
 		    			    :is="icon" 
-		    			    :active="index == selected">	
+		    			    :active="index == selected" draggable="false">	
 		    			</component>
 		    			<span class="text-xl text-[#0f1419] hidden xl:block pl-[19px] pr-[1.125rem] truncate">{{iconsName[index]}}</span>
 		    		</li>
@@ -19,7 +19,7 @@
 		   <div class="w-full h-[4.938rem] mt-4">
 			   <div 
 			        class="w-11 h-11 xl:w-[14.063rem] xl:h-[3.25rem] bg-btn-bg-color text-white font-bold text-[0.938rem] rounded-full cursor-pointer flexCenter mx-auto xl:mx-0"
-			        @click="modal.openNewTweetModal = true, modal.newTweetModalIsActiv = true, modal.scrollHidden(), clearSchedule()">
+			        @click="openNewTweet">
 			        <span class="hidden xl:block">Tweet</span>
 			        <span class="block xl:hidden w-fit h-fit"><NewPostIcon/></span>
 			    </div>
@@ -66,5 +66,11 @@
 
     let store = useStore();
 
-    let clearSchedule =	() => store.commit('setUpdataSchedule', {});
+    let openNewTweet =	() => {
+    	modal.openNewTweetModal = true;
+    	modal.newTweetModalIsActiv = true;
+    	modal.scrollHidden(),
+    	store.commit('setIsModal', true);
+    	store.commit('setUpdataSchedule', {});
+    }
 </script>

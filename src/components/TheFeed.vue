@@ -1,7 +1,7 @@
 <template>
 	<div class="w-[37.5rem] border-x border-min-border-color">
 		<TheHeader/>
-		<TheNewPost v-memo="[false]"/>
+		<TheNewTweet/>
 		<div class="w-full h-px my-1 border-b border-min-border-color"></div>
 		<Post/>
 	</div>
@@ -9,7 +9,10 @@
 
 <script setup>
 	import Post from './Post.vue'
-	import TheNewPost from './TheNewPost.vue';
+	import TheNewTweet from './TheNewTweet.vue';
 	import TheHeader from './TheHeader.vue';
+	import { inject } from 'vue';
+
+	const modal = inject('modal');
 </script>
 

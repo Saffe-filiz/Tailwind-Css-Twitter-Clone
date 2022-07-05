@@ -28,6 +28,7 @@
 	    window.addEventListener("scroll", setSideBarPosition);
     })
 
+
 	const setPositions = reactive({
 		'sideBarPosition': 'static',
 		'topValue': '0px',
