@@ -1,7 +1,7 @@
 <template>
 	<div  class="inline-flex flex-row grow cursor-pointer relative" v-for="(gif, index) in gifs" :key="index" >
 		<div class="w-auto grow" :class="bgColor(index)">
-			<img :src="gif" class="w-full h-full grow " draggable="false" @click="sendMedia(gif)">
+			<img :src="gif" class="w-full h-full grow " draggable="false" @click="sendMedia(takeGif[index])">
 		</div>
 	</div>
 	<InfiniteScroll class="w-full h-1 relative border-0" /> 
@@ -18,10 +18,12 @@
 	})
 
 	const gifs = computed(() =>  store.getters.getGifs);
+	const takeGif = computed(() => store.getters.getGifForTweet)
 
 	const selected = inject('selected');
-	
+	const modal = inject('modal');
 	const sendMedia = (gif) => {
+		modal.openGifModal = false;
 		selected.git = true;
 		store.commit('setMedia', gif)
 	}

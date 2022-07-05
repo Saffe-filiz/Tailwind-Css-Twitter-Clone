@@ -37,6 +37,10 @@ const store = createStore({
 			return state.gifData.gifs.flat().map( item => item.images[mediaType].url).slice(0, state.numberOfGif);
 		},
 
+		getGifForTweet: state => {
+			return state.gifData.gifs.flat().map( item => item.images['downsized_large'].url)
+		},
+
 		getGifGanre: state => state.gifData.ganre,
 
 		getNumberOfGif: state => state.gifData.numberOfGif,
@@ -55,11 +59,11 @@ const store = createStore({
 
 		getGifAutoPlay: state => state.gifData.gifAutoPlay,
 
-		getMedia (state) {
+		getMedia: state => {
 			return state.media.isModal ? state.media.modalMedia: state.media.postMedia
 		},
 
-		getMediaLength (state) {
+		getMediaLength: state => {
 			return state.media.isModal ? state.media.modalMedia.length: state.media.postMedia.length
 		},
 
