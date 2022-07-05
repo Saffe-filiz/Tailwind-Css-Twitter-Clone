@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import axios from 'axios'
 
 const store = createStore({
 	state: {
@@ -33,7 +34,7 @@ const store = createStore({
 	getters: {
 		getGifs: state => {
 			let mediaType = state.gifData.gifAutoPlay ? 'fixed_height_small' : 'fixed_height_small_still';
-			return state.gifData.gifs.flat().map( item => item.images[mediaType].url);
+			return state.gifData.gifs.flat().map( item => item.images[mediaType].url).slice(0, state.numberOfGif);
 		},
 
 		getGifGanre: state => state.gifData.ganre,
@@ -132,12 +133,17 @@ const store = createStore({
 	},
 
 	actions: {
-		getGifts ({ commit }, payload) {
-			fetch(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=50&offset=2&rating=g&lang=en`)
-			    .then( response => response.json())
-			    .then( response =>  commit('setGif', response.data))
-			    .catch( error =>  console.log(error))
-		},
+		async getGifts ({commit}, payload) {
+			let response
+			try{
+				response = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=50&offset=2&rating=g&lang=en`);
+				
+			}catch(error){
+				console.log(error)
+			}
+			let { data } = await response.data 
+			commit('setGif', data)
+		}
 	}
 })
 
