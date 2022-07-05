@@ -127,7 +127,7 @@
     		selected.image = true
     	    Array.from({length: image.length}, (_, index) => store.commit('setMedia', URL.createObjectURL(image[index])) );
     	}
-        else if(isGif && !selected.image && draggedCount <= 1 && imageCount <= 0 || draggedCount <= 0 && imageCount <= 1 ){
+        else if(isGif && !selected.image && draggedCount <= 1 && imageCount < 1 || draggedCount < 0 && imageCount <= 1 ){
         	selected.isGif = isGif;
     		selected.gif = true
     		store.commit('setMedia', URL.createObjectURL(image[0]))
