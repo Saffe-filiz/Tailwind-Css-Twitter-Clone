@@ -23,9 +23,10 @@
 	const selected = inject('selected');
 	const modal = inject('modal');
 	const sendMedia = (gif) => {
-		modal.openGifModal = false;
-		selected.git = true;
+		modal.closePopUp();
+		selected.gif = true;
 		store.commit('setMedia', gif)
+		store.commit('setGif', [])
 	}
 
 </script>

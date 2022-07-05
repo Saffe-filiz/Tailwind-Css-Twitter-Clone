@@ -3,7 +3,7 @@
 		<div class="h-full w-full overflow-y-scroll inline-flex flex-wrap gap-1">
 		    <TheGifSearch/>
 	        <TheGifPlay v-if="isActive"/>
-	        <TheGifGanreList  v-if="!isActive"/>
+	        <TheGifGanreList v-if="!isActive"/>
 	        <TheGifList v-else/>
 	    </div> 
 	</section>

@@ -66,6 +66,7 @@
 		}
         store.commit('setIsModal', false);
 		store.commit('deletModalMedia', []);
+		store.commit('setGif', [])
 	}
 	
 	watch(() => [modal.openGifModal, modal.openScheduleModal, modal.newTweetModalIsActiv, modal.openUnsentTweets], ( arr ) => {
