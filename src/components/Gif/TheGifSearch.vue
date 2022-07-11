@@ -54,6 +54,7 @@
 	const getNumberOfGif = computed(() => store.getters.getNumberOfGif);
 
 	const getGifs = () => {
+		store.commit('setGifIsReady', true);
 		store.commit('setGifGanre', search.value);
 		store.dispatch('getGifts', search.value);
 	};

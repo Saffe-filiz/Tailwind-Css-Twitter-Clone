@@ -11,6 +11,7 @@ const store = createStore({
 	    	gifAutoPlay: false,
 	    	ganre: '',
 	    	isEmty: false,
+	    	isReady: true,
 	    },
 
 	    updataSchedule: {},
@@ -50,6 +51,8 @@ const store = createStore({
 
 		getGifIsReady: state => state.gifData.gifs.length,
 
+		getGifIsLoading: state => state.gifData.isReady,
+
 		getIsEmty: state => state.gifData.isEmty = state.gifData.gifs.length == 0 && state.gifData.ganre.length > 0,
 
 		getTweets: state => state.tweets,
@@ -79,6 +82,7 @@ const store = createStore({
 		setGif(state, data) {
 			if(state.gifData.numberOfGif > 50) return;
 			state.gifData.gifs = data;
+			state.gifData.isReady = false;
 		},
 
 		setGifOfNumber(state, number) {
@@ -87,6 +91,10 @@ const store = createStore({
 
 		setGifGanre(state, data) {
 			state.gifData.ganre = data
+		},
+
+		setGifIsReady(state, data) {
+			state.gifData.isReady = data
 		},
 
 		setUpdataSchedule (state, data) {
