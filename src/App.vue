@@ -51,6 +51,8 @@
 		}
 	}
 
+	const store = useStore();
+
 	const modal = reactive({
 		openScheduleModal: false,
 		openGifModal: false,
@@ -93,7 +95,26 @@
 		        this.openUnsentTweets = false;
 		        this.scrollVisibil();
 		    }
-	    }    
+	    },
+
+	    exitPopUp () {	
+		if(this.newTweetModalIsActiv && !this.openGifModal && !this.openScheduleModal && !this.openUnsentTweets){
+		    if(modal.textAreaIsEmty){
+		   	    let openSaveTweet = !this.openSaveToTweet;
+		   	    this.openSaveToTweet = openSaveTweet   
+		    }else {
+		    	this.closeNewTweetModal = true
+		        this.closePopUp()
+		    }
+		}else {
+			this.openSaveToTweet = false;
+			this.closePopUp()
+		}
+        store.commit('setIsModal', false);
+		store.commit('deletModalMedia', []);
+		store.commit('setGif', [])
+	}
+
     
 	});
 
@@ -110,7 +131,6 @@
 	const mediaLength = computed(() => store.getters.getMediaLength)
 
 
-	const store = useStore();
 	let draggableAreaActive = ref(false);
 	let showToast = ref(false);
 	let toastMassage = ref('');
@@ -124,6 +144,7 @@
     	let isGif =  Array.from({length: image.length}, (_, index) => image[index].name.split('.').indexOf('gif')).includes(1);
 
     	if(!isGif && !selected.gif && draggedCount <= 4 && imageCount < 4){
+    		console.log(imageCount, draggedCount)
     		selected.image = true
     	    Array.from({length: image.length}, (_, index) => store.commit('setMedia', URL.createObjectURL(image[index])) );
     	}
@@ -137,7 +158,6 @@
     	}
         selected.imageLength = imageCount;
     	e.target.value = ''
-    	console.log(selected)
 	};
 
 

@@ -10,6 +10,7 @@ const store = createStore({
 	    	numberOfGif: 20,
 	    	gifAutoPlay: false,
 	    	ganre: '',
+	    	isEmty: false,
 	    },
 
 	    updataSchedule: {},
@@ -48,6 +49,8 @@ const store = createStore({
 		getUpdataSchedule: state => state.updataSchedule,
 
 		getGifIsReady: state => state.gifData.gifs.length,
+
+		getIsEmty: state => state.gifData.isEmty = state.gifData.gifs.length == 0 && state.gifData.ganre.length > 0,
 
 		getTweets: state => state.tweets,
 
@@ -143,7 +146,7 @@ const store = createStore({
 				response = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=GqPadHTXbqlqEhw7vHMg8VrmyHdroaVP&q=${payload}&limit=50&offset=2&rating=g&lang=en`);
 				
 			}catch(error){
-				console.log(error)
+				console.log(error, 'dasdasda')
 			}
 			let { data } = await response.data 
 			commit('setGif', data)

@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full h-12 px-2 bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between sticky top-0 z-20" >
+	<div class="w-full h-12 px-2 bg-[#ffffffa6] backdrop-blur-md inline-flex items-center justify-between sticky top-0 z-20">
 		<div class="w-[1.875rem] h-[1.875rem] hover:bg-[#0f14191a] rounded-full flexCenter">
 			<CrossIcon 
 			    class="fill-[696c70]"
@@ -50,12 +50,13 @@
 
 
 	const search = ref('');
-	const isLoading = ref(false)
-
 	const getGanre = computed(() => store.getters.getGifGanre);
 	const getNumberOfGif = computed(() => store.getters.getNumberOfGif);
 
-	const getGifs = () => store.dispatch('getGifts', search.value);
+	const getGifs = () => {
+		store.commit('setGifGanre', search.value);
+		store.dispatch('getGifts', search.value);
+	};
 
 
     const celarSearch = () =>  {

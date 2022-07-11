@@ -1,6 +1,6 @@
 <template>
-	<div  class="inline-flex flex-row grow cursor-pointer relative" v-for="(gif, index) in gifs" :key="index" >
-		<div class="w-auto grow" :class="bgColor(index)">
+	<div  class="inline-flex flex-row grow cursor-pointer relative" v-for="(gif, index) in gifs" :key="index" v-if="!isRady">
+		<div class="min-w-[110px]  grow" :class="bgColor(index)">
 			<img :src="gif" class="w-full h-full grow " draggable="false" @click="sendMedia(takeGif[index])">
 		</div>
 	</div>
@@ -18,6 +18,7 @@
 	})
 
 	const gifs = computed(() =>  store.getters.getGifs);
+	const isRady = computed(() => store.getters.getIsEmty)
 	const takeGif = computed(() => store.getters.getGifForTweet)
 
 	const selected = inject('selected');

@@ -59,7 +59,7 @@
 	import Toast from './Toast.vue';
 	import TheNewPostCircleAndSend from './TheNewPostCircleAndSend.vue';
 	
-	const data = defineProps({isActive: Boolean, isPopUp: Boolean})
+	const data = defineProps({saveToDraf: Boolean, isPopUp: Boolean})
 	const store = useStore();
     
     let toastMassageDate = ref()
@@ -136,6 +136,6 @@
 		oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): ''
 	});*/
 
-	watch(() => data.isActive, (value) => sendTweet())
+	watch(() => data.saveToDraf, (value) => sendTweet())
 
 </script>
