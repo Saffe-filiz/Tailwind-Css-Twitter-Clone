@@ -82,7 +82,7 @@ const store = createStore({
 		setGif(state, data) {
 			if(state.gifData.numberOfGif > 50) return;
 			state.gifData.gifs = data;
-			state.gifData.isReady = false;
+			setTimeout(() => state.gifData.isReady = false, 500);
 		},
 
 		setGifOfNumber(state, number) {

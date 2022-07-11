@@ -1,10 +1,12 @@
 <template>
+	<div class="inline-flex flex-wrap gap-1">
 	<div  class="w-[18.063rem] h-[8.75rem] last:w-full relative cursor-pointer" v-for="(ganre, index) in genres" @click="setGanre(ganre.title)">
 		<div class="w-full h-full bg-red-100">
 			<img :src="ganre.url" class="w-full h-full object-cover" draggable="false">
 	        <span class="absolute bottom-0 p-2 text-lg  text-white font-bold z-10">{{ganre.title}}</span>
 		</div>
 	</div>
+</div>
 </template>
 
 

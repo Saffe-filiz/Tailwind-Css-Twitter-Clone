@@ -112,7 +112,8 @@
 		}
         store.commit('setIsModal', false);
 		store.commit('deletModalMedia', []);
-		store.commit('setGif', [])
+		store.commit('setGif', []);
+		store.commit('setGifGanre', '');
 	}
 
     

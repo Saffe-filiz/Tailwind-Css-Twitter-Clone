@@ -1,10 +1,12 @@
 <template>
+	<div class="inline-flex flex-wrap gap-1">
 	<div  class="inline-flex flex-row grow cursor-pointer relative" v-for="(gif, index) in gifs" :key="index" v-if="!isRady">
 		<div class="min-w-[110px]  grow" :class="bgColor(index)">
 			<img :src="gif" class="w-full h-full grow " draggable="false" @click="sendMedia(takeGif[index])">
 		</div>
 	</div>
 	<InfiniteScroll class="w-full h-1 relative border-0" /> 
+    </div>
 </template>
 
 <script setup>
