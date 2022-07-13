@@ -66,7 +66,14 @@ const store = createStore({
 
 		getPollData: state => state.pollData,
 
-		getPollDataDate: state => state.pollData.length,
+		getPollDataDate: state => {
+			let date = new Date();
+		    let [day, hours, minute] =  [...state.pollData.length].map(Number)
+		    date.setDate(date.getDate() + day); 
+		    date.setHours(date.getHours() + hours);
+		    date.setMinutes(date.getMinutes() + minute)
+		    return date
+		},
 
 		getShowPoll: state => state.pollData.showPoll,
 
@@ -117,8 +124,6 @@ const store = createStore({
 		// Poll Start
 
 		setPollData: (state, data) => state.pollData = data,
-
-		setPollDataDate: (state, data) => state.pollData.date = data,
 
 		setShowPoll (state, data) {
 			console.log(data)

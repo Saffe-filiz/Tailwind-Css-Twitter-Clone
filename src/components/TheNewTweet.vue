@@ -73,16 +73,6 @@
 	const showPoll = computed(() => store.getters.getShowPoll)
 	const updataSchedule = computed(() => store.getters.getUpdataSchedule);
 
-	const setPollLength = computed(() => {
-		if(!getPollData.value) return;
-		let date = new Date();
-		let [day, hours, minute] =  [...getPollData.value.pollLength].map(Number)
-		date.setDate(date.getDate() + day); 
-		date.setHours(date.getHours() + hours);
-		date.setMinutes(date.getMinutes() + minute);
-        return date
-	})
-
 	let draggableAreaActive = inject('draggableAreaActive')
 
     let post = reactive({

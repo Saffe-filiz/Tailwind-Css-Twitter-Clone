@@ -27,6 +27,7 @@
 
 	import { ref, inject, computed } from 'vue'
 	import { useStore } from 'vuex'; 
+	
 	const store = useStore();
 
 	const showPoll = () => store.commit('setShowPoll', true);

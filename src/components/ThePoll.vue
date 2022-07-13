@@ -67,7 +67,7 @@
     	 quest: ['', '', '', ''],
     	 length: [1, 0, 0],
     	 counter: 2,
-    	 showPoll: true, 
+    	 showPoll: false, 
     });
 
 
@@ -75,7 +75,10 @@
     
     const pollData = reactive(store.getters.getPollData);
 
-    const removePoll = store.commit('setPollData', poll)
+    const removePoll = () => {	
+        poll.showPoll = false
+        store.commit('setPollData', poll)
+    }
 
     const pollQuestData = computed(() => {
     	if(!pollData.pollData) return;
