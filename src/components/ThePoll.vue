@@ -66,7 +66,8 @@
     const poll = reactive({
     	 quest: ['', '', '', ''],
     	 length: [1, 0, 0],
-    	 counter: 2, 
+    	 counter: 2,
+    	 showPoll: true, 
     });
 
 

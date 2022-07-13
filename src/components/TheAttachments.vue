@@ -7,7 +7,7 @@
 	        :isActive="selected.image || selected.gif || selected.poll" 
 	        @click="modal.openGifModal = true, modal.scrollHidden()"/>
 		<Poll 
-		    @click="$emit('showPoll', true)" 
+		    @click="showPoll" 
 		    :isActive="selected.gif || selected.image" />
 	    <Emoji/>
 	    <Schedule 
@@ -28,8 +28,9 @@
 	import { ref, inject, computed } from 'vue'
 	import { useStore } from 'vuex'; 
 	const store = useStore();
+
+	const showPoll = () => store.commit('setShowPoll', true);
 	
-	const is = defineProps({active: Array})
 	const selected = inject('selected'); // Coming from app vue
 	const modal = inject('modal');
 	const mediaLength = computed(() => store.getters.getMediaLength == 4)

@@ -17,7 +17,7 @@ const store = createStore({
 	    updataSchedule: {},
 	    pollData: {
 	    	quest: ['', '', '', ''],
-	    	date: [1, 0, 0],
+	    	length: [1, 0, 0],
 	    	counter: 2,
 	    	showPoll: false,
 	    },
@@ -35,6 +35,8 @@ const store = createStore({
 	},
 
 	getters: {
+		// Gif Start
+
 		getGifs: state => {
 			let mediaType = state.gifData.gifAutoPlay ? 'fixed_height_small' : 'fixed_height_small_still';
 			return state.gifData.gifs.flat().map( item => item.images[mediaType].url).slice(0, state.numberOfGif);
@@ -48,23 +50,31 @@ const store = createStore({
 
 		getNumberOfGif: state => state.gifData.numberOfGif,
 
-		getUpdataSchedule: state => state.updataSchedule,
-
 		getGifIsReady: state => state.gifData.gifs.length,
 
 		getGifIsLoading: state => state.gifData.isReady,
 
-		getGifIsNonFind: state => state.gifData.gifIsNonFind = state.gifData.gifs.length == 0 && state.gifData.ganre.length > 0,
+		getGifIsNonFind: state => {
+			return state.gifData.gifIsNonFind = state.gifData.gifs.length == 0 && state.gifData.ganre.length > 0
+		},
+
+		// Gif End
 
 		getTweets: state => state.tweets,
 
+		// Poll Start
+
 		getPollData: state => state.pollData,
 
-		getPollDataDate: state => state.pollData.date,
+		getPollDataDate: state => state.pollData.length,
 
 		getShowPoll: state => state.pollData.showPoll,
 
+		// Poll End
+
 		getUnSendDrafts: state => state.unSendTweets.drafts,
+
+		getUpdataSchedule: state => state.updataSchedule,
 
 		getUnSendScheduled: state => state.unSendTweets.scheduled,
 
@@ -78,69 +88,54 @@ const store = createStore({
 			return state.media.isModal ? state.media.modalMedia.length: state.media.postMedia.length
 		},
 
-		getIsModal: state => state.media.isModal
+		getIsModal: state => state.media.isModal,
 
 
 	},
 
 	mutations: {
+		// Gif Start
+
 		setGif(state, data) {
 			if(state.gifData.numberOfGif > 50) return;
 			state.gifData.gifs = data;
 			setTimeout(() => state.gifData.isReady = false, 600);
 		},
 
-		setGifOfNumber(state, number) {
-			state.gifData.numberOfGif = number
+		setGifOfNumber: (state, number) => state.gifData.numberOfGif = number,
+
+		setGifGanre: (state, data) => state.gifData.ganre = data,
+
+		setGifIsReady: (state, data) => state.gifData.isReady = data,
+
+		setUpdataSchedule: (state, data) => state.updataSchedule = data,
+
+		setGifAutoPlay: (state, data) => state.gifData.gifAutoPlay = data,
+
+		// Gif End
+
+		// Poll Start
+
+		setPollData: (state, data) => state.pollData = data,
+
+		setPollDataDate: (state, data) => state.pollData.date = data,
+
+		setShowPoll (state, data) {
+			console.log(data)
+			return state.pollData.showPoll = data
 		},
 
-		setGifGanre(state, data) {
-			state.gifData.ganre = data
-		},
+		// Poll End
 
-		setGifIsReady(state, data) {
-			state.gifData.isReady = data
-		},
+		setUnSendScheduled: (state, data) => state.unSendTweets.scheduled.push(data),
 
-		setUpdataSchedule (state, data) {
-			state.updataSchedule = data;
-		},
+		deletUnScheduled: (state, data) => state.unSendTweets.scheduled = data,
 
-		setGifAutoPlay (state, data) {
-			state.gifData.gifAutoPlay = data;
-		},
+		deletUnDraft: (state, data) => state.unSendTweets.drafts = data,
 
-		setNewTweet (state, data) {
-			state.tweets.push(data)
-		},
+		setIsModal: (state, data) => state.media.isModal = data,
 
-		setPollData (state, data) {
-			state.pollData = data;
-		},
-
-		setPollDataDate (state, data) {
-			state.pollData.date = data;
-		},
-
-		setUnSendScheduled (state, data) {
-			state.unSendTweets.scheduled.push(data);
-		},
-
-		setUnSendDraft (state, data) {
-			state.unSendTweets.drafts.push(data);
-		},
-
-		deletUnScheduled (state, data) {
-			state.unSendTweets.scheduled = data;
-		},
-
-		deletUnDraft (state, data) {
-			state.unSendTweets.drafts = data;
-		},
-
-		setIsModal (state, data) {
-			state.media.isModal = data;
-		},
+		setUnSendDraft: (state, data) => state.unSendTweets.drafts.push(data),
 
 		setMedia (state, data) {
 			state.media.isModal ? state.media.modalMedia.push(data): state.media.postMedia.push(data)
@@ -150,9 +145,9 @@ const store = createStore({
 			state.media.isModal ? state.media.modalMedia.splice(data, 1): state.media.postMedia.splice(data, 1)
 		},
 
-		deletModalMedia (state, data) {
-			state.media.modalMedia = data;
-		},
+		deletModalMedia: (state, data) => state.media.modalMedia = data,
+
+		setNewTweet: (state, data) => state.tweets.push(data),
 
 	},
 

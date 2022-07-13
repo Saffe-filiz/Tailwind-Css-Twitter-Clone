@@ -8,15 +8,12 @@
 			    :date="updataSchedule.date"
 			    @click="modal.openScheduleModal = true" 
 			    v-if="updataSchedule.date"/>
-			<DragArea  @dragover="draggableAreaActive = true">
+			<DragArea v-memo="[draggableAreaActive]"  @dragover="draggableAreaActive = true">
 		        <TextArea 
 		            class="selectedItem"
 		            @post="(text) => post.post = text" 
 		            @click="selected.whoCanAnswer = true"/>
-		        <ThePoll 
-		            v-if="selected.poll" 
-		            @removePoll="(pollObject) => setPollData(pollObject)" 
-		            :pollData="pollData"/>
+		        <ThePoll v-if="showPoll"/>
 		    </DragArea>
 		    <TheWhoCanReply 
 		        v-show="hidden"
@@ -26,7 +23,7 @@
 		        />
 		</div>
 	    <div class="w-auto h-[45px] inline-flex justify-between items-center duration-100" v-show="hidden">
-	    	<TheAttachments  @showPoll="(value) => selected.poll = value"/>
+	    	<TheAttachments/>
             <TheNewPostCircleAndSend :massage="post.post">
                 <button 
                     class="w-auto h-8 px-3.75 bg-btn-bg-color text-white rounded-[2rem] disabled:opacity-50" 
@@ -62,7 +59,7 @@
 	const data = defineProps({saveToDraf: Boolean, isPopUp: Boolean})
 	const store = useStore();
     
-    let toastMassageDate = ref()
+    let toastMassageDate = ref();
 	let toastMassage = ref('');
 	let showToast = ref(false)
 	let hidden = ref(true)
@@ -72,32 +69,21 @@
 		setTimeout(() => hidden.value = true, 1500)
 	}
 
-	const position = ref('')
-
-   
-	let pollData = ref();
-
-	const setPollData = ( obj ) => {
-		selected.poll = obj.showPoll;
-		pollData.value = obj.data;
-	};
+	const getPollData = computed(() => 	store.getters.getPollData);
+	const showPoll = computed(() => store.getters.getShowPoll)
+	const updataSchedule = computed(() => store.getters.getUpdataSchedule);
 
 	const setPollLength = computed(() => {
-		if(!pollData.value) return;
+		if(!getPollData.value) return;
 		let date = new Date();
-		let [day, hours, minute] =  [...pollData.value.pollLength].map(Number)
+		let [day, hours, minute] =  [...getPollData.value.pollLength].map(Number)
 		date.setDate(date.getDate() + day); 
 		date.setHours(date.getHours() + hours);
 		date.setMinutes(date.getMinutes() + minute);
         return date
 	})
 
-
-
 	let draggableAreaActive = inject('draggableAreaActive')
-    
-    const updataSchedule = computed(() => store.getters.getUpdataSchedule);
-   
 
     let post = reactive({
     	user: null,
@@ -118,7 +104,6 @@
     		post.date = updataSchedule.value.date;
     		store.commit('setUnSendScheduled', post);
     		store.commit('setUpdataSchedule', {});
-    		hiddenA()
     	}
     }
 
@@ -131,10 +116,6 @@
     	store.commit('setUnSendDraft', post);
     	setTimeout(() => modal.openNewTweetModal = false, 800)
     }
-
-	/*watch(images.value, (oldValue, newValue) => {
-		oldValue == '' ? Object.keys(selected).map( v => v == 'whoCanReply' ? selected[v] : selected[v] = false): ''
-	});*/
 
 	watch(() => data.saveToDraf, (value) => sendTweet())
 
