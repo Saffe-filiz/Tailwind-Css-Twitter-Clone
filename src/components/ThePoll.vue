@@ -10,7 +10,7 @@
 			    :key="num">
 			    <label>
 			        <input 
-			            class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input" 
+			            class="w-full h-8 outline-none absolute bottom-0 hoverDuration indent-2 input"
 			            type="text" 
 			            v-model="poll.quest[num -1]" 
 			            maxlength="25">  
@@ -21,28 +21,34 @@
 			    </label>
 			</span>
 		</div>
-		<TheAddNewPollQuestion @click="addNewQuestion" v-if="questCounter"/>
+		<div 
+		    class="w-[3.063rem] pl-1 relative" 
+		    v-if="questCounter">
+	        <div @click="addNewQuestion">
+		        <Plus class="w-[20px] h-[20px] text-[8px]"/>
+	        </div>
+        </div>
 	</div>
 	<div class="w-full p-2.75 border-t border-[#cfd9de]">
 		<span>Poll Length</span>
 		<div class="w-full h-auto inline-flex justify-between">
 			<SelectBox 
 			    class="w-[9.438rem]" 
-			    title="Day" :length="pollLength(8)" 
+			    title="Day" :length="pollDateLength(8)" 
 			    :date="poll.length[0]" 
 			    @setDate=" number => poll.length[0] = number"/>
 			<SelectBox 
 			    class="w-[9.438rem]" 
 			    title="Hours" 
 			    :isDisable="inputDisable" 
-			    :length="pollLength(24)" 
+			    :length="pollDateLength(24)" 
 			    :date="poll.length[1]" 
 			    @setDate=" number => poll.length[1] = number"/>
 			<SelectBox 
 			    class="w-[9.438rem]" 
 			    title="Minute" 
 			    :isDisable="inputDisable" 
-			    :length="pollLength(60).slice(startIndex)" 
+			    :length="pollDateLength(60).slice(startIndex)" 
 			    :date="poll.length[2]" 
 			    @setDate=" number => poll.length[2] = number"/>
 	    </div>
@@ -56,66 +62,49 @@
 
 <script setup>
 	import SelectBox from './SelectBox.vue'
-	import TheAddNewPollQuestion from './TheAddNewPollQuestion.vue';
+	import Plus from './icons/Plus.vue';
 
-	import { reactive, computed, onMounted, watch, nextTick } from 'vue';
+	import { ref, reactive, computed, onMounted, watch, nextTick } from 'vue';
 	import { useStore } from 'vuex';
 
 	const store = useStore();
+    const poll = reactive(store.getters.getPollData);
 
-    const poll = reactive({
-    	 quest: ['', '', '', ''],
-    	 length: [1, 0, 0],
-    	 counter: 2,
-    	 showPoll: false, 
-    });
-
-
-    onMounted(() => setQuestiobData())
-    
-    const pollData = reactive(store.getters.getPollData);
+    onMounted(() => {
+    	pollQuestData()
+    })
 
     const removePoll = () => {	
         poll.showPoll = false
         store.commit('setPollData', poll)
     }
 
-    const pollQuestData = computed(() => {
-    	if(!pollData) return;
-    	let emptyIndex = pollData.quest.filter( item => item != '');
+    const pollQuestData = () => {
+    	console.log(poll.quest.every(v => v == ''))
+    	let emptyIndex = poll.quest.filter( item => item != '');
     	let questLength = emptyIndex.length < 2 ? 2: emptyIndex.length
-    	pollData.counter = questLength;
-    	Array.from({length: pollData.counter}, (_, i) => emptyIndex.push(''));
-    	!emptyIndex[0] ? inputFocus.value(0): null;
+    	poll.counter = questLength;
+    	Array.from({length: poll.counter}, (_, i) => emptyIndex.push(''));
+    	!emptyIndex[0] ? inputFocus(0): null;
     	return emptyIndex;
-    })
-
-    const setQuestiobData = () => {
-    	if(!pollData) return inputFocus.value(0);
-    	pollQuestData.value.forEach((item, index) => poll.quest[index] = item || '')
-    	pollData.length.forEach((item, index) => poll.length[index] = item || 0);
-    	poll.counter = pollData.counter;
     }
 
-    const pollLength = computed(() => (num) => Array.from({length: num}, (_, index) => index))
-    
-
+    const pollDateLength = computed(() => (num) => Array.from({length: num}, (_, index) => index))
+   
     const addNewQuestion = () => {
     	poll.counter++
     	poll.quest.push('');
     };
 
    	const questCounter = computed(() => poll.counter < 4 );
-    
-    
     const inputDisable = computed(() => poll.length[0] == 7)
-
-    const inputFocus = computed(() => (index) => {
+    
+    const inputFocus = (index) => {
     	nextTick(() => {
-    		let input = document.querySelectorAll('.input') 
-            input[index].focus()   
-        })
-    });
+    		let input = document.querySelectorAll('.input');
+    		input[index].focus()
+    	})
+    };
 
 	const labelAnimation = computed(() => (n) => poll.quest[n -1].length > 0);
 	const inputPlaceHolder = computed(() => (n) => n > 2 ? `Choice ${n} (optional)`: `Choice ${n}`);
@@ -144,6 +133,9 @@
     	}
     })
 
-    watch(()=> poll.counter, (oldValue, newValue) => !poll.quest[newValue] ? inputFocus.value(newValue): console.log('test'))
+    watch(()=> poll.counter, (oldValue, newValue) => {
+    	console.log(oldValue, newValue)
+    	!poll.quest[newValue] ? inputFocus(newValue): null
+    })
 
 </script>

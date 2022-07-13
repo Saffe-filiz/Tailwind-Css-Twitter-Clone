@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-	import { ref, computed, inject, provide, reactive, watch, onMounted } from 'vue';
+	import { ref, computed, inject, reactive, watch } from 'vue';
 	import { useStore } from 'vuex';
   
  	import ThePoll from './ThePoll.vue'
