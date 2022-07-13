@@ -11,13 +11,11 @@
 
 
 <script setup>
-	import {computed} from 'vue';
+	import { computed} from 'vue';
 	import { useStore } from 'vuex';
 
 	const store = useStore()
-
-	const setGanre = ( ganre ) => store.commit('setGifGanre', ganre)
-
+	const setGanre = ganre => store.commit('setGifGanre', ganre)
 	const bgColor = computed(() => (i) => {
 		return i % 3 == 0 ? 'bg-[#7856ff]': i % 2 == 0 ? 'bg-[#f91880]': i % 1 == 0 ? 'bg-[#ffd400]': 'bg-[#00ba7c]'
 	})

@@ -61,11 +61,10 @@
 
 
     const celarSearch = () =>  {
+    	search.value = ''
     	store.commit('setGif', [])
     	store.commit('setGifOfNumber', 50)
     	store.commit('setGifGanre', '')
-    	store.state.gifGanre = '';
-    	search.value = ''
     };
 
     onMounted(() => inputFocus())

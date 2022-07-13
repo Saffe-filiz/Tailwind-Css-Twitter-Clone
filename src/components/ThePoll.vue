@@ -47,17 +47,21 @@
 			    @setDate=" number => poll.length[2] = number"/>
 	    </div>
 	</div>
-    <ThePollRemove @click="$emit('removePoll', {'data': poll, 'showPoll': false})"/>
+	<div class="w-full h-[3.125rem] rounded-b-2xl border-t border-[#cfd9de] hover:bg-[#f4212e1a] hoverDuration">
+		<button class="w-full h-full bg-red text-[#f4212e]" @click="removePoll">Remove Poll</button>
+	</div>
 </article>
 </template>
 
 
 <script setup>
-	import { reactive, computed, onMounted, watch, nextTick } from 'vue';
-
 	import SelectBox from './SelectBox.vue'
 	import TheAddNewPollQuestion from './TheAddNewPollQuestion.vue';
-	import ThePollRemove from './ThePollRemove.vue';
+
+	import { reactive, computed, onMounted, watch, nextTick } from 'vue';
+	import { useStore } from 'vuex';
+
+	const store = useStore();
 
     const poll = reactive({
     	 quest: ['', '', '', ''],
@@ -65,9 +69,12 @@
     	 counter: 2, 
     });
 
+
     onMounted(() => setQuestiobData())
     
-    const pollData = defineProps({pollData: Object}); 
+    const pollData = reactive(store.getters.getPollData);
+
+    const removePoll = store.commit('setPollData', poll)
 
     const pollQuestData = computed(() => {
     	if(!pollData.pollData) return;

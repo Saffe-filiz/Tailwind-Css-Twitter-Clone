@@ -10,7 +10,7 @@ const store = createStore({
 	    	numberOfGif: 20,
 	    	gifAutoPlay: false,
 	    	ganre: '',
-	    	isEmty: false,
+	    	gifIsNonFind: false,
 	    	isReady: true,
 	    },
 
@@ -19,6 +19,7 @@ const store = createStore({
 	    	quest: ['', '', '', ''],
 	    	date: [1, 0, 0],
 	    	counter: 2,
+	    	showPoll: false,
 	    },
 
 	    unSendTweets: {
@@ -53,11 +54,15 @@ const store = createStore({
 
 		getGifIsLoading: state => state.gifData.isReady,
 
-		getIsEmty: state => state.gifData.isEmty = state.gifData.gifs.length == 0 && state.gifData.ganre.length > 0,
+		getGifIsNonFind: state => state.gifData.gifIsNonFind = state.gifData.gifs.length == 0 && state.gifData.ganre.length > 0,
 
 		getTweets: state => state.tweets,
 
+		getPollData: state => state.pollData,
+
 		getPollDataDate: state => state.pollData.date,
+
+		getShowPoll: state => state.pollData.showPoll,
 
 		getUnSendDrafts: state => state.unSendTweets.drafts,
 
@@ -82,7 +87,7 @@ const store = createStore({
 		setGif(state, data) {
 			if(state.gifData.numberOfGif > 50) return;
 			state.gifData.gifs = data;
-			setTimeout(() => state.gifData.isReady = false, 500);
+			setTimeout(() => state.gifData.isReady = false, 600);
 		},
 
 		setGifOfNumber(state, number) {
@@ -109,8 +114,12 @@ const store = createStore({
 			state.tweets.push(data)
 		},
 
-		setPollDataDate (state, date) {
-			state.pollData.date = date;
+		setPollData (state, data) {
+			state.pollData = data;
+		},
+
+		setPollDataDate (state, data) {
+			state.pollData.date = data;
 		},
 
 		setUnSendScheduled (state, data) {

@@ -25,11 +25,14 @@
 
 	const selected = inject('selected');
 	const modal = inject('modal');
+	
 	const sendMedia = (gif) => {
 		modal.closePopUp();
 		selected.gif = true;
+		store.commit('setGifAutoPlay', false)
 		store.commit('setMedia', gif)
 		store.commit('setGif', [])
+		store.commit('setGifGanre', '');
 	}
 
 </script>

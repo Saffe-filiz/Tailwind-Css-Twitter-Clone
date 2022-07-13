@@ -5,7 +5,7 @@
 	        <TheGifPlay v-if="isActive || noGif"/>
 	        <TheGifGanreList v-if="!isActive && !noGif"/>
 	        <TheGifList v-else/>
-	        <h1 v-if="gifLoading">Loading</h1>
+            <Loading v-if="gifLoading"/>
 	        <TheGifNonFund v-if="noGif && !gifLoading"/>
 	    </div> 
 	</section>
@@ -17,12 +17,14 @@
 	import TheGifList from './TheGifList.vue';
 	import TheGifPlay from './TheGifPlay.vue';
 	import TheGifNonFund from './TheGifNonFund.vue';
+	import Loading from '../Loading.vue'
 
 	import { computed, onMounted, ref } from 'vue';
 	import { useStore } from 'vuex';
 	
 	const store = useStore()
+	
 	const isActive = computed(() => store.getters.getGifIsReady)
-	const noGif = computed(() => store.getters.getIsEmty)
+	const noGif = computed(() => store.getters.getGifIsNonFind)
 	const gifLoading = computed(() => store.getters.getGifIsLoading)
 </script>
