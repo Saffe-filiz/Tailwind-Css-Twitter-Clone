@@ -81,20 +81,20 @@
     }
 
     const pollQuestData = computed(() => {
-    	if(!pollData.pollData) return;
-    	let emptyIndex = pollData.pollData.quest.filter( item => item != '');
+    	if(!pollData) return;
+    	let emptyIndex = pollData.quest.filter( item => item != '');
     	let questLength = emptyIndex.length < 2 ? 2: emptyIndex.length
-    	pollData.pollData.counter = questLength;
-    	Array.from({length: pollData.pollData.counter}, (_, i) => emptyIndex.push(''));
+    	pollData.counter = questLength;
+    	Array.from({length: pollData.counter}, (_, i) => emptyIndex.push(''));
     	!emptyIndex[0] ? inputFocus.value(0): null;
     	return emptyIndex;
     })
 
     const setQuestiobData = () => {
-    	if(!pollData.pollData) return inputFocus.value(0);
+    	if(!pollData) return inputFocus.value(0);
     	pollQuestData.value.forEach((item, index) => poll.quest[index] = item || '')
-    	pollData.pollData.length.forEach((item, index) => poll.length[index] = item || 0);
-    	poll.counter = pollData.pollData.counter;
+    	pollData.length.forEach((item, index) => poll.length[index] = item || 0);
+    	poll.counter = pollData.counter;
     }
 
     const pollLength = computed(() => (num) => Array.from({length: num}, (_, index) => index))
